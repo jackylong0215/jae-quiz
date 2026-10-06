@@ -1,0 +1,294 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #2563eb;
+  --accent-bg: rgba(37, 99, 235, 0.1);
+  --accent-border: rgba(37, 99, 235, 0.5);
+  --shadow: rgba(0, 0, 0, 0.08) 0 10px 15px -3px, rgba(0, 0, 0, 0.04) 0 4px 6px -2px;
+
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --heading: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  font: 16px/150% var(--sans);
+  letter-spacing: 0.1px;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select, textarea {
+  touch-action: manipulation;
+  font-family: inherit;
+}
+
+#root {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: #f8fafc;
+}
+
+/* ========================================================
+   KaTeX 排版優化
+   ======================================================== */
+
+/* 1. 消除外部 letter-spacing 對 KaTeX 符號的影響 */
+.katex, .katex * {
+  letter-spacing: normal !important;
+}
+
+/* 2. 隱藏 MathML，避免劃詞時產生重字 */
+.katex-mathml {
+  display: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+/* 3. 防止公式在運算符、上下標處被折行 */
+.katex .base,
+.katex .msupsub {
+  white-space: nowrap !important;
+}
+.katex .mord,
+.katex .mop {
+  white-space: nowrap;
+}
+
+/* 4. 行內公式：稍微放大，上下留出呼吸空間 */
+.katex {
+  font-size: 1.05em;
+  vertical-align: -0.05em;
+  padding: 0 0.1em;
+}
+
+/* 5. 題幹、解析、答案 markdown 統一行高 */
+.question-markdown,
+.answer-markdown,
+.solution-content {
+  line-height: 3 !important;
+  font-size: 20px;
+  color: #1e293b;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* 6. 段落間距加大，避免擠在一起 */
+.question-markdown p,
+.answer-markdown p,
+.solution-content p {
+  margin: 1.4em 0 !important;
+  line-height: 4.5 !important;
+}
+
+.question-markdown p:first-child,
+.answer-markdown p:first-child,
+.solution-content p:first-child {
+  margin-top: 0 !important;
+}
+
+.question-markdown p:last-child,
+.answer-markdown p:last-child,
+.solution-content p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 7. 區塊公式：上下留白加大，並支援手機橫向滾動 */
+.katex-display {
+  margin: 1.4em 0 !important;
+  padding: 6px 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  max-width: 100%;
+}
+
+/* 8. 行內分式微調垂直對齊 */
+.katex .mord.mfrac {
+  vertical-align: -0.35em;
+  padding: 0 0.15em;
+}
+
+/* 9. Markdown 表格在手機端橫向順暢滾動 */
+.question-markdown table,
+.answer-markdown table,
+.solution-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.question-markdown th,
+.question-markdown td,
+.answer-markdown th,
+.answer-markdown td,
+.solution-content th,
+.solution-content td {
+  border: 1px solid #cbd5e1;
+  padding: 8px 12px;
+  text-align: center;
+  min-width: 60px;
+}
+
+/* 10. 手機端微調 */
+@media (max-width: 640px) {
+  .question-markdown,
+  .answer-markdown,
+  .solution-content {
+    font-size: 15px;
+    line-height: 2.1 !important;
+  }
+  .question-markdown p,
+  .answer-markdown p,
+  .solution-content p {
+    line-height: 2.1 !important;
+  }
+}
+
+/* ========================================================
+   其他既有樣式
+   ======================================================== */
+
+.nav-chips-container::-webkit-scrollbar {
+  height: 6px;
+}
+.nav-chips-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+.nav-chips-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.nav-chips-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ===== Loading Screen ===== */
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loading-message {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* ===== Skeleton ===== */
+.skeleton-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+.skeleton-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.skeleton-tag {
+  height: 22px;
+  width: 60px;
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+.skeleton-line {
+  height: 14px;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  animation: shimmer 1.4s infinite;
+}
+.skeleton-line.full { width: 100%; }
+.skeleton-line.medium { width: 65%; }
+.skeleton-line.short { width: 35%; }
+.skeleton-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+.skeleton-option {
+  height: 40px;
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== 頁面切換淡入動畫 ===== */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: pageFadeIn 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 確保動畫不會影響 sticky 元素的定位 */
+@media (prefers-reduced-motion: reduce) {
+  .page-transition { animation: none; }
+}
+

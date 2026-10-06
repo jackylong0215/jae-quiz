@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+jae_app.db
+.venv/
+venv/
+.env
+
+# Node
+node_modules/
+dist/
+build/
+.vite/
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store
+
+# 敏感文件
+*.key
+*.pem
