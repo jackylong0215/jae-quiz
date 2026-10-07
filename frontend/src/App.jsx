@@ -81,7 +81,6 @@ function extractOptions(q, lang = 'zh') {
 
   return {};
 }
-
 function cleanDiagramUrl(url) {
   if (!url) return '';
   if (url.startsWith('data:image')) return url;

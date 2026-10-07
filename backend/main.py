@@ -72,8 +72,8 @@ def admin_stats(admin: User = Depends(require_admin), db: Session = Depends(get_
     return {
         "用戶總數": db.query(User).count(),
         "管理員數": db.query(User).filter(User.is_admin == True).count(),
-        "題庫總數": 175,
-        "試卷總數": 11,
+        "題庫總數": 245,
+        "試卷總數": 20,
     }
 
 @app.get("/admin/users")
@@ -132,7 +132,6 @@ def on_startup():
 
     # 自動建立管理員帳號
     try:
-        from auth import hash_password
         db = SessionLocal()
         try:
             admin = db.query(User).filter(User.username == "admin").first()
@@ -146,12 +145,12 @@ def on_startup():
                 )
                 db.add(admin)
                 db.commit()
-                print("[OK] ✅ Admin account created: admin / Admin123456")
+                print("[OK] Admin account created: admin / Admin123456")
             else:
                 if not admin.is_admin:
                     admin.is_admin = True
                     db.commit()
-                    print(f"[OK] ✅ {admin.username} upgraded to admin")
+                    print(f"[OK] {admin.username} upgraded to admin")
                 else:
                     print(f"[OK] Admin already exists: {admin.username}")
         finally:
@@ -182,7 +181,6 @@ ZH_TO_EN_CATEGORY = {
     "微積分": "Calculus",
 }
 
-# 中文科目 → 題庫 topic 對照表（AI 模式使用）
 CATEGORY_TOPIC_ALIASES = {
     "代數": ["代數運算", "集合與不等式", "二項式定理", "比例與應用"],
     "幾何": ["平面幾何", "解析幾何", "百分率與立體幾何"],
@@ -194,6 +192,18 @@ CATEGORY_TOPIC_ALIASES = {
     "統計": ["統計"],
     "微積分": ["微積分"],
     "解析幾何": ["解析幾何"],
+}
+
+EN_ALIASES = {
+    "三角學": ["Trigonometry", "Trigonometric Functions", "Trigonometric Identities", "Trigonometric Equations"],
+    "幾何": ["Geometry", "Coordinate Geometry", "Analytical Geometry", "Conic Sections", "Solid Geometry"],
+    "代數": ["Algebra", "Sets", "Set Theory", "Inequalities", "Polynomials", "Binomial Theorem"],
+    "函數": ["Functions", "Logarithms", "Exponentials"],
+    "概率": ["Probability", "Permutations", "Combinations"],
+    "數列": ["Sequences", "Series", "Geometric Progression", "Arithmetic Progression"],
+    "統計": ["Statistics"],
+    "微積分": ["Calculus", "Differentiation", "Integration", "Curve Sketching"],
+    "解析幾何": ["Analytical Geometry", "Coordinate Geometry", "Conic Sections"],
 }
 
 
@@ -1016,14 +1026,13 @@ async def generate_quiz(
     types_list = req.types or []
     count = req.count if (req.count and req.count > 0) else 10
 
-    # 把中文科目轉成英文 main_category
     if cats:
         expanded_cats = set()
         for cat in cats:
             expanded_cats.add(cat)
             if cat in ZH_TO_EN_CATEGORY:
                 expanded_cats.add(ZH_TO_EN_CATEGORY[cat])
-        print(f"[DEBUG] Filtering by categories: {cats} → expanded: {expanded_cats}")
+        print(f"[DEBUG] Filtering by categories: {cats} -> expanded: {expanded_cats}")
         filtered = [q for q in filtered if q.get("main_category") in expanded_cats]
         print(f"[DEBUG] After category filter: {len(filtered)} remaining")
 
@@ -1042,7 +1051,6 @@ async def generate_quiz(
     quiz_id = str(uuid.uuid4())
     question_bank[quiz_id] = sampled
 
-    # 若有登入，提前存一份到 DB
     if current_user:
         try:
             early_record = QuizRecord(
@@ -1087,10 +1095,8 @@ async def submit_quiz(sub: QuizSubmission, current_user: Optional[User] = Depend
     print(f"[DEBUG] quiz_id received: {sub.quiz_id}")
     print(f"[DEBUG] in memory: {sub.quiz_id in question_bank}")
 
-    # 1) 從記憶體找題目
     original_questions = question_bank.get(sub.quiz_id)
 
-    # 2) 記憶體沒有 → 從資料庫找
     if not original_questions:
         record = db.query(QuizRecord).filter(QuizRecord.id == sub.quiz_id).first()
         print(f"[DEBUG] DB record found: {record is not None}")
@@ -1102,7 +1108,6 @@ async def submit_quiz(sub: QuizSubmission, current_user: Optional[User] = Depend
             except Exception as e:
                 print(f"[WARN] Failed to parse questions_json: {e}")
 
-    # 3) 還是找不到 → 404
     if not original_questions:
         print(f"[ERROR] Quiz {sub.quiz_id} not found anywhere")
         raise HTTPException(status_code=404, detail="Quiz not found or expired")
@@ -1315,7 +1320,6 @@ def get_quiz_review(
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """取得某次測驗的完整錯題回顧"""
     record = db.query(QuizRecord).filter(
         QuizRecord.id == quiz_id,
         QuizRecord.user_id == user.id,
@@ -1324,7 +1328,6 @@ def get_quiz_review(
     if not record:
         raise HTTPException(404, "找不到該測驗記錄")
 
-    # 讀題目
     original_questions = []
     if record.questions_json:
         try:
@@ -1335,7 +1338,6 @@ def get_quiz_review(
     if not original_questions:
         original_questions = question_bank.get(quiz_id, [])
 
-    # 讀使用者作答
     user_answers = {}
     if record.user_answers_json:
         try:
@@ -1343,7 +1345,6 @@ def get_quiz_review(
         except Exception as e:
             print(f"[WARN] Failed to parse user_answers_json: {e}")
 
-    # 把每題加上 user_answer / correct_answer / is_correct
     merged = []
     for i, q in enumerate(original_questions):
         user_ans = str(user_answers.get(str(i), "") or "").strip()
@@ -1535,12 +1536,11 @@ def get_prestored_questions(paper_id: Optional[str] = None):
             "score": q.get("points", 4),
             "has_diagram": bool(q.get("diagram")),
             "diagram_image": (
-                f"http://127.0.0.1:8000/diagrams/{os.path.basename(q['diagram'])}"
+                f"/diagrams/{os.path.basename(q['diagram'])}"
             ) if q.get("diagram") else None,
             "source_paper": paper_title
         })
 
-    # ===== 用题目内容去重 =====
     seen_texts = set()
     deduped = []
     for q in mapped:
@@ -1554,7 +1554,7 @@ def get_prestored_questions(paper_id: Optional[str] = None):
             seen_texts.add(text_key)
         deduped.append(q)
 
-    print(f"[DEDUP] {len(mapped)} → {len(deduped)} after dedup")
+    print(f"[DEDUP] {len(mapped)} -> {len(deduped)} after dedup")
     return {"total": len(deduped), "questions": deduped}
 
 
@@ -1731,24 +1731,12 @@ async def generate_ai_quiz(
         raise HTTPException(404, "題庫為空，無法生成 AI 題目")
 
     filtered = all_questions
+
     if payload.categories:
         expanded = set()
         for cat in payload.categories:
             expanded.add(cat)
             expanded.update(CATEGORY_TOPIC_ALIASES.get(cat, [cat]))
-        # 英文别名
-        EN_ALIASES = {
-            "三角學": ["Trigonometry", "Trigonometric Functions", "Trigonometric Identities", "Trigonometric Equations"],
-            "幾何": ["Geometry", "Coordinate Geometry", "Analytical Geometry", "Conic Sections", "Solid Geometry"],
-            "代數": ["Algebra", "Sets", "Set Theory", "Inequalities", "Polynomials", "Binomial Theorem"],
-            "函數": ["Functions", "Logarithms", "Exponentials"],
-            "概率": ["Probability", "Permutations", "Combinations"],
-            "數列": ["Sequences", "Series", "Geometric Progression", "Arithmetic Progression"],
-            "統計": ["Statistics"],
-            "微積分": ["Calculus", "Differentiation", "Integration", "Curve Sketching"],
-            "解析幾何": ["Analytical Geometry", "Coordinate Geometry", "Conic Sections"],
-        }
-        for cat in payload.categories:
             expanded.update(EN_ALIASES.get(cat, []))
 
         print(f"[DEBUG AI] Categories: {payload.categories}")
@@ -1760,16 +1748,42 @@ async def generate_ai_quiz(
             q.get("main_category") in expanded or
             any(t in expanded for t in (q.get("sub_topics") or []))
         )]
-        print(f"[DEBUG AI] After filter: {len(filtered)}")
+        print(f"[DEBUG AI] After category filter: {len(filtered)}")
 
-        if payload.difficulties:
-            filtered = [q for q in filtered if q.get("difficulty") in payload.difficulties]
-        if payload.types:
-            type_map = {"MCQ": "multiple_choice", "Long": "written"}
-            wanted = [type_map.get(t, t) for t in payload.types]
-            filtered = [q for q in filtered if q.get("questionType") in wanted]
+    if payload.difficulties:
+        DIFF_ALIASES = {
+            "Easy": {"Easy", "easy", "1", "基礎", "简单", "簡單"},
+            "Medium": {"Medium", "medium", "2", "中等"},
+            "Hard": {"Hard", "hard", "3", "困難", "困难", "難"},
+        }
+        wanted_diffs = set()
+        for d in payload.difficulties:
+            wanted_diffs.add(d)
+            wanted_diffs.update(DIFF_ALIASES.get(d, []))
+        print(f"[DEBUG AI] Difficulty filter: {wanted_diffs}")
+        filtered = [q for q in filtered if (
+            q.get("difficulty") is None or
+            str(q.get("difficulty")).strip() in wanted_diffs
+        )]
+        print(f"[DEBUG AI] After difficulty filter: {len(filtered)}")
 
-        print(f"[DEBUG AI] Filtered: {len(filtered)} questions")
+    if payload.types:
+        TYPE_ALIASES = {
+            "MCQ": {"MCQ", "mcq", "multiple_choice", "multiple-choice", "選擇題", "选择题"},
+            "Long": {"Long", "long", "written", "解答大題", "解答题", "大题"},
+        }
+        wanted_types = set()
+        for t in payload.types:
+            wanted_types.add(t)
+            wanted_types.update(TYPE_ALIASES.get(t, []))
+        print(f"[DEBUG AI] Type filter: {wanted_types}")
+        filtered = [q for q in filtered if (
+            q.get("questionType") is None or
+            str(q.get("questionType")).strip() in wanted_types
+        )]
+        print(f"[DEBUG AI] After type filter: {len(filtered)}")
+
+    print(f"[DEBUG AI] Final filtered: {len(filtered)} questions")
 
     if not filtered:
         raise HTTPException(404, "找不到符合條件的範例題")
@@ -1864,7 +1878,6 @@ def add_favorite(
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """新增收藏題目"""
     existing = db.query(FavoriteQuestion).filter(
         FavoriteQuestion.user_id == user.id,
         FavoriteQuestion.question_id == payload.question_id,
@@ -1890,7 +1903,6 @@ def remove_favorite(
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """取消收藏（使用 query 參數，避免中文/特殊字元在路徑中出錯）"""
     fav = db.query(FavoriteQuestion).filter(
         FavoriteQuestion.user_id == user.id,
         FavoriteQuestion.question_id == question_id,
@@ -1909,7 +1921,6 @@ def list_favorites(
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """列出收藏題目"""
     favs = db.query(FavoriteQuestion).filter(
         FavoriteQuestion.user_id == user.id
     ).order_by(FavoriteQuestion.created_at.desc()).all()
