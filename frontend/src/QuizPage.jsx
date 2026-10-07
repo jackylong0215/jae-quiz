@@ -915,6 +915,61 @@ return (
                   </div>
                 )}
 
+{/* 選項列表（僅 MCQ） */}
+{!isLong && (() => {
+  const optionsMap = extractOptions(r);
+  const letters = ['A', 'B', 'C', 'D', 'E'].filter(l => Boolean(optionsMap[l]));
+  if (letters.length === 0) return null;
+  
+  const correctLetter = String(r.correct_answer || r.answer || '').trim().toUpperCase();
+  
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 14, marginBottom: 14 }}>
+      {letters.map(letter => {
+        const isRight = letter === correctLetter;
+        return (
+          <div
+            key={letter}
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              padding: '10px 14px',
+              background: isRight ? '#dcfce7' : '#f8fafc',
+              border: `1.5px solid ${isRight ? '#10b981' : '#e2e8f0'}`,
+              borderRadius: 8,
+              fontSize: '0.95rem',
+              lineHeight: 1.6,
+            }}
+          >
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 24, height: 24,
+              background: isRight ? '#10b981' : '#2563eb',
+              color: '#fff', fontWeight: 700, fontSize: '0.8rem',
+              borderRadius: '50%', flexShrink: 0, marginTop: 2,
+            }}>
+              {letter}
+            </span>
+            <div style={{ flex: 1, color: isRight ? '#15803d' : '#1e293b', wordBreak: 'break-word' }}>
+              <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                {normalizeLatex(optionsMap[letter])}
+              </ReactMarkdown>
+            </div>
+            {isRight && (
+              <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>
+                ✅ 正確
+              </span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+})()}
+
                 {isLong ? (
                   <div className="long-self-check">
                     <div className="long-self-check-hint">
