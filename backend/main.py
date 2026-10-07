@@ -9,7 +9,7 @@ import random
 from typing import AsyncGenerator, Optional, List, Any, Dict
 from fastapi import Depends
 from sqlalchemy.orm import Session
-from database import get_db, init_db
+from database import get_db, init_db, SessionLocal
 from models import User, QuizRecord
 from auth import hash_password, get_current_user
 from auth import (
@@ -129,6 +129,35 @@ if os.path.isdir(DIAGRAMS_DIR):
 def on_startup():
     init_db()
     print("[OK] Database initialized (SQLite: jae_app.db)")
+
+    # 自動建立管理員帳號
+    try:
+        from auth import hash_password
+        db = SessionLocal()
+        try:
+            admin = db.query(User).filter(User.username == "admin").first()
+            if not admin:
+                admin = User(
+                    username="admin",
+                    email="admin@jae.local",
+                    hashed_password=hash_password("Admin123456"),
+                    full_name="系統管理員",
+                    is_admin=True,
+                )
+                db.add(admin)
+                db.commit()
+                print("[OK] ✅ Admin account created: admin / Admin123456")
+            else:
+                if not admin.is_admin:
+                    admin.is_admin = True
+                    db.commit()
+                    print(f"[OK] ✅ {admin.username} upgraded to admin")
+                else:
+                    print(f"[OK] Admin already exists: {admin.username}")
+        finally:
+            db.close()
+    except Exception as e:
+        print(f"[WARN] Failed to create admin: {e}")
 
 
 # =====================================================
