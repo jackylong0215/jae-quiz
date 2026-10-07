@@ -1808,7 +1808,15 @@ async def generate_ai_quiz(
         q["options_en"] = q.get("options_en") or normalized
 
         q.setdefault("question_number", f"AI-{i + 1}")
-        q.setdefault("question_type", "MCQ")
+        if payload.types:
+            if "Long" in payload.types and "MCQ" not in payload.types:
+                q["question_type"] = "Long"
+                q["options_zh"] = {}
+                q["options_en"] = {}
+            elif "MCQ" in payload.types and "Long" not in payload.types:
+                q["question_type"] = "MCQ"
+        else:
+            q.setdefault("question_type", "MCQ")
         q.setdefault("main_category", "Algebra")
         q.setdefault("sub_topics", [])
         q.setdefault("difficulty", "Medium")
