@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -175,10 +175,23 @@ function formatFileSize(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-import { useLocation } from 'react-router-dom';
-
+/* ============================================================
+   PageWrapper — 全域路由切換時自動回頂（無 flash）
+   ============================================================ */
 function PageWrapper({ children }) {
   const location = useLocation();
+
+  useEffect(() => {
+    // 用 requestAnimationFrame 確保新頁面已 paint 完成後才滾動
+    // 這樣不會出現「舊頁面先跳頂」的 flash
+    const raf = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [location.pathname]);
+
   return (
     <div key={location.pathname} className="page-transition">
       {children}
@@ -915,7 +928,7 @@ export default function App() {
                       </div>
                     )}
 
-                    {/* Answer Accordion - 已移除 .details-body wrapper */}
+                    {/* Answer Accordion */}
                     <details className="answer-accordion">
                       <summary className="answer-summary">
                         💡 參考答案與解析
@@ -1001,9 +1014,9 @@ export default function App() {
           background: #0f172a;
           color: #f8fafc;
           padding: 10px 18px;
-          borderRadius: 8px;
-          boxShadow: 0 10px 25px rgba(0,0,0,0.25);
-          zIndex: 9999;
+          border-radius: 8px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+          z-index: 9999;
           font-size: 14px;
           font-weight: 500;
           animation: fadeIn 0.2s ease;
@@ -1388,92 +1401,91 @@ export default function App() {
           text-align: left;
         }
 
-        /* 管理員工具高亮面板 */
-.admin-upload-collapsible {
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-  border: 2px dashed #f59e0b;
-  border-radius: 12px;
-  padding: 0;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
-  overflow: hidden;
-  transition: box-shadow 0.25s ease, border-color 0.25s ease;
-}
+        .admin-upload-collapsible {
+          background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+          border: 2px dashed #f59e0b;
+          border-radius: 12px;
+          padding: 0;
+          margin-bottom: 20px;
+          box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+          overflow: hidden;
+          transition: box-shadow 0.25s ease, border-color 0.25s ease;
+        }
 
-.admin-upload-collapsible:hover {
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.28);
-  border-color: #d97706;
-}
+        .admin-upload-collapsible:hover {
+          box-shadow: 0 6px 20px rgba(245, 158, 11, 0.28);
+          border-color: #d97706;
+        }
 
-.admin-upload-collapsible[open] {
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
-}
+        .admin-upload-collapsible[open] {
+          box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
+        }
 
-.admin-upload-collapsible summary {
-  cursor: pointer;
-  font-weight: 700;
-  color: #92400e;
-  font-size: 1.05rem;
-  list-style: none;
-  padding: 16px 22px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  transition: background 0.2s ease;
-  user-select: none;
-  letter-spacing: 0.5px;
-}
+        .admin-upload-collapsible summary {
+          cursor: pointer;
+          font-weight: 700;
+          color: #92400e;
+          font-size: 1.05rem;
+          list-style: none;
+          padding: 16px 22px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+          transition: background 0.2s ease;
+          user-select: none;
+          letter-spacing: 0.5px;
+        }
 
-.admin-upload-collapsible summary::-webkit-details-marker {
-  display: none;
-}
+        .admin-upload-collapsible summary::-webkit-details-marker {
+          display: none;
+        }
 
-.admin-upload-collapsible summary::before {
-  content: '▶';
-  display: inline-block;
-  font-size: 11px;
-  color: #b45309;
-  transition: transform 0.25s ease;
-  margin-right: 2px;
-}
+        .admin-upload-collapsible summary::before {
+          content: '▶';
+          display: inline-block;
+          font-size: 11px;
+          color: #b45309;
+          transition: transform 0.25s ease;
+          margin-right: 2px;
+        }
 
-.admin-upload-collapsible[open] summary::before {
-  transform: rotate(90deg);
-}
+        .admin-upload-collapsible[open] summary::before {
+          transform: rotate(90deg);
+        }
 
-.admin-upload-collapsible[open] summary {
-  border-bottom: 1px solid #fde68a;
-  background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
-}
+        .admin-upload-collapsible[open] summary {
+          border-bottom: 1px solid #fde68a;
+          background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
+        }
 
-.admin-upload-collapsible summary:hover {
-  background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
-}
+        .admin-upload-collapsible summary:hover {
+          background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
+        }
 
-.admin-upload-collapsible > .upload-card {
-  margin: 0;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 20px 18px;
-  background: #ffffff;
-}
+        .admin-upload-collapsible > .upload-card {
+          margin: 0;
+          border: none;
+          border-radius: 0;
+          box-shadow: none;
+          padding: 20px 18px;
+          background: #ffffff;
+        }
 
-.top-stats-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 24px;
-}
+        .top-stats-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 20px;
+          margin-bottom: 24px;
+        }
 
-.stats-badges-row {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
+        .stats-badges-row {
+          display: flex;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
 
         .stat-pill {
           background: #ffffff;
@@ -1497,10 +1509,10 @@ export default function App() {
           border-color: #bfdbfe;
         }
 
-.export-btns-row {
-  display: flex;
-  gap: 14px;
-}
+        .export-btns-row {
+          display: flex;
+          gap: 14px;
+        }
 
         .export-btn {
           padding: 8px 14px;
@@ -1909,7 +1921,6 @@ export default function App() {
           background: #ffffff;
         }
 
-        /* Answer details - 已移除 .details-body，改為原生 details 行為 */
         .answer-accordion {
           margin-top: 16px;
           background: #f0fdf4;
@@ -2096,27 +2107,14 @@ export default function App() {
             text-align: center;
           }
 
-.top-stats-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;             /* ← 左側統計和右側按鈕之間的間距 */
-  margin-bottom: 24px;   /* ← 與下方 filter-card 的距離 */
-}
+          .top-stats-container {
+            flex-direction: column;
+            align-items: stretch;
+          }
 
-.stats-badges-row {
-  display: flex;
-  gap: 14px;             /* ← 「總題數」和「選擇題」之間的間距 */
-  flex-wrap: wrap;
-}
-
-.export-btns-row {
-  display: flex;
-  gap: 14px;             /* ← 三個按鈕之間的間距 */
-  padding: 8px 14px;
-  margin: 0 10px;
-}
+          .export-btns-row {
+            width: 100%;
+          }
 
           .export-btn {
             flex: 1;
@@ -2134,98 +2132,6 @@ export default function App() {
             flex-wrap: nowrap;
             white-space: nowrap;
             padding-bottom: 4px;
-          }
-
-.admin-upload-collapsible {
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-  border: 2px dashed #f59e0b;
-  border-radius: 12px;
-  padding: 0;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
-  overflow: hidden;
-  transition: box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-.admin-upload-collapsible:hover {
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.28);
-  border-color: #d97706;
-}
-
-.admin-upload-collapsible[open] {
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
-}
-
-/* summary 做成一个明显的按钮条 */
-.admin-upload-collapsible summary {
-  cursor: pointer;
-  font-weight: 700;
-  color: #92400e;
-  font-size: 1rem;
-  list-style: none;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-bottom: 1px solid transparent;
-  transition: background 0.2s ease, border-color 0.2s ease;
-  user-select: none;
-}
-
-.admin-upload-collapsible summary::-webkit-details-marker {
-  display: none;
-}
-
-.admin-upload-collapsible summary::before {
-  content: '▶';
-  display: inline-block;
-  font-size: 11px;
-  color: #b45309;
-  transition: transform 0.25s ease;
-  margin-right: 2px;
-}
-
-.admin-upload-collapsible[open] summary::before {
-  transform: rotate(90deg);
-}
-
-.admin-upload-collapsible summary {
-  padding: 16px 22px;
-  font-size: 1.05rem;
-  letter-spacing: 0.5px;
-}
-
-.admin-upload-collapsible summary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
-}
-
-/* 展开后的内容区域 */
-.admin-upload-collapsible > .upload-card {
-  margin: 0;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 20px 18px;
-  background: #ffffff;
-}
-          .admin-upload-collapsible summary::-webkit-details-marker {
-            display: none;
-          }
-          .admin-upload-collapsible summary::before {
-            content: '▶ ';
-            display: inline-block;
-            transition: transform 0.2s;
-            margin-right: 4px;
-          }
-          .admin-upload-collapsible[open] summary::before {
-            transform: rotate(90deg);
-          }
-          .admin-upload-collapsible[open] summary {
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #fde68a;
           }
         }
       `}</style>
