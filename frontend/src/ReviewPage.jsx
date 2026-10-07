@@ -70,7 +70,7 @@ export default function ReviewPage() {
       .catch(err => {
         console.error('Review load failed:', err);
         setError(
-          err.response?.status === 401 ? '請先登入才能查看錯題回顧' :
+          err.response?.status === 401 ? '請先登入才能查看測驗回顧' :
           err.response?.status === 404 ? '找不到此測驗記錄（可能未登入時建立，或 ID 不符）' :
           (err.response?.data?.detail || err.message || '載入失敗')
         );
@@ -83,7 +83,11 @@ export default function ReviewPage() {
   if (!review) return null;
 
   const allQuestions = review.questions || [];
+  const mcqQuestions = allQuestions.filter(q => q.question_type !== 'Long');
+  const longQuestions = allQuestions.filter(q => q.question_type === 'Long');
+  const correctCount = allQuestions.filter(q => q.is_correct === true).length;
   const wrongCount = allQuestions.filter(q => q.is_correct === false).length;
+  const longCount = longQuestions.length;
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: 20 }}>
@@ -101,14 +105,20 @@ export default function ReviewPage() {
         <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
           <span>📅 {review.created_at}</span>
           <span>🎯 得分：{review.score_percent}%</span>
-          <span style={{ color: '#15803d' }}>✅ 答對：{review.correct_count}/{review.total_count}</span>
+          <span style={{ color: '#15803d' }}>✅ 答對：{correctCount}/{mcqQuestions.length}（選擇題）</span>
           <span style={{ color: '#b91c1c' }}>❌ 錯題：{wrongCount}</span>
+          {longCount > 0 && (
+            <span style={{ color: '#0369a1' }}>📖 自我核對：{longCount}</span>
+          )}
         </div>
       </div>
 
       {allQuestions.map((q, i) => {
         const isCorrect = q.is_correct === true;
         const isLong = q.question_type === 'Long';
+        const optionsMap = extractOptions(q);
+        const letters = ['A', 'B', 'C', 'D', 'E'].filter(l => Boolean(optionsMap[l]));
+        const correctLetter = String(q.correct_answer || q.answer || '').trim().toUpperCase();
 
         return (
           <div
@@ -162,65 +172,58 @@ export default function ReviewPage() {
                 {normalizeLatex(q.raw_text_zh || q.raw_text_en || '')}
               </ReactMarkdown>
             </div>
+
             {/* 選項列表（MCQ 才顯示） */}
-{(() => {
-  const optionsMap = extractOptions(q);
-  const letters = ['A', 'B', 'C', 'D', 'E'].filter(l => Boolean(optionsMap[l]));
-  if (letters.length === 0) return null;
-  
-  const correctLetter = String(q.correct_answer || '').trim().toUpperCase();
-  
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
-      {letters.map(letter => {
-        const isCorrect = letter === correctLetter;
-        return (
-          <div
-            key={letter}
-            style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: 10,
-              padding: '10px 14px',
-              background: isCorrect ? '#dcfce7' : '#f8fafc',
-              border: `1.5px solid ${isCorrect ? '#10b981' : '#e2e8f0'}`,
-              borderRadius: 8,
-              fontSize: '0.95rem',
-              lineHeight: 1.6,
-            }}
-          >
-            <span style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 24,
-              height: 24,
-              background: isCorrect ? '#10b981' : '#2563eb',
-              color: '#fff',
-              fontWeight: 700,
-              fontSize: '0.8rem',
-              borderRadius: '50%',
-              flexShrink: 0,
-              marginTop: 2,
-            }}>
-              {letter}
-            </span>
-            <div style={{ flex: 1, color: isCorrect ? '#15803d' : '#1e293b', wordBreak: 'break-word' }}>
-              <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                {normalizeLatex(optionsMap[letter])}
-              </ReactMarkdown>
-            </div>
-            {isCorrect && (
-              <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>
-                ✅ 正確
-              </span>
+            {letters.length > 0 && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+                {letters.map(letter => {
+                  const isRightAnswer = letter === correctLetter;
+                  return (
+                    <div
+                      key={letter}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: 10,
+                        padding: '10px 14px',
+                        background: isRightAnswer ? '#dcfce7' : '#f8fafc',
+                        border: `1.5px solid ${isRightAnswer ? '#10b981' : '#e2e8f0'}`,
+                        borderRadius: 8,
+                        fontSize: '0.95rem',
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      <span style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 24,
+                        height: 24,
+                        background: isRightAnswer ? '#10b981' : '#2563eb',
+                        color: '#fff',
+                        fontWeight: 700,
+                        fontSize: '0.8rem',
+                        borderRadius: '50%',
+                        flexShrink: 0,
+                        marginTop: 2,
+                      }}>
+                        {letter}
+                      </span>
+                      <div style={{ flex: 1, color: isRightAnswer ? '#15803d' : '#1e293b', wordBreak: 'break-word' }}>
+                        <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                          {normalizeLatex(optionsMap[letter])}
+                        </ReactMarkdown>
+                      </div>
+                      {isRightAnswer && (
+                        <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>
+                          ✅ 正確
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             )}
-          </div>
-        );
-      })}
-    </div>
-  );
-})()}
 
             {/* 你的作答 vs 正确答案 */}
             <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -228,9 +231,9 @@ export default function ReviewPage() {
                 flex: 1,
                 minWidth: 180,
                 padding: 12,
-                background: isCorrect ? '#dcfce7' : '#fee2e2',
+                background: isCorrect ? '#dcfce7' : (isLong ? '#fffbeb' : '#fee2e2'),
                 borderRadius: 8,
-                color: isCorrect ? '#15803d' : '#b91c1c'
+                color: isCorrect ? '#15803d' : (isLong ? '#78350f' : '#b91c1c')
               }}>
                 <strong>你的作答：</strong> {q.user_answer || '(未作答)'}
               </div>
