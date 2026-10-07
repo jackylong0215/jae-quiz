@@ -42,14 +42,14 @@ export default function ReviewPage() {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => setReview(res.data))
-.catch(err => {
-  console.error('Review load failed:', err);
-  setError(
-    err.response?.status === 401 ? '請先登入才能查看錯題回顧' :
-    err.response?.status === 404 ? '找不到此測驗記錄（可能未登入時建立，或 ID 不符）' :
-    (err.response?.data?.detail || err.message || '載入失敗')
-  );
-})
+      .catch(err => {
+        console.error('Review load failed:', err);
+        setError(
+          err.response?.status === 401 ? '請先登入才能查看錯題回顧' :
+          err.response?.status === 404 ? '找不到此測驗記錄（可能未登入時建立，或 ID 不符）' :
+          (err.response?.data?.detail || err.message || '載入失敗')
+        );
+      })
       .finally(() => setLoading(false));
   }, [quizId]);
 
@@ -57,7 +57,8 @@ export default function ReviewPage() {
   if (error) return <div style={{ padding: 40, textAlign: 'center', color: '#b91c1c' }}>⚠️ {error}</div>;
   if (!review) return null;
 
-  const wrongQuestions = review.questions.filter(q => !q.is_correct);
+  const allQuestions = review.questions || [];
+  const wrongCount = allQuestions.filter(q => q.is_correct === false).length;
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: 20 }}>
@@ -68,24 +69,23 @@ export default function ReviewPage() {
         >
           ← 返回題庫
         </button>
-        <h2 style={{ margin: 0 }}>🔍 錯題回顧</h2>
+        <h2 style={{ margin: 0 }}>🔍 測驗回顧</h2>
       </div>
 
       <div style={{ background: '#f8fafc', borderRadius: 12, padding: 16, marginBottom: 20 }}>
         <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
           <span>📅 {review.created_at}</span>
           <span>🎯 得分：{review.score_percent}%</span>
-          <span>✅ 答對：{review.correct_count}/{review.total_count}</span>
-          <span style={{ color: '#b91c1c' }}>❌ 錯題：{wrongQuestions.length}</span>
+          <span style={{ color: '#15803d' }}>✅ 答對：{review.correct_count}/{review.total_count}</span>
+          <span style={{ color: '#b91c1c' }}>❌ 錯題：{wrongCount}</span>
         </div>
       </div>
 
-      {wrongQuestions.length === 0 ? (
-        <div style={{ padding: 40, textAlign: 'center', background: '#dcfce7', borderRadius: 12, color: '#15803d', fontWeight: 600 }}>
-          🎉 全部答對！無錯題需要回顧
-        </div>
-      ) : (
-        wrongQuestions.map((q, i) => (
+      {allQuestions.map((q, i) => {
+        const isCorrect = q.is_correct === true;
+        const isLong = q.question_type === 'Long';
+
+        return (
           <div
             key={i}
             style={{
@@ -93,40 +93,83 @@ export default function ReviewPage() {
               borderRadius: 12,
               padding: 20,
               marginBottom: 16,
-              borderLeft: '6px solid #ef4444',
+              borderLeft: `6px solid ${isCorrect ? '#10b981' : (isLong ? '#0ea5e9' : '#ef4444')}`,
               boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
             }}
           >
-<div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'center' }}>
-  <h4 style={{ margin: 0 }}>{q.question_number || `第 ${i + 1} 題`}</h4>
-  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-    <span style={{ background: '#eff6ff', color: '#1d4ed8', padding: '4px 10px', borderRadius: 6, fontSize: '0.8rem', fontWeight: 600 }}>
-      {CATEGORY_MAP[q.main_category] || q.main_category}
-    </span>
-    <FavoriteButton
-      question={q}
-      questionId={q.id || `${q.question_number}-${q.raw_text_zh?.slice(0, 20)}`}
-    />
-  </div>
-</div>
+            {/* 标题行 */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'flex-start' }}>
+              <div>
+                <h4 style={{ margin: 0 }}>{q.question_number || `第 ${i + 1} 題`}</h4>
+                <span style={{
+                  background: '#eff6ff',
+                  color: '#1d4ed8',
+                  padding: '2px 8px',
+                  borderRadius: 4,
+                  fontSize: '0.75rem',
+                  marginTop: 4,
+                  display: 'inline-block'
+                }}>
+                  {CATEGORY_MAP[q.main_category] || q.main_category}
+                </span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{
+                  background: isCorrect ? '#dcfce7' : (isLong ? '#e0f2fe' : '#fee2e2'),
+                  color: isCorrect ? '#15803d' : (isLong ? '#0369a1' : '#b91c1c'),
+                  padding: '4px 10px',
+                  borderRadius: 6,
+                  fontSize: '0.8rem',
+                  fontWeight: 600
+                }}>
+                  {isCorrect ? '✅ 答對' : (isLong ? '📖 自我核對' : '❌ 答錯')}
+                </span>
+                <FavoriteButton
+                  question={q}
+                  questionId={q.id || `${q.question_number}-${q.raw_text_zh?.slice(0, 20)}`}
+                />
+              </div>
+            </div>
 
+            {/* 题干 */}
             <div style={{ lineHeight: 1.8, marginBottom: 16 }}>
               <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                 {normalizeLatex(q.raw_text_zh || q.raw_text_en || '')}
               </ReactMarkdown>
             </div>
 
+            {/* 你的作答 vs 正确答案 */}
             <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
-              <div style={{ flex: 1, minWidth: 180, padding: 12, background: '#fee2e2', borderRadius: 8, color: '#b91c1c' }}>
+              <div style={{
+                flex: 1,
+                minWidth: 180,
+                padding: 12,
+                background: isCorrect ? '#dcfce7' : '#fee2e2',
+                borderRadius: 8,
+                color: isCorrect ? '#15803d' : '#b91c1c'
+              }}>
                 <strong>你的作答：</strong> {q.user_answer || '(未作答)'}
               </div>
-              <div style={{ flex: 1, minWidth: 180, padding: 12, background: '#dcfce7', borderRadius: 8, color: '#15803d' }}>
-                <strong>正確答案：</strong> {q.correct_answer}
+              <div style={{
+                flex: 1,
+                minWidth: 180,
+                padding: 12,
+                background: '#f0f9ff',
+                borderRadius: 8,
+                color: '#0c4a6e'
+              }}>
+                <strong>正確答案：</strong>
+                <div style={{ marginTop: 6 }}>
+                  <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                    {normalizeLatex(q.correct_answer || '(無答案)')}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
 
+            {/* 解析 */}
             {q.solution && (
-              <details style={{ background: '#f8fafc', padding: 12, borderRadius: 8 }}>
+              <details style={{ background: '#f8fafc', padding: 12, borderRadius: 8 }} open={!isCorrect}>
                 <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0369a1' }}>
                   💡 查看解題步驟
                 </summary>
@@ -138,8 +181,8 @@ export default function ReviewPage() {
               </details>
             )}
           </div>
-        ))
-      )}
+        );
+      })}
     </div>
   );
 }
