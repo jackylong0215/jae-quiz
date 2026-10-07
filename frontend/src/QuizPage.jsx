@@ -774,9 +774,15 @@ function QuizContent() {
 
     const breakdown = results.category_breakdown || {};
 
-    return (
-      <div className="quiz-container">
-        <h2>📊 四校勝券 · 模擬測驗診斷報告</h2>
+return (
+  <div className="quiz-container">
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+      <button className="btn btn-secondary" onClick={() => navigate('/browse')}>
+        ← 返回題庫
+      </button>
+      <h2 style={{ margin: 0 }}>📊 四校勝券 · 模擬測驗診斷報告</h2>
+      <div style={{ width: 100 }} />  {/* 占位，让标题居中 */}
+    </div>
 
         <div className="results-summary card">
           <div className="score-circle-wrapper">
@@ -972,10 +978,9 @@ function QuizContent() {
           })}
         </div>
 
-        <div className="results-actions">
-          <button className="btn btn-secondary" onClick={() => navigate('/browse')}>← 返回題庫</button>
-          <button className="btn btn-primary" onClick={() => setPhase('setup')}>🔄 重新生成測驗</button>
-        </div>
+<div className="results-actions" style={{ justifyContent: 'center' }}>
+  <button className="btn btn-primary" onClick={() => setPhase('setup')}>🔄 重新生成測驗</button>
+</div>
       </div>
     );
   }
