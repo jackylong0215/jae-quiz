@@ -23,6 +23,31 @@ function normalizeLatex(text) {
   return text.replace(/\\n/g, '\n');
 }
 
+function extractOptions(q) {
+  if (!q) return {};
+  const raw = q.options_zh || q.options || q.options_en;
+  if (!raw) return {};
+
+  if (typeof raw === 'object' && !Array.isArray(raw)) {
+    const cleaned = {};
+    for (const [k, v] of Object.entries(raw)) {
+      if (v) cleaned[k.toUpperCase()] = typeof v === 'object' ? (v.text || JSON.stringify(v)) : String(v);
+    }
+    return cleaned;
+  }
+
+  if (Array.isArray(raw)) {
+    const cleaned = {};
+    raw.forEach((item, idx) => {
+      const key = (item.id || item.letter || item.label || String.fromCharCode(65 + idx)).toUpperCase();
+      cleaned[key] = item.text || item.content || String(item);
+    });
+    return cleaned;
+  }
+
+  return {};
+}
+
 export default function ReviewPage() {
   const { quizId } = useParams();
   const navigate = useNavigate();
@@ -137,6 +162,65 @@ export default function ReviewPage() {
                 {normalizeLatex(q.raw_text_zh || q.raw_text_en || '')}
               </ReactMarkdown>
             </div>
+            {/* 選項列表（MCQ 才顯示） */}
+{(() => {
+  const optionsMap = extractOptions(q);
+  const letters = ['A', 'B', 'C', 'D', 'E'].filter(l => Boolean(optionsMap[l]));
+  if (letters.length === 0) return null;
+  
+  const correctLetter = String(q.correct_answer || '').trim().toUpperCase();
+  
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+      {letters.map(letter => {
+        const isCorrect = letter === correctLetter;
+        return (
+          <div
+            key={letter}
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              padding: '10px 14px',
+              background: isCorrect ? '#dcfce7' : '#f8fafc',
+              border: `1.5px solid ${isCorrect ? '#10b981' : '#e2e8f0'}`,
+              borderRadius: 8,
+              fontSize: '0.95rem',
+              lineHeight: 1.6,
+            }}
+          >
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 24,
+              height: 24,
+              background: isCorrect ? '#10b981' : '#2563eb',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: '0.8rem',
+              borderRadius: '50%',
+              flexShrink: 0,
+              marginTop: 2,
+            }}>
+              {letter}
+            </span>
+            <div style={{ flex: 1, color: isCorrect ? '#15803d' : '#1e293b', wordBreak: 'break-word' }}>
+              <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                {normalizeLatex(optionsMap[letter])}
+              </ReactMarkdown>
+            </div>
+            {isCorrect && (
+              <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>
+                ✅ 正確
+              </span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+})()}
 
             {/* 你的作答 vs 正确答案 */}
             <div style={{ display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
