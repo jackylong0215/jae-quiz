@@ -303,6 +303,28 @@ export default function HomePage() {
               <IconStar />
               我的收藏
             </button>
+
+            <button
+  className="home-btn"
+  onClick={() => navigate('/wrong-book')}
+  style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 10,
+    padding: '16px 28px',
+    background: '#ffffff',
+    color: '#b91c1c',
+    border: '2px solid #fecaca',
+    borderRadius: 14,
+    fontSize: '1rem',
+    fontWeight: 700,
+    cursor: 'pointer',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+    marginLeft: 12,
+  }}
+>
+  📕 我的錯題本
+</button>
           </div>
 
           <div className="hero-stats">

@@ -13,6 +13,9 @@ import AdminPage from './AdminPage.jsx';
 import { LoadingScreen, SkeletonList } from './LoadingScreen.jsx';
 import FavoriteButton from './FavoriteButton.jsx';
 import ReviewPage from './ReviewPage.jsx';
+import WrongBookPage from './WrongBookPage.jsx';
+import { StreakBadge } from './StatsWidgets.jsx';
+import SpeakButton from './SpeakButton.jsx';
 
 // Configure API Base URL dynamically to match host (127.0.0.1 vs localhost)
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? `http://${window.location.hostname}:8000` : 'http://127.0.0.1:8000');
@@ -518,25 +521,36 @@ export default function App() {
           <div className="badge-jae" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             澳門四校聯考 (JAE)
           </div>
-          <div className="header-auth-box">
-            <button
-              type="button"
-              className="auth-fav-btn"
-              onClick={() => navigate('/favorites')}
-              title="我的收藏"
-            >
-              ⭐ 我的收藏
-            </button>
-            {currentUser ? (
-              <button type="button" className="auth-user-btn" onClick={() => setIsLoginOpen(true)}>
-                🎓 {currentUser.full_name || currentUser.username} (個人中心)
+            <div className="header-auth-box">
+              <button
+                type="button"
+                className="auth-fav-btn"
+                onClick={() => navigate('/favorites')}
+                title="我的收藏"
+              >
+                <StreakBadge />
+                ⭐ 我的收藏
               </button>
-            ) : (
-              <button type="button" className="auth-login-btn" onClick={() => setIsLoginOpen(true)}>
-                🔐 考生登入 / 註冊
+
+              <button
+                type="button"
+                className="auth-wrong-btn"
+                onClick={() => navigate('/wrong-book')}
+                title="我的錯題本"
+              >
+                📕 我的錯題本
               </button>
-            )}
-          </div>
+
+              {currentUser ? (
+                <button type="button" className="auth-user-btn" onClick={() => setIsLoginOpen(true)}>
+                  🎓 {currentUser.full_name || currentUser.username} (個人中心)
+                </button>
+              ) : (
+                <button type="button" className="auth-login-btn" onClick={() => setIsLoginOpen(true)}>
+                  🔐 考生登入 / 註冊
+                </button>
+              )}
+            </div>
         </div>
         <h1 className="main-title">
           四校勝券
@@ -805,6 +819,12 @@ export default function App() {
                       </div>
 
                       <div className="meta-actions-right">
+                        <SpeakButton
+  text={language === 'en' ? (q.raw_text_en || q.raw_text_zh || '') : (q.raw_text_zh || q.raw_text_en || '')}
+  options={extractOptions(q, language === 'en' ? 'en' : 'zh')}
+  size="small"
+  label="朗讀"
+/>
                         <button
                           type="button"
                           onClick={() => handleCopyQuestion(q)}
@@ -1066,6 +1086,31 @@ export default function App() {
           transition: all 0.25s;
           white-space: nowrap;
         }
+
+        .auth-wrong-btn {
+  padding: 8px 16px;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.auth-wrong-btn:hover {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border-color: #ef4444;
+  color: #991b1b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+}
+
+.auth-wrong-btn:active {
+  transform: translateY(0);
+}
 
         .auth-fav-btn:hover {
           background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
@@ -2145,6 +2190,7 @@ export default function App() {
       <Route path="/admin" element={<PageWrapper><AdminPage /></PageWrapper>} />
       <Route path="/favorites" element={<PageWrapper><FavoritesPage /></PageWrapper>} />
       <Route path="/review/:quizId" element={<PageWrapper><ReviewPage /></PageWrapper>} />
+      <Route path="/wrong-book" element={<PageWrapper><WrongBookPage /></PageWrapper>} />
     </Routes>
   );
 }

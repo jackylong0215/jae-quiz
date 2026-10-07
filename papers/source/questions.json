@@ -4020,7 +4020,7 @@
     "number": 1,
     "section": "II",
     "questionType": "written",
-    "question": "如上圖所示，$ABCD$ 為梯形，$PA$ 垂直 $ABCD$，$\\angle DAB=\\angle ABC=\\frac\\pi2$，$|AD|=1$，$|PA|=|AB|=|BC|=2$。設 $M$ 為線段 $PC$ 的中點。\n(a)(i) 求三角形 $PBD$ 的面積。 (6分)\n(ii) 求三棱錐 $P-ABD$ 的體積，而求點 $A$ 至平面 $PBD$ 的距離。 (4分)\n(b) 證明\n(i) $CB$ 垂直平面 $PAB$。 (3分)\n(ii) $DM$ 與平面 $PAB$ 平行。[提示：設 $N$ 為 $PB$ 的中點。證明 $ADMN$ 是一長方形。] (7分)",
+    "question": "如上圖所示，$ABCD$ 為梯形，$PA$ 垂直 $ABCD$，$\\angle DAB=\\angle ABC=\\frac\\pi2$，$|AD|=1$，$|PA|=|AB|=|BC|=2$。設 $M$ 為線段 $PC$ 的中點。\n(a)(i)  $PBD$ 的面積。 (6分)\n(ii) 求三棱錐 $P-ABD$ 的體積，而求點 $A$ 至平面 $PBD$ 的距離。 (4分)\n(b) 證明\n(i) $CB$ 垂直平面 $PAB$。 (3分)\n(ii) $DM$ 與平面 $PAB$ 平行。[提示：設 $N$ 為 $PB$ 的中點。證明 $ADMN$ 是一長方形。] (7分)",
     "rawExtract": "如上圖所示，ABCD為梯形，PA垂直ABCD， \\(\\angle DAB = \\angle ABC = \\frac{\\pi}{2}\\) ，|AD|=1，\\(|PA| = |AB| = |BC| = 2\\) 。設 \\(M\\) 為線段 \\(PC\\) 的中點。\n(a)(i)求三角形PBD的面。 (6分)\n(ii)求三棱锥P- ABD的體，而求點A至平面PBD的距離。 (4分)\n(b)證明\n(i)CB垂直平面PAB。 (3分)\n(ii)DM與平面PAB平行。\n[提示：設 \\(N\\) 為 \\(PB\\) 的中點。證明ADMN是一長方形。] (7分)",
     "options": [],
     "answer": "(a)(i) $\\sqrt6$ (ii) 體積 $\\frac23$，距離 $\\sqrt{\\frac23}$\n(b) 證明見解析",
@@ -9052,7 +9052,7 @@
     "commonMistakes": {},
     "formulas": [],
     "generated": false,
-    "diagram": "/diagrams/p16-w1.webp",
+    "diagram": null,
     "diagramAlt": "原卷第 1 題的參考圖；標示與陰影依原卷保留。"
   },
   {
@@ -9139,7 +9139,7 @@
     "commonMistakes": {},
     "formulas": [],
     "generated": false,
-    "diagram": "/diagrams/p16-w4.webp",
+    "diagram": null,
     "diagramAlt": "原卷第 4 題的參考圖；標示與陰影依原卷保留。"
   },
   {
@@ -10073,7 +10073,7 @@
     "section": "II",
     "questionType": "written",
     "question": "A 和 B 兩隊參加射擊比賽，每隊 3 人，每人射一次。中目標者為本隊贏得一分，否則零分。假設 A 隊中 3 人中目標的概率分別為 $\\frac34,\\frac23$ 和 $\\frac12$，B 隊中各人中目標的概率均為 $\\frac34$。假設隊員能否中目標相互之間沒有影響。\n(a) 填寫下面表格中 A 隊得分的概率（用最簡分數表示）。 (4分)\n(b) 求事件「A 和 B 兩隊得分之和等於 3，且 B 隊得分高於 A 隊的得分」的概率。 (4分)",
-    "rawExtract": "1. A和B兩隧参加射擊比赛，每隧3人，每人射一次。中目標者為本隧赢得一分，否则零分。假設A隧中3人中目標的概率分別為 \\(\\frac{3}{4},\\frac{2}{3}\\) 和 \\(\\frac{1}{2}\\) ，B隧中各人中目標的概率均為 \\(\\frac{3}{4}\\) 。假設隧員能否中目標相互之間没有影響。\n(a)填寫下面表格中A隧得分的概率（用最簡分数表示）。 (4分)\n(b)求事件“A和B兩隧得分之和等於3，且B隧得分高於A隧的得分”的概率。 (4分)",
+    "rawExtract": "1. A和B兩隊参加射擊比赛，每隊3人，每人射一次。中目標者為本隊赢得一分，否则零分。假設A隊中3人中目標的概率分別為 \\(\\frac{3}{4},\\frac{2}{3}\\) 和 \\(\\frac{1}{2}\\) ，B隊中各人中目標的概率均為 \\(\\frac{3}{4}\\) 。假設隊員能否中目標相互之間没有影響。\n(a)填寫下面表格中A隊得分的概率（用最簡分数表示）。 (4分)\n(b)求事件“A和B兩隊得分之和等於3，且B隊得分高於A隊的得分”的概率。 (4分)",
     "options": [],
     "answer": "(a) 表格：0: 1/24, 1: 1/4, 2: 11/24, 3: 1/4\n(b) $\\frac{63}{512}$",
     "topic": "概率",
@@ -10092,7 +10092,7 @@
     "commonMistakes": {},
     "formulas": [],
     "generated": false,
-    "diagram": null,
+    "diagram": "/diagrams/p17-w1.webp",
     "diagramAlt": null
   },
   {

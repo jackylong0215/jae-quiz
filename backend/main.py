@@ -7,11 +7,22 @@ import time
 import uuid
 import random
 from typing import AsyncGenerator, Optional, List, Any, Dict
-from fastapi import Depends
+
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, Query
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from openai import AsyncOpenAI
+import pymupdf as fitz
+import json_repair
+
 from database import get_db, init_db, SessionLocal
-from models import User, QuizRecord
-from auth import hash_password, get_current_user
+from models import (
+    User, QuizRecord, WrongQuestion, TopicMastery, FavoriteQuestion,
+    QuestionAttempt, TopicDiagnosis, macao_now,
+)
 from auth import (
     hash_password,
     verify_password,
@@ -19,15 +30,6 @@ from auth import (
     get_current_user,
     get_optional_user,
 )
-
-from pydantic import BaseModel
-from fastapi import FastAPI, File, HTTPException, UploadFile, Query
-from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
-from openai import AsyncOpenAI
-import pymupdf as fitz
-import json_repair
 
 
 # === Auto-load .env ===
@@ -54,18 +56,24 @@ MODEL = os.getenv("JAE_MODEL", "gemini-3.1-pro-preview")
 DPI = 96
 BATCH_SIZE = 6
 MAX_RETRIES = 2
-# =========================
 
 async_client = AsyncOpenAI(api_key=API_KEY or "dummy_offline_key", base_url=BASE_URL, timeout=180.0)
 
 app = FastAPI(title="Macau JAE Exam Analyzer API")
 
-from auth import get_current_user
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 def require_admin(current_user: User = Depends(get_current_user)):
     if not current_user.is_admin:
         raise HTTPException(status_code=403, detail="需要管理員權限")
     return current_user
+
 
 @app.get("/admin/stats")
 def admin_stats(admin: User = Depends(require_admin), db: Session = Depends(get_db)):
@@ -75,6 +83,7 @@ def admin_stats(admin: User = Depends(require_admin), db: Session = Depends(get_
         "題庫總數": 245,
         "試卷總數": 20,
     }
+
 
 @app.get("/admin/users")
 def admin_users(admin: User = Depends(require_admin), db: Session = Depends(get_db)):
@@ -90,12 +99,6 @@ def admin_users(admin: User = Depends(require_admin), db: Session = Depends(get_
         for u in users
     ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 def find_data_file(subpath: str) -> str:
     candidates = [
@@ -109,6 +112,7 @@ def find_data_file(subpath: str) -> str:
             return c
     return candidates[0]
 
+
 def get_diagrams_dir() -> str:
     candidates = [
         os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "papers", "diagrams")),
@@ -121,16 +125,17 @@ def get_diagrams_dir() -> str:
             return c
     return candidates[0]
 
+
 DIAGRAMS_DIR = get_diagrams_dir()
 if os.path.isdir(DIAGRAMS_DIR):
     app.mount("/diagrams", StaticFiles(directory=DIAGRAMS_DIR), name="diagrams")
+
 
 @app.on_event("startup")
 def on_startup():
     init_db()
     print("[OK] Database initialized (SQLite: jae_app.db)")
 
-    # 自動建立管理員帳號
     try:
         db = SessionLocal()
         try:
@@ -163,22 +168,13 @@ def on_startup():
 # 中文科目 → 英文 main_category 對照表
 # =====================================================
 ZH_TO_EN_CATEGORY = {
-    "三角學": "Trigonometry",
-    "三角函數": "Trigonometry",
-    "幾何": "Geometry",
-    "平面幾何": "Geometry",
-    "解析幾何": "Geometry",
-    "立體幾何": "Geometry",
-    "代數": "Algebra",
-    "代數運算": "Algebra",
-    "函數": "Functions",
-    "函數與對數": "Functions",
-    "概率": "Probability",
-    "排列與概率": "Probability",
-    "數列": "Sequences",
-    "數列與級數": "Sequences",
-    "統計": "Statistics",
-    "微積分": "Calculus",
+    "三角學": "Trigonometry", "三角函數": "Trigonometry",
+    "幾何": "Geometry", "平面幾何": "Geometry", "解析幾何": "Geometry", "立體幾何": "Geometry",
+    "代數": "Algebra", "代數運算": "Algebra",
+    "函數": "Functions", "函數與對數": "Functions",
+    "概率": "Probability", "排列與概率": "Probability",
+    "數列": "Sequences", "數列與級數": "Sequences",
+    "統計": "Statistics", "微積分": "Calculus",
 }
 
 CATEGORY_TOPIC_ALIASES = {
@@ -538,6 +534,7 @@ PROMPT_NO_ANSWER = (
     "}"
 )
 
+
 async def call_model_async(images: list[str], n_key_pages: int, self_solve: bool = False) -> list[dict]:
     active_prompt = PROMPT_NO_ANSWER if self_solve else PROMPT
     if self_solve:
@@ -645,6 +642,7 @@ SUB_TOPIC_TRANSLATIONS = {
     'Series': '級數',
 }
 
+
 def clean_and_align_question(q: dict) -> dict:
     if q.get('sub_topics'):
         q['sub_topics'] = [SUB_TOPIC_TRANSLATIONS.get(t, t) for t in q['sub_topics']]
@@ -658,7 +656,7 @@ def clean_and_align_question(q: dict) -> dict:
         if conclusions:
             final_opt = conclusions[-1].upper()
             if ans != final_opt and ans in ['A', 'B', 'C', 'D', 'E']:
-                print(f"Alignment: question {q.get('question_number')} answer corrected from {ans} -> {final_opt} to match solution conclusion.")
+                print(f"Alignment: question {q.get('question_number')} answer corrected from {ans} -> {final_opt}")
                 q['answer'] = final_opt
 
     sol = re.sub(r'(?:等待|等等|抱歉|對不起|不好意思)[，,、\s][\s\S]*?(?:故選|因此選|答案是|答案為|選)\s*([A-E])', r'故選 \1', sol)
@@ -992,6 +990,7 @@ async def analyze_exam(file: UploadFile = File(...)):
 
 question_bank: dict[str, list[dict]] = {}
 
+
 class QuizRequest(BaseModel):
     questions: Optional[List[Any]] = None
     count: Optional[int] = 10
@@ -999,9 +998,11 @@ class QuizRequest(BaseModel):
     difficulties: Optional[List[str]] = None
     types: Optional[List[str]] = None
 
+
 class QuizSubmission(BaseModel):
     quiz_id: str
     answers: Optional[Dict[str, Any]] = None
+    time_per_question: Optional[Dict[str, int]] = None
 
 
 @app.post("/generate-quiz")
@@ -1032,9 +1033,7 @@ async def generate_quiz(
             expanded_cats.add(cat)
             if cat in ZH_TO_EN_CATEGORY:
                 expanded_cats.add(ZH_TO_EN_CATEGORY[cat])
-        print(f"[DEBUG] Filtering by categories: {cats} -> expanded: {expanded_cats}")
         filtered = [q for q in filtered if q.get("main_category") in expanded_cats]
-        print(f"[DEBUG] After category filter: {len(filtered)} remaining")
 
     if diffs:
         filtered = [q for q in filtered if q.get("difficulty") in diffs]
@@ -1042,6 +1041,9 @@ async def generate_quiz(
         filtered = [q for q in filtered if q.get("question_type") in types_list]
 
     print(f"[DEBUG] Final filtered: {len(filtered)} questions")
+
+    if not filtered:
+        raise HTTPException(status_code=404, detail="題庫中沒有符合條件的題目，請更換篩選條件")
 
     if len(filtered) > count:
         sampled = random.sample(filtered, count)
@@ -1080,8 +1082,6 @@ async def generate_quiz(
         stripped.pop("solution", None)
         stripped_questions.append(stripped)
 
-    print(f"[DEBUG] Returning {len(stripped_questions)} questions to client")
-
     return {
         "quiz_id": quiz_id,
         "total": len(stripped_questions),
@@ -1099,7 +1099,6 @@ async def submit_quiz(sub: QuizSubmission, current_user: Optional[User] = Depend
 
     if not original_questions:
         record = db.query(QuizRecord).filter(QuizRecord.id == sub.quiz_id).first()
-        print(f"[DEBUG] DB record found: {record is not None}")
         if record and record.questions_json:
             try:
                 original_questions = json.loads(record.questions_json)
@@ -1109,12 +1108,9 @@ async def submit_quiz(sub: QuizSubmission, current_user: Optional[User] = Depend
                 print(f"[WARN] Failed to parse questions_json: {e}")
 
     if not original_questions:
-        print(f"[ERROR] Quiz {sub.quiz_id} not found anywhere")
         raise HTTPException(status_code=404, detail="Quiz not found or expired")
 
     user_answers = sub.answers or {}
-    print(f"[DEBUG] Answers: {user_answers}")
-
     results = []
     correct_count = 0
     category_breakdown = {}
@@ -1155,6 +1151,7 @@ async def submit_quiz(sub: QuizSubmission, current_user: Optional[User] = Depend
     mcq_questions = [q for q in original_questions if q.get("question_type") != "Long"]
     score_percent = round((correct_count / len(mcq_questions)) * 100) if mcq_questions else 0
 
+    # ===== 保存測驗記錄（QuizRecord）=====
     if current_user:
         try:
             normalized_user_answers = {str(k): str(v) for k, v in user_answers.items()}
@@ -1187,6 +1184,123 @@ async def submit_quiz(sub: QuizSubmission, current_user: Optional[User] = Depend
             print("Failed to persist quiz record:", db_err)
             db.rollback()
 
+    # ===== ⭐ 記錄每次作答（QuestionAttempt）=====
+    if current_user:
+        try:
+            time_map = sub.time_per_question or {}
+            for i, q in enumerate(original_questions):
+                user_answer = str(user_answers.get(str(i), "") or "").strip()
+                correct_answer = str(q.get("answer", "") or "").strip()
+                is_long = q.get("question_type") == "Long"
+                is_correct = None if is_long else bool(
+                    user_answer and user_answer.upper() == correct_answer.upper()
+                )
+
+                q_id = q.get("id")
+                if not q_id:
+                    paper = q.get("source_paper") or q.get("paperId") or ""
+                    num = q.get("question_number") or ""
+                    q_id = f"{paper}-{num}" if (paper or num) else "".join(
+                        (q.get("raw_text_zh") or q.get("raw_text_en") or "").split()
+                    )[:80]
+                if not q_id:
+                    continue
+
+                attempt = QuestionAttempt(
+                    user_id=current_user.id,
+                    quiz_id=sub.quiz_id,
+                    question_id=q_id,
+                    question_json=json.dumps(q, ensure_ascii=False),
+                    user_answer=user_answer,
+                    correct_answer=correct_answer,
+                    is_correct=is_correct,
+                    time_spent_seconds=int(time_map.get(str(i), 0) or 0),
+                    difficulty=q.get("difficulty", ""),
+                    main_category=q.get("main_category", ""),
+                    sub_topics=json.dumps(q.get("sub_topics", []), ensure_ascii=False),
+                )
+                db.add(attempt)
+            db.commit()
+            print(f"[OK] {len(original_questions)} attempts recorded for {current_user.username}")
+        except Exception as e:
+            print(f"[WARN] Failed to record attempts: {e}")
+            db.rollback()
+
+    # ===== ⭐ 自動記錄錯題到錯題本（WrongQuestion）=====
+    if current_user:
+        try:
+            for i, q in enumerate(original_questions):
+                idx_str = str(i)
+                user_answer = str(user_answers.get(idx_str, "") or "").strip()
+                correct_answer = str(q.get("answer", "") or "").strip()
+                is_long = q.get("question_type") == "Long"
+
+                if is_long:
+                    continue
+
+                is_correct = bool(user_answer and (user_answer.upper() == correct_answer.upper()))
+
+                q_id = q.get("id")
+                if not q_id:
+                    paper = q.get("source_paper") or q.get("paperId") or ""
+                    num = q.get("question_number") or ""
+                    if paper or num:
+                        q_id = f"{paper}-{num}"
+                    else:
+                        q_id = "".join((q.get("raw_text_zh") or q.get("raw_text_en") or "").split())[:80]
+
+                if not q_id:
+                    continue
+
+                if not is_correct:
+                    existing_wq = db.query(WrongQuestion).filter(
+                        WrongQuestion.user_id == current_user.id,
+                        WrongQuestion.question_id == q_id,
+                    ).first()
+
+                    if existing_wq:
+                        existing_wq.wrong_count = (existing_wq.wrong_count or 1) + 1
+                        existing_wq.last_wrong_at = macao_now()
+                        existing_wq.user_answer = user_answer
+                        existing_wq.mastered = False
+                    else:
+                        wq = WrongQuestion(
+                            user_id=current_user.id,
+                            question_id=q_id,
+                            question_json=json.dumps(q, ensure_ascii=False),
+                            user_answer=user_answer,
+                            correct_answer=correct_answer,
+                            category=q.get("main_category") or q.get("topic") or "其他",
+                            sub_topics=json.dumps(q.get("sub_topics", []), ensure_ascii=False),
+                            difficulty=q.get("difficulty", ""),
+                            wrong_count=1,
+                            mastered=False,
+                        )
+                        db.add(wq)
+                else:
+                    existing_wq = db.query(WrongQuestion).filter(
+                        WrongQuestion.user_id == current_user.id,
+                        WrongQuestion.question_id == q_id,
+                        WrongQuestion.mastered == False,
+                    ).first()
+                    if existing_wq:
+                        existing_wq.mastered = True
+
+            db.commit()
+            print(f"[OK] Wrong questions updated for {current_user.username}")
+        except Exception as wq_err:
+            print(f"[WARN] Failed to update wrong-question book: {wq_err}")
+            db.rollback()
+
+    # ===== ⭐ 重新計算知識點診斷 =====
+    if current_user:
+        try:
+            recompute_diagnosis(current_user.id, db)
+            print(f"[OK] Topic diagnosis updated for {current_user.username}")
+        except Exception as e:
+            print(f"[WARN] Failed to recompute diagnosis: {e}")
+            db.rollback()
+
     return {
         "total": len(original_questions),
         "correct": correct_count,
@@ -1206,9 +1320,11 @@ class UserRegisterRequest(BaseModel):
     password: str
     full_name: Optional[str] = None
 
+
 class UserLoginRequest(BaseModel):
     username: str
     password: str
+
 
 class FeedbackRequest(BaseModel):
     score_percent: int
@@ -1332,8 +1448,8 @@ def get_quiz_review(
     if record.questions_json:
         try:
             original_questions = json.loads(record.questions_json)
-        except Exception as e:
-            print(f"[WARN] Failed to parse questions_json: {e}")
+        except Exception:
+            pass
 
     if not original_questions:
         original_questions = question_bank.get(quiz_id, [])
@@ -1342,8 +1458,8 @@ def get_quiz_review(
     if record.user_answers_json:
         try:
             user_answers = json.loads(record.user_answers_json)
-        except Exception as e:
-            print(f"[WARN] Failed to parse user_answers_json: {e}")
+        except Exception:
+            pass
 
     merged = []
     for i, q in enumerate(original_questions):
@@ -1388,9 +1504,7 @@ async def generate_pedagogical_feedback(req: FeedbackRequest):
         pct = stats.get('percent', 0)
         correct = stats.get('correct', 0)
         total = stats.get('total', 0)
-        weak_detail_lines.append(
-            f"- {cat}：{correct}/{total} 正确，得分率 {pct}%"
-        )
+        weak_detail_lines.append(f"- {cat}：{correct}/{total} 正确，得分率 {pct}%")
     breakdown_text = "\n".join(weak_detail_lines)
 
     prompt = (
@@ -1406,21 +1520,16 @@ async def generate_pedagogical_feedback(req: FeedbackRequest):
         "- 禁止寫開場白、總結語、鼓勵語（如「相信你一定能進步」）\n\n"
         "✅ 必須包含的內容：\n"
         "1. **逐科診斷**：對每個得分率低於 70% 的科目，寫出：\n"
-        "   - 這個科目在 JAE 中常考的 2-3 個具體題型（例如「三角學：解三角形、和差化積、三角方程通解」）\n"
-        "   - 學生在這些題型上最常見的失分原因（例如「忽略角度範圍限制」「符號判斷錯誤」）\n"
-        "   - 一個**具體的練習處方**：例如「每天做 3 題『已知兩邊及夾角求第三邊』的餘弦定理題，限時 5 分鐘」\n\n"
-        "2. **一個高頻考點公式清單**：針對最弱的 1-2 科，列出 3-5 個必須背熟的具體公式或定理，"
-        "用 LaTeX 寫出（例如 $\\sin^2\\theta + \\cos^2\\theta = 1$）。\n\n"
-        "3. **一週行動計畫**：用 3 條 bullet point 給出具體任務，每條要有：\n"
-        "   - 做什麼（具體題型或公式）\n"
-        "   - 做多少（數量、時間）\n"
-        "   - 達到什麼標準（例如「10 題中至少對 8 題」）\n\n"
+        "   - 這個科目在 JAE 中常考的 2-3 個具體題型\n"
+        "   - 學生在這些題型上最常見的失分原因\n"
+        "   - 一個**具體的練習處方**\n\n"
+        "2. **一個高頻考點公式清單**：針對最弱的 1-2 科，列出 3-5 個必須背熟的具體公式或定理，用 LaTeX 寫出。\n\n"
+        "3. **一週行動計畫**：用 3 條 bullet point 給出具體任務。\n\n"
         "格式要求：\n"
         "- 使用繁體中文\n"
-        "- 使用 Markdown（## 標題、- bullet point、**粗體**重點）\n"
-        "- 數學公式用 LaTeX：行內 $...$，獨立 $$...$$\n"
-        "- 總字數 400-600 字\n"
-        "- 語氣像一位嚴格但實用的補習老師，直接給方法，不要廢話"
+        "- 使用 Markdown\n"
+        "- 數學公式用 LaTeX\n"
+        "- 總字數 400-600 字"
     )
     if req.wrong_questions:
         wrong_lines = "\n".join([
@@ -1447,6 +1556,31 @@ async def generate_pedagogical_feedback(req: FeedbackRequest):
 
 
 # =====================================================================
+# 使用者回報 / 聯絡我們
+# =====================================================================
+
+class ContactRequest(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    category: str = "其他"
+    message: str
+
+
+@app.post("/contact")
+def submit_contact(req: ContactRequest):
+    if not req.message or len(req.message.strip()) < 5:
+        raise HTTPException(400, "訊息內容太短")
+
+    print("=" * 60)
+    print(f"[CONTACT] 來自: {req.name or '匿名'} <{req.email or '未提供'}>")
+    print(f"[CONTACT] 類別: {req.category}")
+    print(f"[CONTACT] 內容: {req.message}")
+    print("=" * 60)
+
+    return {"ok": True, "message": "已收到你的回報，我們會盡快處理。"}
+
+
+# =====================================================================
 # 澳門四校聯考 · 歷屆 SQL 預存題庫端點
 # =====================================================================
 
@@ -1463,23 +1597,18 @@ def get_prestored_papers():
 def get_prestored_questions(paper_id: Optional[str] = None):
     q_path = find_data_file(os.path.join("source", "questions.json"))
     if not os.path.exists(q_path):
-        return {"questions": []}
+        return {"total": 0, "questions": []}
+
     with open(q_path, "r", encoding="utf-8") as f:
         raw_questions = json.load(f)
 
     topic_cat_map = {
-        "三角函數": "Trigonometry",
-        "二項式定理": "Algebra",
-        "代數運算": "Algebra",
-        "函數與對數": "Functions",
-        "平面幾何": "Geometry",
-        "排列與概率": "Probability",
-        "數列與級數": "Sequences",
-        "比例與應用": "Algebra",
-        "百分率與立體幾何": "Geometry",
-        "統計": "Statistics",
-        "解析幾何": "Geometry",
-        "集合與不等式": "Algebra",
+        "三角函數": "Trigonometry", "二項式定理": "Algebra",
+        "代數運算": "Algebra", "函數與對數": "Functions",
+        "平面幾何": "Geometry", "排列與概率": "Probability",
+        "數列與級數": "Sequences", "比例與應用": "Algebra",
+        "百分率與立體幾何": "Geometry", "統計": "Statistics",
+        "解析幾何": "Geometry", "集合與不等式": "Algebra",
     }
 
     papers_map = {}
@@ -1515,7 +1644,7 @@ def get_prestored_questions(paper_id: Optional[str] = None):
                 diff_str = "Hard"
             else:
                 diff_str = "Medium"
-        cat = topic_cat_map.get(q.get("topic"), "Algebra")
+        cat = topic_cat_map.get(q.get("topic"), "Other")
 
         paper_title = papers_map.get(q.get("paperId", ""), q.get("paperId", ""))
         real_en = q.get("english") or q.get("question_en") or ""
@@ -1546,9 +1675,7 @@ def get_prestored_questions(paper_id: Optional[str] = None):
     for q in mapped:
         text_key = (q.get("raw_text_zh") or q.get("raw_text_en") or "")
         text_key = "".join(text_key.split())[:100]
-
         if text_key and text_key in seen_texts:
-            print(f"[DEDUP] Skipped duplicate: {q.get('question_number')} | {q.get('source_paper')}")
             continue
         if text_key:
             seen_texts.add(text_key)
@@ -1665,12 +1792,12 @@ async def generate_similar_questions(samples: List[dict], count: int) -> List[di
 
 嚴格要求：
 1. 題型必須相同（MCQ 選擇題 / Long 解答題）
-2. 知識點相同（例如都是二次函數、三角函數等）
+2. 知識點相同
 3. 難度相近
-4. **數字、情境、選項必須完全不同**（禁止直接照抄範例題）
+4. **數字、情境、選項必須完全不同**
 5. MCQ 必須有 A、B、C、D、E 五個選項
 6. 每題必須提供正確答案與步驟解析
-7. 所有數學式用 LaTeX 表示（$...$ 行內、$$...$$ 獨立）
+7. 所有數學式用 LaTeX 表示
 
 請以 JSON 回傳，格式如下：
 {{
@@ -1739,16 +1866,12 @@ async def generate_ai_quiz(
             expanded.update(CATEGORY_TOPIC_ALIASES.get(cat, [cat]))
             expanded.update(EN_ALIASES.get(cat, []))
 
-        print(f"[DEBUG AI] Categories: {payload.categories}")
-        print(f"[DEBUG AI] Expanded set: {expanded}")
-
         filtered = [q for q in filtered if (
             q.get("topic") in expanded or
             q.get("subtopic") in expanded or
             q.get("main_category") in expanded or
             any(t in expanded for t in (q.get("sub_topics") or []))
         )]
-        print(f"[DEBUG AI] After category filter: {len(filtered)}")
 
     if payload.difficulties:
         DIFF_ALIASES = {
@@ -1760,12 +1883,10 @@ async def generate_ai_quiz(
         for d in payload.difficulties:
             wanted_diffs.add(d)
             wanted_diffs.update(DIFF_ALIASES.get(d, []))
-        print(f"[DEBUG AI] Difficulty filter: {wanted_diffs}")
         filtered = [q for q in filtered if (
             q.get("difficulty") is None or
             str(q.get("difficulty")).strip() in wanted_diffs
         )]
-        print(f"[DEBUG AI] After difficulty filter: {len(filtered)}")
 
     if payload.types:
         TYPE_ALIASES = {
@@ -1776,14 +1897,10 @@ async def generate_ai_quiz(
         for t in payload.types:
             wanted_types.add(t)
             wanted_types.update(TYPE_ALIASES.get(t, []))
-        print(f"[DEBUG AI] Type filter: {wanted_types}")
         filtered = [q for q in filtered if (
             q.get("questionType") is None or
             str(q.get("questionType")).strip() in wanted_types
         )]
-        print(f"[DEBUG AI] After type filter: {len(filtered)}")
-
-    print(f"[DEBUG AI] Final filtered: {len(filtered)} questions")
 
     if not filtered:
         raise HTTPException(404, "找不到符合條件的範例題")
@@ -1817,7 +1934,34 @@ async def generate_ai_quiz(
                 q["question_type"] = "MCQ"
         else:
             q.setdefault("question_type", "MCQ")
-        q.setdefault("main_category", "Algebra")
+
+        if not q.get("main_category"):
+            topic_map = {
+                "三角": "Trigonometry", "三角函數": "Trigonometry",
+                "三角恆等式": "Trigonometry", "三角方程": "Trigonometry",
+                "正弦": "Trigonometry", "餘弦": "Trigonometry",
+                "幾何": "Geometry", "立體": "Geometry", "解析幾何": "Geometry",
+                "圓": "Geometry", "橢圓": "Geometry", "拋物線": "Geometry",
+                "雙曲線": "Geometry", "圓錐": "Geometry",
+                "代數": "Algebra", "集合": "Algebra", "不等式": "Algebra",
+                "方程": "Algebra", "多項式": "Algebra", "二項式": "Algebra",
+                "函數": "Functions", "對數": "Functions", "指數": "Functions",
+                "概率": "Probability", "排列": "Probability", "組合": "Probability",
+                "數列": "Sequences", "級數": "Sequences", "等差": "Sequences", "等比": "Sequences",
+                "統計": "Statistics",
+                "微分": "Calculus", "積分": "Calculus", "導數": "Calculus",
+                "矩陣": "Algebra", "行列式": "Algebra", "向量": "Geometry",
+            }
+            subs = q.get("sub_topics") or []
+            for s in subs:
+                for key, cat in topic_map.items():
+                    if key in str(s):
+                        q["main_category"] = cat
+                        break
+                if q.get("main_category"):
+                    break
+            q.setdefault("main_category", "Other")
+
         q.setdefault("sub_topics", [])
         q.setdefault("difficulty", "Medium")
         q.setdefault("raw_text_zh", "")
@@ -1831,24 +1975,24 @@ async def generate_ai_quiz(
     quiz_id = f"ai-{int(time.time())}"
     question_bank[quiz_id] = ai_questions
 
-    try:
-        early_record = QuizRecord(
-            id=quiz_id,
-            user_id=current_user.id,
-            score_percent=0,
-            correct_count=0,
-            total_count=len(ai_questions),
-            time_taken_seconds=0,
-            category_breakdown_json="{}",
-            questions_json=json.dumps(ai_questions, ensure_ascii=False),
-            user_answers_json="{}",
-        )
-        db.add(early_record)
-        db.commit()
-        print(f"[OK] AI Quiz {quiz_id} pre-saved for user {current_user.username}")
-    except Exception as e:
-        print(f"[WARN] AI early save failed: {e}")
-        db.rollback()
+    if current_user:
+        try:
+            early_record = QuizRecord(
+                id=quiz_id,
+                user_id=current_user.id,
+                score_percent=0,
+                correct_count=0,
+                total_count=len(ai_questions),
+                time_taken_seconds=0,
+                category_breakdown_json="{}",
+                questions_json=json.dumps(ai_questions, ensure_ascii=False),
+                user_answers_json="{}",
+            )
+            db.add(early_record)
+            db.commit()
+        except Exception as e:
+            print(f"[WARN] AI early save failed: {e}")
+            db.rollback()
 
     stripped = []
     for i, q in enumerate(ai_questions):
@@ -1868,11 +2012,8 @@ async def generate_ai_quiz(
 
 
 # =====================================================================
-# 收藏題目 API（FavoriteQuestion）
+# 收藏題目 API
 # =====================================================================
-
-from models import FavoriteQuestion
-
 
 class FavoriteRequest(BaseModel):
     question_id: str
@@ -1947,3 +2088,685 @@ def list_favorites(
             "created_at": f.created_at.strftime("%Y-%m-%d %H:%M") if f.created_at else "",
         })
     return {"total": len(result), "favorites": result}
+
+
+# =====================================================================
+# 多層診斷邏輯
+# =====================================================================
+
+DIFFICULTY_TIME_BASELINE = {
+    "Easy": 30,
+    "Medium": 60,
+    "Hard": 120,
+}
+
+
+def recompute_diagnosis(user_id: int, db: Session):
+    from datetime import timedelta
+    from collections import defaultdict
+
+    cutoff = macao_now() - timedelta(days=90)
+    attempts = db.query(QuestionAttempt).filter(
+        QuestionAttempt.user_id == user_id,
+        QuestionAttempt.attempted_at >= cutoff,
+        QuestionAttempt.is_correct.isnot(None),
+    ).order_by(QuestionAttempt.attempted_at.desc()).all()
+
+    if not attempts:
+        return
+
+    by_topic = defaultdict(list)
+    for a in attempts:
+        try:
+            subs = json.loads(a.sub_topics) if a.sub_topics else []
+        except Exception:
+            subs = []
+        if not subs and a.main_category:
+            subs = [a.main_category]
+        for t in subs:
+            if t:
+                by_topic[t].append(a)
+
+    for topic, records in by_topic.items():
+        total = len(records)
+        correct = sum(1 for r in records if r.is_correct)
+        correct_rate = round(correct / total * 100) if total else 0
+        avg_time = round(sum(r.time_spent_seconds or 0 for r in records) / total) if total else 0
+        recent_3 = ["correct" if r.is_correct else "wrong" for r in records[:3]]
+
+        if correct_rate >= 85 and avg_time > 0:
+            mastery = "mastered"
+        elif correct_rate >= 60:
+            mastery = "partial"
+        elif correct_rate >= 40:
+            mastery = "fuzzy"
+        else:
+            mastery = "unknown"
+
+        diagnosis = "ok"
+        recommendation = ""
+
+        if mastery == "mastered":
+            recommendation = f"你已熟練掌握「{topic}」，可以挑戰進階題。"
+        elif mastery == "partial":
+            recommendation = f"「{topic}」掌握度尚可（{correct_rate}%），建議多做中等題鞏固。"
+        else:
+            past_correct = correct
+            fast_wrong = any(
+                (not r.is_correct) and (r.time_spent_seconds or 0) < DIFFICULTY_TIME_BASELINE.get(r.difficulty or "Medium", 60) * 0.5
+                for r in records[:5]
+            )
+            all_wrong_recent = len(recent_3) >= 3 and all(x == "wrong" for x in recent_3)
+            slow = avg_time > DIFFICULTY_TIME_BASELINE.get(records[0].difficulty or "Medium", 60) * 1.3
+
+            if past_correct >= 2 and fast_wrong:
+                diagnosis = "careless"
+                recommendation = f"「{topic}」你之前會做（曾答對 {past_correct} 次），但最近答錯且速度偏快，可能是粗心。建議：放慢速度、檢查符號與計算。"
+            elif all_wrong_recent and slow:
+                diagnosis = "forgot_formula"
+                recommendation = f"「{topic}」最近 3 次全錯且花時間偏長（平均 {avg_time} 秒），可能公式記不住。建議：複習核心公式。"
+            elif all_wrong_recent:
+                diagnosis = "concept_gap"
+                recommendation = f"「{topic}」最近 3 次全錯，可能核心概念不熟。建議：從基礎觀念重新學。"
+            else:
+                diagnosis = "concept_gap"
+                recommendation = f"「{topic}」掌握度偏低（{correct_rate}%），建議加強基礎練習。"
+
+        diag = db.query(TopicDiagnosis).filter(
+            TopicDiagnosis.user_id == user_id,
+            TopicDiagnosis.topic == topic,
+        ).first()
+        if not diag:
+            diag = TopicDiagnosis(user_id=user_id, topic=topic)
+            db.add(diag)
+        diag.mastery_level = mastery
+        diag.correct_rate = correct_rate
+        diag.avg_time_seconds = avg_time
+        diag.total_attempts = total
+        diag.recent_results = json.dumps(recent_3, ensure_ascii=False)
+        diag.diagnosis_type = diagnosis
+        diag.recommendation = recommendation
+        diag.last_updated = macao_now()
+
+    db.commit()
+
+
+@app.get("/user/topic-diagnosis")
+def get_topic_diagnosis(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    diags = db.query(TopicDiagnosis).filter(
+        TopicDiagnosis.user_id == user.id
+    ).order_by(TopicDiagnosis.correct_rate.asc()).all()
+
+    result = []
+    for d in diags:
+        try:
+            recent = json.loads(d.recent_results) if d.recent_results else []
+        except Exception:
+            recent = []
+        result.append({
+            "topic": d.topic,
+            "mastery_level": d.mastery_level,
+            "correct_rate": d.correct_rate,
+            "avg_time_seconds": d.avg_time_seconds,
+            "total_attempts": d.total_attempts,
+            "recent_results": recent,
+            "diagnosis_type": d.diagnosis_type,
+            "recommendation": d.recommendation,
+            "last_updated": d.last_updated.strftime("%Y-%m-%d %H:%M") if d.last_updated else "",
+        })
+    return {"topics": result}
+
+# =====================================================================
+# 學習趨勢 / 連續天數 / 成就系統（SDG 4）
+# =====================================================================
+
+@app.get("/user/mastery-trend")
+def get_mastery_trend(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """回傳每個知識點過去 30 天的每日正確率趨勢"""
+    from datetime import timedelta
+    from collections import defaultdict
+
+    cutoff = macao_now() - timedelta(days=30)
+    attempts = db.query(QuestionAttempt).filter(
+        QuestionAttempt.user_id == user.id,
+        QuestionAttempt.attempted_at >= cutoff,
+        QuestionAttempt.is_correct.isnot(None),
+    ).order_by(QuestionAttempt.attempted_at.asc()).all()
+
+    if not attempts:
+        return {"topics": []}
+
+    # 依 topic → date → [correct, total]
+    by_topic = defaultdict(lambda: defaultdict(lambda: {"correct": 0, "total": 0}))
+
+    for a in attempts:
+        try:
+            subs = json.loads(a.sub_topics) if a.sub_topics else []
+        except Exception:
+            subs = []
+        if not subs and a.main_category:
+            subs = [a.main_category]
+        day = a.attempted_at.strftime("%Y-%m-%d")
+
+        for t in subs:
+            if not t:
+                continue
+            by_topic[t][day]["total"] += 1
+            if a.is_correct:
+                by_topic[t][day]["correct"] += 1
+
+    # 轉成前端好用的格式
+    result = []
+    for topic, day_map in by_topic.items():
+        points = []
+        for day in sorted(day_map.keys()):
+            d = day_map[day]
+            pct = round(d["correct"] / d["total"] * 100) if d["total"] else 0
+            points.append({"date": day, "percent": pct, "total": d["total"]})
+
+        if points:
+            first_pct = points[0]["percent"]
+            last_pct = points[-1]["percent"]
+            delta = last_pct - first_pct
+            trend = "up" if delta > 5 else ("down" if delta < -5 else "flat")
+
+            result.append({
+                "topic": topic,
+                "points": points,
+                "first_percent": first_pct,
+                "last_percent": last_pct,
+                "delta": delta,
+                "trend": trend,
+            })
+
+    # 依 delta 排序（進步最多的排前面）
+    result.sort(key=lambda x: x["delta"], reverse=True)
+    return {"topics": result[:8]}  # 最多 8 個知識點
+
+
+@app.get("/user/streak")
+def get_streak(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """計算連續學習天數（今天有做題就算）"""
+    from datetime import timedelta
+
+    # 抓所有做題日期（去重）
+    attempts = db.query(QuestionAttempt).filter(
+        QuestionAttempt.user_id == user.id,
+    ).order_by(QuestionAttempt.attempted_at.desc()).all()
+
+    if not attempts:
+        return {"current_streak": 0, "longest_streak": 0, "total_days": 0, "today_done": False}
+
+    # 用 set 收集日期
+    days = set()
+    for a in attempts:
+        if a.attempted_at:
+            days.add(a.attempted_at.date())
+
+    today = macao_now().date()
+
+    # 今天有沒有做？
+    today_done = today in days
+
+    # 計算當前連續天數（從今天或昨天開始往前數）
+    current_streak = 0
+    check_day = today if today_done else today - timedelta(days=1)
+    while check_day in days:
+        current_streak += 1
+        check_day -= timedelta(days=1)
+
+    # 計算歷史最長連續天數
+    sorted_days = sorted(days)
+    longest = 0
+    run = 0
+    prev = None
+    for d in sorted_days:
+        if prev is not None and (d - prev).days == 1:
+            run += 1
+        else:
+            run = 1
+        longest = max(longest, run)
+        prev = d
+
+    return {
+        "current_streak": current_streak,
+        "longest_streak": longest,
+        "total_days": len(days),
+        "today_done": today_done,
+    }
+
+
+@app.get("/user/achievements")
+def get_achievements(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """計算使用者的成就徽章"""
+    total_attempts = db.query(QuestionAttempt).filter(
+        QuestionAttempt.user_id == user.id,
+        QuestionAttempt.is_correct.isnot(None),
+    ).count()
+
+    total_correct = db.query(QuestionAttempt).filter(
+        QuestionAttempt.user_id == user.id,
+        QuestionAttempt.is_correct == True,
+    ).count()
+
+    total_quiz = db.query(QuizRecord).filter(
+        QuizRecord.user_id == user.id,
+    ).count()
+
+    total_wrong_solved = db.query(WrongQuestion).filter(
+        WrongQuestion.user_id == user.id,
+        WrongQuestion.mastered == True,
+    ).count()
+
+    # 各知識點熟練數
+    mastered_topics = db.query(TopicDiagnosis).filter(
+        TopicDiagnosis.user_id == user.id,
+        TopicDiagnosis.mastery_level == "mastered",
+    ).count()
+
+    # 完美測驗數（100% 分數）
+    perfect_quizzes = db.query(QuizRecord).filter(
+        QuizRecord.user_id == user.id,
+        QuizRecord.score_percent == 100,
+    ).count()
+
+    # 成就定義
+    achievements = [
+        {
+            "id": "first_quiz",
+            "icon": "🎯",
+            "title": "初次挑戰",
+            "desc": "完成第一次測驗",
+            "unlocked": total_quiz >= 1,
+            "progress": f"{min(total_quiz, 1)}/1",
+        },
+        {
+            "id": "quiz_10",
+            "icon": "📚",
+            "title": "勤奮學習",
+            "desc": "完成 10 次測驗",
+            "unlocked": total_quiz >= 10,
+            "progress": f"{min(total_quiz, 10)}/10",
+        },
+        {
+            "id": "attempts_50",
+            "icon": "💪",
+            "title": "練習達人",
+            "desc": "累積作答 50 題",
+            "unlocked": total_attempts >= 50,
+            "progress": f"{min(total_attempts, 50)}/50",
+        },
+        {
+            "id": "attempts_200",
+            "icon": "🔥",
+            "title": "題海戰士",
+            "desc": "累積作答 200 題",
+            "unlocked": total_attempts >= 200,
+            "progress": f"{min(total_attempts, 200)}/200",
+        },
+        {
+            "id": "correct_100",
+            "icon": "✅",
+            "title": "百題答對",
+            "desc": "累積答對 100 題",
+            "unlocked": total_correct >= 100,
+            "progress": f"{min(total_correct, 100)}/100",
+        },
+        {
+            "id": "perfect_quiz",
+            "icon": "⭐",
+            "title": "滿分表現",
+            "desc": "在測驗中拿到 100%",
+            "unlocked": perfect_quizzes >= 1,
+            "progress": f"{min(perfect_quizzes, 1)}/1",
+        },
+        {
+            "id": "fix_wrong_5",
+            "icon": "🔄",
+            "title": "亡羊補牢",
+            "desc": "把 5 道錯題變成已掌握",
+            "unlocked": total_wrong_solved >= 5,
+            "progress": f"{min(total_wrong_solved, 5)}/5",
+        },
+        {
+            "id": "mastered_1",
+            "icon": "🧠",
+            "title": "知識點入門",
+            "desc": "精通第 1 個知識點",
+            "unlocked": mastered_topics >= 1,
+            "progress": f"{min(mastered_topics, 1)}/1",
+        },
+        {
+            "id": "mastered_5",
+            "icon": "🏆",
+            "title": "多面手",
+            "desc": "精通 5 個知識點",
+            "unlocked": mastered_topics >= 5,
+            "progress": f"{min(mastered_topics, 5)}/5",
+        },
+    ]
+
+    unlocked_count = sum(1 for a in achievements if a["unlocked"])
+
+    return {
+        "achievements": achievements,
+        "unlocked_count": unlocked_count,
+        "total_count": len(achievements),
+    }
+
+# =====================================================================
+# 錯題本 & 知識點掌握度
+# =====================================================================
+
+@app.get("/user/wrong-questions")
+def get_wrong_questions(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    wrongs = db.query(WrongQuestion).filter(
+        WrongQuestion.user_id == user.id,
+        WrongQuestion.mastered == False,
+    ).order_by(WrongQuestion.wrong_count.desc()).all()
+
+    grouped = {}
+    for w in wrongs:
+        cat = w.category or "其他"
+        if cat not in grouped:
+            grouped[cat] = []
+        try:
+            qjson = json.loads(w.question_json) if w.question_json else {}
+        except Exception:
+            qjson = {}
+        try:
+            subtopics = json.loads(w.sub_topics) if w.sub_topics else []
+        except Exception:
+            subtopics = []
+        grouped[cat].append({
+            "question_id": w.question_id,
+            "question": qjson,
+            "user_answer": w.user_answer,
+            "correct_answer": w.correct_answer,
+            "wrong_count": w.wrong_count or 1,
+            "sub_topics": subtopics,
+            "difficulty": w.difficulty,
+            "last_wrong_at": w.last_wrong_at.strftime("%Y-%m-%d %H:%M") if w.last_wrong_at else "",
+        })
+
+    total = sum(len(v) for v in grouped.values())
+    return {"total": total, "grouped": grouped}
+
+
+@app.get("/user/topic-mastery")
+def get_topic_mastery(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    topics = db.query(TopicMastery).filter(
+        TopicMastery.user_id == user.id
+    ).order_by(TopicMastery.mastery_percent.asc()).all()
+
+    return {
+        "topics": [
+            {
+                "topic": t.topic,
+                "total": t.total_attempts or 0,
+                "correct": t.correct_attempts or 0,
+                "mastery_percent": t.mastery_percent or 0,
+                "status": "weak" if (t.mastery_percent or 0) < 60
+                          else ("ok" if (t.mastery_percent or 0) < 80 else "strong"),
+            }
+            for t in topics
+        ]
+    }
+
+
+class PracticeRequest(BaseModel):
+    topic: str
+    count: int = 5
+    source: str = "past"
+
+
+@app.post("/user/practice-by-topic")
+async def practice_by_topic(
+    req: PracticeRequest,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    all_questions = load_question_bank()
+    if not all_questions:
+        raise HTTPException(404, "題庫為空")
+
+    def normalize(q):
+        raw = dict(q)
+        if not raw.get("raw_text_zh"):
+            raw["raw_text_zh"] = q.get("question", "") or q.get("question_zh", "")
+
+        if not raw.get("options_zh"):
+            opts = q.get("options")
+            opts_zh = {}
+            if isinstance(opts, list):
+                for o in opts:
+                    key = (o.get("id") or o.get("letter") or "").upper()
+                    if key:
+                        opts_zh[key] = o.get("text", "")
+            elif isinstance(opts, dict):
+                opts_zh = opts
+            raw["options_zh"] = opts_zh
+            raw["options_en"] = opts_zh
+
+        if not raw.get("question_number"):
+            raw["question_number"] = f"第 {q.get('number', 1)} 題"
+
+        if not raw.get("question_type"):
+            raw["question_type"] = "MCQ" if q.get("questionType") == "multiple_choice" else "Long"
+
+        if not raw.get("difficulty"):
+            d = q.get("difficulty")
+            if d in [1, 2, 3]:
+                raw["difficulty"] = {1: "Easy", 2: "Medium", 3: "Hard"}[d]
+            else:
+                pts = q.get("points", 0)
+                if pts > 0 and pts <= 3:
+                    raw["difficulty"] = "Easy"
+                elif pts >= 8:
+                    raw["difficulty"] = "Hard"
+                else:
+                    raw["difficulty"] = "Medium"
+
+        if not raw.get("main_category"):
+            topic_cat_map = {
+                "三角函數": "Trigonometry", "二項式定理": "Algebra",
+                "代數運算": "Algebra", "函數與對數": "Functions",
+                "平面幾何": "Geometry", "排列與概率": "Probability",
+                "數列與級數": "Sequences", "比例與應用": "Algebra",
+                "百分率與立體幾何": "Geometry", "統計": "Statistics",
+                "解析幾何": "Geometry", "集合與不等式": "Algebra",
+            }
+            raw["main_category"] = topic_cat_map.get(q.get("topic"), "Other")
+
+        if not raw.get("sub_topics"):
+            raw["sub_topics"] = [t for t in [q.get("topic"), q.get("subtopic")] if t]
+
+        if q.get("diagram"):
+            raw["diagram_image"] = f"/diagrams/{os.path.basename(q['diagram'])}"
+
+        return raw
+
+    same_topic = []
+    for q in all_questions:
+        topics = (q.get("sub_topics") or []) + [q.get("topic"), q.get("subtopic"), q.get("main_category")]
+        topics = [str(t) for t in topics if t]
+
+        matched = False
+        for t in topics:
+            if t == req.topic or req.topic in t or t in req.topic:
+                matched = True
+                break
+        if matched:
+            same_topic.append(normalize(q))
+
+    final_questions = []
+
+    if req.source == "past":
+        if not same_topic:
+            raise HTTPException(404, f"題庫中找不到「{req.topic}」的真題，請改用 AI 生成")
+        if len(same_topic) < req.count:
+            raise HTTPException(404, f"題庫中「{req.topic}」只有 {len(same_topic)} 道真題（你要求 {req.count} 道），請減少題數或改用 AI")
+        final_questions = random.sample(same_topic, req.count)
+
+    elif req.source == "ai":
+        samples = same_topic[:5] if same_topic else random.sample(all_questions, min(3, len(all_questions)))
+        try:
+            ai_qs = await generate_similar_questions(samples, req.count)
+        except Exception as e:
+            raise HTTPException(500, f"AI 生成失敗：{e}")
+
+        for i, q in enumerate(ai_qs):
+            q.setdefault("question_type", "MCQ")
+            q.setdefault("difficulty", "Medium")
+            q.setdefault("main_category", samples[0].get("main_category", "Other") if samples else "Other")
+            q.setdefault("sub_topics", [req.topic])
+            q["id"] = f"ai-practice-{int(time.time())}-{i}"
+            q["source"] = "ai"
+            if not q.get("question_number"):
+                q["question_number"] = f"AI-{i+1}"
+            if not q.get("options_zh"):
+                q["options_zh"] = q.get("options", {})
+            if not q.get("raw_text_zh"):
+                q["raw_text_zh"] = q.get("question", "")
+        final_questions = ai_qs
+
+    else:
+        if len(same_topic) >= req.count:
+            final_questions = random.sample(same_topic, req.count)
+        else:
+            final_questions = list(same_topic)
+            needed = req.count - len(final_questions)
+            samples = same_topic[:3] if same_topic else random.sample(all_questions, min(3, len(all_questions)))
+            try:
+                ai_qs = await generate_similar_questions(samples, needed)
+                for i, q in enumerate(ai_qs):
+                    q.setdefault("question_type", "MCQ")
+                    q.setdefault("difficulty", "Medium")
+                    q.setdefault("main_category", samples[0].get("main_category", "Other") if samples else "Other")
+                    q.setdefault("sub_topics", [req.topic])
+                    q["id"] = f"ai-practice-{int(time.time())}-{i}"
+                    q["source"] = "ai"
+                    if not q.get("question_number"):
+                        q["question_number"] = f"AI-{i+1}"
+                    if not q.get("options_zh"):
+                        q["options_zh"] = q.get("options", {})
+                    if not q.get("raw_text_zh"):
+                        q["raw_text_zh"] = q.get("question", "")
+                final_questions.extend(ai_qs)
+            except Exception as e:
+                print(f"[WARN] AI generation failed: {e}")
+
+    if not final_questions:
+        raise HTTPException(404, f"找不到「{req.topic}」的練習題")
+
+    quiz_id = f"practice-{int(time.time())}-{user.id}"
+    question_bank[quiz_id] = final_questions
+
+    stripped = []
+    for i, q in enumerate(final_questions):
+        s = q.copy()
+        s["index"] = i
+        s["id"] = q.get("id") or f"{quiz_id}-{i}"
+        s.pop("answer", None)
+        s.pop("solution", None)
+        stripped.append(s)
+
+    return {
+        "quiz_id": quiz_id,
+        "total": len(stripped),
+        "topic": req.topic,
+        "source": req.source,
+        "questions": stripped,
+    }
+
+
+# =====================================================================
+# AI 生成複習筆記
+# =====================================================================
+
+class ReviewNoteRequest(BaseModel):
+    topic: str
+    diagnosis_type: str
+    recent_attempts: Optional[List[dict]] = None
+
+
+@app.post("/ai/generate-review-note")
+async def generate_review_note(
+    req: ReviewNoteRequest,
+    user: User = Depends(get_current_user),
+):
+    attempts = req.recent_attempts or []
+    attempts_text = "\n".join([
+        f"- 題目：{(a.get('question_text') or '')[:60]}... | 你的答案：{a.get('user_answer')} | 正確：{a.get('correct_answer')} | 用時：{a.get('time_spent', '?')} 秒"
+        for a in attempts[:5]
+    ]) or "（無近期作答紀錄）"
+
+    type_hint = {
+        "careless": "學生是「粗心大意」類型：曾經會做，但這次做錯，且作答時間明顯過快。筆記重點：提醒檢查步驟、易錯符號。",
+        "forgot_formula": "學生是「公式遺忘」類型：這個知識點的公式記不住，近期多次答錯，且作答時間偏長。筆記重點：公式背誦、公式推導。",
+        "concept_gap": "學生是「概念缺失」類型：對這個知識點的核心概念完全不懂，多次答錯。筆記重點：從基礎觀念講起、用生活化例子。",
+    }.get(req.diagnosis_type, "")
+
+    prompt = f"""你是一位澳門四校聯考（JAE）數學科的資深補習老師。
+學生在「{req.topic}」這個知識點出現學習困難，請生成一份「5 分鐘急救筆記」。
+
+【診斷類型】：{req.diagnosis_type}
+【類型說明】：{type_hint}
+
+【學生最近作答記錄】：
+{attempts_text}
+
+請生成一份 Markdown 格式的筆記，**必須包含以下 4 個區塊**：
+
+## 📌 核心公式
+列出這個知識點最核心的 3 個公式，用 LaTeX 表示。每個公式後面用一句話說明「什麼時候用」。
+
+## ⚠️ 易混淆的觀念
+列出學生最常搞混的 2 個觀念，用「❌ 錯誤想法 → ✅ 正確理解」的格式對比。
+
+## ✏️ 示範題
+出一道典型例題（與學生錯的題目類似但數字不同），附完整解題步驟。
+
+## 🎯 記憶口訣
+給學生一個好記的口訣或圖像化技巧。
+
+格式要求：
+- 繁體中文
+- 數學式用 LaTeX
+- 總字數 400-600 字
+- 不要廢話開場白
+"""
+
+    try:
+        res = await async_client.chat.completions.create(
+            model=MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.6,
+        )
+        note = res.choices[0].message.content.strip()
+    except Exception as e:
+        note = f"## 📌 {req.topic} 核心公式\n\n（AI 生成失敗：{e}）\n\n請稍後再試。"
+
+    return {
+        "topic": req.topic,
+        "diagnosis_type": req.diagnosis_type,
+        "note": note,
+    }
