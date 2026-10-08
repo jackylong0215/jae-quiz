@@ -127,21 +127,22 @@ def get_diagrams_dir() -> str:
 
 
 DIAGRAMS_DIR = get_diagrams_dir()
-print(f"[DEBUG] DIAGRAMS_DIR = {DIAGRAMS_DIR}")
-print(f"[DEBUG] exists = {os.path.isdir(DIAGRAMS_DIR)}")
-print(f"[DEBUG] __file__ = {os.path.abspath(__file__)}")
-print(f"[DEBUG] cwd = {os.getcwd()}")
+print(f"[DEBUG] DIAGRAMS_DIR = {DIAGRAMS_DIR}", flush=True)
+print(f"[DEBUG] exists = {os.path.isdir(DIAGRAMS_DIR)}", flush=True)
+print(f"[DEBUG] __file__ = {os.path.abspath(__file__)}", flush=True)
+print(f"[DEBUG] cwd = {os.getcwd()}", flush=True)
 
 if os.path.isdir(DIAGRAMS_DIR):
     try:
         files = os.listdir(DIAGRAMS_DIR)
-        print(f"[DEBUG] files count = {len(files)}")
-        print(f"[DEBUG] first 3 files = {files[:3]}")
+        print(f"[DEBUG] files count = {len(files)}", flush=True)
+        print(f"[DEBUG] first 3 files = {files[:3]}", flush=True)
     except Exception as e:
-        print(f"[DEBUG] listdir error: {e}")
+        print(f"[DEBUG] listdir error: {e}", flush=True)
     app.mount("/diagrams", StaticFiles(directory=DIAGRAMS_DIR), name="diagrams")
+    print(f"[DEBUG] /diagrams mounted successfully", flush=True)
 else:
-    print(f"[WARN] DIAGRAMS_DIR not found, /diagrams not mounted")
+    print(f"[WARN] DIAGRAMS_DIR not found, /diagrams NOT mounted", flush=True)
 
 
 @app.on_event("startup")
