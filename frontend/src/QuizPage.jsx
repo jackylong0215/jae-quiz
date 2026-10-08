@@ -10,8 +10,7 @@ import FavoriteButton from './FavoriteButton.jsx';
 import SpeakButton from './SpeakButton.jsx';
 import { useSearchParams } from 'react-router-dom';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? `http://${window.location.hostname}:8000` : 'http://127.0.0.1:8000');
-const rehypeKatexOptions = [rehypeKatex, { output: 'html' }];
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? `http://${window.location.hostname}:8000` : 'http://127.0.0.1:8000');const rehypeKatexOptions = [rehypeKatex, { output: 'html' }];
 
 const ZH_TO_EN_CATEGORY = {
   '三角學': 'Trigonometry', '三角函數': 'Trigonometry',
@@ -56,8 +55,7 @@ function cleanDiagramUrl(url) {
   if (url.startsWith('data:image')) return url;
   const filename = url.split('/').pop().replace(/[?#].*$/, '');
   if (!filename) return url;
-  const host = typeof window !== 'undefined' ? window.location.hostname : '127.0.0.1';
-  return `http://${host}:8000/diagrams/${filename}`;
+  return `${API_BASE_URL}/diagrams/${filename}`;
 }
 
 const CATEGORY_MAP = {

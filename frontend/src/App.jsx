@@ -19,7 +19,6 @@ import SpeakButton from './SpeakButton.jsx';
 
 // Configure API Base URL dynamically to match host (127.0.0.1 vs localhost)
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? `http://${window.location.hostname}:8000` : 'http://127.0.0.1:8000');
-
 // Configure KaTeX to emit only HTML to prevent duplicate text during mouse selection/copy
 const rehypeKatexOptions = [rehypeKatex, { output: 'html' }];
 
@@ -89,8 +88,7 @@ function cleanDiagramUrl(url) {
   if (url.startsWith('data:image')) return url;
   const filename = url.split('/').pop().replace(/[?#].*$/, '');
   if (!filename) return url;
-  const host = typeof window !== 'undefined' ? window.location.hostname : '127.0.0.1';
-  return `http://${host}:8000/diagrams/${filename}`;
+  return `${API_BASE_URL}/diagrams/${filename}`;
 }
 
 const CATEGORY_MAP = {
