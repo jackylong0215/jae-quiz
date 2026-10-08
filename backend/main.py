@@ -127,8 +127,21 @@ def get_diagrams_dir() -> str:
 
 
 DIAGRAMS_DIR = get_diagrams_dir()
+print(f"[DEBUG] DIAGRAMS_DIR = {DIAGRAMS_DIR}")
+print(f"[DEBUG] exists = {os.path.isdir(DIAGRAMS_DIR)}")
+print(f"[DEBUG] __file__ = {os.path.abspath(__file__)}")
+print(f"[DEBUG] cwd = {os.getcwd()}")
+
 if os.path.isdir(DIAGRAMS_DIR):
+    try:
+        files = os.listdir(DIAGRAMS_DIR)
+        print(f"[DEBUG] files count = {len(files)}")
+        print(f"[DEBUG] first 3 files = {files[:3]}")
+    except Exception as e:
+        print(f"[DEBUG] listdir error: {e}")
     app.mount("/diagrams", StaticFiles(directory=DIAGRAMS_DIR), name="diagrams")
+else:
+    print(f"[WARN] DIAGRAMS_DIR not found, /diagrams not mounted")
 
 
 @app.on_event("startup")

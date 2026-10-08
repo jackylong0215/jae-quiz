@@ -22,7 +22,7 @@ const MASTERY_META = {
   mastered: { label: '熟練掌握', color: '#10b981', bg: '#dcfce7' },
   partial:  { label: '部分掌握', color: '#f59e0b', bg: '#fef3c7' },
   fuzzy:    { label: '概念模糊', color: '#ef4444', bg: '#fee2e2' },
-  unknown:  { label: '完全不懂', color: '#b91c1c', bg: '#fecaca' },
+  unknown:  { label: '需要加強', color: '#b91c1c', bg: '#fecaca' },
 };
 
 const DIAGNOSIS_META = {
