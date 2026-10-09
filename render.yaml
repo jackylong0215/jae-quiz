@@ -1,0 +1,19 @@
+# Apply this blueprint in the user's Render account; no credentials are stored here.
+services:
+  - type: web
+    name: jae-quiz-api
+    runtime: python
+    plan: free
+    branch: main
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: python -m uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.12
+      - key: JAE_API_KEY
+        sync: false
+      - key: JAE_JWT_SECRET
+        generateValue: true
+      - key: JAE_ADMIN_PASSWORD
+        generateValue: true

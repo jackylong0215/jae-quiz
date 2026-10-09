@@ -15,6 +15,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from localization import (LanguageMiddleware, EnglishTranslator, ENGLISH_INSTRUCTION, get_language, localized_messages)
 from question_bank import bilingual_fields
+from admin_bootstrap import bootstrap_admin
 from sqlalchemy.orm import Session
 from openai import AsyncOpenAI
 import pymupdf as fitz
@@ -174,29 +175,39 @@ def on_startup():
     try:
         db = SessionLocal()
         try:
-            admin = db.query(User).filter(User.username == "admin").first()
-            if not admin:
-                admin = User(
-                    username="admin",
-                    email="admin@jae.local",
-                    hashed_password=hash_password("Admin123456"),
-                    full_name="系統管理員",
-                    is_admin=True,
-                )
-                db.add(admin)
-                db.commit()
-                print("[OK] Admin account created: admin / Admin123456")
-            else:
-                if not admin.is_admin:
-                    admin.is_admin = True
-                    db.commit()
-                    print(f"[OK] {admin.username} upgraded to admin")
-                else:
-                    print(f"[OK] Admin already exists: {admin.username}")
+            if bootstrap_admin(db):
+                print('[OK] Configured administrator created.')
         finally:
             db.close()
     except Exception as e:
         print(f"[WARN] Failed to create admin: {e}")
+
+
+@app.get('/health')
+def deployment_health():
+    """Public readiness metadata; never return secrets or question contents."""
+    from hashlib import sha256
+    from fastapi.responses import JSONResponse
+    try:
+        q_path = find_data_file('source/questions.json')
+        p_path = find_data_file('source/papers.json')
+        with open(q_path, 'rb') as stream:
+            contents = stream.read()
+        questions = json.loads(contents)
+        with open(p_path, encoding='utf-8') as stream:
+            papers = json.load(stream)
+        if not isinstance(questions, list) or not isinstance(papers, list) or not all(isinstance(q, dict) for q in questions):
+            raise ValueError('Invalid question bank')
+        return JSONResponse({
+            'status': 'ok',
+            'commit': os.getenv('RENDER_GIT_COMMIT') or os.getenv('JAE_BUILD_SHA') or 'unknown',
+            'bank_sha256': sha256(contents).hexdigest(),
+            'papers': len(papers),
+            'questions': len(questions),
+            'english_questions': sum(bool(q.get('english')) for q in questions),
+        }, headers={'Cache-Control': 'no-store'})
+    except (OSError, ValueError, TypeError):
+        return JSONResponse({'status': 'unavailable'}, status_code=503, headers={'Cache-Control': 'no-store'})
 
 
 # =====================================================
@@ -1117,8 +1128,9 @@ async def generate_quiz(
         stripped = q.copy()
         stripped["index"] = i
         stripped["id"] = f"{quiz_id}-{i}"
-        stripped.pop("answer", None)
-        stripped.pop("solution", None)
+        for field in ('answer', 'answer_en', 'correct_answer', 'solution', 'solution_zh',
+                      'solution_en', 'explanation', 'explanation_en'):
+            stripped.pop(field, None)
         stripped_questions.append(stripped)
 
     return {

@@ -5,10 +5,16 @@ test('published site loads the updated bilingual bank from the real API', async 
   // Do not send exam text to an AI provider during deployment verification.
   await page.route('**/translate', route => route.fulfill({ status: 503, json: { detail: 'AI translation is disabled during deployment verification.' } }));
   const errors = [];
+  const papersResponse = page.waitForResponse(response => response.url().includes('/prestored/papers'));
   page.on('pageerror', error => errors.push(error.message));
   const response = await page.goto('./#/browse');
   expect(response.status()).toBe(200);
   await expect(page).toHaveTitle('JAE Exam Success');
+  const paperList = await papersResponse;
+  expect(paperList.status()).toBe(200);
+  const catalog = await paperList.json();
+  expect(catalog.papers).toHaveLength(19);
+  console.log(`Live bank verified: ${catalog.papers.length} papers from ${new URL(paperList.url()).origin}`);
   await expect(page.locator('.paper-select-dropdown option')).toHaveCount(20, { timeout: 60000 });
   await expect(page.locator('.prestored-tag')).toContainText('19 papers · 245 questions');
   const apiResponse = page.waitForResponse(response => response.url().includes('/prestored/questions?paper_id=p00'));

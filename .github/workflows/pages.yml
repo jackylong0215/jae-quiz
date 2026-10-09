@@ -1,4 +1,4 @@
-name: Test and deploy React to GitHub Pages
+name: Test and deploy website and backend
 
 on:
   push:
@@ -79,9 +79,25 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  deploy-backend:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Deploy and verify the exact backend revision
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          BACKEND_URL: ${{ vars.VITE_API_BASE_URL || 'https://jae-quiz-api.onrender.com' }}
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: python scripts/deploy_backend.py
+
   verify-live:
     if: github.event_name != 'pull_request'
-    needs: deploy
+    needs: [deploy, deploy-backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

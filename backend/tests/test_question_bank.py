@@ -25,6 +25,12 @@ class LocalClient:
         return False
 
     async def get(self, path, params=None, headers=None):
+        return await self.request('GET', path, params=params, headers=headers)
+
+    async def post(self, path, payload, headers=None):
+        return await self.request('POST', path, payload=payload, headers=headers)
+
+    async def request(self, method, path, payload=None, params=None, headers=None):
         from urllib.parse import urlencode
         sent = []
         supplied = False
@@ -32,11 +38,12 @@ class LocalClient:
             nonlocal supplied
             if not supplied:
                 supplied = True
-                return {'type':'http.request','body':b'','more_body':False}
+                return {'type':'http.request','body':json.dumps(payload).encode() if payload is not None else b'','more_body':False}
             await asyncio.Event().wait()
         async def send(message):
             sent.append(message)
-        await main.app({'type':'http','asgi':{'version':'3.0','spec_version':'2.4'},'http_version':'1.1','scheme':'http','method':'GET','path':path,'raw_path':path.encode(),'query_string':urlencode(params or {}).encode(),'headers':[(key.lower().encode(),value.encode()) for key,value in (headers or {}).items()],'server':('test',80),'client':('test',1000)}, receive, send)
+        request_headers = {'Content-Type':'application/json', **(headers or {})}
+        await main.app({'type':'http','asgi':{'version':'3.0','spec_version':'2.4'},'http_version':'1.1','scheme':'http','method':method,'path':path,'raw_path':path.encode(),'query_string':urlencode(params or {}).encode(),'headers':[(key.lower().encode(),value.encode()) for key,value in request_headers.items()],'server':('test',80),'client':('test',1000)}, receive, send)
         start = next(item for item in sent if item['type']=='http.response.start')
         body = b''.join(item.get('body',b'') for item in sent if item['type']=='http.response.body')
         return SimpleNamespace(status_code=start['status'],headers={key.decode():value.decode() for key,value in start['headers']},json=lambda:json.loads(body))

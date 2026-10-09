@@ -53,6 +53,38 @@ variable `VITE_API_BASE_URL` if necessary. Deploy the backend from the same
 in Render's environment settings. API keys must never be put in frontend
 variables or committed to GitHub.
 
+The workflow now also deploys the backend and checks `/health` against the exact
+Git commit and question-bank SHA-256 before running the live browser test.
+Configure the existing Render service to deploy this repository's **main** branch
+with no Root Directory (it must include both `backend/` and `papers/`). Use:
+
+```text
+Build: pip install -r backend/requirements.txt
+Start: python -m uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT
+Health check: /health
+```
+
+In GitHub Settings → Secrets and variables → Actions, add the repository secret
+`RENDER_DEPLOY_HOOK` from Render Settings → Deploy Hook. Do not paste its value into
+source code or chat. Set the Actions variable `VITE_API_BASE_URL` to the real service
+URL if it differs from the current default. The hook deploys the Render service's
+configured branch; the workflow rejects any revision or bank mismatch.
+
+For a new service, `render.yaml` supplies the same commands and secure initial
+environment settings. Apply it within the user's Render account. `JAE_API_KEY`
+must be entered in Render's environment settings; it is never a frontend variable.
+The initial administrator is created only when `JAE_ADMIN_PASSWORD` is configured,
+and its value is never logged. Existing accounts are not modified by startup.
+Use `JAE_ADMIN_USERNAME`/`JAE_ADMIN_EMAIL` to customise that initial account.
+
+If account and quiz history must survive restarts, configure a persistent disk
+and set `JAE_DATABASE_PATH` to its SQLite path. The provided free-plan blueprint
+has ephemeral storage; persistent disks require a supported Render plan.
+Do not put the writable user database in the Git repository.
+
+Missing deployment credentials fail the backend deployment step explicitly;
+successful Pages publication alone does not mean the backend has been updated.
+
 ## Validation
 
 ```sh
