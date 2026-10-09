@@ -6,7 +6,7 @@ test('Pages production assets, navigation, refresh and language persistence', as
   page.on('response', response => {
     if (response.url().includes('/assets/') && response.status() >= 400) failures.push(response.url());
   });
-  await page.route('https://jae-quiz-2-1.onrender.com/**', route => route.fulfill({ json: { papers: [], translations: [] } }));
+  await page.route('https://jae-quiz.onrender.com/**', route => route.fulfill({ json: { papers: [], translations: [] } }));
   await page.goto('./');
   await page.getByRole('button', { name: 'English', exact: true }).click();
   await expect(page).toHaveTitle('JAE Exam Success');

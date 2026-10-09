@@ -33,3 +33,43 @@ test('published site loads the updated bilingual bank from the real API', async 
   await expect(page.locator('.question-card').first()).toContainText('設');
   expect(errors).toEqual([]);
 });
+
+
+// These inputs are authored solely for verification, not extracted from exams.
+test('live translation returns English text and preserves mathematical notation', async ({ request }) => {
+  test.setTimeout(240000);
+  const response = await request.post(`${process.env.LIVE_API_URL}/translate`, {
+    headers: { 'Accept-Language': 'en' },
+    data: { texts: ['開始練習', '請稍後再試', '顯示公式 $x^2 + 1$。'] },
+    timeout: 210000,
+  });
+  expect(response.status(), await response.text()).toBe(200);
+  const { translations } = await response.json();
+  expect(translations).toHaveLength(3);
+  for (const value of translations) {
+    expect(typeof value).toBe('string');
+    expect(value.trim().length).toBeGreaterThan(0);
+    expect(value).not.toMatch(/[\u3400-\u9fff]/u);
+  }
+  expect(translations[0]).toMatch(/practi[cs]/i);
+  expect(translations[1]).toMatch(/retry|try.*again/i);
+  expect(translations[2]).toContain('$x^2 + 1$');
+  console.log('Live AI translation verified: English output and unchanged LaTeX.');
+});
+
+test('live AI feedback returns usable English content', async ({ request }) => {
+  test.setTimeout(240000);
+  const response = await request.post(`${process.env.LIVE_API_URL}/ai/pedagogical-feedback`, {
+    headers: { 'Accept-Language': 'en' },
+    data: { score_percent: 50, category_breakdown: { Algebra: { correct: 1, total: 2, percent: 50 } }, wrong_questions: [] },
+    timeout: 210000,
+  });
+  expect(response.status(), await response.text()).toBe(200);
+  const result = await response.json();
+  expect(result.available).not.toBe(false);
+  expect(typeof result.feedback).toBe('string');
+  expect(result.feedback.length).toBeGreaterThan(40);
+  expect(result.feedback).not.toMatch(/[\u3400-\u9fff]/u);
+  expect(result.feedback).toMatch(/algebra|equation|solve|practice/i);
+  console.log('Live AI generation verified: nonempty English study feedback.');
+});
