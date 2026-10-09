@@ -1,0 +1,636 @@
+[
+  {
+    "id": "p00",
+    "title": "數學正卷",
+    "year": "2017/2018",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2017_2018試題及建議答案_數學科正卷.pdf",
+    "pageCount": 13,
+    "pdf": "/papers/p00.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "e5d9cc9351d59582a44b76556a9c52c38326f53796941ce2267393f7ccce79d1",
+    "file": "papers/pdfs/p00.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      8,
+      9,
+      10
+    ],
+    "englishAnswerPages": [
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "id": "p01",
+    "title": "數學附加卷",
+    "year": "2017/2018",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "2017_2018試題及建議答案_數學科附加卷.pdf",
+    "pageCount": 15,
+    "pdf": "/papers/p01.pdf",
+    "questionPages": [
+      3,
+      4
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "535add27f7282e2acbd66270113fc6cd6d9465c5b1dabb97d42102cb89c966e8",
+    "file": "papers/pdfs/p01.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "id": "p02",
+    "title": "數學正卷",
+    "year": "2018",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2018_2019試題及建議答案_數學正卷.pdf",
+    "pageCount": 13,
+    "pdf": "/papers/p02.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "4f6fb97f8318d3ce8400bb99c320ad5575f04dd7d2170157610b016fdcfe4fd3",
+    "file": "papers/pdfs/p02.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      8,
+      9,
+      10
+    ],
+    "englishAnswerPages": [
+      11,
+      12,
+      13
+    ],
+    "fileYearLabel": "2018/2019"
+  },
+  {
+    "id": "p02s",
+    "title": "數學附加卷",
+    "year": "2018",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "2018_2019試題及建議答案_數學附加卷.pdf",
+    "pageCount": 15,
+    "pdf": "/papers/p02s.pdf",
+    "questionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "73b6bce2cdda5c78ca30981459bfbd6531f2e26e764785019882b78788526ba1",
+    "file": "papers/pdfs/p02s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "fileYearLabel": "2018/2019"
+  },
+  {
+    "id": "p03s",
+    "year": "2019",
+    "title": "數學附加卷",
+    "kind": "supplementary",
+    "maxScore": 60,
+    "choose": 3,
+    "source": "2019試題及建議答案_數學附加卷.pdf",
+    "sha256": "8a0487f08a04efaa9dffe548a607bfc6166bbf07fe9609b14261673db9ebf283",
+    "pageCount": 16,
+    "pdf": "/papers/p03s.pdf",
+    "file": "papers/pdfs/p03s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "questionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishQuestionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "answerPage": 8,
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5
+  },
+  {
+    "id": "p05",
+    "title": "數學正卷",
+    "year": "2020",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2020試題及建議答案_數學正卷.pdf",
+    "pageCount": 13,
+    "pdf": "/papers/p05.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "90546fea6e6649ddc005ad567d791ffa521a9e968e59ffdbc1e37b571ad1b154",
+    "file": "papers/pdfs/p05.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      8,
+      9,
+      10
+    ],
+    "englishAnswerPages": [
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "id": "p05s",
+    "title": "數學附加卷",
+    "year": "2020",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "2020試題及建議答案_數學附加卷.pdf",
+    "pageCount": 15,
+    "pdf": "/papers/p05s.pdf",
+    "questionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "b595db8b56b0ecfc6c2dc7389fcc14c415296736e603277cb7292df421b9785a",
+    "file": "papers/pdfs/p05s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "id": "p07",
+    "title": "數學正卷",
+    "year": "2021",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2021試題及建議答案_數學正卷.pdf",
+    "pageCount": 13,
+    "pdf": "/papers/p07.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "1c2241165360db38c65ba34ae556be8d26f12b3df285dff6f388619d8a6fba0e",
+    "file": "papers/pdfs/p07.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      8,
+      9,
+      10
+    ],
+    "englishAnswerPages": [
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "id": "p07s",
+    "title": "數學附加卷",
+    "year": "2021",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "2021試題及建議答案_數學附加卷.pdf",
+    "pageCount": 17,
+    "pdf": "/papers/p07s.pdf",
+    "questionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "90c6fa4bd07470539056a27fe759a0c2414fd1da7cfcd225d2213293740fb3e4",
+    "file": "papers/pdfs/p07s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      13,
+      14,
+      15,
+      16,
+      17
+    ]
+  },
+  {
+    "id": "p09",
+    "title": "數學正卷",
+    "year": "2022",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2022試題及建議答案_數學正卷.pdf",
+    "pageCount": 15,
+    "pdf": "/papers/p09.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "02996e5bad36dc36e815ff9252a8a076b007dcf45f72fd05bf788345010516fb",
+    "file": "papers/pdfs/p09.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      9,
+      10,
+      11
+    ],
+    "englishAnswerPages": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "id": "p09s",
+    "title": "數學附加卷",
+    "year": "2022",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "2022試題及建議答案_數學附加卷.pdf",
+    "pageCount": 16,
+    "pdf": "/papers/p09s.pdf",
+    "questionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "81aa00ea18ae3007f17005a596da2794ce15006abcafd2172d5f006aa2e3524b",
+    "file": "papers/pdfs/p09s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      13,
+      14,
+      15,
+      16
+    ]
+  },
+  {
+    "id": "p11",
+    "title": "數學正卷",
+    "year": "2023",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2023試題及參考答案_數學正卷.pdf",
+    "pageCount": 13,
+    "pdf": "/papers/p11.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "78734823fb6dc6c995ef565c746019d5a780fcdcf81cbab98bc905a0358f54f3",
+    "file": "papers/pdfs/p11.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      8,
+      9,
+      10
+    ],
+    "englishAnswerPages": [
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "id": "p11s",
+    "title": "數學附加卷",
+    "year": "2023",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "2023試題及參考答案_數學附加卷.pdf",
+    "pageCount": 15,
+    "pdf": "/papers/p11s.pdf",
+    "questionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "b952df198351b041616f6bac31ef72dbfea091e874c47237b7692b886e4187d0",
+    "file": "papers/pdfs/p11s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "id": "p13",
+    "title": "數學正卷",
+    "year": "2024",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2024試題及參考答案_數學正卷.pdf",
+    "pageCount": 13,
+    "pdf": "/papers/p13.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "3128ac9914259d3de315e596a3679660f165eef9445b4a7b1acf85bd98058d92",
+    "file": "papers/pdfs/p13.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      8,
+      9,
+      10
+    ],
+    "englishAnswerPages": [
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "id": "p13s",
+    "title": "數學附加卷",
+    "year": "2024",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "2024試題及參考答案_數學附加卷.pdf",
+    "pageCount": 15,
+    "pdf": "/papers/p13s.pdf",
+    "questionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "df08fb23f3397496fb7f51de90f8117c2defe629813902cabe00d1c1bec7a3c4",
+    "file": "papers/pdfs/p13s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "id": "p15",
+    "title": "數學正卷",
+    "year": "2025",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "2025試題及參考答案_數學正卷.pdf",
+    "pageCount": 13,
+    "pdf": "/papers/p15.pdf",
+    "questionPages": [
+      2,
+      3,
+      4
+    ],
+    "answerPage": 5,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "530b06e9f3920b7d8206fa86ac36ad8eaca017ee3b854384cd85c2cbaa157f90",
+    "file": "papers/pdfs/p15.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      8,
+      9,
+      10
+    ],
+    "englishAnswerPages": [
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "id": "p16",
+    "title": "數學正卷",
+    "year": "模擬",
+    "kind": "standard",
+    "questionCount": 20,
+    "mcCount": 15,
+    "writtenCount": 5,
+    "source": "模擬試題及建議答案_數學科正卷.pdf",
+    "pageCount": 17,
+    "pdf": "/papers/p16.pdf",
+    "questionPages": [
+      3,
+      4,
+      5
+    ],
+    "answerPage": 6,
+    "maxScore": 100,
+    "choose": null,
+    "sha256": "1702a87f100e3109bfddd1cf312b59e1f8537803b25c06ceaaedaa8c11296348",
+    "file": "papers/pdfs/p16.pdf",
+    "title_en": "Mathematics Standard Paper",
+    "englishQuestionPages": [
+      11,
+      12,
+      13
+    ],
+    "englishAnswerPages": [
+      14,
+      15,
+      16,
+      17
+    ]
+  },
+  {
+    "id": "p16s",
+    "title": "數學附加卷",
+    "year": "模擬",
+    "kind": "supplementary",
+    "questionCount": 5,
+    "mcCount": 0,
+    "writtenCount": 5,
+    "source": "模擬試題及建議答案_數學科附加卷.pdf",
+    "pageCount": 21,
+    "pdf": "/papers/p16s.pdf",
+    "questionPages": [
+      3,
+      4
+    ],
+    "answerPage": 8,
+    "maxScore": 60,
+    "choose": 3,
+    "sha256": "b268557825ab5bdb4abb1abbc3c81f47a55ef8c322bd6086947d6379ea72305b",
+    "file": "papers/pdfs/p16s.pdf",
+    "title_en": "Mathematics Supplementary Paper",
+    "englishQuestionPages": [
+      6,
+      7
+    ],
+    "englishAnswerPages": [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ]
+  }
+]

@@ -1,0 +1,49 @@
+4. 設 3 = √−1。
+
+    (a) (i) 設 4 = 3 + 53 及 4 = 5 + 3。若 4 =  + #3 滿足 |4 −4 | = |4 −4 |，
+
+    其中 x 和 y 為實數，求 x 和 y 的關係式。                                  (4 分)
+
+         (ii) 在阿根圖中繪出 4 ，4 和 z 的軌跡。                                     (2 分)
+
+        (iii) 求 |4 −4 | 的最小值。                                                     (2 分)
+
+    (b) 設 ω = cos  + 3 sin 。
+                    7         7
+         (i) 證明 97 = 1，並推導出 1 + 9 + 9 + ⋯+ 9; = 0。                       (4 分)
+
+                      <         <        (ii) 證明 9< + 9  = 2 cos  ，= = 1,2,3,…. 。                               (2 分)
+                                   7
+
+                                                    2           ;
+        (ii) 用 (i) 和 (ii) 的結果，求 ?cos  @ + ?cos  @ + ?cos  @ 的值。          (6 分)
+                                         7           7           7
+
+
+   Let 3 = √−1.
+
+    (a) (i) Let 4 = 3 + 53 and 4 = 5 + 3. Suppose 4 =  + #3 satisfies |4 −4 | = |4 −4  |,
+
+        where x and y are real. Find a relation between x and y.                        (4 marks)
+
+         (ii) In the Argand diagram, plot the points 4  , 4 and the locus of z.               (2 marks)
+
+        (iii) Find the minimum value of |4 −4 |.                                         (2 marks)
+
+    (b) Let ω = cos  + 3 sin    .
+                    7         7
+         (i) Show that 97 = 1. Deduce that 1 + 9 + 9 + ⋯+ 9; = 0.                   (4 marks)
+        (ii) Show that 9< + 9 < = 2 cos <  , = = 1,2,3,…..                              (2 marks)
+                                        7
+
+        (ii) Using the results in (i) and (ii), find the value of
+
+                           2           ;
+        ?cos  @ + ?cos  @ + ?cos  @  .                                           (6 marks)
+               7           7           7
+
+
+
+
+
+                                           6

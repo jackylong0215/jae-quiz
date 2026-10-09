@@ -1,0 +1,50 @@
+Part II Problem-solving questions.
+
+                              x3            8 x  6 1. By long division, we get    2       x  3    2              .                          x  3x  2         x  3x  2
+        8 x  6      8 x  6     A   B   Let    2                             . Then 8x  6  A(x  2)  B(x  1).        x  3x  2   ( x  1)( x  2)   x  1  x  2
+                                                                  x3            2    10   Comparing coefficients of both sides yields A   2, B  10. Hence    2       x  3              .                                                              x  3x  2         x  1  x  2
+
+
+  2. (a) The given implies that the radius r  3. ∴ The equation of circle C is given by (x  2)2  (y  3)2  32,
+        that is, x2  y2  4x  6y  4  0.
+                                                      y
+
+                                       L        C
+
+                                     A   b
+                                                                          (2, 3)
+
+
+                                               B
+                                                                          x
+
+
+    (b) Algebraic Method
+                                                                      y   x  b
+      The equation of line L is y   x  b. A and B are solutions of the system                                           .
+                                                                                                           2  y 2  4 x  6 y  4  0                                                                                                                                                                                        x
+       Eliminating y yields 2x2  2(b  1)x  (b2  6b  4)  0  ------------ (1)
+       For the required range of b, the discriminant  of (1) is greater than 0, i.e. (b  1)2  2(b2  6b  4)  0
+       b2  10b  7  0    5  3 2  b  5  3 2 .
+      Geometric Method
+                                                                     2  3  b   5  b
+       Let d be the distance from the center (2, 3) to the line L:  x  y  b  0. Then d                   .
+                                                                       1  1      2
+                                                      5 b
+     L intersects C at two distinct points if and only if d  r, i.e.       3 .
+                                                        2
+       Solving the inequality yields 5  3 2  b  5  3 2 .
+    (c) Algebraic Method
+       Let (x1, y1) and (x2, y2) be respectively the coordinates of points A and B. ∵ The slope of L is  l,
+   ∴   | AB |   2 | x2  x1 |.
+     By Viète Theorem (i.e., the relationship between roots and coefficients), we get
+                                                     | AB |2  2(x2  x1)2  2[(x2  x1)2  4x1x2]  /2   2(b2  10b  7).
+         If | AB |  2, then b2  10b  7   2  b  1 or 9. Upon verification, both values are acceptable.
+      Geometric Method
+                                                            2  3  b   5  b
+     As mentioned above, the distance d from (2, 3) to L is given by d                   .
+                                                              1  1      2
+                                                                       5 b  2    2     2                                                             2   1       2     2                                  AB                                                         1  3  .      From Pythagoras Theorem, we get d   2                                                                    r   , i.e.                                                                                         2  
+       Solving the equation yields b  1 or 9. Upon verification, both values are acceptable.
+
+                                                                                                   12

@@ -1,0 +1,51 @@
+                    𝑎     𝑏      𝑐
+5.  (a) 因式分解行列式 | 𝑏+ 𝑐 𝑐+ 𝑎 𝑎+ 𝑏 |。                                    (7 分)
+                   1 + 𝑏  1 + 𝑐  1 + 𝑎
+
+
+    (b) 設 k 為常數。已知以 x、y 和 z 為未知量的方程組:
+
+                    𝑥+ 𝑦 + 𝑧= 1
+                          (𝐸): { 𝑘𝑥+ 5𝑦 + 𝑧= 3 。
+                    𝑥+ 𝑘𝑦− 𝑧= 1
+
+        (i) 求 k 的取值範圍，使得 (E) 有唯一解。                                     (5 分)
+
+       (ii) 設 𝑘= 3，求 (E) 的通解。                                                  (4 分)
+
+    (c) 求 a 的最大值使得方程組
+
+                                    𝑥 + 𝑦 + 𝑧 = 1
+                           3𝑥+ 5𝑦+ 𝑧= 3
+                          𝑥+ 3𝑦− 𝑧= 1
+                          { 2𝑥+ 2√𝑦+ 3𝑧= 𝑎
+
+  有解，並當 a 取此值時，解此方程組。                                       (4 分)
+
+                         𝑎     𝑏      𝑐
+   (a) Factorize the determinant | 𝑏+ 𝑐 𝑐+ 𝑎 𝑎+ 𝑏 |.                               (7 marks)
+                        1 + 𝑏  1 + 𝑐  1 + 𝑎
+   (b) Let k be a constant. Given the system of equations with unknowns x, y and z:
+
+                    𝑥+ 𝑦 + 𝑧= 1
+                          (𝐸): { 𝑘𝑥+ 5𝑦 + 𝑧= 3 .
+                    𝑥+ 𝑘𝑦− 𝑧= 1
+
+        (i) Find the range of k such that (E) has a unique solution.                         (5 marks)
+
+       (ii) Suppose 𝑘= 3. Find the general solution of (E).                              (4 marks)
+
+    (c) Find the maximum value of a such that the system of equations
+
+                                    𝑥 + 𝑦 + 𝑧 = 1
+                           3𝑥+ 5𝑦+ 𝑧= 3
+                          𝑥+ 3𝑦− 𝑧= 1
+                          { 2𝑥+ 2√𝑦+ 3𝑧= 𝑎
+
+     has a solution. For this value of a, solve the system of equations.                  (4 marks)
+
+
+
+
+
+                                              7

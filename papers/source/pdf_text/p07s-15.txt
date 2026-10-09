@@ -1,0 +1,43 @@
+    (b) (i) From (a), suppose an equation for 𝐿𝑖 is 𝑦𝑖= 𝑚𝑖𝑥−2𝑚𝑖2, 𝑖= 1, 2. As 𝐴(ℎ, 𝑘) is
+                                            2𝑚12                                                 we get          the intersection point of 𝐿1 and 𝐿2 , from {𝑚1ℎ−𝑘=     2,                           𝑚2ℎ−𝑘= 2𝑚2
+         (ℎ, 𝑘) = (2(𝑚1 + 𝑚2), 2𝑚1𝑚2).
+        (ii) Since 𝐿1 and 𝐿2 are perpendicular, 𝑚1𝑚2 = −1 and so 𝑘= 2𝑚1𝑚2 = −2.
+                         1                       1
+       From 𝑚2 = − 𝑚1, we get ℎ= 2(𝑚1 − 𝑚1).
+         For any real number ℎ, consider the equation 2𝑚2 −𝑚ℎ−2 = 0 where m is the
+        unknown. Its discriminant ℎ2 + 16 > 0, and so it has real solutions. Thus, we
+
+                                  1
+       know that ℎ= 2(𝑚1 − 𝑚1) can achieve any real value. Hence, the locus of point A
+            is the straight line 𝑦= −2.
+
+                                                        𝑚1−𝑚2       (iii) As the angle between 1L and 2L is , we get 1 = tan = |                                      4               4    1+𝑚1𝑚2|.
+
+                              2−𝑚2                  2
+       When 𝑚1 = 2, we have | 1+2𝑚2| = 1, that is, 3𝑚2 + 8𝑚2 −3 = 0. Solving, we get
+                             1                                 14 4
+      𝑚2 = −3 or 𝑚2 = 3. Hence, point A is (−2, −12) or ( 3  , 3).
+
+
+4.  (a) From
+
+                    𝐴+𝐵  𝐴−𝐵      𝐴+𝐵    𝐴−𝐵      𝐴+𝐵   𝐴−𝐵
+           sin 𝐴= sin(  +    ) = sin    cos   + cos    sin
+                         2     2          2       2         2       2
+      and
+
+                   𝐵+𝐴  𝐵−𝐴      𝐵+𝐴    𝐵−𝐴      𝐵+𝐴   𝐵−𝐴
+          sin 𝐵= sin(  +    ) = sin    cos   + cos    sin
+                         2     2          2       2         2       2
+                                  𝐴+𝐵    𝐴−𝐵      𝐴+𝐵   𝐴−𝐵
+                   = sin    cos   −cos    sin       ,
+                                          2       2         2       2
+                             𝐴+𝐵    𝐴−𝐵
+     we get sin 𝐴+ sin 𝐵= 2sin    cos       .
+                                    2       2
+
+
+
+
+
+                                       15

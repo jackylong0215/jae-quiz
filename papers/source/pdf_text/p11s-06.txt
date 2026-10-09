@@ -1,0 +1,34 @@
+4. 設 𝑖= √−1。
+
+    (a) 設 𝑤= 𝑥+ 𝑦𝑖，其中 𝑥 和 𝑦 為實數。若 𝑤 滿足方程 𝑧−3𝑧̅ + |𝑧| = −1 + 16𝑖，
+
+   求 𝑤 的值。                                                                    (8 分)
+
+    (b) (i) 用棣美弗定理，證明
+
+           cos 3𝜃= cos3 𝜃−3 cos 𝜃sin2 𝜃  and  sin 3𝜃= 3 cos2 𝜃sin 𝜃−sin3 𝜃。
+
+                    3 tan 𝜃−tan3 𝜃
+    推導出 tan 3𝜃=       。                                          (5 分)
+                    1−3 tan2 𝜃
+        (ii) 用 (i) 的結果，解方程 𝑥3 −3√3𝑥2 −3𝑥+ √3 = 0，答案以 tan 表示。     (7 分)
+
+
+   Let 𝑖= √−1.
+    (a) Let 𝑤= 𝑥+ 𝑦𝑖, where x and y are real numbers. If 𝑤 satisfies the equation
+     𝑧−3𝑧̅ + |𝑧| = −1 + 16𝑖, find the value of 𝑤.                                   (8 marks)
+
+    (b) (i)  Using De Moivre’s theorem, show that
+           cos 3𝜃= cos3 𝜃−3 cos 𝜃sin2 𝜃  and  sin 3𝜃= 3 cos2 𝜃sin 𝜃−sin3 𝜃.
+                         3 tan 𝜃−tan3 𝜃
+         Deduce that tan 3𝜃=                           .                                     (5 marks)
+                        1−3 tan2 𝜃
+          (ii) Using the result in (i), solve the equation 𝑥3 −3√3𝑥2 −3𝑥+ √3 = 0.
+
+          Express your answer in terms of tan.                                        (7 marks)
+
+
+
+
+
+                                           6

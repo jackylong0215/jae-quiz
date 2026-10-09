@@ -1,0 +1,26 @@
+    5. (a) Let x and y be integers. Prove that if both x y and y are divisible by 6, so is x.           (2 marks)
+      (b) Use (a) and mathematical induction to show that 4n3  3n2  5n is a multiple of 6 for all positive
+          integers n.                                                                            (6 marks)
+Ans.: (a) If both x y and y are divisible by 6, then x y  6m and y  6n for some integers m and n.
+     ∴ x  (x  y)  y  6m  6n  6(m  n), which is a multiple of 6. This completes the proof.
+      (b) Let S(n) denote the statement “4n3  3n2  5n is a multiple of 6”.
+
+
+                                                                                                                        (i) S(1) is true ∵ 4 13  3 12  5 1  12, which is a multiple of 6.
+             (ii) Assume S(k) is true for some positive integer k, that is
+                               4k3  3k2  5k is divisible by 6                        ---------------- (1)
+          From the following equalities
+                  [4(k  1)3  3(k  1)2  5(k  1)] (4k3  3k2  5k)
+             4(k3  3k2  3k  1)  3(k2  2k  1)  5(k  1) (4k3  3k2  5k)
+             6(2k2  3k  2)
+         we see that
+                [4(k  1)3  3(k  1)2  5(k  1)] (4k3  3k2  5k) is divisible by 6    ---------------- (2)
+           Using (2), (1) and (a), we conclude that 4(k  1)3  3(k  1)2  5(k  1) is divisible by 6.
+            This means that S(k  1) is also true.
+       By (i), (ii), and the Principle of Mathematical Induction, S(n) is true for all positive integers n.
+
+
+
+
+
+                                                                                                                 17

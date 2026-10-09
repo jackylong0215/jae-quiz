@@ -1,0 +1,51 @@
+Part II Problem-solving questions.
+
+                                                           2           4 2      9    3                                ,   1. (a) Since                                                                                                                                              .                                                                                                                                                                                    , cos < 0. Hence cos  1  sin α   1  5                                                                           25                      2                                                                         5
+      From the formula sin( A  B)  sin A cos B  cos A sin B , we have
+                sin    sin cos   cos sin    2 sin   2 cos   2  4   2   3   2 .                         4           4          4   2         2         2  5   2 5   10
+
+    (b) From the formula sin 2 2 sincos, we have sin 2 2  4   3   24 .                                                                5 5    25
+
+                                                                                                 2
+      From the formula cos 2 1  2 sin 2 , we have cos 2 1  2  4   7  .                                                  5     25
+       Eventually, we have
+                                        sin 2 cos 2  24  7   31 .                                                25  25    25
+
+
+  2. (a) The given means that f(x)  a x  b x2 for some constants a and b.
+      From f(2)  2a  4b  8 and f(6)  6a  36b  0, we get a  6 and b   1. Therefore, f(x)  6 x  x2.
+
+                                                                          3
+                                                                                 2        3
+                                                                                                           2                       3                1    (b) From log 1    f ( x)      , we get    f ( x)      2   8 .                                 2                                 2         2
+          It follows that f(x)  8, i.e., 6 x  x2  8. Solving the quadratic equation x2  6 x  8  0 yields x  4 or 2.
+
+
+                                                                                                     y
+  3. (a) Since the point A (7,  1) and the point B (0, 6) lie on the graph of
+       y  x2  px  q, we get 72  7p  q   1 and q  6, and so p  8 and q  6.
+                                                                          B (0, 6)       C (a, b)
+    (b) Let the coordinates of C be (a, b). Since BC is parallel to x-axis, we
+       have b  6. Also, since C lies on the graph of y  x2  8x  6, a2  8a  6  6,
+           i.e., a2  8a  0, and so a  8 (a  0 is discarded according to the given).
+                                                                                                                             x
+                                                             O
+       Therefore, the coordinates of C are (8, 6).                                          A (7,  1)
+
+    (c) The distance from A (7,  1) to BC  6  ( 1)  7, which is the height
+       of ABC with BC as the base. This, together with | BC |  8, gives
+                         area of ABC  1  8  7  28.                                       2
+
+
+  4. (a) Since 4  6  3  7, we have a4 a6  a3 a7  16. This, together with a4  a6  10, implies that a4 and a6 are
+       the two roots of x2  10x  16  0, i.e., a4  2 and a6  8 (because q  1), therefore, q2  a6 / a4  4, i.e., q 
+        2.
+      Hence, a1  a4 / q3  2 / 8  1 / 4. The general term is thus given by
+                                              an  a1 q n 1  1  2n 1  2n  3 .                                                4
+    (b) From the result of (a) and the formula for arithmetic series, we get
+
+                                                                                                                                           n ( 2 n 3)        n ( n 5)
+                                                                                                                                              2                                                          2                                                                                                                                                             2   .                        Tn  a1a2  na  2 2  21    2n  3  2 2  ( )1  ( n  )3  2
+
+
+                                                                                   12

@@ -1,0 +1,33 @@
+                   1  1 + 𝑎  1 + 𝑎3
+5.  (a) 因式分解行列式 | 1  1 + 𝑏  1 + 𝑏3 |。                                         (8 分)
+                   1  1 + 𝑐  1 + 𝑐3
+                                     𝑥+ 2𝑦−𝑧= 2
+    (b) 設p 和 q 為常數。已知以 x , y , z 為未知量的方程組 (𝐸): { 𝑥+ 𝑦+ 2𝑧= 4 。
+                                        𝑝𝑥+ 7𝑦−𝑧= 𝑞
+
+         (i) 求 p 的取值範圍使得 (E) 有唯一解。                                        (4 分)
+
+        (ii) 若 (E) 有多於一個解，求 q 的值，並求 (E) 的通解。                       (8 分)
+
+
+
+                         1  1 + 𝑎  1 + 𝑎3
+    (a) Factorize the determinant |1  1 + 𝑏  1 + 𝑏3 |.                                  (8 marks)
+                         1  1 + 𝑐  1 + 𝑐3
+    (b) Let p and q be constants. Given, in unknowns x , y , z , the system of equations
+
+       𝑥+ 2𝑦−𝑧= 2
+      (𝐸): { 𝑥+ 𝑦+ 2𝑧= 4 .
+       𝑝𝑥+ 7𝑦−𝑧= 𝑞
+
+         (i) Find the range of p such that (E) has a unique solution.                         (4 marks)
+
+        (ii) Suppose (E) has more than one solution. Find the value of q, and find the
+
+          general solution of (E).                                                       (8 marks)
+
+
+
+
+
+                                                                                      7

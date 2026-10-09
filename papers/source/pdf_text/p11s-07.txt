@@ -1,0 +1,58 @@
+5.  (a) (i) 已知公式
+
+                    sin(𝐴± 𝐵) = sin 𝐴cos 𝐵± cos 𝐴sin 𝐵
+
+    及
+
+                  cos(𝐴± 𝐵) = cos 𝐴cos 𝐵∓sin 𝐴sin 𝐵。
+
+    推導出
+
+                   𝑥+𝑦   𝑥−𝑦                   𝑥+𝑦   𝑥−𝑦
+        sin 𝑥−sin 𝑦= 2 cos      sin   及 cos 𝑥−cos 𝑦= −2 sin      sin  。   (4 分)
+                        2     2                        2     2
+
+
+                   1      1      1
+         (ii) 證明恆等式| sin 2𝜃   sin 4𝜃   sin 8𝜃 | = −4 sin 𝜃sin 2𝜃sin 3𝜃。               (6 分)
+                    cos 2𝜃  cos 4𝜃  cos 8𝜃
+
+
+                 𝜋
+    (b) 設 0 ≤𝜃≤ 2。若以下以 x、y 和 z 為未知量的方程組
+                      𝑥+     𝑦+     𝑧= 6
+                      { (sin 2𝜃)𝑥+ (sin 4𝜃)𝑦 + (sin 8𝜃)𝑧= √3
+                              (cos 2𝜃)𝑥+ (cos 4𝜃)𝑦+ (cos 8𝜃)𝑧= −3
+
+   有多於一個解，求此方程組的通解。                                         (10 分)
+
+
+    (a) (i) Given the formulas
+                       sin(𝐴± 𝐵) = sin 𝐴cos 𝐵± cos 𝐴sin 𝐵
+
+         and
+                      cos(𝐴± 𝐵) = cos 𝐴cos 𝐵∓sin 𝐴sin 𝐵.
+
+        Deduce that
+                   𝑥+𝑦   𝑥−𝑦                    𝑥+𝑦   𝑥−𝑦
+       sin 𝑥−sin 𝑦= 2 cos      sin      and cos 𝑥−cos 𝑦= −2 sin      sin          . (4 marks)
+                       2     2                         2     2
+
+
+                       1      1      1
+        (ii) Prove the identity | sin 2𝜃   sin 4𝜃   sin 8𝜃 | = −4sin 𝜃sin 2𝜃sin 3𝜃.        (6 marks)
+                          cos 2𝜃  cos 4𝜃  cos 8𝜃
+
+
+                  𝜋
+    (b) Let 0 ≤𝜃≤ 2. Suppose the following system of equations with unknowns x, y and z
+                      𝑥+     𝑦+     𝑧= 6
+                      { (sin 2𝜃)𝑥+ (sin 4𝜃)𝑦 + (sin 8𝜃)𝑧= √3
+                              (cos 2𝜃)𝑥+ (cos 4𝜃)𝑦+ (cos 8𝜃)𝑧= −3
+
+      has more than one solution. Find the general solution of this system of equations. (10 marks)
+
+
+
+
+                                           7

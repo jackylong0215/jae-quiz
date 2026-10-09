@@ -1,0 +1,52 @@
+ 8. Consider the numbers: 14, 5, 7, 7, 8, 8, 9, 10, 11, m, n. If the mean and median are both 9, which of the
+   following is true?
+              I.  m  9                         II.  n  11                       III. m  n  20
+   A.  I and II only               B.  I and III only              C.  II and III only
+   D.  I, II and III                  E. none of the above
+
+
+ 9. There are 12 females and 3 males in a group of students. One student is chosen at random from the
+   group. Another one is chosen at random from the remaining students. Calculate the probability that two
+    students of different genders are chosen.
+       2              5               2               6              12   A.               B.              C.              D.               E.
+      15             12              35              35              35
+
+
+10. The sum to infinity of a geometric series is 3, and the sum of the squares of each of its terms is 45. Its
+     first term is
+                                                      2   A. 1            B. 3            C. 5           D.              E.  6
+                                                      3
+
+
+11. Which of the following is the right focus of the ellipse 9x2  25y2  225?
+   A. ( 3, 0)       B.  (3, 0)        C.  (0,  4)       D.  (0, 4)         E.  (4, 0)
+
+
+12. 3-digit numbers are constructed by taking three different digits from 1, 2, 3, …, 9. How many of these
+    constructed numbers are odd?
+   A. 504          B. 280          C. 224         D. 729           E. 720
+
+                                                                                              y
+13. The right figure shows the graph of y  a (x  b)2  2, where a and b are
+    constants. Which of the following is true?
+                                                                                                               x
+   A. a  0 and b  0             B. a  0 and b  0
+   C. a  0 and b  0            D. a  0 and b  0
+    E. none of the above
+
+
+14. The solution of the inequality | x  2 |  2x is
+         2                                 2                        2   A. x                        B. x   2 or x                C.  2  x 
+         3                                 3                        3
+            2   D. 0  x                       E. x   2
+            3
+
+
+15. The midpoints of the sides of a triangle are A(3, 4), B(2, 0) and C(4, 2). Which of the following points is
+   a vertex of the triangle?
+   A.  (1, 2)         B.  (1, 3)        C.  (3, 1)        D.  (3, 2)         E.  (3.5, 3)
+
+
+
+
+                                                                                    9

@@ -1,0 +1,62 @@
+       (iv)
+
+                                                       30   y
+
+
+                                                       20
+
+
+                                                       10
+                                                           y = f(x)
+                                                                              x
+                                                        0
+                                            -4            -2          0          2          4
+                                                               -10
+
+
+                                                               -20
+
+                                          𝑑𝑦
+       (b)(i) The slope of line L is 1. At A, 1 = 𝑑𝑥= 3𝑥2 + 6𝑥+ 1. Solving, 𝑥= 0 or 𝑥= −2.
+        When 𝑥= 0, the point on line L is (0,4) but the point on the curve C is (0,0).
+          Thus, 𝑥= 0 is rejected.
+        When 𝑥= −2, (−2,2) is on line L and on curve C. Hence, A is (−2,2).
+
+                     𝑥3 + 3𝑥2 + 𝑥           (ii) Solving {𝑦=                        , (from (i), 𝑥= −2 is a solution) we get 𝑥= −2 or 𝑥= 1.
+           𝑦= 𝑥+ 4
+        When −2 < 𝑥< 1, the line 𝑦= 𝑥+ 4 is above the curve 𝑦= 𝑥3 + 3𝑥2 + 𝑥 .
+          Hence, the area is
+                1                                   1
+       ∫(𝑥+ 4) −(𝑥3 + 3𝑥2 + 𝑥) 𝑑𝑥 = ∫  4 −𝑥3 −3𝑥2 𝑑𝑥              −2                              −2
+                                                                  1                                                         1
+                          = [4𝑥− 𝑥4−𝑥3]
+                                                         4       −2
+                                                   27
+                          =    .
+                                                   4
+
+
+                    𝑥2   𝑦2
+            +  = 13.   (a)(i) From {   9    4                    , we get 4𝑥2 + 9[𝑚𝑥+ (𝑘−𝑚ℎ)]2 = 36, that is,
+         𝑦= 𝑚𝑥+ (𝑘−𝑚ℎ)
+
+            (4 + 9m2)𝑥2 + 18𝑚(𝑘−𝑚ℎ)𝑥+ 9(𝑘−𝑚ℎ)2 −36 = 0.                        (1)
+       Since the line 𝑦= 𝑚𝑥+ (𝑘−𝑚ℎ) is tangent to E, (1) has a double root and so its discriminant
+          is 0. That is, [18𝑚(𝑘−𝑚ℎ)]2 −4(4 + 9m2)[9(𝑘−𝑚ℎ)2 −36] = 0. Hence, we get
+          9𝑚2 −(𝑘−𝑚ℎ)2 + 4 = 0.                                                        (2)
+
+          (ii) From (2) we get
+            (9 −ℎ2)𝑚2 + 2ℎ𝑘𝑚+ (4 −𝑘2) = 0.                                             (3)
+
+                                                               2ℎ𝑘              𝑘2−4
+          Since 𝑚1 and 𝑚2 are roots of (3), we have 𝑚1 + 𝑚2 =     and 𝑚1𝑚2 =                                                             ℎ2−9               ℎ2−9.
+       (b) When 𝐿1 and 𝐿2 are not a pair of horizontal and vertical lines,
+                               𝑘2−4
+           𝑚1𝑚2 = −1 ⇒   = −1 ⇒ℎ2 + 𝑘2 = 13, ℎ≠±3, 𝑘≠±2.                               ℎ2−9
+       When 𝐿1 and 𝐿2 form a pair of horizontal and vertical lines, readily, (ℎ, 𝑘) = (±3, ±2).
+         Hence, the locus of A is 𝑥2 + 𝑦2 = 13.
+
+
+
+
+                                           13

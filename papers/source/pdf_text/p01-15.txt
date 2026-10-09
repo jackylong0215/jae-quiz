@@ -1,0 +1,38 @@
+5. (a)
+
+         1  a 2  b  c   1    a 2    b  c        1    a 2    b  c
+         1  b 2  a  c  0  b 2  a 2  a  b  ( a  b ) 0   a  b   1
+         1  c 2  a  b   1    c 2    a  b        1    c 2    a  b
+
+                           1    a 2    b  c              1    a 2    b  c
+                   ( a  b ) 0   a  b    1   ( a  b )( a  c ) 0   a  b   1
+                           0  c 2  a 2  a  c             0   c  a   1
+                   ( a  b )( a  c )( c  b )
+
+   (b)
+
+         x　 2 y　 5 z  2         x　 2 y　 5 z  2
+                   
+        3 x   y   z  13             y  2 z  1
+
+         Letting  z ,t  the solution of the system of equations can be expressed as
+        x 4  t , y  1 2t , z ,t  where t is any real number.
+
+                                                  1   2  5
+   (c) (i) The system (E) has a unique solution if and only if  3   1   1  0 , i.e. p  1 .
+                                                  p   1   1
+
+         (ii) For the first two equations of (E) to have a positive solution, using the general
+          solution obtained in (b), we have  x  4  t  0 ,  y  1  2t  0 ,  z t  0 , from
+         which we deduce that 0 t  4 . Substituting the general solution to the third
+                                                           2          equation, we get p( 4  t )  1(  2t )  t  3 and hence  p  1          . From 0 t  4 ,
+                                                          4  t
+                  1
+       we get  p     . From (i), we know that this positive solution is unique.
+                  2
+
+
+
+
+
+                                                                                     15

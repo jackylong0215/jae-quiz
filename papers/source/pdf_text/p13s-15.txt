@@ -1,0 +1,48 @@
+    (c)
+             2 cos 𝛼−cos 3𝛼−cos 5𝛼= 0 ⇒16 sin2 𝛼cos3𝛼= 0
+                                 ⇒sin 𝛼= 0 or cos 𝛼= 0
+                                               𝜋
+                     ⇒𝛼= 𝑘𝜋 or 𝛼=  + 𝑘𝜋, 𝑘 is an integer
+                                                   2
+                                        𝑛𝜋
+                     ⇒𝛼=        , 𝑛 is an integer.
+                                          2
+
+5.  (a)
+               𝑎     𝑏      𝑐        𝑎        𝑏          𝑐
+                      | 𝑏+ 𝑐 𝑐+ 𝑎 𝑎+ 𝑏 | = | 𝑎+ 𝑏+ 𝑐 𝑎+ 𝑏+ 𝑐 𝑎+ 𝑏+ 𝑐 |
+              1 + 𝑏  1 + 𝑐  1 + 𝑎     1 + 𝑏     1 + 𝑐     1 + 𝑎
+
+                                            𝑎     𝑏      𝑐
+                       = (𝑎+ 𝑏+ 𝑐) |  1     1     1   |
+                                           1 + 𝑏  1 + 𝑐  1 + 𝑎
+
+                                            𝑎  𝑏−𝑎 𝑐−𝑎
+                       = (𝑎+ 𝑏+ 𝑐) |  1     0     0   |
+                                           1 + 𝑏 𝑐−𝑏 𝑎−𝑏
+
+                       = (𝑎+ 𝑏+ 𝑐){(−1)[(𝑏−𝑎)(𝑎−𝑏) −(𝑐−𝑏)(𝑐−𝑎)]}
+                       = (𝑎+ 𝑏+ 𝑐)(𝑎2 + 𝑏2 + 𝑐2 −𝑎𝑏−𝑏𝑐−𝑐𝑎)
+
+                                    1  1  1
+    (b)(i) (E) has a unique solution if and only if | 𝑘  5  1 | ≠0, that is, 𝑘≠±3.
+                                    1  𝑘  −1
+
+                                  𝑥+ 𝑦+ 𝑧= 1
+        (ii) When 𝑘= 3, the system of equations becomes { 3𝑥+ 5𝑦 + 𝑧= 3   .
+                                𝑥+ 3𝑦 −𝑧= 1
+                 𝑥 + 𝑦+ 𝑧 = 1
+         Solving {              we get 𝑥= 1 −2𝑡, 𝑦= 𝑡, 𝑧= 𝑡，𝑡∈ℝ.           3𝑥+ 5𝑦 + 𝑧= 3,
+         This solution also satisfies the third equation and hence is the general solution of the system of
+         equations.
+
+    (c) Suppose the system of equations has a solution. Then there exists 𝑡≥0 such that
+                                                       2
+     2(1 −2𝑡) + 2√𝑡+ 3𝑡= 𝑎, that is, 3 −(1 −√𝑡) = 𝑎. Hence, we know that the maximum value of 𝑎
+        is 3. When 𝑎= 3, we have 𝑡= 1 and the solution of the system of equations is 𝑥= −1, 𝑦= 1, 𝑧= 1.
+
+
+
+
+
+                                           15

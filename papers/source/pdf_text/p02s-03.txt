@@ -1,0 +1,59 @@
+任擇三題作答，每題二十分。請把答案寫在緊接每條題目之後的3 頁橫間頁內。
+
+Answer any 3 questions, each carries 20 marks. Write down the answers on the 3 lined pages
+
+following each question.
+
+
+
+
+1.
+
+
+               H            G
+
+
+           E
+                           F
+                      K
+
+
+           M                D
+                              C
+
+              N
+           A               B
+
+
+    如上圖所示，ABCD-EFGH 是邊長為4 的正立方體，MN 為ADHE 中的線
+
+   段，垂直平分AD 於點 N，且   | MN  | ，K1  為正方形 DCGH 的中點。
+
+        (a) 求 cos  MBK 。                                                     (10 分)
+
+        (b)  (i) 證明MA 垂直 AB。                                                  (2 分)
+
+               (ii) 求三棱錐 M-ABD 的體積，從而求點 D 至平面 AMB 的距離。   (8 分)
+
+
+
+
+
+       In the above figure, ABCD-EFGH is a cube with edge length 4, MN is a segment
+
+        in ADHE perpendicularly bisects AD at point N, and   | MN  | .1 Point K is the
+
+       center of the square DCGH.
+
+          (a) Find cos MBK .                                                     (10 marks)
+
+         (b) (i) Show that MA and AB are perpendicular.                               (2 marks)
+
+                 (ii) Find the volume of the triangular pyramid M-ABD, and hence find the
+
+                distance from point D to the plane AMB.                               (8 marks)
+
+
+
+
+                                                                                      3

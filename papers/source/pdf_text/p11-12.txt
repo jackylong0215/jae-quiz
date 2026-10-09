@@ -1,0 +1,51 @@
+Part II Problem-solving questions.
+
+   1.  (a )  If a coin is tossed 10 times consecutively, the probability of getting tails 10 times is (1−1  = (3                                                                                              4)10     4)10.
+                                                                               1 −1   =         The probability of getting exactly one head in ten consecutive tosses of a coin is 10C1                                                                                4(1   4)10−1
+
+                                              =                                                × (3                   Therefore, the probability of at most one head up is (3          52(34)9.                                                  5       13                                                                     4)10 + 2(34)9                                                                          4                                                                                                4)9.
+        (b) The probability that the first 9 tosses are tails and the 10th toss is head is (1 −1   × 1 = 39                                                                                    4)10−1   4    410.
+        (c) The probability of getting exactly two heads in the first 9 tosses is 9C2(1  −1      Therefore, the                                                                          4)2(1   4)9−2.
+            probability of getting a third head on the tenth toss is 9C2(1  −1   × 1 = (3                                                               4)2(1   4)9−2   4     4)9.
+
+
+   2.   (a) The coordinates of the focus F is (0, 1).
+
+                                              3
+        (b) The equation of the straight line L1 is y = 4x + 1. Combining the equations of the straight line L1
+
+          and the parabola P , we can get x2 = 3x + 4. Solving the quadratic equation, one has x = −1 or 4.
+
+                                                    1
+         Then the coordinates of points A and B are A(−1, 4) and B(4, 4), respectively. Then according to
+                                               25
+            the definition of parabolas, we have |AB| =     .
+                                               4
+
+        (c) Suppose the equation of the straight line L2 is y = x + t. Suppose the x-coordinates of points C and
+
+      D are x1 and x2, respectively. Combining the equations of the straight line L2 and the parabola P ,
+
+        we can get x2 −4x −4t = 0. Using Weda’s Theorem, x1 + x2 = 4. Since |DM| = 3|CM|, we have
+                                        √          √
+          x2 = −3x1. Furthermore, we can get x1 = −2, x2 = 6. Thus, |CD| =   12 + 1|x4 −x3| = 8  2.
+
+
+   3.   (a) From the question, we get a1 = S1 = 9 −2k, a2 = S2 −S1 = 27 −9 = 18 and a3 = S3 −S2 = 54.
+
+           Since {an}n≥1 is a geometric sequence, we have a1a3 = a22, which implies that the first term a1 = 6,
+
+            the common ratio q = 3 and k = 3/2. Then we can get an = a1 × qn−1 = 2 × 3n.
+                                           (    )
+                      1                                          1                                                               1
+        (b) Since bn =                       +log2(2×3n) =                              +1+n log2 3, Tn =                                                                  1 −1  +n+ n(n + 1) log2 3.                   2 × 3n               2 × 3n                  4      3n          2
+                                                   1 −1  + 1  When n = 2, the function f(n)        (c) Since cn = 3−n, f(n) = −5(3−n)2 + 3−n = −5(                                                      3n   10)2   20.
+                                 4
+           obtains its maximum value 81.
+                                               √
+                         √                                      3
+   4.   (a) By the double-angle formula, f(x) =   3 sin 2wx −(1 + cos 2wx). So f(x) = 2(    sin 2wx −
+                                                                                 2
+
+
+                                          12 / 13

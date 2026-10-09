@@ -1,0 +1,66 @@
+(iv)
+
+                                             y
+                                                5
+                                                0                             x
+                           -6          -4          -2        0        2        4        6
+                                                           -5
+                                                      y=f(|x|)-2                                                      -10
+
+                                                      -15
+
+                                                      -20
+
+                                                      -25
+
+                                                      -30
+
+
+                y  x 3  3 x 2  9 x  2                                               3       2
+      (b) Solving                                      , we know that the curve C : y  x  3 x  9 x  2
+                y  x  2
+
+        and the line L : y x 2 intersect at x ,2  x  0 and x。When5    ,2  x  0  the
+         curve C is above the line L. When 0 ,x  5 the curve C is below the line L. Hence
+          the required area is
+
+
+                       0                                             5
+               2 ( x 3  3 x 2  9 x  2)  ( x  2) dx  0 ( x  2)  ( x 3  3 x 2  9 x  2) dx
+
+                       0                            5
+           2 x 3  3 x 2  10 x dx  0  x 3  3 x 2  10 x dx
+
+                                         0                           5
+                 x 4     3       2       x 4     3       2 
+              x  5 x     x  5 x                                                              。
+                 4            2     4            0
+               375
+      8
+                4
+             407
+          
+             4
+
+
+
+   3.  (a) Suppose the equation of the tangent line L is y  m ( x  1) .3 From
+         y  ( x  1) 2                             2
+                                    , we get  (x  1)  m( x  1)  3 and hence
+          y  m ( x  1)  3        
+                            x 2  (2  m) x  (2  m)  0                          (*)
+
+      As L is a tangent line of P, (*) has a double root and so its discriminant is 0. Hence we
+         get  [ (2  m)]2  4(1)( 2 m)  0 , i.e., m2  8m  12  0 . Thus, m6  or m.2
+
+       Suppose m.6 From (*) we get x 2  4 x 4  0 and hence  x .2 Now, the tangent
+
+         line L is  y 6 x .3 As  x 2 we get  y .9 Hence the tangent point is ( ,9).2
+
+       Suppose m.2 From (*) we get x 2  0 and hence  x .0 Now the tangent line L is
+
+        y 2 x .1 As  x  0 we get  y .1 Hence the tangent point is (0,1).
+
+
+
+                                                                                    13

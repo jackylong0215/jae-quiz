@@ -1,0 +1,53 @@
+Suggested Answer:
+
+
+    1.  (a) (i) By direct calculation, |𝑃𝐷| = √|𝑃𝐴|2 + |𝐴𝐷|2 = √5,
+
+           |𝐵𝐷| = √|𝐵𝐴|2 + |𝐴𝐷|2 = √5 and |𝑃𝐵| = √|𝑃𝐴|2 + |𝐴𝐵|2 = √8.
+
+             So, ∆𝑃𝐵𝐷 is an isosceles triangle. With 𝑃𝐵 as the base, its height is
+
+           √|𝑃𝐷|2 −(12|𝑃𝐵|)2 = √3. Hence, the area of ∆𝑃𝐵𝐷 is √6.
+
+                                         1                        2
+              (ii) The volume of 𝑃−𝐴𝐵𝐷 is  |𝑃𝐴|(area of ∆𝐴𝐵𝐷) =                                         3                              3.
+             Let d be the distance from point A to plane PBD. Then the volume of 𝐴−𝑃𝐵𝐷
+
+               𝑑√6       𝑑√6   2               2
+                 is      . From   =  we get 𝑑= √                 3          3     3,                  3.
+
+        (b) (i) From 𝑃𝐴⊥𝐴𝐵𝐶𝐷, we get 𝐷𝐴⊥𝐴𝑃. Together with 𝐷𝐴⊥𝐴𝐵, we have
+
+        𝐴𝐷⊥𝑃𝐴𝐵. As 𝐴𝐷 and 𝐵𝐶 are parallel, we get 𝐵𝐶⊥𝑃𝐴𝐵.
+
+             (ii) From the proof of (b)(i), we know that 𝐴𝐷⊥𝑃𝐴𝐵. So, 𝐴𝐷⊥𝐴𝑁. …..(1)
+            Since 𝑁 and 𝑀 are the midpoints of 𝑃𝐵 and 𝑃𝐶, respectively, we have 𝑁𝑀∥𝐵𝐶.
+
+            Together with A𝐷∥𝐵𝐶, we get 𝑁𝑀∥𝐴𝐷. Hence, points 𝐴、𝐷、𝑀 and 𝑁 are
+
+              co-planar. Moreover, from (1), we have 𝑁𝑀⊥𝐴𝑁. …..(2)
+            Since 𝑁 and 𝑀 are the midpoints of 𝑃𝐵 and 𝑃𝐶, respectively, we have
+
+                      1
+          |𝑀𝑁| =  |𝐵𝐶| = 1 = |𝐴𝐷|. …..(3)
+                      2
+           Combining (1) - (3) above, 𝐴𝐷𝑀𝑁 is a rectangle. So, 𝐷𝑀∥𝐴𝑁. Hence,
+
+       DM is parallel to the plane 𝑃𝐴𝐵.
+
+
+    2.  (a) (i) 𝑓′(𝑥) = 6𝑥2 −18𝑥+ 12, 𝑓′′(𝑥) = 12𝑥−18.
+             (ii) 𝑓′(𝑥) = 0 ⇔𝑥= 1 or 𝑥= 2.
+         When 𝑥< 1, 𝑓′(𝑥) > 0 and so 𝑓(𝑥) is increasing.
+         When 1 < 𝑥< 2, 𝑓′(𝑥) < 0 and so 𝑓(𝑥) is decreasing.
+         When 2 < 𝑥, 𝑓′(𝑥) > 0 and so 𝑓(𝑥) is increasing.
+            Hence, 𝑓(1) = 0 is a local maximum value, 𝑓(2) = −1 is a local minimum value.
+             𝑓′′(𝑥) = 0 ⇔𝑥= 3            3                   3                                        2. When 𝑥< 2, 𝑓′′(𝑥) < 0; when 2 < 𝑥, 𝑓′′(𝑥) > 0.
+                                                                 3    1
+           Hence, the inflection point of the curve 𝑦= 𝑓(𝑥) is (   , −     .                                                                 2   2)
+
+
+
+
+
+                                           13

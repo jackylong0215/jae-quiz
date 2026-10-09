@@ -1,0 +1,39 @@
+Part II Problem-solving questions.
+
+   1. There are 3 defective products among the 10 products. Now 4 products are randomly selected.
+
+        (a) Find the probability that at least 2 defective products are selected.                        (4 marks)
+
+        (b) Find the expected number of defective products selected.                                 (4 marks)
+                          √
+                    π         1        3  13
+   2. Given that α, β ∈(0,   ), tan α =   cos β =           .                       2           5,         13
+
+        (a) Find the value of tan(α + β).                                                           (4 marks)
+        (b) Find the value of cos(α + 2β).                                                          (4 marks)
+
+   3. In the arithmetic series {an}n≥1, a1 = 3. a1, a2 and a5 form a geometic series.
+
+        (a) Find the general term for {an}n≥1.                                                      (4 marks)
+        (b) Let Sn be the nth partial sum of {an}n≥1. Is there a positive integer n such that Sn ≥12n + 36? If
+            yes, find the smallest value of such n. If no, give your reason.                            (4 marks)
+
+   4. Suppose the function f(x) = a −|x −3| −|x −7|.
+
+        (a)  If a = 8, solve the inequality f(x) ≥0.                                                  (4 marks)
+        (b)  If the function g(x) = xf(x) has its minimum value −1 in the closed interval [−1, 1], find the value
+           of a.                                                                                   (4 marks)
+                                    √
+                                                   x2             10        √   5. Suppose that the eccentricity of the hyperbolic C :   −y2 = 1 is         . The point A(2  2, 3) lies on the
+                                                     a2    b2        2
+      hyperbolic C. The straight line ℓ: y = x + m intersects C at points P and Q and OP ⊥OQ, where Q is
+      the origin of the coordinate system.
+
+        (a) Find the equation for C.                                                                 (3 marks)
+        (b) Find the value of m.                                                                    (5 marks)
+
+
+
+
+
+                                          10 / 13

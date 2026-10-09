@@ -1,0 +1,38 @@
+3. 已知拋物線 P : x 2  8 y 。
+
+    (a) 若直線 L : y  mx  c 與拋物線 P 相切，證明 c  2m 2 。                     (4 分)
+
+    (b) 設 1L 及 2L 為拋物線 P 的兩條不同的切線，其斜率分別為 m1 及 m 2 ，
+
+   且相交於點 A( h, k ) 。
+
+         (i) 求點 A，答案以 m1 及 m 2 表示。                                          (6 分)
+        (ii) 若 1L 及 2L 的夾角為 ，求點 A 的軌跡。                                 (5 分)
+                            2
+
+               
+        (iii) 若 1L 及 2L 的夾角為  及 𝑚1 = 2，求點 A 。                            (5 分)
+                            4
+
+
+
+   Given parabola P : x 2  8 y .
+
+    (a) If the straight line L : y  mx  c is tangent to the parabola P, show that c  2m 2 . (4 marks)
+
+    (b) Suppose 1L and 2L are two different tangent lines of P with slopes m1 and m 2 ,
+
+        respectively, and intersect at point A( h, k ) .
+
+         (i) Find the point A, giving your answer in terms of m1 and m 2 .                   (6 marks)
+        (ii) If the angle between 1L and 2L is , find the locus of point A.                 (5 marks)
+                                     2
+                   
+        (iii) If the angle between 1L and 2L is   and 𝑚1 = 2, find the point A.             (5 marks)
+                                     4
+
+
+
+
+
+                                           5

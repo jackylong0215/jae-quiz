@@ -1,0 +1,34 @@
+2.  (a) 設 𝑓(𝑥) = 2𝑥3 −9𝑥2 + 12𝑥−5。
+
+          (i) 求 𝑓′(𝑥) 及 𝑓′′(𝑥)。                                                     (2 分)
+
+         (ii) 求 𝑓(𝑥) 的局部極大值和局部極小值。                                   (4 分)
+
+        (iii) 求曲線 𝑦= 𝑓(𝑥) 的拐點。                                              (2 分)
+
+       (iv) 繪出曲線 𝑦= 𝑓(𝑥)，−1 ≤𝑥≤3。                                      (3 分)
+
+      (v) 繪出曲線 𝑦= 𝑓(|𝑥|) −1，−1 ≤𝑥≤3。                                (1 分)
+
+    (b) 求由曲線 𝑦= −𝑥2 + 3𝑥 及曲線 𝑦= 2𝑥3 −𝑥2 −5𝑥 所包圍的區域的面積。 (8 分)
+
+
+
+    (a) Let 𝑓(𝑥) = 2𝑥3 −9𝑥2 + 12𝑥−5.
+          (i) Find 𝑓′(𝑥) and 𝑓′′(𝑥).                                                     (2 marks)
+
+         (ii) Find the local maximum and local minimum values of  f (x ) .                (4 marks)
+
+        (iii) Find the inflection point of the curve 𝑦= 𝑓(𝑥).                             (2 marks)
+       (iv) Sketch the curve 𝑦= 𝑓(𝑥), −1 ≤𝑥≤3.                                  (3 marks)
+
+       (v) Sketch the curve 𝑦= 𝑓(|𝑥|) −1, −1 ≤𝑥≤3.                             (1 marks)
+
+    (b) Find the area of the region bounded by the curves 𝑦= −𝑥2 + 3𝑥 and
+    𝑦= 2𝑥3 −𝑥2 −5𝑥.                                                          (8 marks)
+
+
+
+
+
+                                          4

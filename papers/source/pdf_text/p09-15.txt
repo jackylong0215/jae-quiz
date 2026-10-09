@@ -1,0 +1,24 @@
+5. Proof: Let S ( n ) be the statement “ 3 4 n 2  5 2 n 1 is divisible by 14”.
+   (1). When n  1 ,
+                        34+2 +52+1=36 +53 =729+125=854, 854  14  16 .
+      Therefore, S (1) is true.
+   (2). Assume that S ( n ) is true for n  k ( k                                                             ) , i.e., 34k  2  52k 1 is divisible by 14, where k .
+                                      ) ,     So when n  k  1( k  
+
+                            34( k 1) 2  52( k 1) 1
+                         34 k 4 2  52k 2 1
+                         34  34 k  2  52  5 2k 1
+                         81  34 k  2  25  52 k 1
+                         56  34 k  2  25  34 k  2  25  52 k 1
+                         =56  34 k  2  25（ 34 k  2  52 k 1）,
+     Where 56  34k 2 is divisible by 14, and according to the assumption, 25  (34k  2  52k 1)  is also
+       divisible by 14.
+      In other words, S ( k  1) is also true.
+    By (1), (2) and the Principle of Mathematical Induction, the statement is true for all positive integers
+       n.
+
+
+
+
+
+                                                15

@@ -1,0 +1,36 @@
+5. (a) When n  1,  1    a   , i.e., b  1  3a.               4  1  b  1
+    When n  2,               1   1    2a   , i.e., 2b  1  5a.               3  16  1  2b  1
+                                 b  1  3a
+     Solving the system of equations                     , we obtain a  1 and b  2.                                                                                               2b  1  5a
+
+                                                                                                  n
+                                                             1      n  (b) In what follows, we want to prove by mathematical induction that                                                                  holds for any                               2                                                                                                              k 1 4k  1  2n  1
+      positive integer n.
+
+        I) When n  1, LHS                         1   1 , and RHS   1   1 .                       4  1  3          2  1  3
+      LHS  RHS. The statement is true.
+
+                                                                                                            1                                                                         .        II) Assume that when n   (  ℤ), the statement is true, i.e.,     2                                                                                                      k 1 4k  1  2  1
+       When n    1, it follows from the induction assumption that
+
+                                                   1                 
+                                                                         1 2              12                  12                                                 k 1 4k  1    k 1 4k  1  4(  )1  1
+                                       2 1                                   2  1  4  8  3
+                                         1                                   2  1   (2  1)(2  )3
+                                          (2  )3  1                              
+                                                     (2  1)(2  )3
+                                                      (  1)(2  )1                                                                                   (2  1)(2  )3
+                                           1                                                                 2  3
+                                             1                                                .                                   2(  )1  1
+
+          In other words, the statement is also true when n    1.
+
+                                                                                                 n
+                                                             1      n     According to I), II), and the Principle of Mathematical Induction,                                                                   is true for any                              2                                                                                                            k 1 4k  1  2n  1
+      positive integer n.
+
+
+
+
+
+                                                                                  13

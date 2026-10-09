@@ -1,0 +1,35 @@
+2.   (a) 已知函數 𝑓(𝑥) = 𝑥3 −12𝑥+ 6。
+
+           (i) 求 𝑓′(𝑥) 及 𝑓′′(𝑥)。                                                   (2 分)
+
+            (ii) 求  f (x ) 的局部極大值和局部極小值。                                  (3 分)
+
+            (iii) 求曲線 𝑦= 𝑓(𝑥) 的拐點。                                             (2 分)
+
+          (iv) 運用  (i) – (iii) 的結果，繪出曲線 𝑦= 𝑓(𝑥)。                           (3 分)
+
+     (b) 已知直線 𝐿: 𝑦= 𝑥+ 4 是曲線 𝐶: 𝑦= 𝑥3 +3𝑥2 + 𝑥 在點A 的一條切線。
+
+           (i) 求點A。                                                                 (4 分)
+
+            (ii) 求由直線 𝐿 与曲線 𝐶 所包圍的區域的面積。                            (6 分)
+
+
+     (a) Given function 𝑓(𝑥) = 𝑥3 −12𝑥+ 6.
+           (i)  Find 𝑓′(𝑥) and 𝑓′′(𝑥).                                                   (2 marks)
+            (ii) Find the local maximum and local minimum values of 𝑓(𝑥).                (3 marks)
+            (iii) Find the inflection point(s) of the curve 𝑦= 𝑓(𝑥).                         (2 marks)
+          (iv) Using the results in (i) – (iii), sketch the curve 𝑦= 𝑓(𝑥).                  (3 marks)
+
+     (b) Given that the line 𝐿: 𝑦= 𝑥+ 4  is a tangent line of the curve 𝐶: 𝑦= 𝑥3 +3𝑥2 + 𝑥
+
+          at point A.
+
+           (i)  Find the point A.                                                          (4 marks)
+            (ii) Find the area of the region bounded by the line 𝐿 and the curve 𝐶.           (6 marks)
+
+
+
+
+
+                                           4

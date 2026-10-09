@@ -1,0 +1,54 @@
+Part II Problem-solving questions.
+
+                     4    1. Suppose that sin     ,      ,  .                     5        2    
+             (a) Find sin      .                                                                      (4 marks)                      4 
+    (b) Find sin 2 cos 2.                                                                  (4 marks)
+
+
+  2. Suppose f(x) is a sum of two parts, the first part varies directly with x, and the other part varies directly
+   with x2. Assume that f(2)  8 and f(6)  0.
+    (a) Find f(x).                                                                             (4 marks)
+                                 3    (b) Solve the equation log 1    f ( x)      .                                                  (4 marks)
+                                                         2         2
+
+
+ 3. In the below figure, the graph of y  x2  px  q passes through A (7,  1) and intersects the y-axis at B (0,
+    6). C is another point on the graph such that BC is parallel to the x-axis.
+                                                  y
+
+
+
+                                     B (0, 6)       C
+
+
+
+
+
+                                                                          x
+                             O
+                                                A (7,  1)
+
+
+
+
+
+    (a) Find the values of p and q.                                                            (3 marks)
+    (b) Find the coordinates of C.                                                             (3 marks)
+    (c) Find the area of ABC.                                                                (2 marks)
+
+ 4. In a geometric sequence {an}n  1, the common ratio q  1, a3 a7  16 and a4  a6  10.
+    (a) Find the general term of {an}n  1.                                                       (4 marks)
+    (b) Find the product Tn of the first n terms of {an}n  1, i.e., Tn  a1 a2 ⋯ an.                     (4 marks)
+
+
+
+                               n
+                      1      an 5. (a) If the equality                              holds for all positive integers n, where a and b are constants, find            2                                  k 1 4k  1  bn  1
+       the values of a and b.                                                                 (4 marks)
+                                                                                                                        n
+                                                                         1      an    (b) Prove by mathematical induction that for all positive integers n, the equality                                                                                                          2                                                                                                                                      k 1 4k  1  bn  1
+       holds, where a and b are the constants found in (a).                                     (4 marks)
+
+
+
+                                                                                   10

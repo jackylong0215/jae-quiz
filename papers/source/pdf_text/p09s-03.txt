@@ -1,0 +1,60 @@
+任擇三題作答，每題二十分。請把答案寫在緊接每條題目之後的3 頁橫間頁內。
+
+Answer any 3 questions, each carries 20 marks. Write down the answers on the 3 lined pages
+
+following each question.
+
+   1.
+
+                    P
+
+
+
+
+
+                  C
+
+                                    E
+
+                                              B
+          A
+                    D
+
+
+   如上圖所示，在三棱錐 P-ABC 中，PC 垂直 ABC，|    | = 3，∠   = ，
+
+    D 和 E 分別是AB 和 BC 上的點，且 |    | = |    | = √2，|    | = 2，|    | = 1。
+
+       (a) 求 |  |。[提示: 設 M 為 CE 的中點。]                                     (6 分)
+
+       (b) (i) 證明 ∠   = 。                                                       (2 分)
+
+             (ii) 求 ∠  ，答案以 cos 表示。                                         (5 分)
+
+       (c) 求二面角 P-AB-C，答案以 tan 表示。                                    (7 分)
+
+      [提示: 設 X 為 AB 上一點，使得 CX 與AB 垂直。證明PX 與AB 垂直。]
+
+     As shown in the above figure, P-ABC is a triangular pyramid, PC is perpendicular to
+
+     ABC, |    | = 3, ∠   =    . The points D and E are on AB and BC, respectively, and
+
+        |    | = |    | = √2, |    | = 2,|    | = 1.
+
+       (a) Find |    |. [Hint. Let M be the midpoint of CE.]                               (6 marks)
+
+       (b) (i) Show that ∠   =   .                                                    (2 marks)
+
+             (ii) Find ∠        . Express your answer in terms of cos    .                      (5 marks)
+
+       (c) Find the dihedral angle P-AB-C. Express you answer in terms of tan  .
+
+          [Hint: Let X be the point on AB such that CX and AB are perpendicular.
+
+       Show that PX and AB are perpendicular.]                                     (7 marks)
+
+
+
+
+
+                                           3

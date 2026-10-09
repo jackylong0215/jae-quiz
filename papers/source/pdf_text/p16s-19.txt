@@ -1,0 +1,48 @@
+      (b) Solving the equations y  5  x2 and y  x  1 simultaneously, we                      y
+       know that the line intersects the parabola at A(3,4) and B(2,
+           1).
+
+
+                                                2
+                                                          2                                                                                                                       B     ∴ The required area     5  x                         x  1 dx                                                      3                                                                                                   x
+
+                                           (6  x  x 2) dx                       23
+                                                                                                  A
+                                      x          2                                                      2   x 3                        6 x   
+                                                                       2   3  3
+
+                            125
+                                                   6
+
+
+
+    4. Given parabola P: y  4x2. Let A(a, 4a2) be a point on P, where a  0.
+       (a)  If the straight line y  mx  c is tangent to P, show that m2  16c  0. Hence, or otherwise,
+        deduce that the slope of the tangent line of P at A is 8a.                        (6 marks)
+
+      (b) Suppose that the tangent line and normal line of P at A intersect the y‐axis at points H and K
+
+                                                           1
+                                                                                         (7 marks)          respectively. Show that the mid‐point of HK is F(0, 16 ).
+
+       (c) Let C be the circle centered at F and passing through A. Show that the angle between the
+         tangent line of P at A and the tangent line of C at A is tan 1 | 8a |.               (7 marks)
+
+Ans.: (a) The line y  mx  c is tangent to P at A if and only if the discriminant of 4x2  mx  c  0 is 0.
+         That is, ( m)2  4  4 ( c)  0  m2  16c  0.
+
+         Let L: y  mx  c be a tangent to P at A. Then m is the required slope and 16c  m2. Since L
+         passes through A, we have 4a2  ma  c. ∴ 64a2  16ma  16c  (m  8a)2  0  m  8a.
+
+      (b) From (a), H is the point (0, c), where c  1 m2  4a2.                                                 16
+
+                                                                   d  4a2  1
+         Let K be the point (0, d). Since KA is normal to P at A, its slope is 1/(8a). ∴        d                                                                    0  a   8a
+
+               1
+        4a2     .               8
+
+
+                                                 1             1    1                       1
+     ∴ The y‐coordinate of the mid‐point F is                                                 (4a2  4a2                                                                                          )                                                  2                                                               8                                                                   16                                                                                                                      , i.e., F is the point (0, 16 ).
+                                                                                19

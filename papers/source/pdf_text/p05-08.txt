@@ -1,0 +1,52 @@
+Part I Multiple choice questions. Choose the best answer for each question.
+
+ 1. If P  {0, 1, 2}, Q  {0, 2, 3}, R  {1, 2, 3, 4}, then P ∩ (Q ∪ R) 
+
+   A. {0, 1, 2}                   B. {0, 1, 2, 3, 4}              C. {2}
+   D.                           E. none of the above
+
+
+ 2. Suppose the population of a city was 2,000,000 at the end of year 2017. If the population growth rate is
+  2% per year, at the end of year 2020 the population size will be approximately (select the closest answer):
+   A. 2,100,000     B. 2,080,000    C. 2,140,000    D. 2,060,000     E. 2,120,000
+
+
+ 3. 9x2  3x  4y2  2y 
+   A. (3x  2y)(3x  2y  1)         B. (3x  2y)(3x  2y  1)         C. (3x  2y)(3x  2y  1)
+   D. (2x  3y)(2x  3y  1)         E. none of the above
+
+
+ 4. If   n x  denotes the nth root of x, which of the following is correct?
+
+   A.   4 17   1.4  3 2.7          B.   3 2.7   1.4  4 17          C.   3 2.7  4 17   1.4
+   D.   4 17  3 2.7   1.4          E. none of the above
+
+
+ 5. If |  3x  5 |  4, then
+
+        1                        1                                  1   A.    x  3                 B.  x  3                  C.  3  x  
+        3                        3                                  3
+             1                                1   D.  3  x                     E.  x  3 or  x  
+             3                                3
+
+
+ 6. If x5 y13, which of the following is/are true?
+                 13                 13                  5                  5              I.  log x y                  II.  log y x                III.  log x y           IV.  log y x                  5                  5                  13                 13
+   A.  I only                     B.  II only                    C. IV only
+   D.  II and III only               E.  I and IV only
+
+
+ 7. If   x  7   x  2 , then x 
+       9               3              9               4               3   A.               B.              C.              D.               E.
+       16              16              4               9               4
+
+
+ 8. Three distinct numbers are selected from the six numbers 0, 1, 3, 5, 6, 7 to form a 3-digit even number.
+  How many ways are there? [Note: the number 013 is only 2-digit, not 3-digit.]
+   A. 26           B. 36           C. 42          D. 45            E. none of the above
+
+
+
+
+
+                                         8 / 13

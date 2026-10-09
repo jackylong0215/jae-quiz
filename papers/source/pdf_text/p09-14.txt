@@ -1,0 +1,49 @@
+3. (a) a and b satisfy the system
+
+
+                                                                       2     2                                        a  b     2                                                                                                                          a      2                                                               .
+                                            16                                        8                                                                      2                                                                              2  1                                       b   a
+
+      This implies that a 2  32 , b 2  16 . Thus the equation is
+                                            x 2   y 2                                       .1
+                                       16  32
+                                                              x 2   y 2   (b) Combining the equations of the line y  k1 x  b and the ellipse     ,1 we get                                                       16  32
+                                          x 2   ( k1 x  b) 2                                          .1
+                                     16     32
+     That is, (2  k12 ) x 2  2k1bx  b 2  32  0 . Then the coordinates of M are
+                                    k1b        2b                                        x0         2 , y 0         2 .                                       2  k1      2  k1
+
+      Therefore, the slope of the line segment OM is
+                                         2                                               k 2       .                                                   k1
+      Consequently, k1k 2 .2
+
+
+                       3      1                 
+4. (a)  3 cos sin   2(   cos  sin )  2(cos  cos sin   sin )  2cos(   ) .
+                      2       2            6         6               6
+        It follows from the above that 2   3cos sin 2 .
+                          
+   (b) From the result of (a), we get  3cos sin 2cos(   ) .
+                                                  6
+                      1
+      Since  3 cos sin  ,1 so cos(   )      .
+                                    6    2
+                 2     4         7
+      Since 0   2, we have     or       that is    or                              6  3    3,         2   6.
+                         1             1           1
+   (c) Since  3cos sin     , therefore 2cos(   )     , that is cos(   )     .
+                         2                 6    2             6    4
+                                                                           2      1            2     5    By the double-angle formula, we have 1  2sin (      )     , so sin (      )     . And since
+                                             2  12    4        2  12   8
+                   0   , we get 0       .
+                       2  12
+      Therefore
+                         5    10
+                                              sin(      )             .
+                                      2  12    8    4
+
+
+
+
+
+                                                14

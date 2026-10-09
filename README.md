@@ -66,3 +66,41 @@ npm run test:e2e
 ```
 
 Browser tests use system Chromium when available. Otherwise run `npx playwright install chromium`, or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to your Chromium executable. Tests mock AI responses and API data; a real provider check additionally requires the configured key and service access.
+
+## Locally imported bilingual exam bank
+
+The 18 supplied PDFs contain 225 distinct questions and 675 multiple-choice
+options. Their Chinese stems and curated English stems/options are persisted
+in `papers/source/questions.json`, with the same LaTeX expressions in both
+languages. The existing 20 questions from the 2026 standard paper are retained,
+giving 245 questions across 19 papers. The import performs no external AI calls.
+
+`papers/source/pdf_import_manifest.json` records the original filenames, hashes
+and Chinese/English page locations. The complete local PDF text is retained in
+`papers/source/pdf_text`; font extraction can contain scrambled mathematical
+glyphs and must not replace the curated display text. Original PDFs are served
+at `/papers/<paper-id>.pdf`, and required source diagrams at `/diagrams`.
+
+The 2017 and 2018 supplementary papers now have the correct questions; the 2019
+supplementary paper is listed separately. Duplicate mock supplementary questions
+are removed, with their old IDs retained in `question_id_aliases.json` and the
+SQLite `question_aliases` table. Existing IDs and quiz sessions are preserved.
+
+English **question stems and options** are complete for the uploaded corpus.
+Existing detailed explanations are retained, with specific corrections recorded
+in `papers/source/import_report.json`; they have not all been revalidated or
+translated. The original PDFs include official English worked solutions.
+
+To regenerate the local text audit, validate the bank, or synchronise SQLite:
+
+```sh
+python backend/import_exam_pdfs.py --extract
+python backend/import_exam_pdfs.py --validate
+python backend/import_exam_pdfs.py --sync-db
+cd frontend
+node scripts/validate-question-math.mjs
+```
+
+Synchronisation validates source hashes, bilingual formula/option parity,
+all 135 official MCQ answers and all 90 written questions' subpart marks before
+updating SQLite. It checks database integrity and preserves quiz session rows.

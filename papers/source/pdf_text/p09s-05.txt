@@ -1,0 +1,42 @@
+3. 已知定點  (−1,0) 和 (1,0)。曲線 C 上任一點 '( ,#) 都有 ((((((⃗⋅'  (((((⃗= + ((((((⃗+' ⋅+ (((((⃗+。
+
+    (a) 證明 C 是拋物線 # = 4 。                                                   (4 分)
+
+    (b) 若直線 # = , + - 與 C 相切，證明 ab= 1。                                 (4 分)
+
+    (c) 設 . > 0。
+
+         (i) 除原點以外，求直線 0  : # = . 與C 的交點 P。答案以 m 表示。         (2 分)
+
+        (ii) 求曲線 C 在 P 的切線 0 的斜率。答案以 m 表示。                        (4 分)
+
+        (iii) 求 m 的值使得 1L 與 L2 的夾角為 tan 2。                                (6 分)
+
+
+
+
+   Given fixed points  (−1,0) and  (1,0). Any point '( ,#) on the curve C satisfies
+
+      ((((((⃗⋅'  (((((⃗= + ((((((⃗+' ⋅+ (((((⃗+.
+
+    (a) Show that C is the parabola # = 4   .                                          (4 marks)
+
+    (b) Suppose that the straight line # = , + - is tangent with C. Show that ab= 1.   (4 marks)
+
+    (c) Suppose . > 0.
+
+          (i) Find, besides the origin, the intersection point P of the straight line
+
+        0  : # = .  and C. Express your answer in terms of m.                       (2 marks)
+
+        (ii) Find the slope of the tangent line 0  of C at P. Express your answer
+
+          in terms of m.                                                              (4 marks)
+
+        (iii) Find the value(s) of m such that the angle between 1L and L2 is tan  2.      (6 marks)
+
+
+
+
+
+                                           5

@@ -1,0 +1,52 @@
+                           y
+                           250
+
+                           200
+                                                  y=S(x)
+                           150
+
+                           100
+
+                            50
+
+                             0                                           x
+                               0      1      2      3      4      5      6      7
+
+         (iv) The maximum value of S (x )  is S )1(  220 , and its minimum value is
+         S ( )3  108 .
+   (b) Solving ax ( a x )  0 , we know that the curve  y  ax ( a  x )  intersects the x-axis
+       at  x  0 and x  a . Using the condition on the area, we get
+
+                                                                       a                                                         2  2       3                 4                         a                            2        2    8     a x   ax    8    a   8               a x  ax dx                  a  2 .                 0                                             3    6   3                           3          2    3    0
+
+               y  mx  c                      2
+3. (a) We solve   2              . From  ( mx  c )  2 x we get
+               y  2 x
+
+               m 2 x 2  ( 2mc  2) x  c 2  0 .                          (*)
+
+     Since L is a tangent line of P, (*) has a double root and so its discriminant is 0.
+                                        2       2  2            1    Hence we get  ( 2mc  2)  4m c  0 , i.e. c        .
+                                           2 m
+   (b) (i) Let  1L and  2L  be, respectively,
+                              1                  1
+                        y  m1 x       and   y  m2 x         .
+                             2 m1                2 m2
+
+                                          1  m1  m2 
+         Their intersection point A is              ,                  .                                         2 m1m2  2 m1m2 
+
+                                               1     1   
+         (ii) Since m1 m2  1 , the point A is               ,                . Moreover, we have                                              2 m1m2 2 m1m2 
+
+                                                                 2  1      1  2  1
+            m1m2  m1 1(  m1 )  m1  m1    m1        .                                         4         2    4
+
+                                   1                 1
+        As m1  m2 , we know that m1    and hence m1m2     . Thus,
+                                   2                 4
+              1                      1           1
+                 2 (when 0  m1m2    )    or         0 (when m1m2  0 ).
+            2 m1m2                    4         2 m1m2
+           Therefore, the locus of point A is {(t , t :) t  2 or t  0} .
+                                                                                     13

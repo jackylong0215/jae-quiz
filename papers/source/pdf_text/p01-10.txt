@@ -1,0 +1,40 @@
+4.   (a) (i) 設 S (n ) 代表命題 “ zn  cos n i sin n”。當 n  1 ， S )1( 明顯成立。假設對
+     某正整數k ， S (k ) 成立，即  zk  cos k i sin k。 則
+                       z k 1  z k z
+                    (cos k i sin k)(cos i sin)
+                    (cos kcos sin ksin)  i (cos ksin sin kcos)
+                    cos[( k  )1]  i sin[( k  )1] 
+     故 S ( k  )1 也成立。根據數學歸納法原理， S (n ) 對所有正整數 n 都成立。
+           (ii) 因
+
+                    z n z n  ( c o ns i s i nn) ( c ons  i s i nn)  c o 2s n s i n2 n 1 ，
+
+                 1      n                                                  n   1
+       故                              n  z  (cos n i sin n) ，從而得到  z    n  2 cos n。                     z                                               z
+     (b) 用  (a)(ii) 的結果，
+                                          4      1    1   4                         cos    z                                                                            2     z  
+                             1   4       2       1   1 
+                              z  4 z  6  4  2    4                             16                 z    z   
+                             1   4   1       2   1     
+                               z    4  4 z    2  6                             16      z               z          
+                             1
+                             ( 2 cos 4 8 cos 2 6 ) 
+                             16
+   由此可知恆等式成立。
+     (c) 用 (b) 的結果，
+                            c o s4 4 c o s2 1  0
+            c o s4 4 c o s2 3  2
+            8 c o 4s  2
+
+                                  2
+            c o s  
+                                  2
+                
+             k ，其中 k 為整數。
+                                4
+
+
+
+
+
+                                                                                     10

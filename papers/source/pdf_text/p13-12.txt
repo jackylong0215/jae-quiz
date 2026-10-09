@@ -1,0 +1,57 @@
+Part II Problem-solving questions.
+
+
+   1. Let the number of defective items selected be X.
+
+
+        (a) The probability of selecting exactly 2 defective items out of 4 is P(X = 2) = 3C2·7C2                                                    = 10,3  and the                                                                                                      10C4
+
+            probability of selecting exactly 3 defective items out of 4 is P(X = 3) = 3C3·7C1                                                  = 30.1  Therefore,                                                                                                 10C4
+
+            the probability of selecting at least 2 defective items is P(X ≥2) = P(X = 2) + P(X = 3) =
+
+              3 + 1 = 1              10    30    3.
+
+        (b) The probability of selecting 4 non-defective items is P(X = 0) = 3C0·7C4                                              = 16, and the probability                                                                                         10C4
+
+           of selecting exactly 1 defective item out of 4 is P(X = 1) = 3C1·7C3                                            = 12. Therefore, the expected                                                                                    10C4
+
+         number of defective products selected is E(X) = 0 · P(X = 0) + 1 · P(X = 1) + 2 · P(X =
+
+           2) + 3 · P(X = 3) = 1 · 1 + 2 · 3 + 3 · 1 = 6                                          2       10       30    5.
+                  √                   √
+               π            3  13        √            2  13           2
+   2. Since β ∈(0,   ) and cos β =           , therefore sin β =   1 −cos2 β =      and tan β =                 2              13                                13               3.
+
+                      1                                      tan α+tan β
+        (a) Since tan α =   we have tan(α + β) =      = 1.                                                             1−tan α tan β                         5,
+                     π               π                                        π
+        (b) Since α, β ∈(0,   ), by (a), α + β =     . Then cos(α + 2β) = cos[(α + β) + β] = cos(β +   ) =
+      √            2  √            4                                             4
+            2                 26
+               (cos β −sin β) =         .
+           2                 26
+
+   3.   (a) Let the common difference of the arithmetic sequence be d. Since a1 = 3, we have a2 = 3 + d
+
+          and a5 = 3 + 4d. Because a1, a2, and a5 form a geometric sequence, we have a22 = a1a5, that is,
+
+           (3 + d)2 = 3(3 + 4d). Solving this equation, we find d = 0 or d = 6.  Therefore, an = 3 or
+
+          an = 3 + 6(n −1) = 6n −3.
+
+        (b) From the formula for the sum of the first n terms of an arithmetic sequence, we know Sn = 3n or
+
+         Sn = 3n2. (1) When Sn = 3n, there is no positive integer n that satisfies the given conditions. (2)
+
+        When Sn = 3n2, we require 3n2 ≥12n + 36, which implies n ≥6. Therefore, the smallest positive
+
+            integer n that satisfies the condition is 6.
+
+
+   4.   (a) f(x) ≥0 implies |x −3| + |x −7| ≤8. Then, the sum of the distances from x to 3 and 7 does not
+
+          exceed 8. Thus 1 ≤x ≤9.
+
+
+                                          12 / 13

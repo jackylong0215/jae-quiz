@@ -1,0 +1,41 @@
+3. 已知拋物線 P : y 2  x 及點 A( t 2 , t )  ( t )0 是在拋物線上。
+
+    (a) (i) 證明直線  y  mx 是c   P 的一條切線當且僅當 4mc 。1                    (5 分)
+
+                                         1
+        (ii) 推導出 P 在點A 的切線的斜率為  。                                   (3 分)
+                                                     2t
+
+    (b) (i) 給出 P 在點A 的法線的方程。                                            (2 分)
+
+        (ii) 證明P 有兩條非水平的法線通過 B ( h ,0) 當且僅當 h  1/ 2 。             (4 分)
+
+        (iii) 設P 有兩條非水平法線通過 B ( h ,0) ，且它們的夾角是 ，求 h 的值。  (6 分)
+                                                           4
+
+
+
+    Given parabola P : y 2  x and that point A( t 2 , t )  ( t )0  is on the parabola.
+
+     (a) (i) Show that the line y  mx  c  is a tangent line of P if and only if 4mc.1  (5 marks)
+
+                                                           1
+          (ii) Deduce that the slope of the tangent line of P at point A is       .             (3 marks)
+                                                                           2t
+
+     (b) (i) Give an equation of normal line of P at point A.                            (2 marks)
+
+          (ii) Show that there are two non-horizontal normal lines of P passing through
+
+        B ( h ,0)  if and only if h  1/ 2 .                                           (4 marks)
+
+        (iii) Suppose there are two non-horizontal normal lines of P passing through
+
+        B ( h ,0) and the angle between them is , find the value of h.             (6 marks)
+                                           4
+
+
+
+
+
+                                                                                      5

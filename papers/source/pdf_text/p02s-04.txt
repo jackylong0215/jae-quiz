@@ -1,0 +1,38 @@
+2.   (a) 已知函數   f ( x )  x 3  3 x 2  9 x  2 。
+
+           (i) 求   f (x ) 及   f ( x ) 。                                                  (2 分)
+
+           (ii) 求   f (x ) 的局部極大點、局部極小點和拐點。                         (6 分)
+
+          (iii) 繪出曲線 y   f (x ) 。                                                    (2 分)
+
+        (iv) 繪出曲線  y   f ( x )  2 。                                               (2 分)
+
+     (b) 求由曲線  y  x 3  3 x 2  9 x  2 和直線  y  x  2 所包圍的區域的面積。 (8 分)
+
+
+
+
+
+     (a)  Given function   f ( x )  x 3  3 x 2  9 x  2 .
+
+          (i) Find   f (x ) and   f ( x ) .                                                  (2 marks)
+
+           (ii) Find the local maximum points, local minimum points and inflection points
+
+           of   f (x ) .                                                                 (6 marks)
+
+           (iii) Sketch the curve  y   f (x ) .                                              (2 marks)
+
+
+         (iv) Sketch the curve  y   f ( x )  2 .                                          (2 marks)
+
+     (b) Find the area of the region bounded by the curve  y  x 3  3 x 2  9 x  2 and the
+
+         straight line  y  x  2 .                                                       (8 marks)
+
+
+
+
+
+                                                                                      4

@@ -1,0 +1,61 @@
+     (b) Solving _# =  −8 + 24 , we obtain = 2 or = 6.
+            # = 8 −
+       For 2 < < 6, the curve # = 8 −     is above the curve # =  −8 + 24.
+
+      Hence, the required area is
+
+            ;                                     ;
+       ∫(8 −   ) −( −8 + 24) a = ∫−2  + 16 −24 a
+
+                                                                     ;
+                         = b−   + 8  −24  c
+
+
+                                                 ;2
+                         =    .
+
+
+
+
+3.   (a) We have ((((((⃗='  ( + 1,#),(((((⃗= (2,0) and  ((((((⃗='  ( −1,#). Hence,
+
+
+                                                  ((((((⃗'  ∙ (((((⃗=  + (((((⃗++((((((⃗+' ⇒2( + 1) = 2N( −1) + # ⇒# = 4   .
+
+
+
+           = 4    (b) From _#                    , we get ,   + (2,- −4) + - = 0. ⋯⋯ (1)
+            # = , + -
+
+      As the line # = , + - is tangent to C, (1) has a double root, its discriminant is 0,
+
+           i.e., (2,- −4) −4, - = 0. Hence, ,- = 1.
+
+             = 4                          2     (c) (i) Solving _#              , we get = 0 or =   As the intersection point P is not the origin,               # = .                       gO.
+
+                 2  2
+                it is ?  ,             gO g@.
+
+                                                                      2      2
+          (ii) By (b), let 0 be # = , + h. As P is a point on 0  , we get g = , gO + h which gives
+
+                             g
+        4, −4,. + . = 0. Hence, , =    .
+
+                                g
+         (iii) As . > 0, let tani = . and tani =   be the slopes of 0 and 0  , respectively,
+
+         where 0 < i < i <   . Then,
+
+                1                tani −tani   . −.    .                                                    2             = tan(i −i ) =          =      =      ,
+                4              1 + tani tani             2 + .                                              1 + .(. )
+                                                    2
+
+
+          from which we get . −4. + 2 = 0. Hence, . = 2 ± √2.
+
+
+
+
+
+                                           14

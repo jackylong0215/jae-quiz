@@ -554,7 +554,9 @@ export default function App() {
       <div className="prestored-banner-card">
         <div className="prestored-banner-content">
           <div className="prestored-info-col">
-            <div className="prestored-tag"><LocalizedText value="🗄️ 共 11 套 245 題，附完整答案與解析" /></div>
+            <div className="prestored-tag">{language === 'en'
+              ? `🗄️ ${prestoredPapers.length} papers · ${prestoredPapers.reduce((total, p) => total + (p.questionCount || 0), 0)} questions with answers and solutions`
+              : `🗄️ 共 ${prestoredPapers.length} 套 ${prestoredPapers.reduce((total, p) => total + (p.questionCount || 0), 0)} 題，附答案與解析`}</div>
             <h2 className="prestored-card-title"><LocalizedText value="澳門四校聯考 · 歷屆真題庫" /></h2>
             <p className="prestored-card-desc"><LocalizedText value="支援全套試題瀏覽與隨機組卷測驗！" /></p>
           </div>
@@ -570,7 +572,7 @@ export default function App() {
               </option>
               {prestoredPapers.map((p) => (
                 <option key={p.id} value={p.id}>
-                  📄 <LocalizedText value={p.year} /> <LocalizedText value={p.title || '數學正卷'} /> (<LocalizedText value={p.questionCount || 15} /><LocalizedText value="題)" /></option>
+                  📄 <LocalizedText value={p.year} /> <LocalizedText value={(language === 'en' && p.title_en) || p.title || '數學正卷'} /> (<LocalizedText value={p.questionCount || 15} /><LocalizedText value="題)" /></option>
               ))}
             </select>
             <button

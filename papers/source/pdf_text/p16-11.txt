@@ -1,0 +1,55 @@
+Part I Multiple choice questions. Choose the best answer for each question.
+
+ 1. As x increases from  to 3, the value of cos x                         4    4
+   A. always increases            B. always decreases           C. increases and then decreases
+   D. decreases and then increases   E. none of the above
+
+
+ 2. The marked price of a watch is 40% above its cost. If the watch is sold at a discount of 30%, find the
+   percentage of gain or loss.
+   A. gain 28%     B. gain 12%     C. gain 10%     D. lose 2%       E.  lose 10%
+
+
+ 3. In the Venn diagram, the shaded region represents
+
+
+                                                                     Y
+                                          X
+
+
+
+
+
+                                                                  Z
+
+   A. X ∪ (Y ∩ Z)                 B. X c∪ (Y ∩ Z)                C. X ∪ (Y ∩ Z)c
+   D. (X ∩ Y)c ∩ Z                 E. (X c ∩ Y) ∩ Z
+
+
+ 4. If y x, which of the following is/are true?
+              I.   x  y                         II.   y2  x2                       III.  (y  x)  2x
+   A.  II only                    B.  III only                   C.  I and II only
+   D.  I and III only                E.  I, II and III
+
+
+ 5. It is known that a polynomial p(x) is divisible by 2x  1, and the remainder is 1 when p(x) is divided by
+   x  1. What is the remainder if p(x) is divided by 2x2  x  1?
+        2    1               1              1    2                1                 2   A.   x          B. x            C.   x         D. 3x           E. 2x         3    3               3              3    3                3                 3
+
+
+
+                                                                        1   1
+ 6. If a and b are the two distinct roots of the equation 2x2  x  5  0, then                                                                               a2  b2
+       25              19              37              21              23
+   A.               B.              C.              D.               E.       19              25              44              25              25
+
+
+        1              1
+ 7. If x x  7 , then  x   x 
+   A. 7         B. 5         C. 3          D. 7            E. None of the above
+
+
+
+
+
+                                                                                                               11

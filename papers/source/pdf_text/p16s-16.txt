@@ -1,0 +1,51 @@
+    1. In the diagram below, ABCDEF is a right triangular prism with | AD |  2. ABC is an equilateral
+      triangle with side length 1. Let M be the midpoint of AB, N be the point on AE such that MN 
+      AE.
+                                                    D
+                               A
+                                N
+
+
+
+                        M
+                                                          F
+                         C
+
+                                                                     E
+                                      B
+
+
+       (a) Show that CM  AE.                                                            (4 marks)
+
+      (b) Show that AMN and AEB are similar. Hence find | MN |.                     (5 marks)
+
+       (c) Find the volume of the triangular pyramid CAMN.                             (5 marks)
+
+      (d) Find the angle between the plane ACE and the plane ABE. Give your answer in terms of arctan.
+                                                                                         (6 marks)
+
+Ans.: (a) ABC is equilateral and M is the mid‐point of AB imply CM  AB. Together with the fact that
+       ABC  ABED, we have CM  ABED. Hence CM  AE.
+
+      (b) MAN is a common angle, and ABE and ANM are right angles. Hence AMN and AEB
+                               | BE |          2  1   1
+                                                                                                                                                                                                                                                                                         .         are similar. ∴ | MN |                                | AM |                                | AE |          5  2    5
+
+                                                              1   3  1  1   1     3
+                                                                                                                                                                                                                                                                                                    (c) ∵ CM is the height of the pyramid, ∴ the required volume                                                               3  2  2   5 2 5  120.
+
+                                                                   3   1          15                                                                                                                      1                                                                                                                                                          .                                                           ／                                                                                                )  tan      (d) Firstly, prove that CN  AE. ∴ the required angle  CNM  tan 1 ( 2                                                                                 2                                                                        5
+
+
+
+
+
+                               a  b  b
+    2. (a) Factorize the determinant b  a  b .                                            (6 marks)
+                               b  b  a
+
+      (b) Let a be a real number. Given the system of equations in unknowns x, y, z:      (8 marks)
+
+
+
+                                                                                16

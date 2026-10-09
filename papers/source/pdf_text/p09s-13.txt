@@ -1,0 +1,60 @@
+Suggested Answer:
+
+
+1.   (a) Let M be the mid-point of CE. As Δ       is an isosceles triangle with |    | = |     |,
+     we have G ⊥      . Given ∠   =  and so Δ     and Δ  G are similar. Thus,
+          |IJ|   |LM|                                                    |LM|
+       =    As | G| = N|    | −|G  | = 1, we get |    | =      |    | =   .          |JK|    |MK|.                                                     |MK|
+
+     (b) (i) As |    | = 4 = |    | + |    |  , we get ∠   =   .
+
+         (ii) From the solution of (a), we have | G| = 1. So, |    | = N| G| + |G  | = √5.
+         Hence,
+                                      |JL|OP|KL|O  |JK|O           PQ R
+           ∠   = cos  ?             @ = cos  ?    = cos  ?                                             |JL||KL|               √ √Q@         √ S@.
+
+     (c) Let X be the point on AB such that T ⊥      . Then, as PC⊥     (since   ⊥        ), we get
+                                                                                                        |UJ|
+      T ⊥      . So, the dihedral angle P-AB-C is equal to ∠ T   , and ∠ T = tan  |JV|.
+     To find | T|, consider the area of ∠        . We have   |    ||    | =   |    || T| and hence
+                  |IJ||KJ|       (WO)          | T| =            =                                                                                        W = tan √5.
+                    |IK|                   = √Q. Hence, the dihedral angle is tan                         X?W O P O                                                               √Y                                O@
+
+
+2.   (a)  (i) As  (1) = 0, we know that −1 is a factor of ( ). By direct calculation,
+           ( ) = ( −1)( −2 −2).
+           Hence,  ( ) = 0 ⇔ = 1 or  −2 −2 = 0 ⇔ = 1 or = 1 ± √3.
+
+            (ii)   \( ) = 3  −6  ,   \\( ) = 6 −6.
+
+            (iii)   \( ) = 0 ⇔ = 0 or  = 2.
+         When < 0,  \( ) > 0 and so ( ) is increasing.
+         When 0 < < 2,  \( ) < 0 and so ( ) is decreasing.
+         When 2 <   ,  \( ) > 0 and so ( ) is increasing.
+           Hence,  (0) = 2 is a local maximum value,  (2) = −2 is a local minimum value.
+
+          (iv)   \\( ) = 0 ⇔ = 1. When < 1,  \\( ) < 0; when > 1,  \\( ) > 0.
+           Hence, is (1,0) is the inflection point of the curve # = ( ).
+
+          (v)
+
+                                 y
+                                   4
+
+                                   3
+                                                    y=f(x)
+                                   2
+
+                                   1
+
+                                   0                                    x
+                        -2         -1       0        1        2        3        4
+                                           -1
+
+                                           -2
+
+                                           -3
+
+
+
+                                           13

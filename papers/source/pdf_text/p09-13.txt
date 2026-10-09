@@ -1,0 +1,46 @@
+Part II Problem-solving questions.
+
+ 1. (a) The coefficients of the quadratic function satisfy the following system
+                                         25a  5b  c  0
+                        b   4a              .
+                                                                                 4a  2b  c 9                                        
+
+       Solving the equation system yields
+                                   a  1, b  4, c .5
+
+      The function is
+                                                                 f ( x )  x 2  4 x  5 .
+
+    (b) y  ( x  1) 2  6  x 2  2 x  5 .
+
+    (c) We have g ( x )  (3sin x ) 2  4(3sin x )  5  (3sin x  2) 2  9 .
+       Since 3  3sin x ,3   2 [ 3,3] , the function obtains its maximum value at 3sin x ,3  that is,
+
+                            Max g ( x)   f (  3)  16 .
+      The function attains its minimum value at 3 sin x  ,2 that is,
+
+                              Min g ( x )   f (2) .9
+
+
+ 2. (a) Let na  a1q n 1 . As a1 ,4 a 2 ,16 a3 are in arithmetic progression, so 16 a 3  a1  8a 2 , i.e.,
+                       16a1q 2  a1  8a1q .
+                            1       Since a1  1 , we have q     . Thus                            4
+                                       1  n 1      n                                            na            , bn    n  .                           4        4
+
+                                           4    1    (b) From the geometric sum formula, we get S n    1    n   .                                           3    4  
+
+       Since
+
+                                1   2   3   4      n  1  n                                                                                                                  ,                                (1)                                                                                                                                  Tn                                                                                    1                                                                             4                                    4 2                                        4 3                                            4 4                                                    4 n                                                         4 n
+     we have
+                                        2   3   4                                                                                                               4Tn 1                                                                                                               nn1  .                                 (2)                                                                                       4                                           4 2                                               4 3                                                       4
+       Subtracting (1) from (2) gives
+                               1   1   1       1   n   4    1    n                                                                                                                                     .                                                                                                                                                                                                                       1                                                                                  3Tn 1                                                                      4                                                       3                                   4 2                                      4 3                                              4 n 1                                                   4 n                                                            4 n                                                                 4 n
+      Hence
+                                         4    1     n                                 Tn    1    n       n .                                         9    4    3  4
+
+
+
+
+
+                                                  13

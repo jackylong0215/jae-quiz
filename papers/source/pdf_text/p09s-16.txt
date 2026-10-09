@@ -1,0 +1,43 @@
+           ,  - + B  - + B      ,    - + B  - + B
+5.   (a)        A -  , + B  , + B  A = A- −,  , −-  , −- A
+             B  , + -  , + -     B −,  , −B  , −B
+
+                                         ,   - + B  - + B
+                    = (, −-)(, −B) A −1   1    , + - A
+                                   −1   1    , + B
+
+                                         ,   - + B  - + B
+                    = (, −-)(, −B) A −1   1   , −- A
+                                        0    0     B −-
+
+                                        , + - + B  - + B  - + B
+                    = (, −-)(, −B) A   0      1   , −- A
+                                          0      0     B −-
+
+                    = (, −-)(- −B)(B −,)(, + - + B).
+
+
+                                     1  1  D
+     (b) (i) (E) has a unique solution if and only if A D  1  1 A ≠0, i.e., D ≠1 and D ≠−2.
+                                     1  D  1
+
+                              + # + 4 = 1
+         When D = 1, (E) becomes C + # + 4 = 1 . So, E = 1 and the solution is
+                              + # + 4 = E
+
+        = 1 −r −s, # = r,4 = s, r,s ∈ℝ.
+
+                                + # −24 = 1
+          (ii) When D = −2, (E) becomes C−2 + # + 4 = −2. The sum of all the three equations gives
+                           −2# + 4 = E
+
+         0 = E −1.
+
+                                + # −24 = 1
+           Hence, E = 1. Then, solving _              we get = 1 + s, # = s,4 = s, s ∈ℝ.                          −2 + # + 4 = −2,
+
+
+
+
+
+                                           16

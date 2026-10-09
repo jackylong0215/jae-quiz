@@ -1,0 +1,42 @@
+3. (a) RHS  a 2  ( x 2  2mxy  m 2 y 2 )  (a 2  x 2  2mxy )  m 2 y 2  y 2  m 2 y 2  LHS .
+
+  (b) From the equality of (a) we have
+                                         2    a 2     ( x  my ) 2                          y         2           2    ------------------------------ (1)                           1  m    1  m
+                                        a 2              ( x  my ) 2      Since 0  m  1, we have 0  m2  1, and so        2  0 and          2   0 is true for all x, y ∊ ℝ.                                       1 m         1  m
+                                                                            2               2                                                                   2    a         a        It follows from (1) that for all x, y ∊ ℝ,  y         2 , i.e.        2  is the maximum value of y2, and y2                                          1  m      1  m
+                                                    x      attains this maximum value when x – my  0 (⇔ y     ).                                m
+                                                         x  ∵ y  0, ∴ y also attains this maximum value when y      .                                   m
+  (c) Let ymax represent the maximum value of y, and let y attain this maximum value when x  x0.
+                      a 2               | a |            m | a |    From (b), y max           2           2 and x0  mymax           2  .                    1  m    1  m                1  m
+
+
+
+
+4. (a) Common difference d  (a20  a2) / (20  2)  2.
+  ∴ a1  a2  d  1.
+  ∴ an  a1  (n  1) d  2n  1.
+                      n      1             n 1   1     1    1   n   1        n   1     1     1      n                                                                                                                                                                       ,                                                                                                                                                                                                                         1                                                                                                                                                                                                                          (b) ∵ S n                                                                                                            2                                                                   2                       (2k  1)(2k  )1                              2  2k  1                                       2k  1                                                  2k  1                                                           2k  1                                                                       2n  1                                                                              2n  1                        k 1                           k 1                        k 1              k 1       
+           10      n    10  ∴ Sn            21n  20n  10  n  10 .           21    2n  1  21
+
+
+
+
+                               2 2                           15. (a) From sin( C A)  1 and cos B          , we have A  C  90° and sin B     .
+                                3                            3
+                                                                            1  ∵ A  B  C  180° and A  C  90°, ∴ 2C  270°  B ⇒ cos 2C  cos(270  B)   sin B      .
+                                                                            3
+                 2    1  cos 2C  1    1   2  ∴ sin C           1       .                  2      2   3  3
+
+                                                                        2       3  (b) From C > 90º and (a), we get cos C   1  sin C        ,             C                                                 3
+                                     3                           5     and so sin A  sin(C  90 )   cos C        .
+                                     3
+                                 sin A       3                  A                             B    Law of Sines yields BC     AC         3  5  5 3 .
+                                 sin B      3
+                     1              1         2  25 2  ∴ area of △ABC   AC  BC  sin C      5  5 3               .
+                     2              2         3    2
+
+
+
+
+
+                                                13

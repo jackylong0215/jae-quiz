@@ -1,0 +1,46 @@
+Suggested Answer
+
+
+1. (a) (i) Since   | AB |     | AC |2  | BC |2   5 and   | BD |     | BC |2  | CD |2   5 , BAD
+
+           is an isosceles triangle with   | AB |  | BD | . Let F be the mid-point of AD. Then,
+
+                                                                   |         |    2      BF  AD and   | AF | AD        . Hence, the distance from point B to line AD is
+                             2     2
+                                2           2  3 2                  | BF |     | AB |  | AF |          .
+                              2
+         (ii) Let h be the distance from point C to plane ABD. Then,
+                            1       1             1         volume of A BCD      | AC |       | BC || CD |    and                            3              2                         3
+                            1   1              h           2         volume of C  ABD   h       | AD || BF |     . Hence h     .                            3    2                         2           3
+   (b) (i) Since AC  BCD , we know that AC  BD . Together with AE  BD , we have
+      BD  A C E. Hence, CE  BD .
+         (ii) From (i), we know that the dihedral angle A-BD-C and AEC  are equal. From
+                1         1                        1
+                   5 | CE |      | BD || CE |  area of BCD      | BC || CD | 1 ,
+                2         2                        2
+
+              2 5                                                                1 | AC |       1  5                     | CE |         . Hence, the dihedral angle A-BD-C  AEC  tan       tan         .
+               5                                                                                                              | CE |       2
+
+                                                                                                         2  6 xh  cm2.2. (a) (i) The surface area of the rectangular block is 2( 2 x ) x  ( 2 x ) h  xh   4 x
+
+                                                               36
+        Form the condition on the volume, we get 72  ( 2 x )( x )( h ) , i.e., h    2  . Hence,                                                                       x
+                            2  216         S ( x )  4 x         .
+                       x
+         dS      216      d 2 S     432
+         (ii)     8 x     2  and      2  8     3          dx        x        dx        x
+          dS          216            3
+         (iii)     0  8 x     2  0  x  27  0  x  3 .          dx            x
+                        dS        When 1 x  3 ,     0 . So S (x )  is decreasing.
+                         dx
+                       dS        When 3 x  6 ,    0 . So S (x )  is increasing.
+                         dx
+         Hence S ()3  108  is a local minimum point.
+          d 2 S     432
+                    2  8     3  ,0 1  x  ,6 The curve has no inflection point and is convex.          dx        x
+
+
+
+
+                                                                                     12

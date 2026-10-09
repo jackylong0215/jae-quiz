@@ -1,0 +1,59 @@
+Part I Multiple choice questions. Choose the best answer for each question.
+
+
+   1. Let sets A = {x : x2 + 3x −4 ≥0} and B = {−4, −2, 0, 3}. Then A ∩B = (      ).
+
+      A. {−4, 3}           B. {−4, −2}         C. {−2, 3}          D. {0, 3}             E. {−2, 0}
+
+       1     1
+   2.  If   and   are roots of the equation 2x2 + 2x −1 = 0, then 2α+1 × 2β+1 = (      ).
+      α    β
+                                                                                     1
+      A. 1                 B. 2                 C. 4                D. 16                 E.
+                                                                                    16
+
+   3.  If the base radius of a cylinder increases by 30%, while its height simultaneously decreases by 30%, then
+
+      the volume of the cylinder will (      ).
+
+      A. increase by 18.3%            B. increase by 9%               C. decrease by 9%
+
+      D. decrease by 6%                E. remain unchanged
+
+   m 32 −m−12
+   4.     1     = (      ).
+   m 2 + m−12
+      A. m                B. m + 1            C. m −1            D. m2 + 1            E. m2 −1
+
+
+   5.  If 2p = 5 and 2q = 7, then log2 0.7 = (      ).
+
+      A. q + p −1                    B. 2q −2p                     C. q −p + 1
+
+      D. q −p −1                     E. None of the above
+
+
+   6. The set of solutions of the inequality |x(x −5)| < 6 is (      ).
+
+      A. {−1 < x < 6}               B. {−2 < x < 1}               C. {−1 < x ≤1} ∪{4 ≤x ≤5}
+
+      D. {x ≤−1} ∪{x ≥6}          E. {−1 < x < 2} ∪{3 < x < 6}
+
+
+   7. Four girls and three boys are to be arranged in a single line. If boys are not allowed to stand next to each
+
+       other, then there are (     ) different possible arrangements.
+
+
+      A. 144              B. 288               C. 1440             D. 2880              E. 5760
+
+
+   8.  If the median of six numbers x + 2, x + 3, x + 4, x −4, x −5, x −6 is 8, then the mean of these six numbers
+
+       is (      ).
+
+
+      A. 3                 B. 7                 C. 8                D. 9                  E. x
+
+
+                                           8 / 13

@@ -1,0 +1,22 @@
+     (c) 因為△DEG ∼△DFE，所以DE = DG       = DG·DF。又因為△DEF ∼△BDE，                                DF  DE，於是DE2
+
+    所以DE = EF        = DB · EF。因此DG · DF = DB · EF。          BD  DE，於是DE2
+
+                                              y                            y
+5.   (a) 若設M(x, y)，則AM 的斜率kAM =   √    的斜率kBM =   √                                     x + 2 2，BM             x −2 2。由題意知，
+                                y         y                                            y2      kAM × kBM = −1      √ ×   √ = −1        的方程為：x2 +  = 1。            2，即 x + 2  2   x −2  2  2，化簡得曲線C            8    4
+
+
+                  
+                   y = kx + b                                                              (kx + b)2     (b) 聯立直線ℓ和曲線C 的方程   x2   y2   ，消y 得x2 +      = 1，整理得(2k2 +
+                    +  = 1            8       4
+                                    8    4
+                                                                                     2kb
+        1)x2 + 4kbx + 2b2 −8 = 0。由韋達定理及中點坐標公式得D 點的x−坐標為xD = −                                                                                       2k2 + 1，
+                                           b                                                                yD                                               = −1   從而D 點的y−坐標為yD =                                  的斜率kOD =                                   2k2 + 1。因此，直線OD            xD   2k。
+
+
+
+
+
+                                        7 / 13

@@ -1,0 +1,57 @@
+Answer any 3 questions, each carries 20 marks.
+
+
+1.
+
+                                           A
+
+
+
+
+
+                    B                           C
+
+
+                              E
+                                    D
+
+    In the above figure, A-BCD is a triangular pyramid, AC is perpendicular to
+              plane BCD, BCD      ,   | AC | CD|        |  1 and    | BC |  2 . Let E be a point
+                     2
+
+   on BD such that AE is perpendicular BD.
+
+    (a) (i)  Find the distance from point B to line AD.
+            [Hint: Show firstly that   | BA |  | BD | .]                                     (7 marks)
+
+          (ii) Find the distance from point C to plane ABD .                               (5 marks)
+
+    (b) (i)  Prove that CE is perpendicular to BD.                                       (2 marks)
+          (ii) Find the dihedral angle A-BD-C. Express your answer in terms of  tan.1
+
+            [Hint: Find   | EC | .]                                                       (6 marks)
+
+
+2.  (a) A rectangular block has volume 72 cm3. Its length, width and height are 2x cm,
+       x cm and h cm, respectively, where 1 x  6 .
+
+             (i) Express the surface area of the block as a function S (x )  in x.              (3 marks)
+
+                dS      d 2 S
+             (ii) Find     and      2  , 1 x  6 .                                          (2 marks)                 dx       dx
+             (iii) Sketch the curve  y  S (x ) . Indicate in the graph the local maximum points,
+
+               local minimum points and inflection points.                              (6 marks)
+
+           (iv) Find the maximum and minimum values of S (x ) .                        (2 marks)
+
+    (b) Find the value(s) of a such that the area of the region bounded the curve
+
+                                  8         y  ax ( a  x ) and the x-axis is      .                                            (7 marks)
+                                  3
+
+
+
+
+
+                                                                                      6

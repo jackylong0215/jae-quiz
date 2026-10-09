@@ -1,0 +1,45 @@
+                  19.    If  sin x  cos x     , then  sin xcos x 
+                  3
+        2                             4                             2
+     A.                            B.                           C. 
+        9                             9                             9
+          1
+     D.                            E.  none of the above
+          3
+
+10. How many real roots does the equation  ln( x  )1  ln x  ln 6 have?
+     A.  0          B.  1         C.  2            D.  3            E.  4
+
+11.  Suppose that a1 , a2 , a3 , a4 form a geometric sequence.   If  1a and a 4 are the roots of the equation
+    3 x 2 x5  2  0 , then a2a3 
+        2               3           5                  5               2
+     A.             B.           C.               D.              E. 
+        3               2           3                  3               3
+
+12. The graph of the exponential function  y  xe  is shifted upward by one unit, and then shifted to the
+     right by one unit.  What is the equation of the new graph?
+     A.  y  xe 1  1                 B.  y  xe 1  1                  C.  y  xe  1
+     D.  y  xe 1  1                  E.  y  xe 1  1
+
+13.  Suppose  (2,0) .   If cos 0 and  tan 0 , then
+                                                                             3     A.   ,0                    B.      ,                  C.  ,    
+                2                             2                                    2 
+               3                                    3         D.        , 2               E.      ,         , 2
+               2                               2       2     
+
+                                                           x 2 y 2  1 , and that M  is any point on the14.  Suppose that F1 and F2  are the foci of the ellipse
+                                                     9   25
+      ellipse, then the perimeter of MF1F2  is
+
+     A. 16                         B. 18                          C.  22
+     D. 20                          E. none of the above
+
+                        1 10
+15. In the expansion of   x       , what is the constant term?            x      
+    A.  252        B. 252       C. 0             D.  32      E. 32
+
+
+
+
+
+                                                                                                    9

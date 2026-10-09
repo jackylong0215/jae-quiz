@@ -1,0 +1,42 @@
+                   ,  - + B  - + B
+5.  (a) 因式分解行列式 A -  , + B  , + B A。                                    (8 分)
+                       B  , + -  , + -
+
+
+    (b) 已知以 x、y 和 z 為未知量的方程組:
+
+                            + # + D4 = 1
+                      ( ): C D + # +  4 = D ，
+                            + D# +  4 = E
+
+   其中 p 和 q 為常數。
+
+         (i) 求 p 的取值範圍，使得 (E) 有唯一解。                                  (4 分)
+
+        (ii) 對使得 (E) 有多於一個解的 p 及 q 的值，求 (E) 的通解。               (8 分)
+
+
+
+                         ,  - + B  - + B
+    (a) Factorize the determinant A -  , + B  , + B  A.                              (8 marks)
+                              B  , + -  , + -
+
+    (b) Given the system of equations with unknowns x, y and z:
+
+                            + # + D4 = 1
+                      ( ): C D + # +  4 = D ,
+                             + D# +  4 = E
+
+      where p and q are constants.
+
+         (i) Find the range of p such that (E) has a unique solution.                      (4 marks)
+
+        (ii) Find the general solution of (E) for those values of p and q such that (E) has more
+
+         than one solution.                                                         (8 marks)
+
+
+
+
+
+                                           7

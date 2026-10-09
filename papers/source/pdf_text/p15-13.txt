@@ -1,0 +1,36 @@
+         here.)
+
+     (b) Since AD = AE, we have ∠ADE = ∠AED. Thus ∠DEF = ∠BDE. Since ∠AFD = ∠DEB,
+
+      we have ∠EFD = ∠DEB. Thus △DEF ∼△BDE.  (There are multiple ways to solve this
+
+        problem, which will not be enumerated here.)
+
+     (c) By △DEG ∼△DFE, we have DE = DG  Then DE2 = DG · DF. By △DEF ∼△BDE, we                                 DF    DE.
+
+       have DE = EF  Then DE2 = DB · EF. Therefore DG · DF = DB · EF.          BD   DE.
+
+                                               y                                  y
+5.   (a) Given M(x, y), the slope of AM is kAM =   √  and the slope of BMis kBM =   √   Thus,                                     x + 2  2,                       x −2  2.
+                                   y         y      kAM × kBM = −1 which is   √ ×   √ = −1  Simplify the equation and we can get the                         2,       x + 2  2   x −2  2     2.
+                             x2   y2
+        equation of the curve C  +  = 1.
+                           8    4
+
+                               
+                                y = kx + b
+     (b) Combine the equation of the straight line ℓand the curve C,   x2   y2            . Eliminating y, we get
+                                 +  = 1
+                                                           8    4
+        x2   (kx + b)2
+      +      = 1, which is (2k2 +1)x2 +4kbx+2b2 −8 = 0. By Vieta’s Theorem, the coordinates
+        8      4
+                                     2kb                b
+        of the the midpoint D is xD = −       and yD =        Thus the slope of the straight line OD                                    2k2 + 1          2k2 + 1.
+              yD            = −1          is kOD =             xD     2k.
+
+
+
+
+
+                                        13 / 13

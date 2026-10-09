@@ -1,0 +1,59 @@
+Suggested Answer
+
+    1.  (a) (i) From 𝐸𝑀⊥𝐷𝐹 and 𝐷𝐹𝐸⊥𝐴𝐷𝐹𝐶, we have 𝐸𝑀⊥𝐴𝐷𝐹𝐶 and hence 𝐸𝑀⊥𝐴𝑀.
+
+           |𝐴𝑀| = √|𝐴𝐷|2 + |𝐷𝑀|2 = √10, |𝐸𝑀| = √|𝐷𝐸|2 −|𝐷𝑀|2 = √3.
+
+                                   1             √30
+           The area of ∆𝐴𝑀𝐸 is  |𝐴𝑀||𝐸𝑀| =        .
+                                   2               2
+
+                                          1                       √3
+              (ii) The volume of 𝐴−𝐷𝐸𝑀 is  |𝐴𝐷|(area of ∆𝐷𝐸𝑀) =     .
+                                          3                         2
+             Let d be the distance from point D to plane AEM. Then, the volume of 𝐷−𝐴𝐸𝑀
+
+               𝑑√30        𝑑√30   √3              3
+                is        . From   =     , we get 𝑑=                 6            6     2              √10.
+        (b) From 𝐷𝐸𝐹⊥𝐷𝐸𝐵𝐴 and 𝑀𝐿⊥𝐷𝐸, we get 𝑀𝐿⊥𝐷𝐸𝐵𝐴 and hence 𝐿𝐾 is the
+
+          orthogonal projection of 𝑀𝐾 in the plane 𝐷𝐸𝐵𝐴. Since 𝑀𝐾⊥𝐴𝐸, 𝐿𝐾⊥𝐴𝐸.
+
+         Hence the dihedral angle 𝐷−𝐴𝐸−𝑀= ∠𝐿𝐾𝑀.
+
+                                                   1             1
+          Considering the area of ∆𝐷𝐸𝑀, we have  |𝐷𝐸||𝐿𝑀| =  |𝐷𝑀||𝑀𝐸| and hence
+                                                   2             2
+
+                  √3
+         |𝐿𝑀| =     .
+                    2
+
+                                                                         1             √30
+          Considering the area of ∆𝐴𝑀𝐸 and the result in (a)(i), we have  |𝐴𝐸||𝑀𝐾| =
+                                                                         2               2
+
+                             √30
+         and hence |𝑀𝐾| = √13.
+
+                                                                     |𝐿𝑀|   √130         The dihedral angle 𝐷−𝐴𝐸−𝑀= ∠𝐿𝐾𝑀= sin−1   =        .
+                                                               |𝑀𝐾|    20
+
+
+    2.  (a) (i) 𝑓′(𝑥) = 4𝑥3 −12𝑥2, 𝑓′′(𝑥) = 12𝑥2 −24𝑥.
+             (ii) 𝑓′(𝑥) = 0 ⇔𝑥= 0 or 𝑥= 3.
+          When 𝑥< 0, 𝑓′(𝑥) < 0 and hence 𝑓(𝑥) is decreasing.
+          When 0 < 𝑥< 3, 𝑓′(𝑥) < 0 and hence 𝑓(𝑥) is decreasing.
+          When 3 < 𝑥, 𝑓′(𝑥) > 0 and hence 𝑓(𝑥) is increasing.
+           Hence 𝑓(3) = −11 is a local minimum value.
+             𝑓′′(𝑥) = 0 ⇔𝑥= 0 or 𝑥= 2.
+         When 𝑥< 0, 𝑓′′(𝑥) > 0 and hence the curve 𝑦= 𝑓(𝑥) is convex.
+         When 0 < 𝑥< 2, 𝑓′′(𝑥) < 0 and hence the curve 𝑦= 𝑓(𝑥) is concave.
+         When 2 < 𝑥, 𝑓′′(𝑥) > 0 and hence the curve 𝑦= 𝑓(𝑥) is convex.
+            Hence, the inflection points of the curve 𝑦= 𝑓(𝑥) are (0,16) and (2,0).
+
+
+
+
+
+                                                                                     12

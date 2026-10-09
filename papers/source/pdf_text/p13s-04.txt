@@ -1,0 +1,49 @@
+2.  (a) 一正圓錐的斜高為 1 米。設其底半徑為 𝑥 米及體積為 𝑉(𝑥) 立方米。
+
+                        𝜋2
+         (i) 證明 𝑉2(𝑥) =   (𝑥4 −𝑥6)，0 ≤𝑥≤1。                                  (2 分)
+                          9
+        (ii) 求當 0 < 𝑥< 1 時 𝑉2(𝑥) 的局部極大值和局部極小值。                  (4 分)
+
+       (iii) 求曲線 𝑦= 𝑉2(𝑥) 的拐點。                                              (3 分)
+
+      (iv) 運用 (ii) 和 (iii) 的結果，繪出曲線 𝑦= 𝑉2(𝑥)。                           (2 分)
+
+      (v) 正圓錐的最大體積是多少?                                                 (1 分)
+
+                                                                              𝑥2         𝑥2
+    (b) 設 k 是正常數。若在第一象限中，由直線 𝑦= 𝑥 及兩條曲線 𝑦= 和 𝑦=
+                                                                        𝑘         2𝑘
+
+   所包圍的區域的面積是1，求 k 的值。                                       (8 分)
+
+
+    (a) The slant height of a right circular cone is 1 m. Suppose its base radius is 𝑥 m and
+
+         its volume is 𝑉(𝑥) m3.
+
+                             𝜋2
+         (i) Show that 𝑉2(𝑥) =   (𝑥4 −𝑥6), 0 ≤𝑥≤1.                                (2 marks)
+                               9
+        (ii) Find the local maximum and local minimum values of 𝑉2(𝑥) when
+
+       0 < 𝑥< 1.                                                                (4 marks)
+
+       (iii) Find the inflection point(s) of the curve 𝑦= 𝑉2(𝑥).                          (3 marks)
+
+      (iv) Using the results in (ii) – (iii), sketch the curve 𝑦= 𝑉2(𝑥).                   (2 marks)
+
+      (v) What is the maximum possible volume of the cone?                          (1 mark)
+
+     (b) Let k be a positive constant. Suppose, in the first quadrant, the area of the region
+
+                                                           𝑥2          𝑥2
+      bounded by the line 𝑦= 𝑥 and the two curves 𝑦=   and 𝑦=    is 1. Find the
+                                                       𝑘          2𝑘
+      value of k.                                                                     (8 marks)
+
+
+
+
+
+                                              4

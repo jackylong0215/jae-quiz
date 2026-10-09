@@ -1,0 +1,40 @@
+(c) Method 1
+                                                                                        P
+   Slope of the tangent of P at A is m1  8a, and slope of the
+                                                                                                                         y  4x2
+   tangent of C at A is m2   16 a  2 . The angle between the                        1  64 a
+                        1 m1  m2   two lines is tan                 . Upon simplification, the result                       K                 1  m1m2                                                                  A                                                            
+                                                                                      C
+    follows.                                                
+
+   Method 2
+                                                                                                                     F
+                                                                                         G
+    Since P is symmetrical about the y‐axis, we may assume,
+   without loss of generality, that a  0 (see the right picture).           
+                                                                   
+
+   Observe that the required angle is the same as the angle                   H
+   between the normal of P at A (i.e. KA) and the normal of                         L
+   C at A (i.e. FA). Thus it is the same as to find the angle .
+
+
+
+    Let , , be the angles as shown in the picture, where is the angle between L and the
+   tangent line of C at H.
+
+    Since the y‐coordinate of A is 4a2 and the y‐coordinate of H is 4a2, G is the mid‐point of HA.
+   From this and the fact that F is the mid‐point of HK, we infer that FG  HA. It follows that FA
+    FH   .
+
+  ∴  90°   90°    tan tan slope of L  8a   tan 1 (8a).
+
+    In the above argument, if a  0, we may replace a by a.
+
+   Summing up, the required angle is tan 1 | 8a |.
+
+
+
+
+
+                                                                           20

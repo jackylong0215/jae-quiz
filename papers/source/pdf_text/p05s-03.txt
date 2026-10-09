@@ -1,0 +1,56 @@
+任擇三題作答，每題二十分。請把答案寫在緊接每條題目之後的3 頁橫間頁內。
+
+Answer any 3 questions, each carries 20 marks. Write down the answers on the 3 lined pages
+
+following each question.
+
+   1.
+
+                                   B
+
+                   A
+
+
+                               C
+                             K
+
+                                   E
+
+                         L
+                D
+
+                   M
+                                  F
+
+   如上圖所示，ABC 是一等邊三角形，其邊長為2，ABCDEF 是一直三棱
+
+   柱，其棱長為3。 M 為 DF 的中點，K 為 AE 上的一點，使得MK ⊥ AE，
+
+     L 為 DE 上的一點，使得ML ⊥ DE。
+
+        (a) (i) 證明 AM ⊥ EM ，從而求三角形 AME 的面積。                        (5 分)
+
+             (ii) 求三棱錐 A-DEM 的體積，從而求點 D 至平面 AEM 的距離。         (5 分)
+
+        (b) 求二面角 D – AE – M，答案以 sin−1 表示。[提示: 證明 LK ⊥ AE。]     (10 分)
+
+
+       In the above figure, ABC is an equilateral triangle with edge length 2, ABCDEF
+
+         is a right triangular prism with edge length 3. M is the mid-point of DF, K is the
+       point on AE such that MK ⊥ AE, and L is the point on DE such that ML ⊥ DE
+
+        (a) (i) Show that AM ⊥ EM . Hence find the area of the triangle AME.          (5 marks)
+
+              (ii) Find the volume of the triangular pyramid A-DEM. Hence find the
+
+              distance from point D to the plane AEM.                                (5 marks)
+        (b) Find the dihedral angle D – AE – M. Express your answer in terms of sin−1.
+
+           [Hint. Show that LK ⊥ AE.]                                             (10 marks)
+
+
+
+
+
+                                                                                      3

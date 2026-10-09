@@ -1,0 +1,41 @@
+Part II Problem-solving questions.
+
+   1. Suppose the sum of the first n terms of the sequence {an}∞n=1 is Sn = n2 + 2n. In the geometric sequence
+     {bn}∞n=1 with positive common ratio, b1 = 2 and b3 = 2a4.
+
+        (a) Find the general terms of the sequences {an}∞n=1 and {bn}∞n=1.                            (4 marks)
+        (b) Let cn = anbn. Find the sum Tn of the first n terms of the sequence {cn}∞n=1.              (4 marks)
+
+   2. Let f(x) = 8x4 + ax3 + bx2 + cx + 9, where a, b and c are constants. It is given that the remainder is −10
+     when f(x) is divided by x + 1 and f(x) ≡(px2 −3x + 3)(2x2 + qx + r) where p, q and r are constants.
+
+        (a) Find the values of p, q and r.                                                            (3 marks)
+        (b) Find real roots of the equation f(x) = 0.                                                (5 marks)
+
+                      C
+   3. In △ABC, sin(A + B) = 6 sin2     .
+                                2
+
+        (a) Find cos C.                                                                             (4 marks)
+        (b)  If ∠A = 45◦, find sin 2B.                                                               (4 marks)
+
+   4. In △ABC, AB = AC, AD = AE. The point F lies on AC, DF intersects BE at the point G, and
+   ∠AFD = ∠DEB.
+
+        (a) Prove that △DEG ∼△DFE.                                                          (3 marks)
+        (b) Prove that △DEF ∼△BDE.                                                          (3 marks)
+        (c) Prove that DG · DF = DB · EF.                                                       (2 marks)
+               √       √
+   5. Given two points A(−2  2, 0) and B(2  2, 0), a moving point M(x, y) satisfies that the product of the
+      slopes of the lines AM and BM is −1  Let the locus of the point M be the curve C.                                          2.
+
+        (a) Find the equation of the curve C.                                                        (4 marks)
+        (b) The straight line ℓ: y = kx + b (k, b̸ = 0) intersects the curve C at points P and Q. The midpoint of
+            the line segment PQ is D, and the origin of coordinates is O. Find the slope of the straight line OD
+             (in terms of k).                                                                         (4 marks)
+
+
+
+
+
+                                          10 / 13

@@ -1,0 +1,55 @@
+4. 設複數 𝑧= cos 𝛼+ 𝑖sin 𝛼，其中 𝑖= √−1。
+
+    (a) 用數學歸納法，證明對任意正整數 k，
+
+              𝑧𝑘= cos 𝑘𝛼+ 𝑖sin 𝑘𝛼。                                      (6 分)
+
+    (b) 設 𝑛 為正整數。
+
+          (i) 證明 𝑧𝑧̅ = 1 及 (1 −𝑧)(1 −𝑧̅) = 2 −2 cos 𝛼 。                             (3 分)
+
+         (ii) 證明若 𝑧≠1，
+                                    𝑧(1−𝑧𝑛)             𝑧+ 𝑧2 + ⋯+ 𝑧𝑛=    。                                 1−𝑧
+    推導出若 cos 𝛼≠1，
+
+                                          cos𝑛𝛼+cos𝛼−cos(𝑛+1)𝛼−1
+                    cos 𝛼+ cos 2𝛼+ ⋯+ cos 𝑛𝛼=            。 (5 分)                                               2−2cos𝛼
+    (c) 已知恆等式
+
+                  𝐴+𝐵  𝐴−𝐵                 𝐴+𝐵  𝐴−𝐵
+         cos 𝐴+ cos 𝐵= 2 cos     cos   及  cos 𝐴−cos 𝐵= −2 sin      sin   。
+                       2     2                       2     2
+   證明若 cos 𝛼≠1，
+
+                                   𝑛𝛼   (𝑛+1)𝛼                                                        sin    cos
+                    cos 𝛼+ cos 2𝛼+ ⋯+ cos 𝑛𝛼=   2   𝛼  2  。         (6 分)                                                                sin                                          2
+
+
+   Let complex number 𝑧= cos 𝛼+ 𝑖sin 𝛼, where 𝑖= √−1.
+
+    (a) Using mathematical induction, show that for any positive integer k,
+              𝑧𝑘= cos 𝑘𝛼+ 𝑖sin 𝑘𝛼.                                        (6 marks)
+    (b) Let 𝑛 be a positive integer.
+          (i) Show that 𝑧𝑧̅ = 1 and (1 −𝑧)(1 −𝑧̅) = 2 −2 cos 𝛼.                        (3 marks)
+
+         (ii) Show that if 𝑧≠1,
+                                      𝑧(1−𝑧𝑛)
+             𝑧+ 𝑧2 + ⋯+ 𝑧𝑛=  1−𝑧.
+        Deduce that if cos 𝛼≠1,
+                                          cos𝑛𝛼+cos𝛼−cos(𝑛+1)𝛼−1
+                    cos 𝛼+ cos 2𝛼+ ⋯+ cos 𝑛𝛼=                                                .    (5 marks)                                               2−2cos𝛼
+       (iii) Given identities
+
+                  𝐴+𝐵  𝐴−𝐵                 𝐴+𝐵  𝐴−𝐵
+         cos 𝐴+ cos 𝐵= 2 cos     cos       and  cos 𝐴−cos 𝐵= −2 sin      sin            .
+                       2     2                       2     2
+       Show that if cos 𝛼≠1,
+
+                                   𝑛𝛼   (𝑛+1)𝛼                                                        sin    cos
+                    cos 𝛼+ cos 2𝛼+ ⋯+ cos 𝑛𝛼=   2   𝛼  2        .           (6 marks)                                                                sin                                          2
+
+
+
+
+
+                                                                                      6

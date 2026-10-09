@@ -1,0 +1,58 @@
+5. (a)(i)
+    sin 𝑥−sin 𝑦
+           𝑦  𝑥−𝑦          𝑦  = sin (𝑥+ +     ) −sin (𝑥+ −𝑥−𝑦 )
+         2     2          2     2
+      𝑥+ 𝑦  𝑥−𝑦   𝑥+ 𝑦  𝑥−𝑦     𝑥+ 𝑦  𝑥−𝑦   𝑥+ 𝑦  𝑥−𝑦
+  = (sin      cos     +cos      sin     ) −(sin      cos     −cos      sin     )
+         2      2        2      2          2      2        2      2
+      𝑥+ 𝑦  𝑥−𝑦
+  = 2 cos      sin             .
+          2      2
+
+   cos 𝑥−cos 𝑦
+           𝑦  𝑥−𝑦          𝑦  = cos (𝑥+ +     ) −cos (𝑥+ −𝑥−𝑦 )
+          2     2          2     2
+      𝑥+ 𝑦  𝑥−𝑦   𝑥+ 𝑦  𝑥−𝑦     𝑥+ 𝑦  𝑥−𝑦   𝑥+ 𝑦  𝑥−𝑦
+  = (cos      cos     −sin      sin     ) −(cos      cos     +sin      sin     )
+          2      2       2      2          2      2       2      2
+       𝑥+ 𝑦  𝑥−𝑦
+  = −2 sin      sin             .
+           2      2
+
+(a)(ii)
+           1      1      1       1         0             0
+              | sin 2𝜃   sin 4𝜃   sin 8𝜃 | = | sin 2𝜃   sin 4𝜃−sin 2𝜃   sin 8𝜃−sin 2𝜃 |
+           cos 2𝜃  cos 4𝜃  cos 8𝜃    cos 2𝜃  cos 4𝜃−cos 2𝜃  cos 8𝜃−cos 2𝜃
+
+                            1         0             0
+                  = | sin 2𝜃   2 cos 3𝜃sin 𝜃   2 cos 5𝜃sin 3𝜃 |
+                               cos 2𝜃  −2 sin 3𝜃sin 𝜃  −2 sin 5𝜃sin 3𝜃
+
+                                      1      0       0
+                  = 4 sin 𝜃sin 3𝜃| sin 2𝜃    cos 3𝜃    cos 5𝜃 |
+                                           cos 2𝜃  −sin 3𝜃  −sin 5𝜃
+
+                  = 4 sin 𝜃sin 3𝜃(−sin 5𝜃cos 3𝜃+ cos 5𝜃sin 3𝜃)
+                  = 4 sin 𝜃sin 3𝜃[−sin(5𝜃−3𝜃)]
+                  = −4 sin 𝜃sin 2𝜃sin 3θ
+
+(b) Since the system of equations has more than one solution, using the result in  (a)(ii), we have
+  −4 sin 𝜃sin 2𝜃sin 3θ = 0.
+              𝜋                     𝜋       𝜋
+   As 0 ≤𝜃≤ 2, we have 𝜃= 0 or 𝜃= 2 or 𝜃= 3.
+                 𝜋
+     If 𝜃= 0 or 𝜃= 2, the second equation becomes 0𝑥+ 0𝑦+ 0𝑧= √3, from which we know that
+                                                          𝜋
+    the system of equations has no solution. Hence, 𝜃≠0 and 𝜃≠ 2.
+                                𝑥+ 𝑦+ 𝑧= 6
+                                                √3                                                             √3             𝜋                                  𝑥−√3                                             𝑦 +                                     𝑧= √3 .   When 𝜃=                                                    2                                                           2                                                                  2                  3, the system of equations becomes
+                                                       1     1     1
+                             − 𝑥− 𝑦 − 𝑧= −3                              {   2     2     2
+          𝑥+ 𝑦+ 𝑧 = 6
+   Solving {√3           √3              , we get 𝑥= 4 −𝑡, 𝑦= 2, 𝑧= 𝑡, 𝑡∈ℝ.          𝑥−√3 𝑦+  𝑧= √3             2      2      2
+
+
+
+
+
+                                       15

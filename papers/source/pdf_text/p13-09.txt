@@ -1,0 +1,62 @@
+  √
+       (m4 −1 )2
+ 9.   1 +       = (      ).
+          2m2
+
+     m4 + 2m + 1              m4 −1                             1    A.                             B.                       C.m2 +
+         2m2                    2m2                        2   2m2
+
+    √
+       m2 + 1
+    D.                               E. None of the above
+          2
+                                √
+                                                     4  3
+10. In the acute triangle △ABC, |AB| = 8, |AC| = 7, sin C =         . Then |BC| =(      ).
+                                                      7
+
+    A. 6                B. 12                C. 2                D. 3                  E. 5
+
+11. A parabola cuts the x-axis at (–2, 0) and (6, 0) and the y-axis at (0, 4).  If (m, n) is a point lying on the
+    parabola, the maximum value of n is (      ).
+
+       8                  16
+    A.                  B.                  C. 4                D. 8                  E. 16
+       3                  3
+
+                                                  π
+12. In the following interval (      ), the function f(x) = 5 cos(x +   ) increases monotonically.
+                                                        3                                           (   )     (   )                       )         π                   (π                            3π
+    A.  0,                         B.      , π                       C.  π,
+          2                          2                               2
+
+     (3π  )              (π 5π )
+    D.        , 2π                      E.       ,
+         2                           3  6
+
+13.  If θ ∈[0, π) and 1 + sin θ −2 cos2 θ = 0, then θ =(      ).
+
+      π   5π           π                π   π            π   π            π   π
+    A.   or              B.                  C.   or             D.   or              E.   or
+       6    6             3                  6   3              6   2             3   2
+
+                             1
+14.  If x2 −3x + 1 = 0, then x4 +  = (      ).
+                               x4
+
+    A. 2                 B. 47                C. 49               D. 79                 E. 81
+
+
+15. Let f(x) be an even function defined on R and decrease in (−∞, 0). Which of the following is true? (      ).
+
+    A. f(2−73) > f(3−27) > f(log3 27)                                               B. f(3−27) > f(log3 27) > f(2−73)
+
+    C. f(log3 7)2 > f(2−73) > f(3−27)                                             D. f(3−27) > f(2−73) > f(log3 27)
+
+    E. f(log3 7)2 > f(3−27) > f(2−73)
+
+
+
+
+
+                                         9 / 13

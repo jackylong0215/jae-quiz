@@ -1,0 +1,47 @@
+4. 設 𝑖= √−1。
+
+                                          √3+𝑖
+    (a) (i) 以極式 𝑟(𝑐𝑜𝑠𝜃+ 𝑖𝑠𝑖𝑛𝜃) 表 1+𝑖，其中 𝑟≥0 及 −𝜋< 𝜃≤𝜋。       (4 分)
+
+                    26
+        (ii) 求 (√3+𝑖 ，答案以 𝑎+ 𝑏𝑖 形式表示，其中 𝑎 和 𝑏 為實數。           (4 分)             1+𝑖)
+
+    (b) 設 𝜔= cos 𝛼+ 𝑖sin 𝛼。用棣美弗定理，證明對任意正整數 𝑛，
+
+                      1                             1
+           cos 𝑛𝛼= (𝜔𝑛+ 𝜔−𝑛) 及  sin 𝑛𝛼=      。                      2                    2𝑖(𝜔𝑛−𝜔−𝑛)
+
+                               1
+   推導出 sin2 𝛼cos3 𝛼=   (2 cos 𝛼−cos 3𝛼−cos 5𝛼)。                       (8 分)
+                               16
+
+    (c) 求方程 2 cos 𝛼−cos 3𝛼−cos 5𝛼= 0 的通解。                               (4 分)
+
+
+   Let 𝑖= √−1.
+
+                  √3+𝑖
+    (a) (i) Express      in polar form 𝑟(𝑐𝑜𝑠𝜃+ 𝑖𝑠𝑖𝑛𝜃), where 𝑟≥0 and −𝜋< 𝜃≤𝜋. (4 marks)
+                    1+𝑖
+
+                     26
+        (ii) Find (√3+𝑖     . Express your answer in the form 𝑎+ 𝑏𝑖, where 𝑎 and 𝑏 are real              1+𝑖)
+         numbers.                                                                    (4 marks)
+
+    (b) Let 𝜔= cos 𝛼+ 𝑖sin 𝛼. Using De Moivre’s theorem, show that for any positive
+
+       integer 𝑛,
+
+                      1                              1
+           cos 𝑛𝛼= (𝜔𝑛+ 𝜔−𝑛)  and  sin 𝑛𝛼=                      2                      2𝑖(𝜔𝑛−𝜔−𝑛).
+
+                                    1
+     Deduce that sin2 𝛼cos3 𝛼=   (2 cos 𝛼−cos 3𝛼−cos 5𝛼).                     (8 marks)
+                                   16
+    (c) Find the general solution of the equation 2 cos 𝛼−cos 3𝛼−cos 5𝛼= 0 .        (4 marks)
+
+
+
+
+
+                                               6

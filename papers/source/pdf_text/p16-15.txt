@@ -1,0 +1,50 @@
+  Part II Problem-solving questions.
+
+    1. Suppose the parabola y  x2  4x  3 intersects the x-axis at points A and B, and intersects the y-axis at
+      point C. Determine the area of ABC.                                                     (8 marks)
+  Ans.: Since x2  4x  3  (x  1)(x  3), the x-intercepts of the parabola are at A(1, 0) and B(3, 0). Since the
+        constant term of the quadratic polynomial is 3, the y-intercept is at C(0, 3) (see the picture below).
+                                                                  y
+
+
+
+                                                   A        B        x
+
+
+
+
+
+                                           C
+
+
+   ∴ ABC can be considered as a triangle of base length 2 ( 3  1) and of height 3.
+                           1         ∴ area of ABC   2 3 3.                           2
+
+
+                                                x 3    2. Find the partial fraction decomposition of                      .                                    (8 marks)                                                          ( x  2)( x  )1
+                                                    x 3              3x  2  Ans.: Performing long division enables us to write           x  1                      .                                                               ( x  2)( x  )1           ( x  2)( x  )1
+                                        3x  2                3x  2     A   B       The partial fraction decomposition of             has the form                      .
+                                                        ( x  2)( x  )1                 ( x  2)( x  )1   x  2  x  1
+                                                 8         1       Comparing terms on both sides yields A    and B     .                                                 3         3
+              x3                      83         13           8       1    ∴           x  1          x  1                   .             ( x  2)( x  )1        x  2  x  1         (3 x  2)   (3 x  )1
+
+
+    3. In Bag A there are 4 red balls, 6 yellow balls and 10 green balls. In Bag B there are 12 red balls, 4 yellow
+      balls and 4 green balls. If one ball is randomly selected from each bag, find the probability that
+       (a) both balls are red.                                                                    (2 marks)
+      (b) both balls are not red.                                                                 (2 marks)
+       (c) at least one ball is red.                                                                (2 marks)
+      (d) both balls are red or both balls are not red.                                             (2 marks)
+                                                                                 4      12
+Ans.: (a) The probabilities of drawing a red ball from Bag A and Bag B are respectively    and       . The                                                                                20     20
+         event of drawing a ball from Bag A is clearly independent of the event of drawing a ball from Bag B.
+                                             4  12   1  3   3
+                                                                                                                                                                         ∴ The required probability of this part                 .                                            20  20   5  5   25
+                                                    1      3    8      (b) From (a), the required probability of this part  1     1          .                                                                 25                               5           5          
+                                                      8   17
+       (c) From (b), the required probability of this part  1          .                                                     25   25
+                                                                                   3   8   11
+      (d) Since the events in (a) and (b) are mutually exclusive, the required probability of this part            .                                                                                      25  25   25
+
+
+                                                                                                                 15

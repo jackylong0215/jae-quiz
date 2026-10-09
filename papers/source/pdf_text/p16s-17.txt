@@ -1,0 +1,44 @@
+                                   ax   y   z  1
+                                              ( E )     x  ay   z  a
+                                                                                   2                                                                        x   y  az  a
+
+         Find the value of a such that the system of equations (E)
+
+              (i)  has a unique solution;
+
+               (ii) has infinitely many solutions;
+
+               (iii) has no solutions.
+
+       (c) Suppose a  2. Solve the system of equations (E).                               (6 marks)
+
+Ans.: (a) Using row and column operations, we get
+
+             a  b  b   a   b    b    a   2b    b
+                                                        a   2b             b  a  b  b   a    b   b  a  b   b   (a  b)                                                        b  a  b             b  b  a   0  b  a  a  b   0   0   a  b
+
+                           a  b b  a        1  1                   (a  b)          (a  b)2        (a  b)2(a  2b)                             b   a  b        b  a  b
+
+                                             a  1  1 
+                                                           (b) The coefficient matrix of (E) is  1  a  1  .
+                                                                                                                                                     1  1  a 
+
+        By (a), its determinant D is given by D  (a  1)2(a  2).
+
+              (i)   If a  1 and a  2, then D  0. In this case, (E) has a unique solution.
+
+               (ii)  If a  1, the three equations in (E) are identical, and hence it has infinitely many solutions.
+
+               (iii) If a  2, the three equations in (E) add up to 0  3. This means that (E) has no solutions.
+
+       (c) When a  2, (E) becomes
+
+                                 2 x   y   z  1   - - - - - (1)
+                                          ( E )     x  2 y   z  2   - - - - - (2)
+                                                                   x   y  2 z  4   - - - - - (3)
+
+        3  (3)  (1)  (2)  4z  9  z  9 . (2)  (3)  y  z  2  1 . (1)  (2)  x  y  1  3 .                                       4                     4                       4
+
+
+
+                                                                                17

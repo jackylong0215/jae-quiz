@@ -1,0 +1,48 @@
+任擇三題作答，每題二十分。請把答案寫在緊接每條題目之後的3 頁橫間頁內。
+
+Answer any 3 questions, each carries 20 marks. Write down the answers on the 3 lined pages
+
+following each question.
+
+   1.
+
+                                    E
+
+
+                 D                                        C
+                              G
+                                    E   F
+
+           A                                 B
+
+                                                        𝜋
+   如上圖，E-ABCD 是四棱錐，其底ABCD 為菱形，|𝐴𝐵| = 2√2 及 ∠𝐷𝐴𝐵= 3。
+                    𝜋
+      |𝐸𝐵| = |𝐸𝐶|，∠𝐵𝐸𝐶= 2，F 為 BC 的中點，G 為E 在DF 的垂足。|𝐷𝐸| = √5。
+
+                     √3
+       (a) 證明 cos(∠𝐷𝐹𝐸) =  。[提示: 求 |𝐸𝐹| 及 |𝐷𝐹|。]                          (8 分)
+                       4
+       (b) 證明EG 垂直平面ABCD。[提示: 證明 Δ𝐸𝐺𝐵是直角三角形。]             (7 分)
+
+       (c) 求 |𝐴𝐸|。                                                                   (5 分)
+
+      In the above figure, E-ABCD is a pyramid, its base ABCD is a rhombus, |𝐴𝐵| = 2√2
+             𝜋                𝜋
+     and ∠𝐷𝐴𝐵= 3. |𝐸𝐵| = |𝐸𝐶|, ∠𝐵𝐸𝐶= 2, F is the midpoint of BC, G is the foot of
+
+      perpendicular from E to DF. |𝐷𝐸| = √5.
+
+                        √3
+       (a) Show that cos(∠𝐷𝐹𝐸) =     . [Hint. Find |𝐸𝐹| and |𝐷𝐹|.]                     (8 marks)
+                          4
+
+       (b) Show that EG is perpendicular to plane ABCD.
+          [Hint. Show that Δ𝐸𝐺𝐵 is a right-angled triangle.]                             (7 marks)
+       (c) Find |𝐴𝐸|.                                                                   (5 marks)
+
+
+
+
+
+                                           3

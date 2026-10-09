@@ -1,0 +1,36 @@
+Part II  Problem-solving questions.  Each question carries 8 marks with a total 40 marks.
+
+                                                  x 3  x
+1.   Find the partial fraction decomposition of                    .                                   (8 marks)
+                                                x 2  3 x  2
+
+
+2.   Let C be a circle centered at (2, 3) and x-axis be a tangent to C.  Let L be a straight line with slope
+    1 and y-intercept b.
+     (a)  Find the equation of the circle C.                                                    (2 marks)
+     (b)  Find the range of b such that the straight line L and the circle C intersect at two different points
+       A and B.                                                                           (3 marks)
+     (c)  Given that AB , length of the line segment AB, equals 2.  Find the value of b.       (3 marks)
+
+
+3.   Suppose three persons are randomly chosen from three boys and four girls to compete in a singing
+     contest. What is the probability for each of the following events?
+     (a)  All the three boys are chosen.                                                       (2 marks)
+     (b)  One boy and two girls are chosen.                                                  (2 marks)
+     (c)  Two boys and one girl are chosen.                                                  (2 marks)
+     (d)  At least one girl is chosen.                                                          (2 marks)
+
+
+4.   Let na  n 1 be an arithmetic sequence such that a1  a2  a3  0 and a1  a2  a3  a4  a5  5 .
+     (a)  Find the general term  na of the arithmetic sequence.                                (4 marks)
+                  1     (b)  Let bn            ( n  )1 , find the sum of the first n  terms of nb n 1 .              (4 marks)
+                an  3 an  4
+
+
+5.   Prove by mathematical induction that 33 n  1  5n  2 is divisible by 22 for any positive integer n.   (8 marks)
+
+
+
+
+
+                                                                                                   10

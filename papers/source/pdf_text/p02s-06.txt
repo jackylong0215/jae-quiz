@@ -1,0 +1,51 @@
+            1                                       10   1
+4.   (a) 求    2  的部分分式，從而求    2  。                               (6 分)            x  1                                    n  2 n  1
+                                                      1
+     (b) 設 {a n }n 1 為一數列，滿足 a1  2 及 a n 1  a n  ， n  3,2,1,... 。
+                                                   a n
+
+                                               1
+            (i) 設 h 和 k 為正數，且 h   k 。證明 h     k  2 。
+                                               h
+
+                          1
+        [提示: 考慮  ( h    2) 。]                                               (3 分)
+                          h
+
+           (ii) 用  (i) 及數學歸納法，證明對任意正整數n， an   2 n  1 。           (3 分)
+
+                a n                    bn 1
+         (iii) 設 bn   ， n  3,2,1,... 。證明      1 ， n  3,2,1,... 。                 (8 分)
+                 n                    bn
+
+
+
+
+
+                                1                       10   1
+     (a) Find the partial fractions of    2    Hence find    2       .                     (6 marks)                                  x .1                    n  2 n  1
+                                                            1
+     (b) Let {a n }n 1 be a sequence satisfying a1  2 and a n 1  a n       , n  3,2,1,... .
+                                                         a n
+
+                                                                1
+          (i) Suppose h and k are positive numbers and h   k  . Show that h     k  2 .
+                                                                h
+
+                           1
+            [Hint: Consider  ( h    2) .]                                                (3 marks)
+                           h
+
+           (ii) Using (i) and mathematical induction, show that for any positive integer n,
+
+                                an   2 n  1 .                                         (3 marks)
+
+                 a n                       bn 1
+         (iii) Let bn         , n  3,2,1,... . Show that      1 , n  3,2,1,... .               (8 marks)
+                  n                       bn
+
+
+
+
+
+                                                                                      6

@@ -1,0 +1,36 @@
+2.  (a) 已知函數 ( ) =  −3  + 2，且  (1) = 0。
+
+          (i) 求方程 ( ) = 0 的所有解。                                              (3 分)
+
+         (ii) 求   ′( ) 及   ′′( )。                                                     (2 分)
+
+        (iii) 求  f (x ) 的局部極大值和局部極小值。                                   (3 分)
+
+       (iv) 求曲線 # = ( ) 的拐點。                                               (2 分)
+
+       (v) 運用  (i) – (iv) 的結果，繪出曲線 # = ( )。                             (3 分)
+
+    (b) 求由曲線 # =  −8 + 24 及 # = 8 −  所包圍的區域的面積。         (7 分)
+
+
+    (a) Given function ( ) =  −3  + 2, and that  (1) = 0.
+
+          (i) Find all the solution(s) of the equation ( ) = 0.                            (3 marks)
+
+         (ii) Find  ′( ) and   ′′( ).                                                     (2 marks)
+
+        (iii) Find the local maximum and local minimum values of ( ).                 (3 marks)
+
+       (iv) Find the inflection point(s) of the curve # = ( ).                           (2 marks)
+
+       (v) Using the results in (i) – (iv), sketch the curve # = ( ).                    (3 marks)
+
+    (b) Find the area of the region bounded by the curves # =  −8 + 24 and
+
+     # = 8 −      .                                                                  (7 marks)
+
+
+
+
+
+                                          4

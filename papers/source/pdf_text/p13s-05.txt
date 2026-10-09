@@ -1,0 +1,39 @@
+                         𝑦2
+3. 已知雙曲線H: 𝑥2 −  = 1。有過點 𝑃(√5, 0) 的非垂直直線 𝐿 與 𝐻交於不同
+                         4
+
+ 的兩點 𝐴(𝑥1, 𝑦1) 和 𝐵(𝑥2, 𝑦2)。設 𝑚 為 𝐿 的斜率。
+
+    (a) 證明 𝑥1 和 𝑥2 滿足方程 (𝑚2 −4)𝑥2 −2√5𝑚2𝑥+ (5𝑚2 + 4) = 0 。           (2 分)
+
+    (b) 求 𝑚 的取值範圍。                                                            (4 分)
+
+    (c) 設 𝑂 為原點。求 𝑚 的值使得 𝑂𝐴⊥𝑂𝐵。                                     (6 分)
+
+    (d) 若 𝑚= √5，求三角形 𝐴𝑂𝐵 的面積。
+
+     [提示: 線段 𝑂𝑃 把三角形 𝐴𝑂𝐵 分成兩個三角形。]                            (8 分)
+
+
+
+                               𝑦2
+   Given a hyperbola H: 𝑥2 −  = 1. A non-vertical line L passing through the point 𝑃(√5, 0)
+                               4
+    interests with H at two distinct points 𝐴(𝑥1, 𝑦1) and 𝐵(𝑥2, 𝑦2). Let 𝑚 be the slope of 𝐿.
+    (a) Show that 𝑥1 and 𝑥2 satisfy the equation
+
+               (𝑚2 −4)𝑥2 −2√5𝑚2𝑥+ (5𝑚2 + 4) = 0.                       (2 marks)
+
+    (b) Find the range of 𝑚.                                                           (4 marks)
+
+    (c) Let 𝑂 be the origin. Find the value(s) of 𝑚 such that 𝑂𝐴⊥𝑂𝐵.                  (6 marks)
+
+    (d) Suppose 𝑚= √5. Find the area of the triangle 𝐴𝑂𝐵.
+
+       [Hint. The segment 𝑂𝑃 divides the triangle 𝐴𝑂𝐵 into two triangles.]             (8 marks)
+
+
+
+
+
+                                               5

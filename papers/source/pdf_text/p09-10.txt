@@ -1,0 +1,47 @@
+                                                                             y  2 x  4
+ 9. In the below figures, which of the regions is the solution set to the system of inequalities  x  y  5  ?
+                                          y  2  0                                                                            
+
+
+
+
+
+   A.               B.              C.  III          D. IV            E. none of the above
+
+10. Suppose that the line L passes through the point (1, 2), and is perpendicular to the line 2 x  3 y  4 .
+   L and the y-axis will intersect at
+          7                5                                      1              3 
+   A.    ,0 2         B.     ,0 2         C.  (0, 3)        D.    ,0 2       E.     ,0 2 
+
+
+11. There are 6400 chairs in an indoor stadium. Each row of the venue has 32 chairs. Current social
+    distancing measure requires that no more than 4 consecutive chairs could be occupied in the same row.
+   To comply with this requirement, the maximum number of chairs that could be occupied in each
+   performance is
+   A. 5000         B. 5200         C. 5400        D. 5600          E. 5800
+
+
+12. Suppose the two real roots of the equation 3 x 2  8 x  m  0 are 1x and 2x . If the arithmetic mean of
+    1     1      and      is 2, what is the value of m?
+    x1     x 2
+   A. 2           B. 1           C. 4           D. 1             E. 2
+
+
+13. Two different numbers are picked up from 1, 2, 3, 4, and 5 sequentially to form the tens and unit digits
+    of a two-digit number. The probability that the two-digit number is less than 40 is
+      1              2              3              4   A.               B.               C.              D.               E. 1
+       5              5              5              5
+
+
+14. The solution of the equation 6 x  2 x  2 x 1  6 x 1  2 x  2 is
+                          1                           1   A.  x 1       B.  x         C.  x  0        D.  x            E.  x  1
+                          2                           2
+
+
+15. Peter first faced east and walked for n kilometers, and then he turned 150 degrees to the right and walked
+   3 kilometers. Now he was  3 kilometers away from the starting point. Find the value of n.
+                       3            1   A. 3 3          B.               C.              D. 3             E. 2 3 or  3
+                      3             3
+
+
+                                                  10

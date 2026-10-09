@@ -1,0 +1,47 @@
+                                    √
+       1                                         1             3         π
+          cos 2wx) −1 = 2 sin(2wx −θ) −1, with sin θ =  and cos θ =       . Thus θ =  + 2kπ. Since the
+       2                                         2            2           6
+                        2π                                              2
+         least period of f(x) is                   = 3π, we get 2w =                                                and can write f(x) = 2 sin(2 −π ) −1.                     2w                 3                    3x   6
+                                                          1                                                   −π                                                                      ) =                                                   <                                                         <     (b) Since f(C) = 2 sin(23C−π6                         )−1 = 0, we have sin(23C−π6                                                                  2. By observing that                                                                             6                                                                                 23C−π6
+      π
+                , we can get                   2 −π = π . Then C = π and A + B = π . We have 2sin2 B = cos B + cos(A −π )       2        3C   6   6           2             2            √          2
+                                                                             5 −1
+       which implies that 2sin2 B = sin A + sin A. Then 1 −sin2 A = sin A, and sin A =             .
+                                                                              2
+
+
+5. Answer:
+
+
+     (a)
+
+
+
+
+
+     (b) y/x is the slope of straight line jointing point P(x, y) and the origin. Intersections of the given straight
+
+         lines are A(2, 7/2), B(5, 13/2) and C(5, −1). When point P varies inside the given region, the min-
+
+      imum value of z can be obtained at point C and the maximum value can be obtained at point A.
+
+      Then−1/5 ≤z ≤7/4.
+
+
+     (c) t is the square of the distance between point P(x, y) in the given region and the origin. The nearest
+
+        point to the origin is the point D lying on the line 3x + 2y −13 = 0 and OD is perpendicular to
+
+          this straight line. The slope of the line OD should be 2/3 and the equation is y = 2x/3. Thus, the
+
+         intersection of lines OD and 3x + 2y −13 = 0 is (x, y) = (3, 2). Therefore, t obtains its minimum
+
+        value 13 at point (x, y) = (3, 2).
+
+
+
+
+
+                                        13 / 13

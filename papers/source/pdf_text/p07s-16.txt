@@ -1,0 +1,59 @@
+(b)
+                 sin 𝐴+ sin 𝐵+ sin 𝐶
+
+                   𝐴+𝐵    𝐴−𝐵
+        = 2 sin    cos   + sin 𝐶
+                        2       2
+                   𝜋−𝐶    𝐴−𝐵        𝐶    𝐶
+        = 2 sin    cos   + 2 sin  cos
+                        2       2          2    2
+                      𝐶    𝐴−𝐵        𝐶    𝐶
+        = 2 cos  cos   + 2 sin  cos
+                       2      2         2    2
+                      𝐶    𝐴−𝐵      𝐶
+        = 2 cos  (cos   + sin                       2       2       2)
+                      𝐶    𝐴−𝐵      𝜋−(𝐴+𝐵)
+        = 2 cos  (cos   + sin        )
+                       2       2           2
+                      𝐶    𝐴−𝐵      𝐴+𝐵
+        = 2 cos  (cos   + cos    )
+                       2       2         2
+                      𝐶     𝐴    𝐵      𝐴   𝐵       𝐴    𝐵      𝐴   𝐵
+        = 2 cos  (cos  cos + sin  sin + (cos  cos  −sin  sin                       2     2    2       2    2        2    2       2    2))
+                    𝐴    𝐵    𝐶
+        = 4 cos  cos  cos
+                       2    2    2
+
+
+(c)(i) Let 𝑃(𝑛) be the proposition
+               “ 2 sin 𝑥[cos 𝑥+ cos 3𝑥+ ⋯+ cos(2𝑛−1)𝑥] = sin 2𝑛𝑥 ”.
+
+    When 𝑛= 1, since 2 sin 𝑥cos 𝑥= sin 2𝑥, P (1) is true.
+
+     Suppose 𝑃(𝑘) is true for some positive integer k . When 𝑛= 𝑘+ 1,
+             2 sin 𝑥[cos 𝑥+ cos 3𝑥+ ⋯+ cos(2(𝑘+ 1) −1)𝑥]
+        = sin 2𝑘𝑥+ 2 sin 𝑥cos(2𝑘+ 1)𝑥
+
+                                (2𝑘+2)𝑥−2𝑘𝑥    (2𝑘+2)𝑥+2𝑘𝑥
+        = sin 2𝑘𝑥+ 2 sin           cos
+                                      2              2
+        = sin 2𝑘𝑥+ sin(2𝑘+ 2)𝑥+ sin (−2𝑘𝑥)
+        = sin 2(𝑘+ 1)𝑥.
+
+    Hence 𝑃(𝑘+ 1) is also true.
+
+    By the principle of mathematical induction, 𝑃(𝑛) is true for any positive integer 𝑛.
+
+  (ii) Obviously, when 𝑥= 0, 𝜋, 2𝜋，sin 𝑥= 0 and cos 𝑥+ cos 3𝑥+ cos 5𝑥≠0.
+
+    From (i), when 0 ≤𝑥≤2𝜋, cos 𝑥+ cos 3𝑥+ cos 5𝑥= 0 if and only if sin 6𝑥= 0
+
+                                                𝑛𝜋
+     and 𝑥≠0, 𝜋, 2𝜋. Solving sin 6𝑥= 0, we get 𝑥=     , 𝑛= 1,2,3,4,5,7,8,9,10,11.
+                                                       6
+
+
+
+
+
+                                    16

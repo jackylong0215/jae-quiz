@@ -1,0 +1,37 @@
+3. 已知拋物線 P : y x(  2)1 及點 A(3,1) 。
+
+     (a) 設過點 A 且與 P 相切的兩條切線與 P 分別相切於點 B 及 C，求這兩條切線
+
+    的方程，並求點 B 及 C 的座標。
+
+     [提示: 設  y  3  m( x  1) 為切線的方程。]                              (12 分)
+
+                                             4
+     (b) 若  為這兩條切線的夾角，證明  tan   。                           (2 分)
+                                             13
+
+     (c) 求三角形 ABC 的面積。                                                   (6 分)
+
+
+
+
+
+    Given parabola P : y x(  2)1 and point A(3,1) .
+
+     (a) Suppose the two lines passing through A and tangent to P touch P at points B and C.
+
+       Find the equations of the two tangent lines, and find the coordinates of points B and C.
+
+        [Hint. Suppose the equation of the tangent line is  y  3  m( x  1) .]            (12 marks)
+
+                                                              4
+     (b) If   is the angle between the two tangent lines, show that  tan        .        (2 marks)
+                                                              13
+
+     (c) Find the area of the triangle ABC.                                             (6 marks)
+
+
+
+
+
+                                                                                      5

@@ -1,0 +1,58 @@
+                                             2  1 12
+ 9. The constant term in the expansion of  
+                                                                                  x x    is
+   A. 495          B. 220          C. 66          D. 792           E. none of the above
+
+
+10. Suppose (a, 0) and (0, b) are the endpoints of a diameter of a circle. Which of the following points lie
+   on the circle?
+              I. (0, 0)                             II. (a, b)                           III. (a,  b)
+   A.  I only                     B.  III only                   C.  I and II only
+   D.  II and III only               E.  I and III only
+
+
+11. If the graph of the parabola y  (x  1)2 is shifted to the right by 4 units, and then shifted downward by 5
+    units, what is the equation of the resulting parabola?
+   A. y  (x  3)2  5               B. y  (x  5)2  5               C. y  (x  5)2  3
+   D. y  (x  3)2  5                E. y  (x  4)2  5
+
+
+                                                                                                                    y
+12. In the right figure, two parallel lines L1: x  4y  12  0                                                                                                                          L1
+   and L2: 2x  my  4  0 intersect the y-axis at points A and                                A
+  B respectively. Find the length of line segment AB.
+
+   A. 4                         B. 7/2                                                                                                                          L2
+                                                                                   B
+   C. 5/2                      D. 1
+                                                                                                                           x
+                                                                      O
+    E. none of the above
+
+
+13. In the arithmetic sequence {an}n  1, a2  22 and a5  13. How many positive terms does this sequence have?
+   A. 6            B. 7            C. 8           D. 9             E. 10
+
+
+                                                               P
+14. In the right figure, PQ and HK touch the circle at A and                        A
+  C respectively. Given that ABC  84° and BCH  18°,                            Q
+    find PAB .
+
+   A. 45°                       B. 72°
+   C. 78°                      D. 85°                                               84°
+                                                                  B
+    E. none of the above                                                                        18°
+                                                   H           C          K
+
+
+                  115. If  sin cos     , and   2, what is the value of cos 2?
+                  5
+       7                7              7              12            12   A.               B.             C.            D.              E.
+       25               25             25             25            25
+
+
+
+
+
+                                         9 / 13

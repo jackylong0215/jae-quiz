@@ -1,0 +1,65 @@
+Suggested Answer
+
+
+1. (a) (i) Since PAB is equilateral and N is the midpoint of AB , we have PN  AB .
+        Given the planes PAB and ABC  are perpendicular, hence PN  is perpendicular
+
+                          3
+         to plane ABC. As PN  AP sin       and
+                                   3   2
+
+                         1           2                         6
+         the area of  BCM   AB BC        , the volume of P  BCM  is         .
+                         2          2                         12
+
+                           3
+       (ii) From BM  PM        , PMB is isosceles. Given PB ,1 by direct
+                          2
+
+                                  5
+          calculation, the area of PMB is         . Let h be the distance from point C to the
+                                 4
+
+
+                                            5h
+        plane PBM. Then, the volume of C  PBM  is           . Together with the result in
+                                             12
+
+                      6
+            (i), we get h         .
+                      5
+
+
+                                                    2  3           2  3          2  9
+   (b) (i) By direct calculation, MN      , MC      , NC      .  Since
+                                 4         2         4
+
+
+                   2          2         2
+     MN  MC  NC   ,  NMC is a right angle.
+
+       (ii) Since PN is perpendicular to the plane ABC, the projection of PM on the plane
+
+                           
+       ABCis NM . Hence  PMC  NMC      .
+                                           2
+
+                                                                       1 PN          1  3 2  
+         dihedral angle N  MC  P =  PMN  tan       tan         .
+                               MN             3 2   4
+
+
+                                   2             x 3      2
+    2.  (a) (i)   f ( x )   x  2 x  3 dx     x  3 x  C ,   f (0)  3  C  3 .   f "( x )  2 x  2 .                                 3
+             (ii)   f '( x )  0  x 2  2 x  3  0  ( x  3)( x  1)  0  x  3 or x .1
+          When x,1    f '( x )  0 . Hence   f ( x )  is increasing.
+          When ,1  x  3    f '( x )  0 . Hence   f ( x )  is decreasing.
+          When  3  x ,   f '( x )  0 . Hence f ( x )  is increasing.
+                                14
+              Consequently,   f (  1)       is a local maximum point and   f (3)  6  is a local
+                                 3
+           minimum point.
+
+
+
+                                                                                     13

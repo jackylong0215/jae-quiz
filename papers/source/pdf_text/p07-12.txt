@@ -1,0 +1,47 @@
+Part II Problem-solving questions.
+
+  1. (a) Here three books are chosen from nine, and so the size of the sample space is 9 C 3. The size of the
+                                                4  2  3  24  2       event is 4  2  3, and hence the required probability is             .
+                                                                                    9 C 3   84  7
+    (b) Here we want to permute 9 books, and so the size of the sample space is 9!. The event can be
+       regarded as a permutation of three groups, and there are 4! ways, 2! ways, and 3! ways to permute
+        the Chinese books, English books, and Mathematics books respectively. It follows that the required
+                        !3 !4 !2 !3   1       probability is               .
+                          !9    210
+
+
+
+
+  2. (a) Let r be the radius of the circle.                                        y
+      Method 1                                                                                  L1: y  2x
+       Equation of the circle is  ( x  4) 2  ( y  4) 2  r 2  -------- (1)
+        Putting y  2x into (1), we have ( x  4) 2  (2 x  4) 2  r 2 , i.e.             P
+               5 x 2  24 x  (32  r 2 )  0  ---------------------- (2)              M (4, 4)
+                                                                                                                                   L2: y  mx
+      At the tangent point P, the discriminant of (2) is zero, i.e.                                                                  Q
+                                2                  2              2  16                     (24)  45()(32  r )  0 ⇔ r       .
+                                         5
+        Putting the last equation into (1), upon simplification, we      O                                    x
+       get the equation of the circle:
+               5 x 2  5 y 2  40 x  40 y  144  0  ------------- (3)
+      Method 2
+                                                                                                                                | 2(4)  4 |   4       Equation of L1 can be written as 2x  y  0. ∴ r  | MP |                , and so the equation of the
+                                                      4  1     5
+        circle is
+                                               2            2  16          2       2                                  ( x  4)  ( y  )4   ⇔ 5 x  5 y  40 x  40 y  144  0 .
+                                      5
+    (b) Method 1
+        Putting y  mx into (3), we have 5 x 2  (5mx) 2  40 x  40(mx)  144  0 , i.e.
+                   1(5  m 2 ) x 2  401(  m) x  144  0  ----------- (4)
+      At the tangent point Q, the discriminant of (2) is zero, i.e. [ 401(  m)]2  45()(1  m 2 )(144)  0 ⇔
+               2                                                 1      2m m5   2  0 ⇔ ( m  2)(2m  )1  0 . Corresponding to L2, m     .
+                                                           2
+      Method 2
+                                                                          1      1      The line y  x passes through O and M. Symmetry of OP and OQ about y  x yields m              .
+                                                                             Slope of L1   2
+
+
+
+
+
+                                                  12

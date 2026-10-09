@@ -1,0 +1,70 @@
+                                       x  5 y  8
+    4. (a) Solve the system of inequalities              graphically.                              (4 marks)                                                                                                     3x  y  17
+      (b) Let C  2x  y, where (x, y) is a solution of the system of inequalities in (a). What is the maximum
+         value of C?                                                                           (4 marks)
+Ans.: (a) The graphical solution of the given inequalities is the common region of the lower half-plane of y 
+      1 x  8 and the lower half-plane of y  3x  17 (including the boundary), which is shown as the            5    5
+         shaded area in the picture below.
+                                                                             y
+
+                                                                  y  3x  17                                                                   8
+
+
+                                                                   6
+
+                                   y   1                                         x  8                                          5                                               5              4
+
+                                                                   2
+
+                                                                                                                    x
+                                                      -8     -6     -4     -2   0      2     4     6     8
+
+                                                                                -2
+
+
+                                                                                -4
+
+
+                                                                                -6
+
+
+                                                                                -8
+
+      (b) Let L0 and L1 denote respectively the lines 2x  y  0 and 2x  y  6. By considering the positions of
+          these 2 lines, we see that parallel shifts in the line L0 to the right produce bigger values of C, therefore,
+       we have to move L0 to the right as far as possible while L0 remains touching the shaded region.
+                                                                                                y
+
+                                                                              L0       L1
+                                                                                 y  3x  17                                                                                    8
+
+
+                                                                                    6
+
+                                                  y   1                                                        x  8                                                          5                                                               5              4
+
+                                                                                    2
+                                                                             P
+                                                                                                                                       x
+                                                                           -8     -6     -4     -2   0     2     4     6     8
+
+                                                                                                    -2
+
+
+                                                                                                    -4
+
+
+                                                                                                    -6
+
+
+                                                                                                    -8
+
+        The above picture shows that the value of C is maximized at the point P, which is the intersection of
+                    8                                                                             1         y  1               x                                                                                                                              ,               5                    5                   and y  3x  17. Solving these equations, we get P  (112                                                                             2 ).
+                                    11  1  23
+                                                                                                        ∴ Maximum value of C  2       11.5.                                     2   2   2
+
+
+
+
+                                                                                                                 16

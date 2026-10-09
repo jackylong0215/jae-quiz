@@ -1,0 +1,64 @@
+任擇三題作答，每題二十分。請把答案寫在緊接每條題目之後的3 頁橫間頁內。
+
+Answer any 3 questions, each carries 20 marks. Write down the answers on the 3 lined pages
+
+following each question.
+
+   1.
+
+          P
+
+                    M
+
+
+                   B                     C
+
+
+
+
+
+          A
+                     D
+
+                               
+   如上圖所示，ABCD 為梯形，PA 垂直 ABCD， DAB  ABC  ， | AD |  1 ，
+                                                           2
+
+                | PA | =| AB | =| BC | = 2 。設M 為線段 PC 的中點。
+
+       (a) (i) 求三角形 PBD 的面積。                                                (6 分)
+
+             (ii) 求三棱錐 P-ABD 的體積，從而求點 A 至平面 PBD 的距離。          (4 分)
+
+       (b) 證明
+
+            (i) CB 垂直平面 PAB 。                                                     (3 分)
+
+            (ii) DM 與平面 PAB 平行。
+
+       [提示: 設N 為PB 的中點。證明ADMN 是一長方形。]                   (7 分)
+
+     As shown in the above figure, ABCD is a trapezoid, PA is perpendicular to ABCD,
+          
+   DAB  ABC      ,  | AD |  1 ,   | PA | =| AB | =| BC | = 2 . Let M be the midpoint of PC.
+                    2
+
+       (a) (i) Find the area of the triangle PBD .                                        (6 marks)
+
+             (ii) Find the volume of the triangular pyramid P-ABD, and hence find the
+
+             distance from point A to the plane PBD .                                  (4 marks)
+
+       (b) Show that
+
+            (i) CB is perpendicular to the plane PAB ;                                     (3 marks)
+
+            (ii) DM is parallel to the plane PAB ;
+
+             [Hint: Let N be the midpoint of PB. Show that ADMN is a rectangle.]        (7 marks)
+
+
+
+
+
+                                           3

@@ -1,0 +1,51 @@
+1. In the diagram below, ABCDEF is a right triangular prism with | AD |  2. ABC is an equilateral
+   triangle with side length 1. Let M be the midpoint of AB, N be the point on AE such that MN 
+  AE.
+                                                 D
+                            A
+                              N
+
+
+
+                      M
+                                                      F
+                      C
+
+                                                                  E
+                                   B
+   (a) Show that CM  AE.                                                            (4 marks)
+
+   (b) Show that AMN and AEB are similar. Hence find | MN |.                     (5 marks)
+
+   (c) Find the volume of the triangular pyramid CAMN.                             (5 marks)
+
+   (d) Find the angle between the plane ACE and the plane ABE. Give your answer in terms of arctan.
+                                                                                      (6 marks)
+
+
+
+
+
+                            a  b  b
+2. (a) Factorize the determinant b  a  b .                                            (6 marks)
+                            b  b  a
+
+   (b) Let a be a real number. Given the system of equations in unknowns x, y, z:      (8 marks)
+
+                                ax   y   z  1
+                                         ( E )     x  ay   z  a
+                                                                              2                                                                  x   y  az  a
+
+      Find the value of a such that the system of equations (E)
+
+         (i)  has a unique solution;
+
+         (ii) has infinitely many solutions;
+
+          (iii) has no solutions.
+
+   (c) Suppose a  2. Solve the system of equations (E).                               (6 marks)
+
+
+
+                                                                              6

@@ -1,0 +1,44 @@
+4. (a) (i) Let S (n )  denote the proposition “ zn  cos n i sin n”. When n  1 , S )1(  is
+
+        obviously true. Suppose S (k )  is true for some positive integer  k , i.e.
+          zk  c o sk i s i nk. Then,
+                   z k 1  z k z
+                 (cos k i sin k)(cos i sin)
+                 (cos kcos sin ksin)  i (cos ksin sin kcos)
+                 cos[( k  )1]  i sin[( k  )1.]
+        Thus, S ( k  )1  is true. By the principle of mathematical induction, S (n ) is true
+
+          for all positive integers n.
+          (ii) Since
+
+                     z n z n  (cos n i sin n)(cos n i sin n)  cos 2 n sin 2 n 1 ,
+
+                1      n                                                               n   1
+        we get    n  z  (cos n i sin n) , from which we obtain  z    n  2 cos n.                     z                                                        z
+     (b) Using the result in (a)(ii),
+                                              4      1    1   4                           cos    z                                                                                     2     z  
+                               1   4       2       1   1 
+                                z  4 z  6  4  2    4                                16                 z    z  
+                               1   4   1       2   1     
+                                 z    4   4 z    2   6                               16      z              z         
+                               1
+                               ( 2 c o s4 8 c o s2 6 .)
+                               16
+      Hence we know that the identity is true.
+     (c) Using the result in (b),
+                                  c o s4 4 c o s2 1  0
+              c o s4 4 c o s2 3  2
+              8 c o 4s  2
+
+                                       2
+              c o s  
+                                      2
+                   
+                k     ,   where k  is an integer.
+                                     4
+
+
+
+
+
+                                                                                     14

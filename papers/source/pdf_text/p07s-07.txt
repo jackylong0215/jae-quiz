@@ -1,0 +1,37 @@
+                   𝑎  𝑎2 + 1  𝑏𝑐
+5.  (a) 因式分解行列式 | 𝑏  𝑏2 + 1  𝑎𝑐 |。                                           (8 分)
+                       𝑐  𝑐2 + 1  𝑎𝑏
+    (b) 已知以 x、y 和 z 為未知量的方程組:
+
+                      𝑘𝑥+ 𝑦 −𝑧 = 𝑝
+                           (𝐸): { 𝑥+ 𝑘𝑦+ 𝑧 = 𝑞 ，
+                    −𝑥+ 𝑦+ 𝑘𝑧= 𝑟
+
+   其中 k, p, q, r 為常數。
+
+         (i) 求 k 的取值範圍，使得 (E) 有唯一解。                                     (4 分)
+
+        (ii) 設 𝑘= 2，且 (E) 有多於一個解。求p, q, r 的關係，並於
+
+        p  ,5 q  ,1 r  4 時，解方程組 (E)。                                      (8 分)
+
+
+                         𝑎  𝑎2 + 1  𝑏𝑐
+    (a) Factorize the determinant | 𝑏  𝑏2 + 1  𝑎𝑐 |.                                     (8 marks)
+                              𝑐  𝑐2 + 1  𝑎𝑏
+    (b) Given the system of equations with unknowns x, y and z:
+                      𝑘𝑥+ 𝑦 −𝑧 = 𝑝
+                          (𝐸): { 𝑥+ 𝑘𝑦+ 𝑧 = 𝑞 ,
+                   −𝑥+ 𝑦+ 𝑘𝑧= 𝑟
+
+      where k, p, q, r are constants.
+
+         (i) Find the range of k such that (E) has a unique solution.                         (4 marks)
+        (ii) Suppose 𝑘= 2 and (E) has more than one solution. Find the relation between
+           p, q, and r, and solve the system (E) when p  5 , q ,1  r .4                (8 marks)
+
+
+
+
+
+                                           7

@@ -1,0 +1,40 @@
+2.  (a) 設曲線 y  f ( x ) 通過點  (0,3) 及   f '( x )  x 2  2 x 。3
+
+         (i) 求   f ( x ) 及   f ( x ) 。                                                     (3 分)
+
+          (ii) 求   f (x ) 的局部極大點、局部極小點和拐點。                           (5 分)
+
+          (iii) 繪出曲線 y   f (x ) ，2 x  4 。                                         (3 分)
+
+
+        (iv) 繪出曲線  y   f (  x ) ，4 x  2 。                                      (1 分)
+
+
+    (b) 求由曲線  y  x 2  4 x  3 及  y  3| x  1| 所包圍的區域的面積。          (8 分)
+
+
+
+    (a) Suppose the curve  y  f ( x )  passes through the point (0,3) and   f '( x )  x 2  2 x .3
+
+          (i)  Find   f ( x ) and   f ( x ) .                                                    (3 marks)
+
+          (ii) Find the local maximum points, local minimum points and inflection points
+
+           of   f (x ) .                                                                  (5 marks)
+
+          (iii) Sketch the curve y   f (x ) , 2  x  4 .                                      (3 marks)
+
+
+        (iv) Sketch the curve  y   f (  x ) , 4  x  2 .                                   (1 marks)
+
+
+    (b) Find the area of the region bounded by the curves  y  x 2  4 x  3 and
+
+
+       y  3| x  1| .                                                                   (8 marks)
+
+
+
+
+
+                                                                                      4

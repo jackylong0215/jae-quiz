@@ -1,0 +1,60 @@
+                                                        𝜋       𝜋
+     (c) For 𝑖= 1,2, let 𝑚𝑖= tan 𝜃𝑖 be the slope of 𝐿𝑖 , where − < 𝜃𝑖<                                                               2          2.
+                                               5              3
+     As (ℎ, 𝑘) = (5,4), we have 𝑚1 + 𝑚2 =  and 𝑚1𝑚2 =                                               2                  4.
+                                                         𝜋
+      Suppose the angle between 𝐿1 and 𝐿2 is α, where 0 < α < 2. Then,
+                             tan 𝜃1 −tan 𝜃2    𝑚1 −𝑚2   √(𝑚1 + 𝑚2)2 −4𝑚1𝑚2  2√13
+    tan 𝛼= |tan(𝜃1 −𝜃2)| = |                      | = |             | =              =             .                       1 + tan 𝜃1 tan 𝜃2    1 + 𝑚1𝑚2          |1 + 𝑚1𝑚2|         7
+
+                                                  2√13
+       Hence, the angle between 𝐿1 and 𝐿2 is tan−1        .                                                     7
+
+
+4. (a)
+          𝑧−3𝑧̅ + |𝑧| = −1 + 16𝑖⇒(𝑥+ 𝑦𝑖) −3(𝑥−𝑦𝑖) + √𝑥2 + 𝑦2 = −1 + 16𝑖
+                    ⇒−2𝑥+ √𝑥2 + 𝑦2 + 4𝑦𝑖= −1 + 16𝑖
+                     ⇒{−2𝑥+ √𝑥2 + 𝑦2 = −1 .
+                             4𝑦= 16
+     From the second equation, 𝑦= 4. Solving the first equation with 𝑦= 4, we have
+          −2𝑥+ √𝑥2 + 16 = −1 ⇒√𝑥2 + 16 = 2𝑥−1
+                        ⇒𝑥2 + 16 = (2𝑥−1)2 and 𝑥≥1/2
+                          ⇒3𝑥2 −4𝑥−15 = 0   and 𝑥≥1/2
+                         ⇒(𝑥−3)(3𝑥+ 5) = 0  and 𝑥≥1/2
+                   ⇒𝑥= 3
+     Hence, 𝑤= 3 + 4𝑖.
+
+   (b) (i)
+         cos 3𝜃+ 𝑖sin 3𝜃= (cos 𝜃+𝑖sin 𝜃)3
+               = cos3𝜃+ 3𝑖 cos2𝜃sin 𝜃−3 cos 𝜃sin2 𝜃−𝑖sin3 𝜃
+               = (cos3𝜃−3 cos 𝜃sin2 𝜃) + 𝑖(3cos2𝜃sin 𝜃−sin3 𝜃).
+        Comparing the real and imaginary parts, we get
+               cos 3𝜃= cos3𝜃−3 cos 𝜃sin2 𝜃 and sin 3𝜃= 3cos2𝜃sin 𝜃−sin3 𝜃.
+        Hence,
+                                      sin 3𝜃    (3cos2𝜃sin 𝜃−sin3 𝜃)/cos3𝜃   3 tan 𝜃−tan3 𝜃
+                   tan 3𝜃= cos3𝜃= (cos3𝜃−3 cos 𝜃sin2 𝜃)/cos3𝜃=  1−3 tan2 𝜃.
+
+                          𝜋       𝜋
+           (ii)  Let 𝑥= tan 𝜃, − < 𝜃<   Then,                              2         2.
+
+                     𝑥3 −3√3𝑥2 −3𝑥+ √3 = 0
+                ⇒tan3 𝜃−3√3 tan2 𝜃−3 tan 𝜃+ √3 = 0
+                          3 tan 𝜃−tan3 𝜃
+           ⇒       = √3                         1−3 tan2 𝜃
+               ⇒tan 3𝜃= √3
+                            𝜋
+           ⇒3𝜃=  + 𝑛𝜋, 𝑛 is an integer
+                                3
+                           𝜋   𝑛𝜋
+          ⇒𝜃=  +       , 𝑛 is an integer.
+                                9    3
+
+                𝜋       𝜋                                 2𝜋      𝜋        4𝜋
+          Since − < 𝜃<   the roots of the equation are tan(−  )，tan  and tan    .                   2         2,                                     9        9          9
+                                 𝜋   𝜋                              𝜋 4𝜋    7𝜋
+         [Remark: If we let 0 ≤𝜃<  or < 𝜃< 𝜋, then the values of 𝜃 are     and     .                                      2   2                                         9, 9      9
+                                                2𝜋       7𝜋
+         The answers are the same because tan(−   ) = tan    .]
+                                                       9          9
+
+                                           14

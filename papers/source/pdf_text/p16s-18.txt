@@ -1,0 +1,42 @@
+    3. (a) A right circular cylinder has base radius x ( 0) and volume 54. Let S(x) be the surface area
+          (including the two bases) of the cylinder.
+                                      2  54 
+              (i) Show that S ( x)  2 x  x   .                                             (3 marks)
+
+                dS     d 2 S               (ii) Find    and     2  .                                                         (2 marks)                 dx      dx
+
+               (iii) Sketch the curve y  S(x). Mark in the graph (if any) the local maximum point, local
+          minimum point, and inflection point.                                       (6 marks)
+
+            (iv) If 1  x  6, find the maximum value of S(x).                                  (1 mark)
+
+      (b) Find the area of the region bounded by the curve y  5  x2 and the line y  x  1. (8 marks)
+
+Ans.: (a)  (i)  Let h be the height of the cylinder. In terms of x and h, the volume V and surface area S
+             of the cylinder are given by V  x2h and S  2x2  2xh.
+
+                                       54                                                        54       2  54                                                                                                                                                                                                   From the given, 54 x2h  xh     . ∴ S(x)  2x2  2   2 x            .                                              x                   x                                                                                                                                                                       x  
+
+                                dS                   2                  2      x 3  27               (ii) ∵ S(x)  2(x2  54x1), ∴    22 x  54 x    4x  27 x    4     2     .                                  dx                                     x
+
+              d 2 S                 3      x 3  54       ∴     2  41  54 x    4     3     .               dx                      x
+
+               (iii) From (ii), we see that S'(x)  0 on (0, 3), and               y
+                S'(x)  0 on (3, ). ∴ S(x) is decreasing on
+                                                                                   y  S(x)                (0,  3), and increasing on  (3, ). This
+             implies that the curve has a local minimum
+             point at x  3, and it has no local maximum
+             point (∵ S(x)   as x  0 or ).
+
+        We see from (ii) also that S"(x)  0 on (0,
+            ). This, implies that the curve is concave                                          local minimum
+                                                                                                                                          (3, 54)
+           up throughout (0, ), and hence it has no
+               inflection point.                                                                 2       4       6       8      10      12    x
+
+           The curve y  S(x) is sketched on the right.
+
+            (iv) Since S(1)  110and S(6)  90, we conclude from the graph of y  S(x) that 110is the
+          maximum value of S(x) on [1, 6].
+
+                                                                                18

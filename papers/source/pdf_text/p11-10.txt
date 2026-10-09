@@ -1,0 +1,53 @@
+Part II Problem-solving questions.
+
+                                                     1
+   1. A coin is unfair that the probability of a head facing up is 4.
+
+        (a) Find the probability of obtaining at most one head facing up in 10 successive tosses.       (3 marks)
+        (b) Find the probability that the 10th toss will be the first of obtaining head facing up.         (2 marks)
+        (c) Find the probability that the 10th toss will be the third of obtaining head facing up.        (3 marks)
+
+
+   2. In the right figure, the parabola P : x2 = 4y has its focus F. The
+                         3
+       straight line L1 of slope   passing through the focus F intersects
+                         4
+      the parabola P at points A and B. Another straight line L2 of
+      slope 1 intersects the parabola P at points C and D, and intersects
+      the y-axis at point M.
+
+
+        (a) Find the coordinates of the focus F.                                                     (2 marks)
+        (b) Find the length of segment AB.                                                         (3 marks)
+        (c)  If |DM| = 3|CM|, find the length of segment CD.                                      (3 marks)
+
+   3. Let Sn = 3n+1 −2k be the nth sum of the geometric sequence {an}n≥1. Here k ∈R is a constant.
+
+        (a) Find k and an.                                                                          (3 marks)
+                  1
+        (b) Let bn =  + log2 an. Find the sum Tn of the first n terms for the sequence bn.           (3 marks)
+                  an
+                  2
+        (c) Let cn =      . Find n where f(n) = −5c2n + cn obtains its maximum value.                (2 marks)
+                  an
+                            √
+   4. The minimal positive period of the function f(x) =  3 sin (2wx) −2cos2 (wx) is 3π.
+
+        (a) Find the expression of f(x).                                                            (4 marks)
+        (b) In △ABC, if f(C) = 0 and 2sin2 B = cos B + cos(A −C), find the value of sin A.      (4 marks)
+          
+                     3x + 2y −13 ≥0
+   5. Let x, y satisfy  x ≤5                       .
+                    
+                   2x −2y + 3 ≥0
+
+        (a) Sketch the region satisfying the above system of inequalities.                             (2 marks)
+                 y
+        (b) Let z = x. Find the range of z.                                                         (3 marks)
+        (c) Let t = x2 + y2. Find the minimum value of t.                                           (3 marks)
+
+
+
+
+
+                                          10 / 13

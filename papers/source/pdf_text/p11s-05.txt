@@ -1,0 +1,39 @@
+             𝑥2   𝑦2
+3. 已知橢圓E:  +  = 1 及E 以外的一點 𝐴(ℎ, 𝑘)。設 1L 和 2L 是過點 A 且              9    4
+
+  與 E 相切的兩條直線。
+
+    (a) (i) 證明過點 A 直線 𝑦= 𝑚𝑥+ (𝑘−𝑚ℎ) 與 E 相切當且僅當
+
+                    9𝑚2 −(𝑘−𝑚ℎ)2 + 4 = 0。                             (5 分)
+
+          (ii) 設 𝑚1 和 𝑚2 是 (a)(i)中以 𝑚 為未知量的二次方程的兩個根，證明
+                  2ℎ𝑘         𝑘2−4
+        𝑚1 + 𝑚2 =   及 𝑚1𝑚2 =                                             (3 分)                 ℎ2−9        ℎ2−9。
+
+    (b) 若 1L 與 2L 互相垂直，求點 A 的軌跡。                                       (6 分)
+
+    (c) 若 (ℎ, 𝑘) = (5,4)，求 1L 與 2L 的夾角，答案以 tan−1 表示。                  (6 分)
+
+
+               𝑥2   𝑦2
+   Given ellipse E:  +  = 1 and a point 𝐴(ℎ, 𝑘) outside E. Suppose 1L and 2L                9    4
+
+    are two lines passing through A and tangent to E.
+    (a) (i) Show that the straight line 𝑦= 𝑚𝑥+ (𝑘−𝑚ℎ) that passes through A is
+
+          tangent to the ellipse E if and only if
+                    9𝑚2 −(𝑘−𝑚ℎ)2 + 4 = 0.                             (5 marks)
+        (ii) Let 𝑚1 and 𝑚2 be the two roots of the quadratic equation in unknown m
+                             2ℎ𝑘          𝑘2−4
+          in (a)(i). Show that 𝑚1 + 𝑚2 =      and 𝑚1𝑚2 =                          (3 marks)                            ℎ2−9           ℎ2−9.
+
+    (b) If 1L and 2L are perpendicular, find the locus of A.                             (6 marks)
+    (c) If (ℎ, 𝑘) = (5,4), find the angle between 1L and 2L . Express your answer in
+       terms of tan−1.                                                               (6 marks)
+
+
+
+
+
+                                           5

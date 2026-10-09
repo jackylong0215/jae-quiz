@@ -1,0 +1,43 @@
+3. (a) A right circular cylinder has base radius x ( 0) and volume 54. Let S(x) be the surface area
+      (including the two bases) of the cylinder.
+                                  2  54 
+         (i) Show that S ( x)  2 x  x   .                                             (3 marks)
+
+             dS     d 2 S         (ii) Find    and     2  .                                                         (2 marks)              dx      dx
+
+          (iii) Sketch the curve y  S(x). Mark in the graph (if any) the local maximum point, local
+       minimum point, and inflection point.                                       (6 marks)
+
+        (iv) If 1  x  6, find the maximum value of S(x).                                  (1 mark)
+
+   (b) Find the area of the region bounded by the curve y  5  x2 and the line y  x  1. (8 marks)
+
+
+
+
+4. Given parabola P: y  4x2. Let A(a, 4a2) be a point on P, where a  0.
+   (a)  If the straight line y  mx  c is tangent to P, show that m2  16c  0. Hence, or otherwise,
+     deduce that the slope of the tangent line of P at A is 8a.                        (6 marks)
+
+   (b) Suppose that the tangent line and normal line of P at A intersect the y‐axis at points H and K
+
+                                                       1
+                                                                                      (7 marks)      respectively. Show that the mid‐point of HK is F(0, 16 ).
+
+   (c) Let C be the circle centered at F and passing through A. Show that the angle between the
+      tangent line of P at A and the tangent line of C at A is tan 1 | 8a |.               (7 marks)
+
+
+
+
+5. (a) Let n be a positive integer and Sn  x  2x2  …  nxn, where x  1. By considering Sn  xSn, show
+                                         n 1               x1(  x n )  nx      that S n           2           .                                                     (5 marks)                   1(  x )   1  x
+   (b) Let {na}n 1 be a geometric progression with common ratio r  1, and suppose a1  a2  a321
+     and a1a2a3  216.
+
+         (i)  Find the general term an of the geometric progression.                     (6 marks)
+
+                                                                                            n , n  1, 2, … .                         (9 marks)         (ii) Using the result in (a), find a1a                                                                             1 a2a                                                                                  2  ana
+
+
+                                                                              7

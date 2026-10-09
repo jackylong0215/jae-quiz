@@ -1,0 +1,64 @@
+Suggested Answer
+1.   (a) Since   | BK |2  24 ,   | BM |2  21 and   | MK |2  9 , we have
+
+                                                       | BM |2  | BK |2  | MK |2   3
+              cos MBK                            .
+                                 2| BM || BK |        14
+
+     (b) (i) Since BA  AEHD and MA  AEHD , we have BA  MA .
+
+                              1        1             8
+         (ii) The volume of M  ABD     | MN |     | AB || AD |      .
+                              3        2             3
+
+          Let h be the distance from point D to the plane AMB. Then
+
+                            1   1             2 5h            4
+           the volume of D  AMB   h     | AM || AB |             . Hence h        .
+                            3   2               3              5
+
+
+2.   (a) (i)   f '( x )  3 x 2  6 x  9 and   f "( x )  6 x  6
+         (ii)   f '( x )  0  3 x 2  6 x  9  0  3( x  3)( x  1)  0  x  3 or x .1
+        When x ,1    f '( x )  0 and hence   f ( x )  is increasing.
+
+        When 1  x ,3    f '( x )  0 and hence   f ( x )  is decreasing.
+
+        When 3  x ,   f '( x )  0 and hence   f ( x )  is increasing.
+
+          Thus, f (  1)  7  is local maximum point and   f (3)  25  is a local minimum point.
+
+                   f "( x )  0  6 x  6  0  x .1
+
+        When x ,1  f "( x )  0 and hence   f ( x )  is concave.
+
+        When x ,1  f "( x )  0 and hence   f ( x )  is convex.
+
+          Thus,   f (1)  9  is an inflection point.
+
+             (iii)
+
+
+
+                                     10
+
+                                      5
+                                      0                                x
+                         -4           -2         0         2         4         6
+                                               -5
+                                                y=f(x)
+                                          -10
+
+                                          -15
+
+                                          -20
+
+                                          -25
+
+                                          -30
+
+
+
+
+
+                                                                                     12

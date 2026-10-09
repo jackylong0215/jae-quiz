@@ -1,0 +1,55 @@
+      (iii) Using the result in (ii), we have
+
+
+
+                                             n 1
+                                    n 1   ( a n  1 an ) n      1    n             bn 1    a                                               (1    2 )                                 an              bn           n     a n  n  1       a n   n  1
+
+                       1      n      2( n  1) n      4 n 2  4 n
+                (1         )                
+                     2 n  1  n  1   (2 n  1) n  1    4 n 2  4 n  1
+                1
+
+
+
+5.   (a)
+
+          a  a 2  a 3      1  a  a 2      1   a     a 2
+          b  b 2  b 3  abc 1  b  b 2  abc 0  b  a  b 2  a 2
+           c  c 2  c 3      1  c  c 2      0  c  a  c 2  a 2
+
+                                  1  a   a 2
+                  abc ( b  a )( c  a ) 0  1  b  a  abc ( b  a )( c  a )( c  b )
+                                  0  1  c  a
+
+
+              x  2 y z   3     x  2 y   z 3
+     (b) (i)          
+            2 x  5 y  z  5          y  3 z 1
+
+
+            Let  z .t Then the general solution of the system of equations can be written as
+           x 7t ，5   y ，z3t 1   ，wheret              t is any real number.
+
+            (ii) Substituting the general solution in (i) into the third equation, we get
+            (2  7 p)t  (1  5 p) .q
+
+               2                 5 p q 1
+                If p    then for any q ,  t                  . Hence the solution of the system of
+               7                  2  7 p
+
+
+              3 7q     1  8 p  3q     5 p q 1
+            equations is x              ,  y      ， z                  .
+                       2  7 p       2  7 p        2  7 p
+
+               2                 3
+                If p    then q  (1  5 p)    . Now the general solution of the system of
+               7                 7
+            equations in (b)(i) is the solution of this system of equations.
+
+
+
+
+
+                                                                                     15

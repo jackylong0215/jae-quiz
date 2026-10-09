@@ -1,0 +1,52 @@
+                       a  a 2  a 3
+5.   (a) 因式分解行列式  b  b 2  b 3 。                                           (8 分)
+                          c  c 2  c 3
+
+
+     (b) (i) 求下列方程組的通解:
+
+                         x  2 y z   3
+                            x  5 y  z  5                 2      。                                      (4 分)
+
+           (ii) 利用  (i) 的通解，或用其他方法，求常數 p 和 q 的值使得下列方程組有解，
+
+     並給出方程組的解:
+
+                        x  2 y z   3
+                 2 x  5 y  z  5 。                                      (8 分)
+                                             px   y  z  q                    
+
+
+
+
+
+                             a  a 2  a 3
+     (a) Factorize the determinant  b  b 2  b 3   .                                      (8 marks)
+                                 c  c 2  c 3
+
+
+     (b) (i) Find the general solution of the following system of equations:
+
+                          x  2 y z   3
+                 2 x  5 y  z  5   .                                      (4 marks)                      
+
+         (ii) Using the general solution obtained in (i), or otherwise, find the values of the
+
+          constants p and q such that the following system of equations has a solution, and
+
+          give the solution:
+
+                          x  2 y z   3
+                  2 x  5 y  z  5   .                                     (8 marks)
+                                                 px   y  z  q                      
+
+
+
+
+                   全卷完
+
+                                  End of Paper
+
+
+
+                                                                                      7

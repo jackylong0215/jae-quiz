@@ -1,0 +1,34 @@
+                       1  a 3   bc
+5.  (a) 因式分解行列式  1  b 3  ac 。                                             (8 分)
+                       1  c 3  ab
+
+
+                                                               x  2 y  p z  q
+    (b) 設p 和 q 為常數。已知以  x , y , z 為未知量的方程組  ( E ):    x   y  2 z  1 。
+                               x   py  2 z  0                                                            
+
+
+          (i) 求 p 的取值範圍使得 (E) 有唯一解。                                   (4 分)
+          (ii) 對 p  0 及 q  4 ，求 (E) 的解。                                          (4 分)
+          (iii) 對 p ，求3     q 的值使得 (E) 有解，並求 (E) 的解。                 (4 分)
+
+
+                             1  a 3   bc
+    (a) Factorize the determinant  1  b 3  ac   .                                        (8 marks)
+                             1  c 3  ab
+
+    (b) Let p and q be constants. Given, in unknowns  x , y , z  the system of equations
+
+                x  2 y  p z  q
+            ( E ):    x   y  2 z  1 .
+       x   py  2 z  0             
+
+         (i)  Find the range of p such that (E) has a unique solution.                       (4 marks)
+          (ii) Solve (E) when  p  0 and q  4 .                                         (4 marks)
+          (iii) For  p ,3  find the value of q such that (E) has a solution, and solve (E).    (4 marks)
+
+
+
+
+
+                                                                                      7

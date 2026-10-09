@@ -1,0 +1,63 @@
+                                                          y3
+ 9. The coefficient of the term x4y5 in the expansion of (x + x2)(x + y)8 is (      ).
+
+    A. 65                B. 84                C. 94               D. 127               E. 176
+
+
+10. Given the circle x2 −4x + y2 = 0, the minimum length of the chord intercepted by the circle from a line
+
+    passing through the point (1, 1) is (      ).
+
+                √                     √           √
+    A. 1                 B. 2  3              C. 2                D.  5                E. 2  2
+
+
+11. Given that A is a point on the parabola C : x2 = −py (p > 0), the distance from the point A to the focus of
+
+   C is 15, and the distance from A to the x-axis is 7, then p = (      ).
+
+    A. 14                B. 15                C. 16               D. 28                 E. 32
+
+
+                                                                                      1
+12. In a shooting game, the probabilities of John and Anna hitting the target successfully in each shot are  and
+                                                                                      3
+    2
+    3, respectively. If each of them shoots three times, the probability that the total number of successful hits
+
+   by John and Anna is 4 is (      ).
+
+       16                 64                 25                  58                 34
+    A.                  B.                  C.                 D.                   E.
+       27                 81                 81                 243                243
+
+13. Given Sn be the sum of the first n terms of the arithmetic sequence {an}∞n=1, and 2S23 = 3S2S4, a1 = 4.
+
+   Then a7 = (      ).
+
+    A. −14              B. −8               C. −2              D. 10                 E. 18
+
+
+               
+                               3x + 4y ≤7
+14.  If x, y satisfy the constraints  x −2y ≥−1    , then the maximum value for z = 3x + y is (      ).
+                              
+                              y ≥−1
+
+    A. 4                 B. 6                 C. 7                D. 10                 E. 11
+
+
+15. The function f(x) is defined on R and satisfies f(x) = f(x + 2). For x ∈[4, 6], f(x) = 1 + |x −5|. The
+
+    following inequality (     ) is false.
+
+          π        π                π        π
+    A. f(sin   ) > f(cos   )          B. f(sin   ) > f(cos   )          C. f(cos π) < f(sin π)
+            6         6                  3         3
+
+
+           2π        2π              π        π
+    D. f(sin    ) < f(cos    )        E. f(sin   ) < f(cos   )
+            3          3                2         2
+
+                                         9 / 13

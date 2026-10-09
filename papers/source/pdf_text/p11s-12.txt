@@ -1,0 +1,52 @@
+Suggested Answers:
+
+
+                                                                                     1              𝜋
+1.   (a) From F is the midpoint of BC and |𝐸𝐵| = |𝐸𝐶|, we get 𝐸𝐹⊥𝐵𝐶 and ∠𝐸𝐵𝐹= (𝜋−∠𝐵𝐸𝐶) =                                                                                     2                   4.
+                                           1             1
+       Then, |𝐸𝐹| = |𝐵𝐹| tan(∠𝐸𝐵𝐹) = ( |𝐵𝐶|) ⋅1 =  |𝐴𝐵| = √2.                                           2             2
+                    𝜋
+      From ∠𝐷𝐴𝐵=  and |𝐴𝐷| = |𝐴𝐵|, we get Δ𝐷𝐴𝐵 is equilateral. So, |𝐷𝐵| = |𝐴𝐵| = 2√2.                       3
+      From F is the midpoint of BC and |𝐷𝐵| = |𝐴𝐵| = |𝐷𝐶|, we get 𝐷𝐹⊥𝐵𝐶.
+       Then, |𝐷𝐹|2 = |𝐷𝐵|2 −|𝐵𝐹|2 = 8 −2 = 6.
+                                 |𝐷𝐹|2+|𝐸𝐹|2−|𝐷𝐸|2   6+2−5   √3
+       Hence, cos(∠𝐷𝐸𝐹) =         =    =     .
+                                       2|𝐷𝐹||𝐸𝐹|       2√6√2    4
+
+                                                                                     2
+                                                                                      √26     (b) In ∆𝐸𝐹𝐺, |𝐸𝐺| = |𝐸𝐹| sin(∠𝐷𝐹𝐸) = |𝐸𝐹|√1 −cos2(∠𝐷𝐹𝐸) = √2√1 −(√3) =      .                                                                                   4       4
+                                                                                  3    √38
+        In ∆𝐵𝐹𝐺, |𝐵𝐺| = √|𝐵𝐹|2 + |𝐹𝐺|2 = √2 + |𝐸𝐹|2 cos2(∠𝐷𝐹𝐸) = √2 + 2( 16) =  4  .
+        In ∆𝐸𝐹𝐵, |𝐵𝐸| = √|𝐸𝐹|2 + |𝐵𝐹|2 = √2 + 2 = 2.
+                                                     𝜋
+       Since |𝐸𝐺|2 + |𝐵𝐺|2 = 4 = |𝐵𝐸|2, we have ∠𝐸𝐺𝐵= 2.
+      From 𝐸𝐺⊥𝐷𝐹 and 𝐸𝐺⊥𝐺𝐵, we get 𝐸𝐺⊥𝐴𝐵𝐶𝐷.
+
+                                                                                 1         𝜋
+     (c) From F is the midpoint of BC and |𝐷𝐵| = |𝐷𝐶|(= |𝐵𝐶|), we get ∠𝐵𝐷𝐹= ∠𝐵𝐷𝐶=                                                                                 2            6.
+                                                 𝜋   𝜋   𝜋
+       Join A and G. Since ∠𝐴𝐷𝐺= ∠𝐴𝐷𝐵+ ∠𝐵𝐷𝐹= + =  we have |𝐴𝐺|2 = |𝐴𝐷|2 + |𝐷𝐺|2.                                                        3   6    2,
+                                                                            3√6       Since |𝐷𝐺| = |𝐷𝐹| −|𝐹𝐺| = √6 −|𝐸𝐹| cos(∠𝐷𝐹𝐸) = √6 −√2 (√3) =      ,                                                                          4      4
+                                               54   91
+     we have |𝐴𝐺|2 = |𝐴𝐷|2 + |𝐷𝐺|2 = 8 +  =    .
+                                               16    8
+                                             91   13
+       Hence, |𝐴𝐸| = √|𝐴𝐺|2 + |𝐸𝐺|2 = √ +  = √13.                                            8    8
+
+
+2.   (a)(i) 𝑓′(𝑥) = 3𝑥2 −12, 𝑓′′(𝑥) = 6𝑥.
+
+        (ii) 𝑓′(𝑥) = 0 ⇔𝑥= −2 or 𝑥= 2.
+      When 𝑥< −2, 𝑓′(𝑥) > 0, and thus 𝑓(𝑥) is increasing.
+      When −2 < 𝑥< 2, 𝑓′(𝑥) < 0, and thus 𝑓(𝑥) is decreasing.
+      When 2 < 𝑥, 𝑓′(𝑥) > 0, and thus 𝑓(𝑥) is increasing.
+        Hence, 𝑓(−2) = 22 is a local maximum value and 𝑓(2) = −10 is a local minimum value.
+
+        (iii) 𝑓′′(𝑥) = 0 ⇔𝑥= 0. When 𝑥< 0, 𝑓′′(𝑥) < 0; when 𝑥> 0, 𝑓′′(𝑥) > 0.
+        Hence, (0,6) is an inflection point of the curve 𝑦= 𝑓(𝑥).
+
+
+
+
+
+                                           12

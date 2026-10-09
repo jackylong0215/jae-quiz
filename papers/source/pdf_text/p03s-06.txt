@@ -1,0 +1,42 @@
+4. 設  i    1 。
+
+                 1  i
+    (a) 設複數  z    。
+                1   3i
+
+          (i) 按極式  r (cos   i sin ) 表示  z ，其中       。                (4 分)
+
+          (ii) 求  z 2019 。                                                              (4 分)
+
+    (b) (i) 用棣美弗定理，證明
+
+          cos7  64cos 7   112cos 5   56cos 3   7cos  。                     (6 分)
+
+          (ii) 用  (i) 的結果及代換 x  4cos 2  ，解方程  x 3  7 x 2  14 x  7  0 。     (6 分)
+
+
+
+
+   Let  i    1 .
+
+                            1  i
+    (a) Let complex number  z              .
+                           1   3i
+
+         (i) Express z in polar form  r (cos   i sin ) ,       .                   (4 marks)
+
+          (ii) Find  z 2019 .                                                              (4 marks)
+
+    (b) (i) Using De Moivre’s theorem, show that
+
+          cos7  64cos 7   112cos 5   56cos 3   7cos  .                       (6 marks)
+
+          (ii) Using the result in (i) and the substitution  x  4cos 2  , solve the equation
+
+            x 3  7 x 2  14 x  7  0 .                                                  (6 marks)
+
+
+
+
+
+                                                                                      6

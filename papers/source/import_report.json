@@ -1,0 +1,126 @@
+{
+  "pdfs": 18,
+  "pages": 268,
+  "importedQuestions": 225,
+  "translatedOptions": 675,
+  "officialMcqAnswersVerified": 135,
+  "writtenQuestionMarksVerified": 90,
+  "questionAndOptionMathSpans": 3810,
+  "totalQuestions": 245,
+  "papers": 19,
+  "sourceIssues": [],
+  "method": "local-only; no external service calls",
+  "explanationScope": "Existing explanations retained except explicit corrections; not comprehensively rechecked or translated.",
+  "date": "2026-10-09",
+  "corrections": [
+    {
+      "ids": [
+        "p01-w1",
+        "p01-w2",
+        "p01-w3",
+        "p01-w4",
+        "p01-w5"
+      ],
+      "change": "Move incorrectly attributed 2018 supplementary questions from p01 to p02s; preserve question IDs."
+    },
+    {
+      "ids": [
+        "p02-w6",
+        "p02-w7",
+        "p02-w8",
+        "p02-w9",
+        "p02-w10"
+      ],
+      "change": "Move 2019 supplementary questions to newly indexed paper p03s; normalise question numbers to 1–5."
+    },
+    {
+      "ids": [
+        "p01-2017-w1",
+        "p01-2017-w2",
+        "p01-2017-w3",
+        "p01-2017-w4",
+        "p01-2017-w5"
+      ],
+      "change": "Restore actual 2017 supplementary questions and concise official answers from the local PDF."
+    },
+    {
+      "ids": [
+        "p16-w6",
+        "p16-w7",
+        "p16-w8",
+        "p16-w9",
+        "p16-w10"
+      ],
+      "change": "Remove duplicate mock supplementary entries; retain aliases to p16s-w1 through p16s-w5."
+    },
+    {
+      "ids": [
+        "p01-w5",
+        "p07-w10",
+        "p11-w10",
+        "p13-w10"
+      ],
+      "change": "Restore omitted systems and symbolic parameter equations from source PDFs."
+    },
+    {
+      "ids": [
+        "p07-w10"
+      ],
+      "change": "Correct determinant answer to include the -1 term, as printed in the official answer; remove the legacy explanation incorrectly assuming a paper typo."
+    },
+    {
+      "ids": [
+        "p01-w5",
+        "p11-w10",
+        "p13-w10"
+      ],
+      "change": "Correct explanations affected by restored equations."
+    },
+    {
+      "ids": [
+        "p01-w1",
+        "p13-w4"
+      ],
+      "change": "Correct square centre/angle notation and closed-interval wording."
+    },
+    {
+      "ids": [
+        "p00-w1",
+        "p00-w5",
+        "p05-w2",
+        "p11-w1",
+        "p01-w3",
+        "p01-w4"
+      ],
+      "change": "Restore omitted subpart marks and check all 90 written questions against source marks."
+    },
+    {
+      "ids": [
+        "p01-2017-w1",
+        "p16s-w1",
+        "p11-w5"
+      ],
+      "change": "Add 2017 geometry crop; repair mock diagram filename; remove nonexistent question diagram that belongs to a solution."
+    },
+    {
+      "ids": [
+        "p17"
+      ],
+      "change": "Preserve all 20 existing 2026 question records; correct catalog written count and standard-paper maximum score."
+    }
+  ],
+  "retainedQuestionsOutsideUploadedCorpus": 20,
+  "existingSessionsPreserved": 16,
+  "validation": {
+    "backendTests": 17,
+    "browserTests": 6,
+    "mathRender": {
+      "formulasRendered": 12695,
+      "parseErrors": 0,
+      "scope": "All persisted question, option, answer and explanation math fields; existing 2026 explanations retain two font-metric warnings for circled labels."
+    },
+    "frontendBuild": "passed",
+    "frontendLint": "passed with existing warnings"
+  },
+  "deployment": "Local workspace updated. Uploaded PDF content has not been sent to an AI service or published by this import."
+}

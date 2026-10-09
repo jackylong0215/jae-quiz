@@ -1,0 +1,43 @@
+ 8. If a  2 and ax  2  2x  3, then
+          5             5              5              5              5
+   A. x a  2     B.  x a  2     C.  x a  2     D. x 2  a      E.  x a  2
+
+
+ 9. If 1 log10 y  1  log10 x , then      2
+   A.  y  10 x     B. y  100x2      C. y  (10  x)2   D. y  10x2       E. None of the above
+
+
+     2       x  110.   2      2          x  1  x  2 x  3
+         x 2  2 x  5                x 2  2 x  7                  x 2  5   A.                           B.                           C.         ( x  1)( x  1)( x  )3                   ( x  1)( x  1)( x  )3                  ( x  3)( x  1)( x  )1
+            x 2  5                   x 2  4 x  7   D.                             E.         ( x  3)( x  1)( x  )1                  ( x  3)( x  1)( x  )1
+
+
+11. There are 2 boys and 3 girls to attend a lecture. They take a 5 seat row in the classroom. How many
+    different possible ways of sitting are there if 2 boys are required to sit together?
+   A. 12           B. 24           C. 36          D. 48            E. None of the above
+
+
+12. In a geometric sequence, all numbers are positive. Any term of the sequence is always equal to the sum
+    of the next two terms. Determine the value of the common ratio.
+                       5              5  1         1  5           2   A. 1            B.              C.              D.               E.
+                      2               2              2             5
+
+
+13. Find the area of the inscribed regular octagon in a circle of radius 1.
+   A.  2           B. 2 2         C. 3 2         D.  2          E. 4 2
+
+
+14. If tan  2, where lies in the third quadrant, what is the value of sin cos?
+   A.  1          B.  1          C.  3         D.  1            E.  3
+        2               5              5            5              5
+
+
+15. If two lines ax  by  c  0 and px  qy  r  0 are perpendicular, which of the following is true?
+   A. aq  bp                    B. ap  bq  0                 C. ac  br
+   D. ap  cr  0                   E. None of the above
+
+
+
+
+
+                                                                                                               12

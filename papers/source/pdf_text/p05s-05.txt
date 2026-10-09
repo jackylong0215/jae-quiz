@@ -1,0 +1,41 @@
+3. 已知直線 𝐿: 3𝑥+ 𝑦−4 = 0 與圓 𝐶: 𝑥2 + 𝑦2 + 6𝑥+ 4𝑦+ 𝑘= 0 相交於
+
+  不同的兩點 𝐴(𝑥1, 𝑦1) 和 𝐵(𝑥2, 𝑦2)。
+    (a) 求一條以 𝑥1 和 𝑥2 為根的二次方程。                                      (3 分)
+
+    (b) 證明:
+
+                             32+𝑘
+          (i) 𝑥1 + 𝑥2 = 3 及 𝑥1𝑥2 =         ;                                           (2 分)                                10
+               288+9𝑘
+         (ii) 𝑦1𝑦2 =      −20 ;                                                     (3 分)                  10
+        (iii) 𝑥𝑖2 + 𝑦𝑖2 = 6𝑥𝑖−16 −𝑘, 𝑖= 1, 2。                                       (3 分)
+
+    (c) 設 𝑂 為原點及 ∠𝐴𝑂𝐵 為一直角。
+
+          (i) 求 𝑘 的值。                                                               (4 分)
+
+         (ii) 求三角形 𝐴𝑂𝐵 的面積。                                                  (5 分)
+
+
+   Given that the straight line 𝐿: 3𝑥+ 𝑦−4 = 0 and the circle 𝐶: 𝑥2 + 𝑦2 + 6𝑥+ 4𝑦+ 𝑘= 0
+    intersect at two distinct points 𝐴(𝑥1, 𝑦1) and 𝐵(𝑥2, 𝑦2).
+    (a) Find a quadratic equation with roots 𝑥1 and 𝑥2.                               (3 marks)
+
+    (b) Show that:
+
+                              32+𝑘
+          (i) 𝑥1 + 𝑥2 = 3 and  𝑥1𝑥2 =         ;                                          (2 marks)                                  10
+               288+9𝑘
+         (ii) 𝑦1𝑦2 =      −20 ;                                                     (3 marks)                  10
+        (iii) 𝑥𝑖2 + 𝑦𝑖2 = 6𝑥𝑖−16 −𝑘, 𝑖= 1, 2.                                         (3 marks)
+    (c) Let 𝑂 be the origin and ∠𝐴𝑂𝐵 be a right angle.
+          (i) Find the value of 𝑘.                                                        (4 marks)
+
+         (ii) Find the area of the triangle 𝐴𝑂𝐵.                                          (5 marks)
+
+
+
+
+
+                                                                                      5

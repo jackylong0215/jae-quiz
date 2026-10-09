@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from localization import (LanguageMiddleware, EnglishTranslator, ENGLISH_INSTRUCTION, get_language, localized_messages)
+from question_bank import bilingual_fields
 from sqlalchemy.orm import Session
 from openai import AsyncOpenAI
 import pymupdf as fitz
@@ -92,11 +93,12 @@ def require_admin(current_user: User = Depends(get_current_user)):
 
 @app.get("/admin/stats")
 def admin_stats(admin: User = Depends(require_admin), db: Session = Depends(get_db)):
+    papers = get_prestored_papers()['papers']
     return {
         "用戶總數": db.query(User).count(),
         "管理員數": db.query(User).filter(User.is_admin == True).count(),
-        "題庫總數": 245,
-        "試卷總數": 20,
+        "題庫總數": sum(p.get('questionCount', 0) for p in papers),
+        "試卷總數": len(papers),
     }
 
 
@@ -158,6 +160,10 @@ if os.path.isdir(DIAGRAMS_DIR):
     print(f"[DEBUG] /diagrams mounted successfully", flush=True)
 else:
     print(f"[WARN] DIAGRAMS_DIR not found, /diagrams NOT mounted", flush=True)
+
+PDFS_DIR = find_data_file('pdfs')
+if os.path.isdir(PDFS_DIR):
+    app.mount('/papers', StaticFiles(directory=PDFS_DIR), name='source_papers')
 
 
 @app.on_event("startup")
@@ -1646,6 +1652,8 @@ def get_prestored_questions(paper_id: Optional[str] = None):
         "數列與級數": "Sequences", "比例與應用": "Algebra",
         "百分率與立體幾何": "Geometry", "統計": "Statistics",
         "解析幾何": "Geometry", "集合與不等式": "Algebra",
+        "立體幾何": "Geometry", "微積分": "Calculus",
+        "線性代數": "Algebra", "複數": "Algebra", "複數與三角函數": "Trigonometry",
     }
 
     papers_map = {}
@@ -1662,10 +1670,7 @@ def get_prestored_questions(paper_id: Optional[str] = None):
     for q in raw_questions:
         if paper_id and q.get("paperId") != paper_id:
             continue
-        opts_zh = {}
-        if "options" in q and isinstance(q["options"], list):
-            for opt in q["options"]:
-                opts_zh[opt.get("id", "")] = opt.get("text", "")
+        bilingual = bilingual_fields(q)
 
         diff_val = q.get("difficulty")
         points = q.get("points", 0)
@@ -1684,38 +1689,35 @@ def get_prestored_questions(paper_id: Optional[str] = None):
         cat = topic_cat_map.get(q.get("topic"), "Other")
 
         paper_title = papers_map.get(q.get("paperId", ""), q.get("paperId", ""))
-        real_en = q.get("english") or q.get("question_en") or ""
-
         mapped.append({
+            **bilingual,
+            "id": q.get("id"),
+            "paper_id": q.get("paperId"),
+            "source": q.get("source"),
             "question_number": f"第 {q.get('number', 1)} 題",
             "question_type": "MCQ" if q.get("questionType") == "multiple_choice" else "Long",
-            "raw_text_zh": q.get("question", ""),
-            "raw_text_en": real_en,
             "answer": q.get("answer", ""),
-            "solution": q.get("explanation", "") or (f"答案為 {q.get('answer')}" if q.get('answer') else ""),
-            "options": opts_zh,
-            "options_zh": opts_zh,
-            "options_en": opts_zh,
+            "solution": (bilingual['solution_en'] if get_language() == 'en' else '') or bilingual['solution_zh'] or (f"答案為 {q.get('answer')}" if q.get('answer') else ""),
             "main_category": cat,
             "sub_topics": [t for t in [q.get("topic"), q.get("subtopic")] if t],
             "difficulty": diff_str,
             "score": q.get("points", 4),
             "has_diagram": bool(q.get("diagram")),
+            "diagram_alt": q.get('diagramAlt_en') if get_language() == 'en' else q.get('diagramAlt'),
             "diagram_image": (
                 f"/diagrams/{os.path.basename(q['diagram'])}"
             ) if q.get("diagram") else None,
             "source_paper": paper_title
         })
 
-    seen_texts = set()
+    seen_ids = set()
     deduped = []
     for q in mapped:
-        text_key = (q.get("raw_text_zh") or q.get("raw_text_en") or "")
-        text_key = "".join(text_key.split())[:100]
-        if text_key and text_key in seen_texts:
+        identity = q.get('id')
+        if identity and identity in seen_ids:
             continue
-        if text_key:
-            seen_texts.add(text_key)
+        if identity:
+            seen_ids.add(identity)
         deduped.append(q)
 
     print(f"[DEDUP] {len(mapped)} -> {len(deduped)} after dedup")
@@ -2589,21 +2591,8 @@ async def practice_by_topic(
 
     def normalize(q):
         raw = dict(q)
-        if not raw.get("raw_text_zh"):
-            raw["raw_text_zh"] = q.get("question", "") or q.get("question_zh", "")
-
-        if not raw.get("options_zh"):
-            opts = q.get("options")
-            opts_zh = {}
-            if isinstance(opts, list):
-                for o in opts:
-                    key = (o.get("id") or o.get("letter") or "").upper()
-                    if key:
-                        opts_zh[key] = o.get("text", "")
-            elif isinstance(opts, dict):
-                opts_zh = opts
-            raw["options_zh"] = opts_zh
-            raw["options_en"] = opts_zh
+        raw.update(bilingual_fields(q))
+        raw['solution'] = (raw['solution_en'] if get_language() == 'en' else '') or raw['solution_zh']
 
         if not raw.get("question_number"):
             raw["question_number"] = f"第 {q.get('number', 1)} 題"
@@ -2632,6 +2621,8 @@ async def practice_by_topic(
                 "數列與級數": "Sequences", "比例與應用": "Algebra",
                 "百分率與立體幾何": "Geometry", "統計": "Statistics",
                 "解析幾何": "Geometry", "集合與不等式": "Algebra",
+                "立體幾何": "Geometry", "微積分": "Calculus",
+                "線性代數": "Algebra", "複數": "Algebra", "複數與三角函數": "Trigonometry",
             }
             raw["main_category"] = topic_cat_map.get(q.get("topic"), "Other")
 

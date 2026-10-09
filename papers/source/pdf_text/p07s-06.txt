@@ -1,0 +1,32 @@
+4.  (a) 已知 恆等式 sin(𝑋+ 𝑌) = sin 𝑋cos 𝑌+ cos 𝑋sin 𝑌，證明恆等式
+
+                                       𝐴+𝐵    𝐴−𝐵
+                         sin 𝐴+ sin 𝐵= 2 sin    cos  。                          (2 分)
+                                                2       2
+
+                                                       𝐴    𝐵    𝐶
+    (b) 設 𝐴+ 𝐵+ 𝐶= 𝜋，證明 sin 𝐴+ sin 𝐵+ sin 𝐶= 4 cos  cos  cos              (7 分)                                                               2    2   2。
+
+    (c) (i) 用數學歸納法，證明對任意正整數n，
+
+           2 sin 𝑥[cos 𝑥+ cos 3𝑥+ ⋯+ cos(2𝑛−1)𝑥] = sin 2𝑛𝑥。               (7 分)
+
+         (ii) 用 (i) 的結果，解 cos x  cos3 x  cos5 x  0 ，其中 0 ≤𝑥≤2𝜋。           (4 分)
+
+
+    (a) Given the identity sin(𝑋+ 𝑌) = sin 𝑋cos 𝑌+ cos 𝑋sin 𝑌. Prove the identity
+
+                                         𝐴+𝐵    𝐴−𝐵
+                           sin 𝐴+ sin 𝐵= 2 sin    cos       .                          (2 marks)
+                                                   2       2
+                                                               𝐴    𝐵    𝐶
+    (b) Suppose 𝐴+ 𝐵+ 𝐶= 𝜋. Show that sin 𝐴+ sin 𝐵+ sin 𝐶= 4 cos  cos  cos     (7 marks)                                                                        2    2     2.
+    (c) (i) Use mathematical induction to show that for any positive integer n,
+           2 sin 𝑥[cos 𝑥+ cos 3𝑥+ ⋯+ cos(2𝑛−1)𝑥] = sin 2𝑛𝑥.                 (7 marks)
+         (ii) Using the result in (i), solve cos x  cos3 x  cos5 x  0 , where 0 ≤𝑥≤2𝜋.    (4 marks)
+
+
+
+
+
+                                           6

@@ -1,0 +1,54 @@
+任擇三題作答，每題二十分。請把答案寫在緊接每條題目之後的3 頁橫間頁內。
+
+Answer any 3 questions, each carries 20 marks. Write down the answers on the 3 lined pages
+
+following each question.
+
+1.
+
+
+
+
+               P
+
+
+
+
+                      B
+                                      C
+
+               N
+
+
+           A       M        D
+
+
+   如上圖所示，PAB 是邊長為1 的等邊三角形，ABCD 是一長方形，
+
+               | BC |   2 ，平面 PAB 與平面 ABC 垂直，M 和N 分別為 AD 和AB
+
+   的中點。
+        (a) (i) 證明 PN 垂直平面 ABC，從而求三棱錐 P-BCM 的體積。          (5 分)
+              (ii) 求三角形 PBM 的面積，從而求點 C 至平面 PBM 的距離。     (6 分)
+        (b) (i) 證明  NMC 是一直角。[提示: 考慮三角形NMC 的邊長。]       (4 分)
+              (ii) 求二面角 N  MC  P 。[提示: 證明 PM  MC 。]                (5 分)
+
+
+       In the above figure, PAB is an equilateral triangle with edge length 1, ABCD is a
+
+        rectangle,   | BC |   2 , plane PAB and plane ABC are perpendicular, M and N
+
+       are the midpoints of AD and AB, respectively.
+        (a) (i) Show that PN is perpendicular to the plane ABC. Hence find the
+           volume of the triangular pyramid P-BCM.                                (5 marks)
+             (ii) Find the area of the triangle PBM. Hence find the distance from point
+        C to the plane PBM.                                                    (6 marks)
+        (b) (i) Show that  NMC  is a right angle. [Hint. Consider the lengths of the
+              sides of triangle NMC .]                                               (4 marks)
+             (ii) Find the dihedral angle N  MC  P . [Hint. Show that PM  MC .]   (5 marks)
+
+
+
+
+
+                                                                                      3

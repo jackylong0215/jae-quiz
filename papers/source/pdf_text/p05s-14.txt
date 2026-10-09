@@ -1,0 +1,42 @@
+    (c) (i) If one of OA and OB is horizontal, then the other one is vertical. In this case,
+         𝑥1𝑥2 = 0 and 𝑦1𝑦2 = 0. Form (b) (i) and (ii), we get a contradiction.
+         Suppose the slopes of OA and OB are 𝑚1 and 𝑚2, respectively. We have
+                                𝑦1𝑦2         288+9𝑘          32+𝑘
+          𝑚1𝑚2 = −1 ⇒   = −1 ⇒    −20 = −  ⇒𝑘= −12.                                𝑥1𝑥2            10              10
+         (ii) When 𝑘= −12, 𝑥1𝑥2 = 2. The area of ∆𝑂𝐴𝐵 is
+            1             1    2         2     2   1           |𝑂𝐴||𝑂𝐵| =
+            2                          2 √𝑥1 + 𝑦12√𝑥2 + 𝑦2 = 2 √6𝑥1 −4√6𝑥2 −4
+             = √9𝑥1𝑥2 −6(𝑥1 + 𝑥1) + 4 = √9(2) −6(3) + 4 = 2.
+
+
+4.  (a) Let 𝑃(𝑘) be the proposition “ 𝑧𝑘= cos 𝑘𝛼+ 𝑖sin 𝑘𝛼 ”. When 𝑘= 1, P (1) is
+
+       obviously true. Suppose 𝑃(𝑘) is true for some positive integer k . That is,
+    𝑧𝑘= cos 𝑘𝛼+ 𝑖sin 𝑘𝛼. Then,
+           𝑧𝑘+1 = 𝑧𝑘𝑧
+          = (cos 𝑘𝛼+ 𝑖sin 𝑘𝛼)(cos 𝛼+ 𝑖sin 𝛼)
+          = (cos 𝑘𝛼cos 𝛼−sin 𝑘𝛼sin 𝛼)+i(sin 𝑘𝛼cos 𝛼+ cos 𝑘𝛼sin 𝛼)
+
+          = cos(𝑘+ 1)𝛼+ 𝑖sin(𝑘+ 1)𝛼.
+
+     Hence 𝑃(𝑘+ 1) is also true.
+
+     By the principle of mathematical induction, 𝑃(𝑘) is true for any positive integer 𝑘.
+    (b)(i) 𝑧𝑧̅ = (cos 𝛼+ 𝑖sin 𝛼)(cos 𝛼−𝑖sin 𝛼) = cos2𝛼+ sin2 𝛼= 1.
+
+       (1 −𝑧)(1 −𝑧̅) = 1 −(𝑧+ 𝑧̅) + 𝑧𝑧̅ = 1 −2 cos 𝛼+ 1 = 2 −2 cos 𝛼.
+
+       (ii) As 𝑧≠1, the result follows from
+                (1 −𝑧)(𝑧+ 𝑧2 + ⋯+ 𝑧𝑛) = 𝑧−𝑧𝑛+1 = 𝑧(1 −𝑧𝑛).
+
+      As cos 𝛼≠1, which means 𝑧≠1, we have
+          cos 𝛼+ cos 2𝛼+ ⋯+ cos 𝑛𝛼= Re(𝑧+ 𝑧2 + ⋯+ 𝑧𝑛)
+
+               𝑧(1−𝑧𝑛)        𝑧(1−𝑧𝑛)(1−𝑧̅)   Re(𝑧𝑛+𝑧−𝑧𝑛+1−1)   cos𝑛𝛼+cos𝛼−cos(𝑛+1)𝛼−1
+     = Re    = Re       =         =                    .               1−𝑧           (1−𝑧)(1−𝑧̅)       2−2 cos𝛼              2−2 cos𝛼
+
+
+
+
+
+                                                                                  14

@@ -1,0 +1,44 @@
+     (b) f(x) is defined on the closed interval [−1, 1]. Thus f(x) = a −(3 −x) −(7 −x) = 2x + (a −10)
+       and g(x) = xf(x) = 2x2 + (a −10)x. The axis of symmetry for g(x) is x0 = −a −10 .
+                                                                            4
+              i.)  If −a −10 ∈[−1, 1], i.e., a ∈[6, 14], then the minimum value of g(x) is −(a −10)2 = −1,
+                 4                                                             8
+               √
+            giving a = 10 ± 2  2.
+
+             ii.)  If −a −10 ≥1, i.e., a ≤6, then g(x) achieves its minimum value at x = 1. That is, 2+(a−10) =
+                 4
+
+          a −8 = −1, and a = 7. This does not satisfy the condition.
+
+            iii.) If −a −10 ≤−1, i.e., a ≥14, then g(x) achieves its minimum value at x = −1. That is
+                 4
+
+           2 −(a −10) = −1, and a = 13. This does not satisfy the condition.
+
+                 √
+        In conclusion, a = 10 ± 2  2.
+
+
+                                                             √      √
+5.   (a) Point A lies on the hyperbola, so  8 −9 = 1. Also, since the eccentricity e =   a2+b2 =   10 , it is                                                  a2     b2                                              a         2
+
+        easy to find a2 = 2 and b2 = 3. Therefore, the equation of the hyperbola is x2 −y2 = 1.                                                                                                2     3
+
+     (b) Suppose the intersection points of the line l and the hyperbola C are P(x1, y1) and Q(x2, y2). By
+
+        solving the equations of line l and hyperbola C together, we have 3x2 −2(x + m)2 −6 = 0, i.e.,
+
+        x2 −4mx −2m2 −6 = 0. According to Vieta’s formulas, x1 + x2 = 4m and x1x2 = −2m2 −6.
+
+        Since OP ⊥OQ, we have y1y2 + x1x2 = 0. Noting that points P and Q lie on the line l, we get
+
+        (x1 + m)(x2 + m) + x1x2 = 0. Simplifying, we obtain 2x1x2 + m(x1 + x2) + m2 = 0. From Vieta’s
+                                              √
+        formulas, we have 2(−2m2 −6) + 4m2 + m2 = 0, which gives m2 = 12, so m = ±2  3.
+
+
+
+
+
+                                        13 / 13

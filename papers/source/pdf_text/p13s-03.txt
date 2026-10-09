@@ -1,0 +1,52 @@
+任擇三題作答，每題二十分。請把答案寫在緊接每條題目之後的3 頁橫間頁內。
+
+Answer any 3 questions, each carries 20 marks. Write down the answers on the 3 lined pages following each
+
+question.
+
+   1.
+
+
+
+                          P        C
+
+
+               D
+
+                                             B
+
+                        A
+
+   如上圖，𝐴𝐵𝐶𝐷 是四邊形，𝐴𝐵𝐶 是等邊三角形，𝑃𝐴𝐷 是以 𝑃𝐷 為斜邊的
+
+                       𝜋        𝜋
+   等腰直角三角形。∠𝑃𝐴𝐶= 2，∠𝑃𝐶𝐴= 6，|𝑃𝐴| = 1 及 |𝐶𝐷| = 2。
+
+       (a) 證明 𝐷𝐴 與 𝑃𝐶 垂直。                                                      (6 分)
+
+       (b) 求三棱錐 𝑃𝐵𝐶𝐷 的體積。                                                  (6 分)
+
+       (c) 求平面 𝐴𝑃𝐷 和平面 𝐶𝑃𝐷 的二面角的餘弦值。
+
+      [提示: 設 𝑀 為 𝐷𝑃 的中點。]                                               (8 分)
+
+      In the above figure, 𝐴𝐵𝐶𝐷 is a quadrilateral, 𝐴𝐵𝐶 is an equilateral triangle, 𝑃𝐴𝐷 is
+
+                                            𝜋       𝜋
+      a right-angled isosceles triangle with hypotenuse 𝑃𝐷. ∠𝑃𝐴𝐶= 2, ∠𝑃𝐶𝐴= 6,
+
+      |𝑃𝐴| = 1 and |𝐶𝐷| = 2.
+
+       (a) Show that 𝐷𝐴 and 𝑃𝐶 are perpendicular.                                      (6 marks)
+
+       (b) Find the volume of the triangular pyramid 𝑃𝐵𝐶𝐷.                             (6 marks)
+
+       (c) Find the cosine of the dihedral angle between plane 𝐴𝑃𝐷 and plane 𝐶𝑃𝐷.
+
+          [Hint. Let 𝑀 be the mid-point of 𝐷𝑃.]                                         (8 marks)
+
+
+
+
+
+                                               3

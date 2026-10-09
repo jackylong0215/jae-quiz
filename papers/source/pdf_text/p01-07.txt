@@ -1,0 +1,57 @@
+3.  Let L : y  mx  c  ( m  0 ) be a tangent line of the parabola P : y 2  2 x .
+
+                   1
+    (a) Show that c        .                                                             (6 marks)
+                  2 m
+
+    (b) Suppose  1L and L2  are two different tangent lines of the parabola P and their
+
+       slopes are nonzero numbers m1 and m2 , respectively.
+
+          (i) Find the intersection point A of  1L and L2 . Express your answer in terms of
+
+      m1 and m2 .                                                               (7 marks)
+          (ii) Suppose m1 m2  1 . Find the locus of point A.                              (7 marks)
+
+
+4.  Let  i    1 .
+    (a) Let  z  cos i sin, where   is a real number.
+
+          (i) Use mathematical induction to show that  zn  cos n i sin n for all positive
+
+          integers n.                                                                   (6 marks)
+
+                                                                   n   1
+          (ii) Show that for all positive integers n,  z    n  2 cos n.                     (5 marks)                                                      z
+
+    (b) Using the result in (a) (ii), prove the identity 8 cos 4  cos 4 4 cos 2 3 .      (5 marks)
+    (c) Using the result in (b), find the general solution of cos 4 4 cos 2 1  0 .      (4 marks)
+
+
+                            1  a 2  b  c
+5.  (a) Factorize the determinant  1  b 2  c  a  .                                      (8 marks)
+                            1  c 2  a  b
+
+                                                  x　 2 y　 5 z  2
+    (b) Find the general solution of the system of equations                             .         (3 marks)
+                                                 3 x   y   z  13
+
+    (c) Given a system of equations with unknowns x, y and z:
+
+                              x 　 2 y　 5 z  2
+                               (E):    3 x   y   z  13 ,
+                                px   y   z  3                                                          
+
+      where p is a constant.
+
+          (i) Find the range of p such that (E) has a unique solution.                        (3 marks)
+
+          (ii) Using the general solution in (b), find the range of p such that (E) has a unique
+           positive solution  ( x, y , z ) , i.e.  x  ,0 y  ,0 z  0 .                            (6 marks)
+
+
+                                  End of Paper
+
+
+
+                                                                                      7

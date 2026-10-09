@@ -1,0 +1,43 @@
+Part II Problem-solving questions.
+
+
+1.  Given that the graph C of the quadratic function  f ( x)  ax 2  bx  c passes through the point (5, 0). Its
+    axis of symmetry is x  2 , and the minimum value of  f (x ) is 9.
+    (a) Find the values of a, b and c.                                                          (3 marks)
+    (b) Find the expression of the function after shifting the graph C to the left by 3 units, and then shifting
+           it up by 3 units.                                                                       (2 marks)
+    (c) Let g ( x )  f ( 3 sin x ) . Find the maximum and minimum values of g (x ) .                (3 marks)
+
+
+
+                                                                             nan2.  Let {a n } n 1 be a geometric sequence with 1 as the first term, and sequence {nb }n 1 is given as bn         .                                                                              4
+   Suppose that 1a , 4a 2 , 16a 3 form an arithmetic sequence.
+    (a) Find the general terms for {a n } n 1 and {nb }n 1 .                                        (3 marks)
+    (b) Find S n , sum of the first n terms for {a n } n 1 , and nT , sum of the first n terms for {nb }n 1 .
+                                                                                             (5 marks)
+
+
+                                          x 2   y 2                23.  Suppose the eccentricity of the ellipse C :                                                                             1  ( a b  0 ) is        , and ( 2  2 , 4 ) is a point lying                                                                 2                                                                        2                                     b   a                2
+   on C.
+    (a) Find the equation of C.                                                               (3 marks)
+    (b) Let L : y  k1 x  b be one line which does not pass through the origin O and is not parallel to the
+       coordinate axes. There are two intersections A and B for the line L and the ellipse C. The midpoint
+       of the line segment AB is M, and the slope of the line OM is k 2 . Show that k1 k 2  2 .   (5 marks)
+
+
+ 4. (a) Express  3 cos sin in the form of r cos( ) , and find the range of  3 cos sin.
+                                                                                             (2 marks)
+    (b) Solve  3 cos sin 1 for 0   2. Answer is to be presented in radians.         (3 marks)
+                        1                                 (c) If  3 cos sin     , and 0   , find sin               .                              (3 marks)                        2                                                     2 12 
+
+
+
+ 5. Prove by mathematical induction that 3 4 n 2  5 2 n 1 is divisible by 14 for any positive integer n.
+
+                                                                                             (8 marks)
+
+
+
+
+
+                                                  11
