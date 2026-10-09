@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 import time
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,6 +44,14 @@ def main():
     if urlsplit(base_url).scheme != 'https' or not commit:
         print('BACKEND_URL (HTTPS) and EXPECTED_COMMIT are required.', file=sys.stderr)
         return 1
+    expected_service = os.getenv('EXPECTED_RENDER_SERVICE_ID', '')
+    if expected_service and parsed.path.rstrip('/').split('/')[-1] != expected_service:
+        print('The configured Deploy Hook belongs to a different Render service. Replace RENDER_DEPLOY_HOOK with the hook for the current backend.', file=sys.stderr)
+        return 1
+    # Pin the tested revision instead of relying on the service branch or an old ref.
+    query = [(key, value) for key, value in parse_qsl(parsed.query, keep_blank_values=True) if key != 'ref']
+    query.append(('ref', commit))
+    hook = urlunsplit(parsed._replace(query=urlencode(query)))
     expected = expected_bank()
     try:
         with urlopen(Request(hook, data=b'', method='POST'), timeout=30) as response:

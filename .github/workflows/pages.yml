@@ -92,6 +92,7 @@ jobs:
         env:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
           BACKEND_URL: ${{ vars.VITE_API_BASE_URL || 'https://jae-quiz-2-1.onrender.com' }}
+          EXPECTED_RENDER_SERVICE_ID: srv-db4bp7p42hec73apj9r0
           EXPECTED_COMMIT: ${{ github.sha }}
         run: python scripts/deploy_backend.py
 

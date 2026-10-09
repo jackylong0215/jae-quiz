@@ -96,6 +96,11 @@ class DeployScriptTests(unittest.TestCase):
             self.assertEqual(deploy_backend.main(),1)
         self.assertNotIn(secret,stderr.getvalue())
 
+    def test_wrong_service_hook_is_rejected_before_deployment(self):
+        with patch.dict(os.environ,{'RENDER_DEPLOY_HOOK':'https://api.render.com/deploy/srv-other?key=test','BACKEND_URL':'https://backend.example.test','EXPECTED_COMMIT':'expected','EXPECTED_RENDER_SERVICE_ID':'srv-current'}),patch.object(deploy_backend,'urlopen') as request,contextlib.redirect_stderr(StringIO()):
+            self.assertEqual(deploy_backend.main(),1)
+            request.assert_not_called()
+
     def test_verified_deployment_requires_matching_revision_and_bank(self):
         health={'status':'ok','commit':'expected',**deploy_backend.expected_bank()}
         class Reply:
@@ -106,6 +111,7 @@ class DeployScriptTests(unittest.TestCase):
         with patch.dict(os.environ,{'RENDER_DEPLOY_HOOK':'https://api.render.com/deploy/srv-test?key=test','BACKEND_URL':'https://backend.example.test','EXPECTED_COMMIT':'expected'}),patch.object(deploy_backend,'urlopen',side_effect=[Reply(),Reply()]) as request,contextlib.redirect_stdout(StringIO()):
             self.assertEqual(deploy_backend.main(),0)
         self.assertEqual(request.call_args_list[0].args[0].data,b'')
+        self.assertEqual(request.call_args_list[0].args[0].full_url,'https://api.render.com/deploy/srv-test?key=test&ref=expected')
         self.assertEqual(request.call_args_list[1].args[0].full_url,'https://backend.example.test/health')
 
 
