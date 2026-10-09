@@ -1,3 +1,6 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { localizedFetch } from './i18n-api.js';
+import { LocalizedText, useLocale } from './i18n.jsx';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginPanel from './LoginPanel.jsx';
@@ -168,6 +171,7 @@ const HeroBackground = () => (
 
 /* ==================== 主元件 ==================== */
 export default function HomePage() {
+  useLocale();
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(0);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -213,7 +217,7 @@ export default function HomePage() {
         import.meta.env.VITE_API_BASE_URL ||
         `http://${window.location.hostname}:8000`;
 
-      const res = await fetch(`${API_BASE_URL}/contact`, {
+      const res = await localizedFetch(`${API_BASE_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(contactForm),
@@ -250,20 +254,20 @@ export default function HomePage() {
           {user ? (
             <div className="user-banner logged-in">
               <div className="user-avatar" style={{ background: user.is_admin ? '#f59e0b' : '#2563eb' }}>
-                {(user.full_name || user.username || '?').charAt(0)}
+                <LocalizedText value={(user.full_name || user.username || '?').charAt(0)} />
               </div>
               <div className="user-info">
                 <div className="user-greeting">
-                  {user.is_admin ? '👑 管理員' : '🎓 考生'}
+                  <LocalizedText value={user.is_admin ? '👑 管理員' : '🎓 考生'} />
                 </div>
                 <div className="user-name">
-                  {user.full_name || user.username}
+                  <LocalizedText value={user.full_name || user.username} />
                 </div>
               </div>
               {user.is_admin && <span className="user-badge">ADMIN</span>}
-              <button className="user-logout" onClick={handleLogout} title="登出">
+              <LocalizedAttributes><button className="user-logout" onClick={handleLogout} title={"登出"}>
                 <IconLogout />
-              </button>
+              </button></LocalizedAttributes>
             </div>
           ) : (
             <button
@@ -273,8 +277,8 @@ export default function HomePage() {
             >
               <div className="user-avatar guest-avatar">?</div>
               <div className="user-info">
-                <div className="user-greeting">訪客模式</div>
-                <div className="user-name">點此登入 / 註冊</div>
+                <div className="user-greeting"><LocalizedText value="訪客模式" /></div>
+                <div className="user-name"><LocalizedText value="點此登入 / 註冊" /></div>
               </div>
             </button>
           )}
@@ -282,27 +286,20 @@ export default function HomePage() {
 
         <div className="hero-inner">
           <h1 className="hero-title">
-            <span className="hero-title-text">四校勝券</span>
+            <span className="hero-title-text"><LocalizedText value="四校勝券" /></span>
             <span className="sparkle sparkle-1" />
             <span className="sparkle sparkle-2" />
             <span className="sparkle sparkle-3" />
             <span className="sparkle sparkle-4" />
           </h1>
 
-          <p className="hero-subtitle">
-            2017–2026 年數學正卷、附加卷、模擬試題。<br />
-            共 <strong>11</strong> 套 <strong>245</strong> 題，附完整答案與逐步解析。
-          </p>
+          <p className="hero-subtitle"><LocalizedText value="2017–2026 年數學正卷、附加卷、模擬試題。" /><br /><LocalizedText value="共" /><strong>11</strong><LocalizedText value="套" /><strong>245</strong><LocalizedText value="題，附完整答案與逐步解析。" /></p>
 
           <div className="hero-actions">
-            <button className="btn-primary" onClick={() => navigate('/browse')}>
-              開始練習
-              <IconArrowRight />
+            <button className="btn-primary" onClick={() => navigate('/browse')}><LocalizedText value="開始練習" /><IconArrowRight />
             </button>
             <button className="btn-ghost" onClick={() => navigate('/favorites')}>
-              <IconStar />
-              我的收藏
-            </button>
+              <IconStar /><LocalizedText value="我的收藏" /></button>
 
             <button
   className="home-btn"
@@ -322,30 +319,28 @@ export default function HomePage() {
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
     marginLeft: 12,
   }}
->
-  📕 我的錯題本
-</button>
+><LocalizedText value="📕 我的錯題本" /></button>
           </div>
 
           <div className="hero-stats">
             <div className="hero-stat">
               <div className="hero-stat-value">245</div>
-              <div className="hero-stat-label">道題目</div>
+              <div className="hero-stat-label"><LocalizedText value="道題目" /></div>
             </div>
             <div className="hero-stat-divider" />
             <div className="hero-stat">
               <div className="hero-stat-value">11</div>
-              <div className="hero-stat-label">套試卷</div>
+              <div className="hero-stat-label"><LocalizedText value="套試卷" /></div>
             </div>
             <div className="hero-stat-divider" />
             <div className="hero-stat">
               <div className="hero-stat-value">10</div>
-              <div className="hero-stat-label">年跨度</div>
+              <div className="hero-stat-label"><LocalizedText value="年跨度" /></div>
             </div>
             <div className="hero-stat-divider" />
             <div className="hero-stat">
               <div className="hero-stat-value">100%</div>
-              <div className="hero-stat-label">附詳解</div>
+              <div className="hero-stat-label"><LocalizedText value="附詳解" /></div>
             </div>
           </div>
         </div>
@@ -355,36 +350,25 @@ export default function HomePage() {
       <section className="section section-white">
         <div className="section-inner">
           <div className="section-header">
-            <h2 className="section-title">三步驟，開始你的備考</h2>
-            <p className="section-desc">
-              從挑選試卷到檢視分析，整個流程只需要幾分鐘。
-            </p>
+            <h2 className="section-title"><LocalizedText value="三步驟，開始你的備考" /></h2>
+            <p className="section-desc"><LocalizedText value="從挑選試卷到檢視分析，整個流程只需要幾分鐘。" /></p>
           </div>
 
           <div className="cards-3">
             <div className="feature-card">
               <div className="feature-icon icon-purple"><IconBook /></div>
-              <h3 className="feature-title">挑選試卷</h3>
-              <p className="feature-desc">
-                從 2017–2026 年的正卷、附加卷、模擬試題中選擇。
-                可以按年份、科目、難度篩選，找到最適合你的練習材料。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="挑選試卷" /></h3>
+              <p className="feature-desc"><LocalizedText value="從 2017–2026 年的正卷、附加卷、模擬試題中選擇。 可以按年份、科目、難度篩選，找到最適合你的練習材料。" /></p>
             </div>
             <div className="feature-card">
               <div className="feature-icon icon-red"><IconPencil /></div>
-              <h3 className="feature-title">開始作答</h3>
-              <p className="feature-desc">
-                用篩選器挑選科目與難度，進入限時模擬測驗。
-                作答介面模擬真實考試節奏，幫你習慣考場壓力。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="開始作答" /></h3>
+              <p className="feature-desc"><LocalizedText value="用篩選器挑選科目與難度，進入限時模擬測驗。 作答介面模擬真實考試節奏，幫你習慣考場壓力。" /></p>
             </div>
             <div className="feature-card">
               <div className="feature-icon icon-green"><IconChart /></div>
-              <h3 className="feature-title">檢視分析</h3>
-              <p className="feature-desc">
-                交卷後立即看到逐題對錯、標準答案、詳細步驟解析，
-                以及各科目的弱點診斷報告。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="檢視分析" /></h3>
+              <p className="feature-desc"><LocalizedText value="交卷後立即看到逐題對錯、標準答案、詳細步驟解析， 以及各科目的弱點診斷報告。" /></p>
             </div>
           </div>
         </div>
@@ -394,54 +378,40 @@ export default function HomePage() {
       <section className="section section-tint">
         <div className="section-inner">
           <div className="section-header">
-            <h2 className="section-title">功能特色</h2>
-            <p className="section-desc">
-              不只是一個題庫，而是一套完整的備考工具。
-            </p>
+            <h2 className="section-title"><LocalizedText value="功能特色" /></h2>
+            <p className="section-desc"><LocalizedText value="不只是一個題庫，而是一套完整的備考工具。" /></p>
           </div>
 
           <div className="cards-3">
             <div className="feature-card feature-card-left">
               <div className="feature-icon-box icon-green"><IconGlobe /></div>
-              <h3 className="feature-title">隨時隨地練習</h3>
-              <p className="feature-desc">
-                只要有網路，你可以在任何裝置上打開題庫、作答、複習。手機、平板、電腦都能用。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="隨時隨地練習" /></h3>
+              <p className="feature-desc"><LocalizedText value="只要有網路，你可以在任何裝置上打開題庫、作答、複習。手機、平板、電腦都能用。" /></p>
             </div>
             <div className="feature-card feature-card-left">
               <div className="feature-icon-box icon-blue"><IconShield /></div>
-              <h3 className="feature-title">帳號安全</h3>
-              <p className="feature-desc">
-                密碼使用 bcrypt 加密，登入使用 JWT 權杖。你的測驗紀錄只有你自己看得到。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="帳號安全" /></h3>
+              <p className="feature-desc"><LocalizedText value="密碼使用 bcrypt 加密，登入使用 JWT 權杖。你的測驗紀錄只有你自己看得到。" /></p>
             </div>
             <div className="feature-card feature-card-left">
               <div className="feature-icon-box icon-pink"><IconClipboard /></div>
-              <h3 className="feature-title">自動評分</h3>
-              <p className="feature-desc">
-                選擇題自動批改，交卷後立即看到分數、答對題數與各科得分率。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="自動評分" /></h3>
+              <p className="feature-desc"><LocalizedText value="選擇題自動批改，交卷後立即看到分數、答對題數與各科得分率。" /></p>
             </div>
             <div className="feature-card feature-card-left">
               <div className="feature-icon-box icon-orange"><IconClock /></div>
-              <h3 className="feature-title">限時模擬</h3>
-              <p className="feature-desc">
-                你可以設定測驗時間，模擬真實考場的節奏。也可以不限時，當作平時練習。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="限時模擬" /></h3>
+              <p className="feature-desc"><LocalizedText value="你可以設定測驗時間，模擬真實考場的節奏。也可以不限時，當作平時練習。" /></p>
             </div>
             <div className="feature-card feature-card-left">
               <div className="feature-icon-box icon-purple"><IconPen2 /></div>
-              <h3 className="feature-title">逐步解析</h3>
-              <p className="feature-desc">
-                每一題都有完整解題步驟、公式推導與答案。不是只有答案，而是教你怎麼想。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="逐步解析" /></h3>
+              <p className="feature-desc"><LocalizedText value="每一題都有完整解題步驟、公式推導與答案。不是只有答案，而是教你怎麼想。" /></p>
             </div>
             <div className="feature-card feature-card-left">
               <div className="feature-icon-box icon-slate"><IconEyeOff /></div>
-              <h3 className="feature-title">公開與私人</h3>
-              <p className="feature-desc">
-                未登入可以自由瀏覽題庫。登入後，你的測驗紀錄、錯題、收藏都會被保存。
-              </p>
+              <h3 className="feature-title"><LocalizedText value="公開與私人" /></h3>
+              <p className="feature-desc"><LocalizedText value="未登入可以自由瀏覽題庫。登入後，你的測驗紀錄、錯題、收藏都會被保存。" /></p>
             </div>
           </div>
         </div>
@@ -451,10 +421,8 @@ export default function HomePage() {
       <section className="section section-white">
         <div className="section-inner">
           <div className="section-header">
-            <h2 className="section-title">他們這樣說</h2>
-            <p className="section-desc">
-              從 2017 到 2026 的題目都在這裡，用過的學生怎麼說。
-            </p>
+            <h2 className="section-title"><LocalizedText value="他們這樣說" /></h2>
+            <p className="section-desc"><LocalizedText value="從 2017 到 2026 的題目都在這裡，用過的學生怎麼說。" /></p>
           </div>
 
           <div className="cards-3">
@@ -492,14 +460,14 @@ export default function HomePage() {
                     </svg>
                   ))}
                 </div>
-                <p className="testimonial-text">「{t.text}」</p>
+                <p className="testimonial-text">「<LocalizedText value={t.text} />」</p>
                 <div className="testimonial-user">
                   <div className="testimonial-avatar" style={{ background: t.avatarBg }}>
-                    {t.initials}
+                    <LocalizedText value={t.initials} />
                   </div>
                   <div>
-                    <div className="testimonial-name">{t.name}</div>
-                    <div className="testimonial-role">{t.role}</div>
+                    <div className="testimonial-name"><LocalizedText value={t.name} /></div>
+                    <div className="testimonial-role"><LocalizedText value={t.role} /></div>
                   </div>
                 </div>
               </div>
@@ -512,10 +480,8 @@ export default function HomePage() {
       <section className="section section-tint">
         <div className="section-inner">
           <div className="section-header">
-            <h2 className="section-title">還有疑問嗎？</h2>
-            <p className="section-desc">
-              如果你還有其他問題，歡迎透過下方表單回報，我們會盡快回覆。
-            </p>
+            <h2 className="section-title"><LocalizedText value="還有疑問嗎？" /></h2>
+            <p className="section-desc"><LocalizedText value="如果你還有其他問題，歡迎透過下方表單回報，我們會盡快回覆。" /></p>
           </div>
 
           <div className="faq-list">
@@ -525,11 +491,11 @@ export default function HomePage() {
                   className="faq-question"
                   onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
                 >
-                  <span>{f.q}</span>
+                  <span><LocalizedText value={f.q} /></span>
                   <span className="faq-chevron"><IconChevronDown /></span>
                 </button>
                 <div className="faq-answer">
-                  <div className="faq-answer-inner">{f.a}</div>
+                  <div className="faq-answer-inner"><LocalizedText value={f.a} /></div>
                 </div>
               </div>
             ))}
@@ -541,39 +507,37 @@ export default function HomePage() {
       <section className="section section-white">
         <div className="section-inner">
           <div className="section-header">
-            <h2 className="section-title">有問題想回報？</h2>
-            <p className="section-desc">
-              如果你發現題目錯誤、詳解有誤，或想給我們建議，歡迎直接告訴我們。
-            </p>
+            <h2 className="section-title"><LocalizedText value="有問題想回報？" /></h2>
+            <p className="section-desc"><LocalizedText value="如果你發現題目錯誤、詳解有誤，或想給我們建議，歡迎直接告訴我們。" /></p>
           </div>
 
           <div className="contact-card">
             <form onSubmit={handleContactSubmit} className="contact-form">
               <div className="form-row">
                 <div className="form-field">
-                  <label>你的稱呼（可選）</label>
-                  <input
+                  <label><LocalizedText value="你的稱呼（可選）" /></label>
+                  <LocalizedAttributes><input
                     type="text"
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    placeholder="例如：陳同學"
+                    placeholder={"例如：陳同學"}
                     className="form-input"
-                  />
+                  /></LocalizedAttributes>
                 </div>
                 <div className="form-field">
-                  <label>電子郵件（可選）</label>
-                  <input
+                  <label><LocalizedText value="電子郵件（可選）" /></label>
+                  <LocalizedAttributes><input
                     type="email"
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                     placeholder="student@example.com"
                     className="form-input"
-                  />
+                  /></LocalizedAttributes>
                 </div>
               </div>
 
               <div className="form-field">
-                <label>問題類別</label>
+                <label><LocalizedText value="問題類別" /></label>
                 <div className="category-chips">
                   {['題目錯誤', '詳解有誤', '功能建議', '帳號問題', '其他'].map((c) => (
                     <button
@@ -582,33 +546,33 @@ export default function HomePage() {
                       className={`category-chip ${contactForm.category === c ? 'active' : ''}`}
                       onClick={() => setContactForm({ ...contactForm, category: c })}
                     >
-                      {c}
+                      <LocalizedText value={c} />
                     </button>
                   ))}
                 </div>
               </div>
 
               <div className="form-field">
-                <label>訊息內容</label>
-                <textarea
+                <label><LocalizedText value="訊息內容" /></label>
+                <LocalizedAttributes><textarea
                   value={contactForm.message}
                   onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                  placeholder="請描述你遇到的問題，例如：第 p00-m5 題的詳解好像有錯..."
+                  placeholder={"請描述你遇到的問題，例如：第 p00-m5 題的詳解好像有錯..."}
                   rows={5}
                   className="form-textarea"
                   required
-                />
+                /></LocalizedAttributes>
               </div>
 
               {contactStatus && (
                 <div className={`contact-status ${contactStatus.type}`}>
-                  {contactStatus.text}
+                  <LocalizedText value={contactStatus.text} />
                 </div>
               )}
 
               <div className="form-actions">
                 <button type="submit" className="btn-primary" disabled={contactLoading}>
-                  {contactLoading ? '送出中...' : '送出訊息'}
+                  <LocalizedText value={contactLoading ? '送出中...' : '送出訊息'} />
                   {!contactLoading && <IconArrowRight />}
                 </button>
               </div>
@@ -621,22 +585,16 @@ export default function HomePage() {
       <section className="cta-section">
         <div className="cta-glow" />
         <div className="section-inner">
-          <h2 className="cta-title">準備好開始了嗎？</h2>
-          <p className="cta-desc">
-            245 道真題、11 套試卷、完整的逐步解析，全部免費。
-          </p>
-          <button className="btn-primary btn-large" onClick={() => navigate('/browse')}>
-            立即開始練習
-            <IconArrowRight />
+          <h2 className="cta-title"><LocalizedText value="準備好開始了嗎？" /></h2>
+          <p className="cta-desc"><LocalizedText value="245 道真題、11 套試卷、完整的逐步解析，全部免費。" /></p>
+          <button className="btn-primary btn-large" onClick={() => navigate('/browse')}><LocalizedText value="立即開始練習" /><IconArrowRight />
           </button>
         </div>
       </section>
 
       {/* ==================== FOOTER ==================== */}
       <footer className="home-footer">
-        <div className="footer-inner">
-          澳門四校聯考數學科題庫 · 供學生自主練習使用
-        </div>
+        <div className="footer-inner"><LocalizedText value="澳門四校聯考數學科題庫 · 供學生自主練習使用" /></div>
       </footer>
 
       {/* ==================== LOGIN MODAL ==================== */}

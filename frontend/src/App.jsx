@@ -1,6 +1,8 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { localizedFetch } from './i18n-api.js';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions, englishContent, t } from './i18n.jsx';
 import React, { useState, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
@@ -59,9 +61,9 @@ function normalizeLatex(text) {
     .replace(/([^\n])\n([^\n])/g, '$1  \n$2');
 }
 
-function extractOptions(q, lang = 'zh') {
+function extractOptions(q) {
   if (!q) return {};
-  let raw = lang === 'en' ? (q.options_en || q.options_zh || q.options) : (q.options_zh || q.options || q.options_en);
+  let raw = questionOptions(q);
   if (!raw) return {};
 
   if (typeof raw === 'object' && !Array.isArray(raw)) {
@@ -180,6 +182,7 @@ function formatFileSize(bytes) {
    PageWrapper — 全域路由切換時自動回頂（無 flash）
    ============================================================ */
 function PageWrapper({ children }) {
+  useLocale();
   const location = useLocation();
 
   useEffect(() => {
@@ -195,7 +198,7 @@ function PageWrapper({ children }) {
 
   return (
     <div key={location.pathname} className="page-transition">
-      {children}
+      <LocalizedText value={children} />
     </div>
   );
 }
@@ -227,7 +230,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [toast, setToast] = useState('');
 
-  const [language, setLanguage] = useState('zh');
+  const { language } = useLocale();
   const [filterCategory, setFilterCategory] = useState('All');
   const [filterDifficulty, setFilterDifficulty] = useState('All');
   const [filterType, setFilterType] = useState('All');
@@ -249,7 +252,7 @@ export default function App() {
 
   // 載入預存試卷清單
   useEffect(() => {
-    fetch(`${API_BASE_URL}/prestored/papers`)
+    localizedFetch(`${API_BASE_URL}/prestored/papers`)
       .then((r) => r.json())
       .then((d) => {
         const papers = d.papers || [];
@@ -265,7 +268,7 @@ export default function App() {
     setLoadingPrestored(true);
     try {
       const url = `${API_BASE_URL}/prestored/questions?paper_id=${paperId}`;
-      const res = await fetch(url);
+      const res = await localizedFetch(url);
       if (!res.ok) throw new Error('載入題庫失敗');
       const data = await res.json();
       setQuestions(data.questions || []);
@@ -314,7 +317,7 @@ export default function App() {
       formData.append('file', file);
 
       const token = localStorage.getItem('jae_token');
-      const response = await fetch(`${API_BASE_URL}/analyze-exam-stream`, {
+      const response = await localizedFetch(`${API_BASE_URL}/analyze-exam-stream`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -428,12 +431,12 @@ export default function App() {
     if (language === 'zh') {
       copyText = `${qNum}\n${q.raw_text_zh || ''}`;
     } else if (language === 'en') {
-      copyText = `${qNum}\n${q.raw_text_en || ''}`;
+      copyText = `${t(qNum)}\n${getQuestionText(q)}`;
     } else {
       copyText = `【題號】${qNum}\n【中文版】\n${q.raw_text_zh || '無'}\n\n【English Version】\n${q.raw_text_en || 'None'}`;
     }
     try {
-      await navigator.clipboard.writeText(copyText);
+      await navigator.clipboard.writeText(language === 'en' ? await englishContent(copyText) : copyText);
       showToast('已複製題目內容！');
     } catch {
       showToast('複製失敗，請手動選取');
@@ -447,8 +450,11 @@ export default function App() {
     const ans = q.answer ? `【標準答案】\n${q.answer}` : '';
     const sol = q.solution ? `【詳細解析】\n${q.solution}` : '';
     const parts = [`【題目】${qNum}`, bodyZh, bodyEn, ans, sol].filter(Boolean);
-    const fullText = parts.join('\n\n');
+    let fullText = parts.join('\n\n');
     try {
+      if (language === 'en') {
+        fullText = await englishContent([t(qNum), getQuestionText(q), q.answer ? `Answer: ${q.answer}` : '', q.solution ? `Solution:\n${q.solution}` : ''].filter(Boolean).join('\n\n'));
+      }
       await navigator.clipboard.writeText(fullText);
       showToast('已複製含解答解析！');
     } catch {
@@ -510,62 +516,47 @@ export default function App() {
     <div className="app-wrapper">
       {toast && (
         <div className="mobile-toast">
-          {toast}
+          <LocalizedText value={toast} />
         </div>
       )}
 
       <header className="app-header">
         <div className="header-top-row">
-          <div className="badge-jae" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-            澳門四校聯考 (JAE)
-          </div>
+          <div className="badge-jae" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}><LocalizedText value="澳門四校聯考 (JAE)" /></div>
             <div className="header-auth-box">
-              <button
+              <LocalizedAttributes><button
                 type="button"
                 className="auth-fav-btn"
                 onClick={() => navigate('/favorites')}
-                title="我的收藏"
+                title={"我的收藏"}
               >
-                <StreakBadge />
-                ⭐ 我的收藏
-              </button>
+                <StreakBadge /><LocalizedText value="⭐ 我的收藏" /></button></LocalizedAttributes>
 
-              <button
+              <LocalizedAttributes><button
                 type="button"
                 className="auth-wrong-btn"
                 onClick={() => navigate('/wrong-book')}
-                title="我的錯題本"
-              >
-                📕 我的錯題本
-              </button>
+                title={"我的錯題本"}
+              ><LocalizedText value="📕 我的錯題本" /></button></LocalizedAttributes>
 
               {currentUser ? (
                 <button type="button" className="auth-user-btn" onClick={() => setIsLoginOpen(true)}>
-                  🎓 {currentUser.full_name || currentUser.username} (個人中心)
-                </button>
+                  🎓 <LocalizedText value={currentUser.full_name || currentUser.username} /><LocalizedText value="(個人中心)" /></button>
               ) : (
-                <button type="button" className="auth-login-btn" onClick={() => setIsLoginOpen(true)}>
-                  🔐 考生登入 / 註冊
-                </button>
+                <button type="button" className="auth-login-btn" onClick={() => setIsLoginOpen(true)}><LocalizedText value="🔐 考生登入 / 註冊" /></button>
               )}
             </div>
         </div>
-        <h1 className="main-title">
-          四校勝券
-        </h1>
-        <p className="subtitle">
-          2017–2026 年數學正卷、附加卷、模擬試題
-        </p>
+        <h1 className="main-title"><LocalizedText value="四校勝券" /></h1>
+        <p className="subtitle"><LocalizedText value="2017–2026 年數學正卷、附加卷、模擬試題" /></p>
       </header>
 
       <div className="prestored-banner-card">
         <div className="prestored-banner-content">
           <div className="prestored-info-col">
-            <div className="prestored-tag">🗄️  共 11 套 245 題，附完整答案與解析</div>
-            <h2 className="prestored-card-title">澳門四校聯考 · 歷屆真題庫 </h2>
-            <p className="prestored-card-desc">
-              支援全套試題瀏覽與隨機組卷測驗！
-            </p>
+            <div className="prestored-tag"><LocalizedText value="🗄️ 共 11 套 245 題，附完整答案與解析" /></div>
+            <h2 className="prestored-card-title"><LocalizedText value="澳門四校聯考 · 歷屆真題庫" /></h2>
+            <p className="prestored-card-desc"><LocalizedText value="支援全套試題瀏覽與隨機組卷測驗！" /></p>
           </div>
           <div className="prestored-action-col">
             <select
@@ -575,12 +566,11 @@ export default function App() {
               disabled={loadingPrestored}
             >
               <option value="" disabled>
-                {prestoredPapers.length === 0 ? '⏳ 載入試卷清單中...' : '請選擇試卷'}
+                <LocalizedText value={prestoredPapers.length === 0 ? '⏳ 載入試卷清單中...' : '請選擇試卷'} />
               </option>
               {prestoredPapers.map((p) => (
                 <option key={p.id} value={p.id}>
-                  📄 {p.year} {p.title || '數學正卷'} ({p.questionCount || 15} 題)
-                </option>
+                  📄 <LocalizedText value={p.year} /> <LocalizedText value={p.title || '數學正卷'} /> (<LocalizedText value={p.questionCount || 15} /><LocalizedText value="題)" /></option>
               ))}
             </select>
             <button
@@ -589,7 +579,7 @@ export default function App() {
               onClick={() => handleLoadPrestored(selectedPaperId)}
               disabled={loadingPrestored}
             >
-              {loadingPrestored ? '⏳ 載入中...' : '📚 一鍵載入真題庫'}
+              <LocalizedText value={loadingPrestored ? '⏳ 載入中...' : '📚 一鍵載入真題庫'} />
             </button>
           </div>
         </div>
@@ -598,14 +588,14 @@ export default function App() {
       {currentUser?.is_admin && (
         <div className="source-divider">
           <span className="source-divider-line"></span>
-          <span className="source-divider-text">或者 上傳全新 PDF 試卷進行 AI 智能分析</span>
+          <span className="source-divider-text"><LocalizedText value="或者 上傳全新 PDF 試卷進行 AI 智能分析" /></span>
           <span className="source-divider-line"></span>
         </div>
       )}
 
       {currentUser?.is_admin && (
         <details className="admin-upload-collapsible">
-          <summary>🛠️ 管理員工具：上傳新試卷</summary>
+          <summary><LocalizedText value="🛠️ 管理員工具：上傳新試卷" /></summary>
 
           <div className="upload-card">
             <form onSubmit={handleUpload}>
@@ -619,8 +609,8 @@ export default function App() {
                 <div className="upload-icon">📄</div>
                 {file ? (
                   <div className="file-info-box">
-                    <span className="file-name">{file.name}</span>
-                    <span className="file-size">({formatFileSize(file.size)})</span>
+                    <span className="file-name"><LocalizedText value={file.name} /></span>
+                    <span className="file-size">(<LocalizedText value={formatFileSize(file.size)} />)</span>
                     <button
                       type="button"
                       className="clear-file-btn"
@@ -628,14 +618,12 @@ export default function App() {
                         e.preventDefault();
                         setFile(null);
                       }}
-                    >
-                      ✕ 清除
-                    </button>
+                    ><LocalizedText value="✕ 清除" /></button>
                   </div>
                 ) : (
                   <div className="upload-hint">
-                    <span className="upload-text-bold">點擊選擇試卷文件</span>
-                    <span className="upload-text-sub">支援 PDF 或真題圖片 (JPG / PNG)</span>
+                    <span className="upload-text-bold"><LocalizedText value="點擊選擇試卷文件" /></span>
+                    <span className="upload-text-sub"><LocalizedText value="支援 PDF 或真題圖片 (JPG / PNG)" /></span>
                   </div>
                 )}
               </label>
@@ -645,15 +633,15 @@ export default function App() {
                 disabled={!file || loading}
                 className={`submit-btn ${!file || loading ? 'disabled' : ''}`}
               >
-                {loading ? '正在分析試卷中...' : '開始上傳並分析'}
+                <LocalizedText value={loading ? '正在分析試卷中...' : '開始上傳並分析'} />
               </button>
             </form>
 
             {loading && (
               <div className="progress-container">
                 <div className="progress-header">
-                  <span className="progress-msg">{progress.message || '正在處理試卷...'}</span>
-                  <span className="progress-pct">{progress.percent}%</span>
+                  <span className="progress-msg"><LocalizedText value={progress.message || '正在處理試卷...'} /></span>
+                  <span className="progress-pct"><LocalizedText value={progress.percent} />%</span>
                 </div>
                 <div className="progress-track">
                   <div className="progress-bar-fill" style={{ width: `${progress.percent}%` }} />
@@ -663,7 +651,7 @@ export default function App() {
 
             {error && (
               <div className="error-banner">
-                ⚠️ {error}
+                ⚠️ <LocalizedText value={error} />
               </div>
             )}
           </div>
@@ -674,26 +662,20 @@ export default function App() {
         <>
           <div className="top-stats-container">
             <div className="stats-badges-row no-scrollbar">
-              <div className="stat-pill success">總題數：<strong>{stats.total}</strong></div>
-              <div className="stat-pill success">選擇題：<strong>{stats.mcq}</strong> | 大題：<strong>{stats.long}</strong></div>
+              <div className="stat-pill success"><LocalizedText value="總題數：" /><strong><LocalizedText value={stats.total} /></strong></div>
+              <div className="stat-pill success"><LocalizedText value="選擇題：" /><strong><LocalizedText value={stats.mcq} /></strong><LocalizedText value="| 大題：" /><strong><LocalizedText value={stats.long} /></strong></div>
             </div>
 
             <div className="export-btns-row">
-              <button onClick={handleExportJSON} className="export-btn export-json">
-                📥 導出 JSON
-              </button>
-              <button onClick={handleExportMarkdown} className="export-btn export-md">
-                📝 導出 Markdown
-              </button>
-              <button onClick={() => navigate('/quiz')} className="export-btn export-md" style={{ background: '#10b981', borderColor: '#059669', color: 'white' }}>
-                📝 開始測驗
-              </button>
+              <button onClick={handleExportJSON} className="export-btn export-json"><LocalizedText value="📥 導出 JSON" /></button>
+              <button onClick={handleExportMarkdown} className="export-btn export-md"><LocalizedText value="📝 導出 Markdown" /></button>
+              <button onClick={() => navigate('/quiz')} className="export-btn export-md" style={{ background: '#10b981', borderColor: '#059669', color: 'white' }}><LocalizedText value="📝 開始測驗" /></button>
             </div>
           </div>
 
           <div className="filter-card">
             <div className="filter-row">
-              <span className="control-label">科目分類：</span>
+              <span className="control-label"><LocalizedText value="科目分類：" /></span>
               <div className="chips-scroll no-scrollbar">
                 {categories.map((c) => (
                   <button
@@ -702,14 +684,14 @@ export default function App() {
                     onClick={() => setFilterCategory(c)}
                     className={`filter-chip ${filterCategory === c ? 'active' : ''}`}
                   >
-                    {c === 'All' ? '全部科目' : (CATEGORY_MAP[c] || c)}
+                    <LocalizedText value={c === 'All' ? '全部科目' : (CATEGORY_MAP[c] || c)} />
                   </button>
                 ))}
               </div>
             </div>
 
             <div className="filter-row">
-              <span className="control-label">題型：</span>
+              <span className="control-label"><LocalizedText value="題型：" /></span>
               <div className="chips-scroll no-scrollbar">
                 {['All', 'MCQ', 'Long'].map((t) => (
                   <button
@@ -718,14 +700,14 @@ export default function App() {
                     onClick={() => setFilterType(t)}
                     className={`filter-chip ${filterType === t ? 'active' : ''}`}
                   >
-                    {t === 'All' ? '全部題型' : t === 'MCQ' ? '選擇題 (MCQ)' : '解答大題 (Long)'}
+                    <LocalizedText value={t === 'All' ? '全部題型' : t === 'MCQ' ? '選擇題 (MCQ)' : '解答大題 (Long)'} />
                   </button>
                 ))}
               </div>
             </div>
 
             <div className="filter-row">
-              <span className="control-label">難度：</span>
+              <span className="control-label"><LocalizedText value="難度：" /></span>
               <div className="chips-scroll no-scrollbar">
                 {['All', 'Easy', 'Medium', 'Hard'].map((d) => (
                   <button
@@ -734,20 +716,20 @@ export default function App() {
                     onClick={() => setFilterDifficulty(d)}
                     className={`filter-chip ${filterDifficulty === d ? 'active' : ''}`}
                   >
-                    {d === 'All' ? '全部難度' : (DIFFICULTY_MAP[d] || d)}
+                    <LocalizedText value={d === 'All' ? '全部難度' : (DIFFICULTY_MAP[d] || d)} />
                   </button>
                 ))}
               </div>
             </div>
 
             <div className="search-box-wrapper">
-              <input
+              <LocalizedAttributes><input
                 type="text"
-                placeholder="搜尋題目關鍵字、知識點、題號..."
+                placeholder={"搜尋題目關鍵字、知識點、題號..."}
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 className="search-input"
-              />
+              /></LocalizedAttributes>
               {searchText && (
                 <button
                   type="button"
@@ -761,8 +743,7 @@ export default function App() {
           </div>
 
           <div className="sticky-nav-bar">
-            <span className="nav-label">
-              題號 ({filtered.length}):
+            <span className="nav-label"><LocalizedText value="題號 (" /><LocalizedText value={filtered.length} />):
             </span>
             <div className="nav-chips-container no-scrollbar">
               {filtered.map((q, i) => (
@@ -772,7 +753,7 @@ export default function App() {
                   onClick={() => scrollToQuestion(i)}
                   className="nav-question-pill"
                 >
-                  {q.question_number || i + 1}
+                  <LocalizedText value={q.question_number || i + 1} />
                 </button>
               ))}
             </div>
@@ -793,50 +774,44 @@ export default function App() {
                     <div className="card-meta-row">
                       <div className="meta-tags-left">
                         <span className="meta-tag tag-category">
-                          {CATEGORY_MAP[q.main_category] || q.main_category}
+                          <LocalizedText value={CATEGORY_MAP[q.main_category] || q.main_category} />
                         </span>
                         <span className="meta-tag tag-type">
-                          {TYPE_MAP[q.question_type] || q.question_type}
+                          <LocalizedText value={TYPE_MAP[q.question_type] || q.question_type} />
                         </span>
                         {(q.sub_topics || []).map((t, i) => (
                           <span key={i} className="meta-tag tag-topic">
-                            {TOPIC_MAP[t] || t}
+                            <LocalizedText value={TOPIC_MAP[t] || t} />
                           </span>
                         ))}
                         <span
                           className="meta-tag"
                           style={{ background: DIFFICULTY_COLORS[q.difficulty] || '#64748b', color: '#fff' }}
                         >
-                          {DIFFICULTY_MAP[q.difficulty] || q.difficulty}
+                          <LocalizedText value={DIFFICULTY_MAP[q.difficulty] || q.difficulty} />
                         </span>
                         {typeof q.page === 'number' && (
-                          <span className="meta-tag tag-page">
-                            第 {q.page} 頁
-                          </span>
+                          <span className="meta-tag tag-page"><LocalizedText value="第" /><LocalizedText value={q.page} /><LocalizedText value="頁" /></span>
                         )}
                       </div>
 
                       <div className="meta-actions-right">
                         <SpeakButton
-  text={language === 'en' ? (q.raw_text_en || q.raw_text_zh || '') : (q.raw_text_zh || q.raw_text_en || '')}
+  text={language === 'en' ? (q.raw_text_en || q.raw_text_zh || '') : (getQuestionText(q))}
   options={extractOptions(q, language === 'en' ? 'en' : 'zh')}
   size="small"
-  label="朗讀"
+  label={t("朗讀")}
 />
                         <button
                           type="button"
                           onClick={() => handleCopyQuestion(q)}
                           className="action-pill-btn"
-                        >
-                          📋 複製題幹
-                        </button>
+                        ><LocalizedText value="📋 複製題幹" /></button>
                         <button
                           type="button"
                           onClick={() => handleCopyFull(q)}
                           className="action-pill-btn success"
-                        >
-                          💡 複製含解答
-                        </button>
+                        ><LocalizedText value="💡 複製含解答" /></button>
                         <FavoriteButton
                           question={q}
                           questionId={q.id || `${q.question_number}-${q.raw_text_zh?.slice(0, 20)}`}
@@ -845,17 +820,17 @@ export default function App() {
                     </div>
 
                     <h3 className="question-title">
-                      {q.question_number}
+                      <LocalizedText value={q.question_number} />
                     </h3>
 
                     <div className={`question-body-grid ${language === 'both' ? 'dual-view' : 'single-view'}`}>
                       {(language === 'zh' || language === 'both') && (
                         <div className="question-text-box">
-                          {language === 'both' && <div className="lang-box-label">【中文版】</div>}
+                          {language === 'both' && <div className="lang-box-label"><LocalizedText value="【中文版】" /></div>}
                           <div className="question-markdown">
-                            <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                            <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                               {normalizeLatex(q.raw_text_zh || '（本題無中文版題幹）')}
-                            </ReactMarkdown>
+                            </LocalizedMarkdown>
                           </div>
                           {(() => {
                             const optionsMap = extractOptions(q, 'zh');
@@ -866,11 +841,11 @@ export default function App() {
                                 <div className="mcq-options-grid-display">
                                   {optionLetters.map((letter) => (
                                     <div key={letter} className="mcq-option-card">
-                                      <span className="mcq-option-letter-badge">{letter}</span>
+                                      <span className="mcq-option-letter-badge"><LocalizedText value={letter} /></span>
                                       <div className="mcq-option-text">
-                                        <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                                        <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                                           {normalizeLatex(optionsMap[letter])}
-                                        </ReactMarkdown>
+                                        </LocalizedMarkdown>
                                       </div>
                                     </div>
                                   ))}
@@ -885,13 +860,11 @@ export default function App() {
                         <div className="question-text-box">
                           {language === 'both' && <div className="lang-box-label">【English Version】</div>}
                           <div className="question-markdown">
-                            <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                            <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                               {normalizeLatex(
-                                q.raw_text_en && q.raw_text_en.trim() && q.raw_text_en !== q.raw_text_zh
-                                  ? q.raw_text_en
-                                  : '（澳門四校聯考此歷屆真題為中文試卷，暫無官方英文譯本）'
+                                getQuestionText(q)
                               )}
-                            </ReactMarkdown>
+                            </LocalizedMarkdown>
                           </div>
                           {(() => {
                             const optionsMap = extractOptions(q, 'en');
@@ -902,11 +875,11 @@ export default function App() {
                                 <div className="mcq-options-grid-display">
                                   {optionLetters.map((letter) => (
                                     <div key={letter} className="mcq-option-card">
-                                      <span className="mcq-option-letter-badge">{letter}</span>
+                                      <span className="mcq-option-letter-badge"><LocalizedText value={letter} /></span>
                                       <div className="mcq-option-text">
-                                        <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                                        <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                                           {normalizeLatex(optionsMap[letter])}
-                                        </ReactMarkdown>
+                                        </LocalizedMarkdown>
                                       </div>
                                     </div>
                                   ))}
@@ -921,19 +894,17 @@ export default function App() {
                     {q.diagram_image && (
                       <div className="diagram-card">
                         <div className="diagram-header">
-                          <span className="diagram-title">📐 試題配圖</span>
+                          <span className="diagram-title"><LocalizedText value="📐 試題配圖" /></span>
                           <button
                             type="button"
                             onClick={() => setPreviewImage(cleanDiagramUrl(q.diagram_image))}
                             className="zoom-btn"
-                          >
-                            🔍 放大查看
-                          </button>
+                          ><LocalizedText value="🔍 放大查看" /></button>
                         </div>
                         <div className="diagram-img-wrapper" onClick={() => setPreviewImage(cleanDiagramUrl(q.diagram_image))}>
-                          <img
+                          <LocalizedAttributes><img
                             src={cleanDiagramUrl(q.diagram_image)}
-                            alt="試題配圖"
+                            alt={"試題配圖"}
                             className="diagram-image"
                             onError={(e) => {
                               const filename = (q.diagram_image || '').split('/').pop().replace(/[?#].*$/, '');
@@ -941,40 +912,34 @@ export default function App() {
                                 e.target.src = `http://${window.location.hostname}:5176/diagrams/${filename}`;
                               }
                             }}
-                          />
+                          /></LocalizedAttributes>
                         </div>
                       </div>
                     )}
 
                     {/* Answer Accordion */}
                     <details className="answer-accordion">
-                      <summary className="answer-summary">
-                        💡 參考答案與解析
-                      </summary>
+                      <summary className="answer-summary"><LocalizedText value="💡 參考答案與解析" /></summary>
 
                       {q.answer && (
                         <div className="answer-highlight-box">
-                          <div className="answer-title-label">
-                            🎯 參考答案：
-                          </div>
+                          <div className="answer-title-label"><LocalizedText value="🎯 參考答案：" /></div>
                           <div className="answer-markdown">
-                            <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                            <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                               {normalizeLatex(q.answer)}
-                            </ReactMarkdown>
+                            </LocalizedMarkdown>
                           </div>
                         </div>
                       )}
 
                       {q.solution ? (
                         <div className="question-markdown solution-content">
-                          <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                          <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                             {normalizeLatex(q.solution)}
-                          </ReactMarkdown>
+                          </LocalizedMarkdown>
                         </div>
                       ) : (
-                        <div className="no-solution-hint">
-                          （官方解答暫未收錄或本卷無對應解答）
-                        </div>
+                        <div className="no-solution-hint"><LocalizedText value="（官方解答暫未收錄或本卷無對應解答）" /></div>
                       )}
                     </details>
                   </div>
@@ -986,14 +951,14 @@ export default function App() {
       )}
 
       {showScrollTop && (
-        <button
+        <LocalizedAttributes><button
           type="button"
           onClick={scrollToTop}
           className="scroll-top-btn"
-          title="回頂部"
+          title={"回頂部"}
         >
           ↑
-        </button>
+        </button></LocalizedAttributes>
       )}
 
       <LoginPanel
@@ -1008,11 +973,9 @@ export default function App() {
             type="button"
             className="modal-close-btn"
             onClick={() => setPreviewImage(null)}
-          >
-            ✕ 關閉
-          </button>
-          <img src={previewImage} alt="放大配圖" className="zoomed-image" />
-          <div className="zoom-hint">輕觸任意處關閉</div>
+          ><LocalizedText value="✕ 關閉" /></button>
+          <LocalizedAttributes><img src={previewImage} alt={"放大配圖"} className="zoomed-image" /></LocalizedAttributes>
+          <div className="zoom-hint"><LocalizedText value="輕觸任意處關閉" /></div>
         </div>
       )}
 

@@ -22,3 +22,7 @@ build/
 # 敏感文件
 *.key
 *.pem
+
+# Browser tests
+test-results/
+playwright-report/

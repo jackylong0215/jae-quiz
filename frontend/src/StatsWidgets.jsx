@@ -1,5 +1,7 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { LocalizedText, useLocale } from './i18n.jsx';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { api as axios } from './i18n-api.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `http://${window.location.hostname}:8000`;
 
@@ -7,6 +9,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `http://${window.locat
    連續學習天數徽章
    ============================================================ */
 export function StreakBadge() {
+  useLocale();
   const [streak, setStreak] = useState(null);
 
   useEffect(() => {
@@ -22,7 +25,7 @@ export function StreakBadge() {
   if (!streak || streak.current_streak === 0) return null;
 
   return (
-    <div
+    <LocalizedAttributes><div
       title={`最長連續 ${streak.longest_streak} 天 · 共學習 ${streak.total_days} 天`}
       style={{
         display: 'inline-flex',
@@ -37,9 +40,7 @@ export function StreakBadge() {
         color: '#92400e',
         boxShadow: '0 2px 8px rgba(245, 158, 11, 0.25)',
       }}
-    >
-      🔥 連續學習 <strong style={{ fontSize: '1rem' }}>{streak.current_streak}</strong> 天
-    </div>
+    ><LocalizedText value="🔥 連續學習" /><strong style={{ fontSize: '1rem' }}><LocalizedText value={streak.current_streak} /></strong><LocalizedText value="天" /></div></LocalizedAttributes>
   );
 }
 
@@ -47,6 +48,7 @@ export function StreakBadge() {
    趨勢圖（SVG 折線圖，無依賴）
    ============================================================ */
 function TrendChart({ points, color }) {
+  useLocale();
   if (!points || points.length === 0) return null;
 
   const W = 400;
@@ -73,7 +75,7 @@ function TrendChart({ points, color }) {
         return (
           <g key={pct}>
             <line x1={PAD.left} y1={y} x2={W - PAD.right} y2={y} stroke="#e2e8f0" strokeWidth="1" strokeDasharray="3 3" />
-            <text x={PAD.left - 6} y={y + 3} fontSize="9" fill="#94a3b8" textAnchor="end">{pct}%</text>
+            <text x={PAD.left - 6} y={y + 3} fontSize="9" fill="#94a3b8" textAnchor="end"><LocalizedText value={pct} />%</text>
           </g>
         );
       })}
@@ -96,6 +98,7 @@ function TrendChart({ points, color }) {
    趨勢區塊
    ============================================================ */
 export function MasteryTrend() {
+  useLocale();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -117,10 +120,8 @@ export function MasteryTrend() {
       background: '#fff', borderRadius: 12, padding: 22, marginBottom: 20,
       border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
     }}>
-      <h3 style={{ margin: '0 0 4px', fontSize: '1.1rem' }}>📈 知識點趨勢（近 30 天）</h3>
-      <p style={{ margin: '0 0 18px', fontSize: '0.85rem', color: '#64748b' }}>
-        追蹤每個知識點的掌握度變化，看看你的進步曲線
-      </p>
+      <h3 style={{ margin: '0 0 4px', fontSize: '1.1rem' }}><LocalizedText value="📈 知識點趨勢（近 30 天）" /></h3>
+      <p style={{ margin: '0 0 18px', fontSize: '0.85rem', color: '#64748b' }}><LocalizedText value="追蹤每個知識點的掌握度變化，看看你的進步曲線" /></p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {data.map((t, i) => {
@@ -135,13 +136,13 @@ export function MasteryTrend() {
               borderLeft: `4px solid ${color}`,
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, flexWrap: 'wrap', gap: 8 }}>
-                <strong style={{ fontSize: '0.95rem', color: '#0f172a' }}>{t.topic}</strong>
+                <strong style={{ fontSize: '0.95rem', color: '#0f172a' }}><LocalizedText value={t.topic} /></strong>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem' }}>
                   <span style={{ color: '#64748b' }}>
-                    {t.first_percent}% → <strong style={{ color }}>{t.last_percent}%</strong>
+                    <LocalizedText value={t.first_percent} />% → <strong style={{ color }}><LocalizedText value={t.last_percent} />%</strong>
                   </span>
                   <span style={{ color, fontWeight: 700 }}>
-                    {trendIcon} {trendText}
+                    <LocalizedText value={trendIcon} /> <LocalizedText value={trendText} />
                   </span>
                 </div>
               </div>
@@ -158,6 +159,7 @@ export function MasteryTrend() {
    成就徽章
    ============================================================ */
 export function Achievements() {
+  useLocale();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -180,18 +182,15 @@ export function Achievements() {
       border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4, flexWrap: 'wrap', gap: 8 }}>
-        <h3 style={{ margin: 0, fontSize: '1.1rem' }}>🏆 成就徽章</h3>
+        <h3 style={{ margin: 0, fontSize: '1.1rem' }}><LocalizedText value="🏆 成就徽章" /></h3>
         <span style={{
           background: '#eff6ff', color: '#1d4ed8',
           padding: '4px 12px', borderRadius: 999,
           fontSize: '0.8rem', fontWeight: 700,
         }}>
-          {data.unlocked_count} / {data.total_count} 已解鎖
-        </span>
+          <LocalizedText value={data.unlocked_count} /> / <LocalizedText value={data.total_count} /><LocalizedText value="已解鎖" /></span>
       </div>
-      <p style={{ margin: '0 0 18px', fontSize: '0.85rem', color: '#64748b' }}>
-        持續練習，收集所有徽章！
-      </p>
+      <p style={{ margin: '0 0 18px', fontSize: '0.85rem', color: '#64748b' }}><LocalizedText value="持續練習，收集所有徽章！" /></p>
 
       <div style={{
         display: 'grid',
@@ -199,7 +198,7 @@ export function Achievements() {
         gap: 12,
       }}>
         {data.achievements.map((a) => (
-          <div
+          <LocalizedAttributes key={a.id}><div
             key={a.id}
             title={`${a.title}：${a.desc}（進度 ${a.progress}）`}
             style={{
@@ -215,24 +214,24 @@ export function Achievements() {
             onMouseEnter={(e) => { if (a.unlocked) e.currentTarget.style.transform = 'translateY(-2px)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
           >
-            <div style={{ fontSize: '2rem', marginBottom: 6 }}>{a.icon}</div>
+            <div style={{ fontSize: '2rem', marginBottom: 6 }}><LocalizedText value={a.icon} /></div>
             <div style={{
               fontWeight: 700, fontSize: '0.88rem',
               color: a.unlocked ? '#15803d' : '#64748b',
               marginBottom: 4,
             }}>
-              {a.title}
+              <LocalizedText value={a.title} />
             </div>
             <div style={{ fontSize: '0.72rem', color: '#94a3b8', lineHeight: 1.4 }}>
-              {a.desc}
+              <LocalizedText value={a.desc} />
             </div>
             <div style={{
               marginTop: 8, fontSize: '0.7rem', fontWeight: 700,
               color: a.unlocked ? '#10b981' : '#cbd5e1',
             }}>
-              {a.unlocked ? '✓ 已解鎖' : a.progress}
+              <LocalizedText value={a.unlocked ? '✓ 已解鎖' : a.progress} />
             </div>
-          </div>
+          </div></LocalizedAttributes>
         ))}
       </div>
     </div>

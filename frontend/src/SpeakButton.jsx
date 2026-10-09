@@ -1,3 +1,6 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { englishMathSpeech } from './math-speech.js';
+import { LocalizedText, useLocale, useEnglishText, t } from './i18n.jsx';
 import React, { useState, useEffect, useRef } from 'react';
 
 /* ============================================================
@@ -219,6 +222,7 @@ function pickBestVoice(voices, lang) {
     if (anyZh) return anyZh;
   }
 
+  if (lang.startsWith('en')) return voices.find(v => v.lang.toLowerCase().startsWith('en')) || null;
   const langPrefix = lang.split('-')[0];
   match = voices.find(v => v.lang.startsWith(langPrefix));
   if (match) return match;
@@ -240,6 +244,9 @@ export default function SpeakButton({
   label = '朗讀',
   stopLabel = '停止',
 }) {
+  const { language } = useLocale();
+  const rawSpeech = [text, ...Object.entries(options || {}).map(([letter, value]) => `${letter}. ${value}`)].filter(Boolean).join('\n');
+  const englishText = useEnglishText(rawSpeech);
   const [speaking, setSpeaking] = useState(false);
   const [supported, setSupported] = useState(true);
   const [voices, setVoices] = useState([]);
@@ -269,7 +276,7 @@ export default function SpeakButton({
 
   const handleClick = () => {
     if (!supported) {
-      alert('你的瀏覽器不支援語音朗讀功能。建議使用 Chrome、Edge 或 Safari。');
+      alert(t('你的瀏覽器不支援語音朗讀功能。建議使用 Chrome、Edge 或 Safari。'));
       return;
     }
     if (speaking) {
@@ -278,8 +285,8 @@ export default function SpeakButton({
       return;
     }
 
-    let speechText = sanitizeForSpeech(text);
-    if (options && typeof options === 'object') {
+    let speechText = language === 'en' ? englishMathSpeech(englishText) : sanitizeForSpeech(text);
+    if (language !== 'en' && options && typeof options === 'object') {
       const letters = ['A', 'B', 'C', 'D', 'E'].filter(l => options[l]);
       if (letters.length > 0) {
         speechText += '。選項：';
@@ -290,16 +297,16 @@ export default function SpeakButton({
     }
 
     if (!speechText.trim()) {
-      alert('沒有可朗讀的內容');
+      alert(t('沒有可朗讀的內容'));
       return;
     }
 
-    const lang = detectLang(text);
+    const lang = language === 'en' ? 'en-GB' : detectLang(text);
     console.log('[SpeakButton] 朗讀文字:', speechText);
     console.log('[SpeakButton] 偵測語言:', lang);
 
     let bestVoice = pickBestVoice(voices, lang);
-    if (!bestVoice && voices.length > 0) bestVoice = voices[0];
+    if (!bestVoice && language !== 'en' && voices.length > 0) bestVoice = voices[0];
     console.log('[SpeakButton] 選中的語音:', bestVoice ? `${bestVoice.name} (${bestVoice.lang})` : '系統預設');
 
     const u = new SpeechSynthesisUtterance(speechText);
@@ -327,9 +334,10 @@ export default function SpeakButton({
   const padding = size === 'large' ? '8px 18px' : size === 'small' ? '4px 10px' : '6px 14px';
 
   return (
-    <button
+    <LocalizedAttributes><button
       type="button"
       onClick={handleClick}
+      disabled={language === 'en' && (englishText === 'Translating into English…' || englishText.startsWith('English translation unavailable.'))}
       title={speaking ? '停止朗讀' : '朗讀此內容'}
       style={{
         display: 'inline-flex',
@@ -349,9 +357,9 @@ export default function SpeakButton({
       }}
     >
       <span style={{ fontSize: size === 'small' ? '0.9rem' : '1rem' }}>
-        {speaking ? '⏹️' : '🔈'}
+        <LocalizedText value={speaking ? '⏹️' : '🔈'} />
       </span>
-      {speaking ? stopLabel : label}
-    </button>
+      <LocalizedText value={speaking ? stopLabel : label} />
+    </button></LocalizedAttributes>
   );
 }

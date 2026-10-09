@@ -1,9 +1,12 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { LocalizedText, useLocale, t } from './i18n.jsx';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { api as axios } from './i18n-api.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `http://${window.location.hostname}:8000`;
 
 export default function FavoriteButton({ question, questionId, size = 'normal' }) {
+  useLocale();
   const [isFav, setIsFav] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -31,11 +34,11 @@ export default function FavoriteButton({ question, questionId, size = 'normal' }
   const toggleFavorite = async () => {
     const token = localStorage.getItem('jae_token');
     if (!token) {
-      alert('請先登入才能收藏題目');
+      alert(t('請先登入才能收藏題目'));
       return;
     }
     if (!questionId) {
-      alert('此題目缺少 ID，無法收藏');
+      alert(t('此題目缺少 ID，無法收藏'));
       return;
     }
 
@@ -67,14 +70,14 @@ export default function FavoriteButton({ question, questionId, size = 'normal' }
       }
     } catch (err) {
       console.error('Toggle favorite failed:', err);
-      alert('操作失敗：' + (err.response?.data?.detail || err.message));
+      alert(t('操作失敗：' + (err.response?.data?.detail || err.message)));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <button
+    <LocalizedAttributes><button
       type="button"
       className={`favorite-btn ${isFav ? 'active' : ''}`}
       onClick={(e) => {
@@ -94,7 +97,7 @@ export default function FavoriteButton({ question, questionId, size = 'normal' }
         opacity: loading ? 0.5 : 1,
       }}
     >
-      {isFav ? '⭐' : '☆'}
-    </button>
+      <LocalizedText value={isFav ? '⭐' : '☆'} />
+    </button></LocalizedAttributes>
   );
 }

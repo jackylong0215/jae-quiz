@@ -1,10 +1,10 @@
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions } from './i18n.jsx';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
-import axios from 'axios';
+import { api as axios } from './i18n-api.js';
 import 'katex/dist/katex.min.css';
 import FavoriteButton from './FavoriteButton.jsx';
 
@@ -18,7 +18,7 @@ function normalizeLatex(text) {
 
 function extractOptions(q) {
   if (!q) return {};
-  const raw = q.options_zh || q.options || q.options_en;
+  const raw = questionOptions(q);
   if (!raw) return {};
 
   if (typeof raw === 'object' && !Array.isArray(raw)) {
@@ -42,6 +42,7 @@ function extractOptions(q) {
 }
 
 export default function FavoritesPage() {
+  useLocale();
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -63,8 +64,8 @@ export default function FavoritesPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}>載入中...</div>;
-  if (error) return <div style={{ padding: 40, textAlign: 'center', color: '#b91c1c' }}>⚠️ {error}</div>;
+  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}><LocalizedText value="載入中..." /></div>;
+  if (error) return <div style={{ padding: 40, textAlign: 'center', color: '#b91c1c' }}>⚠️ <LocalizedText value={error} /></div>;
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: 20 }}>
@@ -72,16 +73,12 @@ export default function FavoritesPage() {
         <button
           onClick={() => navigate('/browse')}
           style={{ padding: '8px 16px', borderRadius: 8, border: '1px solid #cbd5e1', background: '#f1f5f9', cursor: 'pointer', fontWeight: 600 }}
-        >
-          ← 返回題庫
-        </button>
-        <h2 style={{ margin: 0 }}>⭐ 我的收藏 ({favorites.length})</h2>
+        ><LocalizedText value="← 返回題庫" /></button>
+        <h2 style={{ margin: 0 }}><LocalizedText value="⭐ 我的收藏 (" /><LocalizedText value={favorites.length} />)</h2>
       </div>
 
       {favorites.length === 0 ? (
-        <div style={{ padding: 40, textAlign: 'center', background: '#fef3c7', borderRadius: 12, color: '#92400e' }}>
-          尚無收藏題目。瀏覽題庫時點擊 ☆ 即可收藏。
-        </div>
+        <div style={{ padding: 40, textAlign: 'center', background: '#fef3c7', borderRadius: 12, color: '#92400e' }}><LocalizedText value="尚無收藏題目。瀏覽題庫時點擊 ☆ 即可收藏。" /></div>
       ) : (
         favorites.map((f, i) => {
           const q = f.question;
@@ -97,18 +94,17 @@ export default function FavoritesPage() {
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'flex-start' }}>
                 <div>
-                  <h4 style={{ margin: 0 }}>{q.question_number || `題目 ${i + 1}`}</h4>
-                  <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: 4 }}>
-                    收藏於 {f.created_at}
+                  <h4 style={{ margin: 0 }}><LocalizedText value={q.question_number || `題目 ${i + 1}`} /></h4>
+                  <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: 4 }}><LocalizedText value="收藏於" /><LocalizedText value={f.created_at} />
                   </div>
                 </div>
                 <FavoriteButton question={q} questionId={f.question_id} size="large" />
               </div>
 
               <div style={{ lineHeight: 1.8, marginBottom: 12 }}>
-                <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                  {normalizeLatex(q.raw_text_zh || q.raw_text_en || '')}
-                </ReactMarkdown>
+                <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                  {normalizeLatex(getQuestionText(q))}
+                </LocalizedMarkdown>
               </div>
 
               {/* 選項列表（MCQ 才顯示） */}
@@ -152,17 +148,15 @@ export default function FavoritesPage() {
                             flexShrink: 0,
                             marginTop: 2,
                           }}>
-                            {letter}
+                            <LocalizedText value={letter} />
                           </span>
                           <div style={{ flex: 1, color: isCorrect ? '#15803d' : '#1e293b', wordBreak: 'break-word' }}>
-                            <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                            <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                               {normalizeLatex(optionsMap[letter])}
-                            </ReactMarkdown>
+                            </LocalizedMarkdown>
                           </div>
                           {isCorrect && (
-                            <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>
-                              ✅ 正確
-                            </span>
+                            <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}><LocalizedText value="✅ 正確" /></span>
                           )}
                         </div>
                       );
@@ -173,15 +167,15 @@ export default function FavoritesPage() {
 
               {q.answer && (
                 <details style={{ marginTop: 12, background: '#f8fafc', padding: 12, borderRadius: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0369a1' }}>💡 查看答案與解析</summary>
+                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0369a1' }}><LocalizedText value="💡 查看答案與解析" /></summary>
                   <div style={{ marginTop: 10, lineHeight: 1.7 }}>
                     <div style={{ color: '#15803d', marginBottom: 8 }}>
-                      <strong>正確答案：</strong> {q.answer}
+                      <strong><LocalizedText value="正確答案：" /></strong> <LocalizedText value={q.answer} />
                     </div>
                     {q.solution && (
-                      <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                      <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                         {normalizeLatex(q.solution)}
-                      </ReactMarkdown>
+                      </LocalizedMarkdown>
                     )}
                   </div>
                 </details>

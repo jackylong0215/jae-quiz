@@ -1,10 +1,13 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { LocalizedText, useLocale } from './i18n.jsx';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { api as axios } from './i18n-api.js';
 import { useNavigate } from 'react-router-dom';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
 export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
+  useLocale();
   const navigate = useNavigate();
   const [tab, setTab] = useState('login'); // 'login', 'register', 'profile'
   const [user, setUser] = useState(null);
@@ -123,7 +126,7 @@ export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
         {/* Header */}
         <div className="login-modal-header">
           <div className="login-modal-title">
-            {user ? '👤 用戶中心與測驗記錄' : '🔐 澳門四校聯考考生系統'}
+            <LocalizedText value={user ? '👤 用戶中心與測驗記錄' : '🔐 澳門四校聯考考生系統'} />
           </div>
           <button className="login-modal-close" onClick={onClose}>✕</button>
         </div>
@@ -134,62 +137,56 @@ export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
             <button
               className={`login-tab-btn ${tab === 'login' ? 'active' : ''}`}
               onClick={() => { setTab('login'); setError(''); }}
-            >
-              已有帳號 登入
-            </button>
+            ><LocalizedText value="已有帳號 登入" /></button>
             <button
               className={`login-tab-btn ${tab === 'register' ? 'active' : ''}`}
               onClick={() => { setTab('register'); setError(''); }}
-            >
-              新考生 註冊
-            </button>
+            ><LocalizedText value="新考生 註冊" /></button>
           </div>
         ) : null}
 
-        {error && <div className="login-error-box">⚠️ {error}</div>}
+        {error && <div className="login-error-box">⚠️ <LocalizedText value={error} /></div>}
 
         {/* Tab 1: Login */}
         {!user && tab === 'login' && (
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
-              <label>用戶名 或 註冊郵箱：</label>
-              <input
+              <label><LocalizedText value="用戶名 或 註冊郵箱：" /></label>
+              <LocalizedAttributes><input
                 type="text"
                 required
-                placeholder="請輸入用戶名或郵箱"
+                placeholder={"請輸入用戶名或郵箱"}
                 value={loginId}
                 onChange={(e) => setLoginId(e.target.value)}
                 className="login-input"
-              />
+              /></LocalizedAttributes>
             </div>
                         <div className="form-group">
-              <label>密碼：</label>
+              <label><LocalizedText value="密碼：" /></label>
               <div className="password-input-wrapper">
-                <input
+                <LocalizedAttributes><input
                   type={showLoginPassword ? 'text' : 'password'}
                   required
-                  placeholder="請輸入密碼"
+                  placeholder={"請輸入密碼"}
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
                   className="login-input password-input"
-                />
-                <button
+                /></LocalizedAttributes>
+                <LocalizedAttributes><button
                   type="button"
                   className="password-toggle-btn"
                   onClick={() => setShowLoginPassword(!showLoginPassword)}
                   aria-label={showLoginPassword ? '隱藏密碼' : '顯示密碼'}
                   tabIndex={-1}
                 >
-                  {showLoginPassword ? '🙈' : '👁️'}
-                </button>
+                  <LocalizedText value={showLoginPassword ? '🙈' : '👁️'} />
+                </button></LocalizedAttributes>
               </div>
             </div>
             <button type="submit" disabled={loading} className="login-submit-btn">
-              {loading ? '正在登入...' : '立即登入'}
+              <LocalizedText value={loading ? '正在登入...' : '立即登入'} />
             </button>
-            <div className="login-hint">
-              💡 登入後可持久化儲存每次 Quiz 測驗成績與 AI 弱點診斷報告。
-            </div>
+            <div className="login-hint"><LocalizedText value="💡 登入後可持久化儲存每次 Quiz 測驗成績與 AI 弱點診斷報告。" /></div>
           </form>
         )}
 
@@ -197,61 +194,61 @@ export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
         {!user && tab === 'register' && (
           <form onSubmit={handleRegister} className="login-form">
             <div className="form-group">
-              <label>用戶名 (唯一帳號)：</label>
-              <input
+              <label><LocalizedText value="用戶名 (唯一帳號)：" /></label>
+              <LocalizedAttributes><input
                 type="text"
                 required
-                placeholder="英文或拼音帳號"
+                placeholder={"英文或拼音帳號"}
                 value={regUsername}
                 onChange={(e) => setRegUsername(e.target.value)}
                 className="login-input"
-              />
+              /></LocalizedAttributes>
             </div>
             <div className="form-group">
-              <label>電子郵箱：</label>
-              <input
+              <label><LocalizedText value="電子郵箱：" /></label>
+              <LocalizedAttributes><input
                 type="email"
                 required
                 placeholder="student@example.com"
                 value={regEmail}
                 onChange={(e) => setRegEmail(e.target.value)}
                 className="login-input"
-              />
+              /></LocalizedAttributes>
             </div>
             <div className="form-group">
-              <label>學生姓名 / 稱呼：</label>
-              <input
+              <label><LocalizedText value="學生姓名 / 稱呼：" /></label>
+              <LocalizedAttributes><input
                 type="text"
-                placeholder="例如：陳同學"
+                placeholder={"例如：陳同學"}
                 value={regFullName}
                 onChange={(e) => setRegFullName(e.target.value)}
                 className="login-input"
-              />
+              /></LocalizedAttributes>
             </div>
                         <div className="form-group">
-              <label>設置密碼 (至少 6 位)：</label>
+              <label><LocalizedText value="設置密碼 (至少 6 位)：" /></label>
               <div className="password-input-wrapper">
-                <input
+                <LocalizedAttributes><input
                   type={showRegPassword ? 'text' : 'password'}
                   required
-                  placeholder="請設置密碼"
+                  placeholder={"請設置密碼"}
                   value={regPassword}
                   onChange={(e) => setRegPassword(e.target.value)}
                   className="login-input password-input"
-                />
-                <button
+                /></LocalizedAttributes>
+                <LocalizedAttributes><button
                   type="button"
                   className="password-toggle-btn"
                   onClick={() => setShowRegPassword(!showRegPassword)}
                   aria-label={showRegPassword ? '隱藏密碼' : '顯示密碼'}
                   tabIndex={-1}
                 >
-                  {showRegPassword ? '🙈' : '👁️'}
-                </button>
+                  <LocalizedText value={showRegPassword ? '🙈' : '👁️'} />
+                </button></LocalizedAttributes>
               </div>
             </div>
             <button type="submit" disabled={loading} className="login-submit-btn">
-              {loading ? '正在註冊...' : '免費創建帳號'}
+              <LocalizedText value={loading ? '正在註冊...' : '免費創建帳號'} />
             </button>
           </form>
         )}
@@ -261,15 +258,13 @@ export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
           <div className="profile-container">
             <div className="profile-info-card">
               <div className="profile-name">
-                  {user.is_admin ? '👑 ' : '🎓 '}
-                  歡迎回來，<strong>{user.full_name || user.username}</strong>！
+                  <LocalizedText value={user.is_admin ? '👑 ' : '🎓 '} /><LocalizedText value="歡迎回來，" /><strong><LocalizedText value={user.full_name || user.username} /></strong>！
                   {user.is_admin && (
-                    <span className="admin-badge">管理員</span>
+                    <span className="admin-badge"><LocalizedText value="管理員" /></span>
                   )}
                 </div>
-              <div className="profile-meta">
-                帳號：{user.username} ‧ 郵箱：{user.email}
-                {user.is_admin && ' ‧ 權限：管理員'}
+              <div className="profile-meta"><LocalizedText value="帳號：" /><LocalizedText value={user.username} /><LocalizedText value="‧ 郵箱：" /><LocalizedText value={user.email} />
+                <LocalizedText value={user.is_admin && ' ‧ 權限：管理員'} />
               </div>
               {user.is_admin && (
   <button
@@ -284,23 +279,15 @@ export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
       onClose();
       window.location.href = '/admin';
     }}
-  >
-    👑 管理後台
-  </button>
+  ><LocalizedText value="👑 管理後台" /></button>
 )}
-              <button onClick={handleLogout} className="logout-btn">
-                🚪 登出當前帳號
-              </button>
+              <button onClick={handleLogout} className="logout-btn"><LocalizedText value="🚪 登出當前帳號" /></button>
             </div>
 
-            <div className="history-section-title">
-              📜 我的歷史測驗記錄 ({history.length} 次)：
-            </div>
+            <div className="history-section-title"><LocalizedText value="📜 我的歷史測驗記錄 (" /><LocalizedText value={history.length} /><LocalizedText value="次)：" /></div>
 
             {history.length === 0 ? (
-              <div className="empty-history-hint">
-                尚無測驗記錄，前往「開始測驗」完成一次模擬考即可自動在此歸檔！
-              </div>
+              <div className="empty-history-hint"><LocalizedText value="尚無測驗記錄，前往「開始測驗」完成一次模擬考即可自動在此歸檔！" /></div>
             ) : (
               <div className="history-list-box no-scrollbar">
                 {history.map((h, idx) => (
@@ -314,25 +301,22 @@ export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
                     style={{ cursor: 'pointer' }}
                   >
                     <div className="history-item-top">
-                      <span className="history-date">📅 {h.created_at}</span>
+                      <span className="history-date">📅 <LocalizedText value={h.created_at} /></span>
                       <span className="history-score-badge" style={{
                         background: h.score_percent >= 80 ? '#10b981' : h.score_percent >= 50 ? '#f59e0b' : '#ef4444'
                       }}>
-                        {h.score_percent}% 得分 ({h.correct_count}/{h.total_count} 題)
-                      </span>
+                        <LocalizedText value={h.score_percent} /><LocalizedText value="% 得分 (" /><LocalizedText value={h.correct_count} />/<LocalizedText value={h.total_count} /><LocalizedText value="題)" /></span>
                     </div>
                     {h.category_breakdown && Object.keys(h.category_breakdown).length > 0 && (
                       <div className="history-breakdown-tags">
                         {Object.entries(h.category_breakdown).map(([cat, st], ci) => (
                           <span key={ci} className="history-cat-tag">
-                            {cat}: {st.percent}%
+                            <LocalizedText value={cat} />: <LocalizedText value={st.percent} />%
                           </span>
                         ))}
                       </div>
                     )}
-                    <div style={{ marginTop: 8, fontSize: '0.8rem', color: '#2563eb', fontWeight: 600 }}>
-                      點此查看錯題回顧 →
-                    </div>
+                    <div style={{ marginTop: 8, fontSize: '0.8rem', color: '#2563eb', fontWeight: 600 }}><LocalizedText value="點此查看錯題回顧 →" /></div>
                   </div>
                 ))}
               </div>

@@ -1,10 +1,11 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions, t } from './i18n.jsx';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
-import axios from 'axios';
+import { api as axios } from './i18n-api.js';
 import 'katex/dist/katex.min.css';
 import SpeakButton from './SpeakButton.jsx';
 import { StreakBadge, MasteryTrend, Achievements } from './StatsWidgets.jsx';
@@ -39,7 +40,7 @@ function normalizeLatex(text) {
 
 function extractOptions(q) {
   if (!q) return {};
-  const raw = q.options_zh || q.options || q.options_en;
+  const raw = questionOptions(q);
   if (!raw) return {};
 
   if (typeof raw === 'object' && !Array.isArray(raw)) {
@@ -63,6 +64,7 @@ function extractOptions(q) {
 }
 
 export default function WrongBookPage() {
+  useLocale();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -127,7 +129,7 @@ export default function WrongBookPage() {
 
   const handlePractice = async () => {
     const token = localStorage.getItem('jae_token');
-    if (!token) { alert('請先登入'); return; }
+    if (!token) { alert(t('請先登入')); return; }
 
     setPracticeLoading(true);
     setPracticeError('');
@@ -163,7 +165,7 @@ export default function WrongBookPage() {
      ============================================================ */
   const handleGenerateNote = async (topic, diagnosisType) => {
     const token = localStorage.getItem('jae_token');
-    if (!token) { alert('請先登入'); return; }
+    if (!token) { alert(t('請先登入')); return; }
 
     setNoteModal({ topic, diagnosis_type: diagnosisType, note: '', loading: true });
 
@@ -185,8 +187,8 @@ export default function WrongBookPage() {
     }
   };
 
-  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}>載入中...</div>;
-  if (error) return <div style={{ padding: 40, textAlign: 'center', color: '#b91c1c' }}>⚠️ {error}</div>;
+  if (loading) return <div style={{ padding: 40, textAlign: 'center' }}><LocalizedText value="載入中..." /></div>;
+  if (error) return <div style={{ padding: 40, textAlign: 'center', color: '#b91c1c' }}>⚠️ <LocalizedText value={error} /></div>;
 
   const totalWrong = Object.values(wrongQuestions).reduce((sum, arr) => sum + arr.length, 0);
   const weakTopics = topicMastery.filter(t => t.status === 'weak');
@@ -198,10 +200,8 @@ export default function WrongBookPage() {
         <button
           onClick={() => navigate('/browse')}
           style={{ padding: '8px 16px', borderRadius: 8, border: '1px solid #cbd5e1', background: '#f1f5f9', cursor: 'pointer', fontWeight: 600 }}
-        >
-          ← 返回題庫
-        </button>
-        <h2 style={{ margin: 0 }}>📕 我的錯題本</h2>
+        ><LocalizedText value="← 返回題庫" /></button>
+        <h2 style={{ margin: 0 }}><LocalizedText value="📕 我的錯題本" /></h2>
       </div>
 
 {/* ==================== 🔥 連續學習天數 ==================== */}
@@ -221,10 +221,8 @@ export default function WrongBookPage() {
           background: '#fff', borderRadius: 12, padding: 22, marginBottom: 20,
           border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
         }}>
-          <h3 style={{ margin: '0 0 4px', fontSize: '1.1rem' }}>🧠 知識點多層診斷</h3>
-          <p style={{ margin: '0 0 18px', fontSize: '0.85rem', color: '#64748b' }}>
-            根據你的作答正確率、平均用時、近期表現綜合分析
-          </p>
+          <h3 style={{ margin: '0 0 4px', fontSize: '1.1rem' }}><LocalizedText value="🧠 知識點多層診斷" /></h3>
+          <p style={{ margin: '0 0 18px', fontSize: '0.85rem', color: '#64748b' }}><LocalizedText value="根據你的作答正確率、平均用時、近期表現綜合分析" /></p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {topicDiagnosis.map((t, i) => {
@@ -240,33 +238,31 @@ export default function WrongBookPage() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 8 }}>
-                    <strong style={{ fontSize: '1rem', color: '#0f172a' }}>{t.topic}</strong>
+                    <strong style={{ fontSize: '1rem', color: '#0f172a' }}><LocalizedText value={t.topic} /></strong>
                     <span style={{
                       background: meta.bg, color: meta.color,
                       padding: '2px 10px', borderRadius: 999,
                       fontSize: '0.75rem', fontWeight: 700,
                     }}>
-                      {meta.label}
+                      <LocalizedText value={meta.label} />
                     </span>
                     <span style={{
                       background: '#fff', color: '#475569',
                       padding: '2px 10px', borderRadius: 999,
                       fontSize: '0.75rem', border: '1px solid #e2e8f0',
                     }}>
-                      {diag.icon} {diag.label}
+                      <LocalizedText value={diag.icon} /> <LocalizedText value={diag.label} />
                     </span>
                   </div>
 
                   <div style={{ display: 'flex', gap: 16, fontSize: '0.82rem', color: '#64748b', marginBottom: 8, flexWrap: 'wrap' }}>
-                    <span>正確率：<strong style={{ color: meta.color }}>{t.correct_rate}%</strong></span>
-                    <span>作答次數：<strong style={{ color: '#334155' }}>{t.total_attempts}</strong></span>
-                    <span>平均用時：<strong style={{ color: '#334155' }}>{t.avg_time_seconds} 秒</strong></span>
+                    <span><LocalizedText value="正確率：" /><strong style={{ color: meta.color }}><LocalizedText value={t.correct_rate} />%</strong></span>
+                    <span><LocalizedText value="作答次數：" /><strong style={{ color: '#334155' }}><LocalizedText value={t.total_attempts} /></strong></span>
+                    <span><LocalizedText value="平均用時：" /><strong style={{ color: '#334155' }}><LocalizedText value={t.avg_time_seconds} /><LocalizedText value="秒" /></strong></span>
                     {t.recent_results?.length > 0 && (
-                      <span>
-                        最近：
-                        {t.recent_results.slice(0, 3).map((r, ri) => (
+                      <span><LocalizedText value="最近：" />{t.recent_results.slice(0, 3).map((r, ri) => (
                           <span key={ri} style={{ marginLeft: 4, color: r === 'correct' ? '#10b981' : '#ef4444', fontWeight: 700 }}>
-                            {r === 'correct' ? '✓' : '✗'}
+                            <LocalizedText value={r === 'correct' ? '✓' : '✗'} />
                           </span>
                         ))}
                       </span>
@@ -279,7 +275,7 @@ export default function WrongBookPage() {
                       padding: '8px 12px', borderRadius: 8, marginBottom: 10,
                       border: '1px solid #e2e8f0', lineHeight: 1.6,
                     }}>
-                      💡 {t.recommendation}
+                      💡 <LocalizedText value={t.recommendation} />
                     </div>
                   )}
 
@@ -292,9 +288,7 @@ export default function WrongBookPage() {
                           background: '#2563eb', color: '#fff',
                           border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600,
                         }}
-                      >
-                        🎯 練更多題
-                      </button>
+                      ><LocalizedText value="🎯 練更多題" /></button>
                     )}
                     {(t.diagnosis_type === 'forgot_formula' || t.diagnosis_type === 'concept_gap' || t.diagnosis_type === 'careless') && (
                       <button
@@ -305,9 +299,7 @@ export default function WrongBookPage() {
                           border: '1.5px solid #c4b5fd', borderRadius: 8,
                           cursor: 'pointer', fontWeight: 600,
                         }}
-                      >
-                        📝 生成複習筆記
-                      </button>
+                      ><LocalizedText value="📝 生成複習筆記" /></button>
                     )}
                   </div>
                 </div>
@@ -323,7 +315,7 @@ export default function WrongBookPage() {
           background: '#fff', borderRadius: 12, padding: 20, marginBottom: 20,
           border: '1px solid #e2e8f0', boxShadow: '0 2px 5px rgba(0,0,0,0.03)',
         }}>
-          <h3 style={{ margin: '0 0 16px', fontSize: '1.05rem' }}>📊 知識點掌握度（總覽）</h3>
+          <h3 style={{ margin: '0 0 16px', fontSize: '1.05rem' }}><LocalizedText value="📊 知識點掌握度（總覽）" /></h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {topicMastery.slice(0, 15).map((t, i) => {
               const color = t.mastery_percent >= 80 ? '#10b981'
@@ -332,7 +324,7 @@ export default function WrongBookPage() {
               return (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={{ flex: '0 0 130px', fontSize: '0.9rem', color: '#334155', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {t.topic}
+                    <LocalizedText value={t.topic} />
                   </div>
                   <div style={{ flex: 1, height: 18, background: '#f1f5f9', borderRadius: 9, overflow: 'hidden' }}>
                     <div style={{
@@ -343,21 +335,21 @@ export default function WrongBookPage() {
                       transition: 'width 0.3s',
                     }} />
                   </div>
-                  <div
+                  <LocalizedAttributes><div
                     style={{
                       flex: '0 0 130px', fontSize: '0.82rem', color: '#64748b',
                       textAlign: 'right', whiteSpace: 'nowrap',
                     }}
-                    title="答對次數 / 總作答次數（掌握度）"
+                    title={"答對次數 / 總作答次數（掌握度）"}
                   >
-                    <span style={{ color: '#10b981', fontWeight: 700 }}>{t.correct}</span>
+                    <span style={{ color: '#10b981', fontWeight: 700 }}><LocalizedText value={t.correct} /></span>
                     <span style={{ color: '#94a3b8' }}>/</span>
-                    <span style={{ color: '#334155', fontWeight: 600 }}>{t.total}</span>
-                    <span style={{ color: '#94a3b8', fontSize: '0.75rem', marginLeft: 6 }}>答對/作答</span>
+                    <span style={{ color: '#334155', fontWeight: 600 }}><LocalizedText value={t.total} /></span>
+                    <span style={{ color: '#94a3b8', fontSize: '0.75rem', marginLeft: 6 }}><LocalizedText value="答對/作答" /></span>
                     <span style={{ marginLeft: 8, color: t.mastery_percent >= 60 ? '#10b981' : '#ef4444', fontWeight: 700 }}>
-                      {t.mastery_percent}%
+                      <LocalizedText value={t.mastery_percent} />%
                     </span>
-                  </div>
+                  </div></LocalizedAttributes>
                   {t.mastery_percent < 60 && (
                     <button
                       onClick={() => openPracticeModal(t.topic)}
@@ -367,9 +359,7 @@ export default function WrongBookPage() {
                         border: '1px solid #fcd34d', borderRadius: 6,
                         cursor: 'pointer', fontWeight: 600, whiteSpace: 'nowrap',
                       }}
-                    >
-                      🎯 練更多題
-                    </button>
+                    ><LocalizedText value="🎯 練更多題" /></button>
                   )}
                 </div>
               );
@@ -384,9 +374,7 @@ export default function WrongBookPage() {
           background: '#fffbeb', border: '1px solid #fcd34d',
           borderRadius: 12, padding: 16, marginBottom: 20,
         }}>
-          <h3 style={{ margin: '0 0 12px', fontSize: '1rem', color: '#92400e' }}>
-            🔥 優先補強（{weakTopics.length} 個弱項）
-          </h3>
+          <h3 style={{ margin: '0 0 12px', fontSize: '1rem', color: '#92400e' }}><LocalizedText value="🔥 優先補強（" /><LocalizedText value={weakTopics.length} /><LocalizedText value="個弱項）" /></h3>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {weakTopics.map((t, i) => (
               <button
@@ -398,7 +386,7 @@ export default function WrongBookPage() {
                   cursor: 'pointer', fontWeight: 600, color: '#78350f', fontSize: '0.9rem',
                 }}
               >
-                {t.topic} ({t.mastery_percent}%)
+                <LocalizedText value={t.topic} /> (<LocalizedText value={t.mastery_percent} />%)
               </button>
             ))}
           </div>
@@ -410,12 +398,10 @@ export default function WrongBookPage() {
         <div style={{
           padding: 40, textAlign: 'center',
           background: '#dcfce7', borderRadius: 12, color: '#15803d', fontWeight: 600,
-        }}>
-          🎉 錯題本是空的！繼續保持！
-        </div>
+        }}><LocalizedText value="🎉 錯題本是空的！繼續保持！" /></div>
       ) : (
         <>
-          <h3 style={{ margin: '0 0 12px' }}>📚 錯題列表（共 {totalWrong} 題）</h3>
+          <h3 style={{ margin: '0 0 12px' }}><LocalizedText value="📚 錯題列表（共" /><LocalizedText value={totalWrong} /><LocalizedText value="題）" /></h3>
           {Object.entries(wrongQuestions).map(([category, list]) => (
             <div key={category} style={{ marginBottom: 20 }}>
               <button
@@ -428,10 +414,9 @@ export default function WrongBookPage() {
                 }}
               >
                 <span>
-                  {expandedTopics[category] ? '▼' : '▶'} {CATEGORY_MAP[category] || category}
+                  <LocalizedText value={expandedTopics[category] ? '▼' : '▶'} /> <LocalizedText value={CATEGORY_MAP[category] || category} />
                   <span style={{ marginLeft: 8, fontWeight: 500, color: '#64748b', fontSize: '0.85rem' }}>
-                    ({list.length} 題)
-                  </span>
+                    (<LocalizedText value={list.length} /><LocalizedText value="題)" /></span>
                 </span>
               </button>
 
@@ -449,33 +434,31 @@ export default function WrongBookPage() {
                   }}>
 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'flex-start' }}>
   <div>
-    <h4 style={{ margin: 0 }}>{q.question_number || `第 ${i + 1} 題`}</h4>
+    <h4 style={{ margin: 0 }}><LocalizedText value={q.question_number || `第 ${i + 1} 題`} /></h4>
     <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
-      <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '2px 8px', borderRadius: 4, fontSize: '0.75rem', fontWeight: 600 }}>
-        錯 {w.wrong_count} 次
-      </span>
+      <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '2px 8px', borderRadius: 4, fontSize: '0.75rem', fontWeight: 600 }}><LocalizedText value="錯" /><LocalizedText value={w.wrong_count} /><LocalizedText value="次" /></span>
       {(w.sub_topics || []).map((t, ti) => (
         <span key={ti} style={{ background: '#eff6ff', color: '#1d4ed8', padding: '2px 8px', borderRadius: 4, fontSize: '0.75rem' }}>
-          {t}
+          <LocalizedText value={t} />
         </span>
       ))}
     </div>
   </div>
   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
-    <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{w.last_wrong_at}</span>
+    <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}><LocalizedText value={w.last_wrong_at} /></span>
     <SpeakButton
-      text={q.raw_text_zh || q.raw_text_en || ''}
+      text={getQuestionText(q)}
       options={optionsMap}
       size="small"
-      label="朗讀題目"
+      label={t("朗讀題目")}
     />
   </div>
 </div>
 
                     <div style={{ lineHeight: 1.8, marginBottom: 14 }}>
-                      <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                        {normalizeLatex(q.raw_text_zh || q.raw_text_en || '')}
-                      </ReactMarkdown>
+                      <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                        {normalizeLatex(getQuestionText(q))}
+                      </LocalizedMarkdown>
                     </div>
 
                     {letters.length > 0 && (
@@ -497,15 +480,15 @@ export default function WrongBookPage() {
                                 color: '#fff', fontWeight: 700, fontSize: '0.8rem',
                                 borderRadius: '50%', flexShrink: 0, marginTop: 2,
                               }}>
-                                {letter}
+                                <LocalizedText value={letter} />
                               </span>
                               <div style={{ flex: 1, color: isRight ? '#15803d' : '#1e293b', wordBreak: 'break-word' }}>
-                                <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                                <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                                   {normalizeLatex(optionsMap[letter])}
-                                </ReactMarkdown>
+                                </LocalizedMarkdown>
                               </div>
                               {isRight && (
-                                <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>✅ 正確</span>
+                                <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}><LocalizedText value="✅ 正確" /></span>
                               )}
                             </div>
                           );
@@ -515,28 +498,26 @@ export default function WrongBookPage() {
 
                     <div style={{ display: 'flex', gap: 12, marginBottom: 14, flexWrap: 'wrap' }}>
                       <div style={{ flex: 1, minWidth: 140, padding: 10, background: '#fee2e2', borderRadius: 8, color: '#b91c1c', fontSize: '0.9rem' }}>
-                        <strong>你的作答：</strong> {w.user_answer || '(未作答)'}
+                        <strong><LocalizedText value="你的作答：" /></strong> <LocalizedText value={w.user_answer || '(未作答)'} />
                       </div>
                       <div style={{ flex: 1, minWidth: 140, padding: 10, background: '#f0f9ff', borderRadius: 8, color: '#0c4a6e', fontSize: '0.9rem' }}>
-                        <strong>正確答案：</strong> {w.correct_answer}
+                        <strong><LocalizedText value="正確答案：" /></strong> <LocalizedText value={w.correct_answer} />
                       </div>
                     </div>
 
                     {q.solution && (
                       <details style={{ background: '#f8fafc', padding: 12, borderRadius: 8 }}>
-                        <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0369a1', fontSize: '0.9rem' }}>
-                          💡 查看解題步驟
-                        </summary>
+                        <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0369a1', fontSize: '0.9rem' }}><LocalizedText value="💡 查看解題步驟" /></summary>
                         <div style={{ marginTop: 12, lineHeight: 1.8 }}>
-                          <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                          <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                             {normalizeLatex(q.solution)}
-                          </ReactMarkdown>
+                          </LocalizedMarkdown>
                         </div>
                             <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px dashed #cbd5e1', display: 'flex', justifyContent: 'flex-end' }}>
       <SpeakButton
         text={q.solution}
         size="small"
-        label="🔊 朗讀詳解"
+        label={t("🔊 朗讀詳解")}
       />
     </div>
                       </details>
@@ -567,16 +548,13 @@ export default function WrongBookPage() {
               boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
             }}
           >
-            <h3 style={{ margin: '0 0 4px' }}>🎯 專項練習</h3>
-            <p style={{ margin: '0 0 20px', fontSize: '0.9rem', color: '#64748b' }}>
-              知識點：<strong style={{ color: '#0f172a' }}>{practiceModalTopic}</strong>
+            <h3 style={{ margin: '0 0 4px' }}><LocalizedText value="🎯 專項練習" /></h3>
+            <p style={{ margin: '0 0 20px', fontSize: '0.9rem', color: '#64748b' }}><LocalizedText value="知識點：" /><strong style={{ color: '#0f172a' }}><LocalizedText value={practiceModalTopic} /></strong>
             </p>
 
             {/* 題目來源 */}
             <div style={{ marginBottom: 18 }}>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#334155', marginBottom: 8 }}>
-                題目來源
-              </div>
+              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#334155', marginBottom: 8 }}><LocalizedText value="題目來源" /></div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {[
                   { value: 'past', label: '📚 只用真題', sub: '從歷屆題庫中抽題' },
@@ -595,8 +573,8 @@ export default function WrongBookPage() {
                       display: 'flex', flexDirection: 'column', gap: 2,
                     }}
                   >
-                    <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#0f172a' }}>{opt.label}</span>
-                    <span style={{ fontSize: '0.78rem', color: '#64748b' }}>{opt.sub}</span>
+                    <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#0f172a' }}><LocalizedText value={opt.label} /></span>
+                    <span style={{ fontSize: '0.78rem', color: '#64748b' }}><LocalizedText value={opt.sub} /></span>
                   </button>
                 ))}
               </div>
@@ -609,8 +587,8 @@ export default function WrongBookPage() {
                 marginBottom: 12, display: 'flex',
                 justifyContent: 'space-between', alignItems: 'center',
               }}>
-                <span>題數</span>
-                <strong style={{ color: '#2563eb', fontSize: '1.05rem' }}>{practiceCount} 題</strong>
+                <span><LocalizedText value="題數" /></span>
+                <strong style={{ color: '#2563eb', fontSize: '1.05rem' }}><LocalizedText value={practiceCount} /><LocalizedText value="題" /></strong>
               </div>
               <input
                 type="range"
@@ -640,8 +618,7 @@ export default function WrongBookPage() {
                       transition: 'all 0.15s',
                     }}
                   >
-                    {n} 題
-                  </button>
+                    <LocalizedText value={n} /><LocalizedText value="題" /></button>
                 ))}
               </div>
             </div>
@@ -651,7 +628,7 @@ export default function WrongBookPage() {
                 padding: 10, background: '#fef2f2', border: '1px solid #fecaca',
                 color: '#b91c1c', borderRadius: 8, fontSize: '0.85rem', marginBottom: 14,
               }}>
-                ⚠️ {practiceError}
+                ⚠️ <LocalizedText value={practiceError} />
               </div>
             )}
 
@@ -669,9 +646,7 @@ export default function WrongBookPage() {
                   cursor: practiceLoading ? 'not-allowed' : 'pointer',
                   fontWeight: 600, fontSize: '0.92rem', transition: 'all 0.15s',
                 }}
-              >
-                取消
-              </button>
+              ><LocalizedText value="取消" /></button>
               <button
                 onClick={handlePractice}
                 disabled={practiceLoading}
@@ -685,7 +660,7 @@ export default function WrongBookPage() {
                   transition: 'all 0.15s',
                 }}
               >
-                {practiceLoading ? '生成中...' : '🚀 開始練習'}
+                <LocalizedText value={practiceLoading ? '生成中...' : '🚀 開始練習'} />
               </button>
             </div>
           </div>
@@ -713,9 +688,8 @@ export default function WrongBookPage() {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
               <div>
-                <h3 style={{ margin: 0 }}>📝 複習筆記</h3>
-                <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: '#64748b' }}>
-                  知識點：<strong style={{ color: '#0f172a' }}>{noteModal.topic}</strong>
+                <h3 style={{ margin: 0 }}><LocalizedText value="📝 複習筆記" /></h3>
+                <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: '#64748b' }}><LocalizedText value="知識點：" /><strong style={{ color: '#0f172a' }}><LocalizedText value={noteModal.topic} /></strong>
                 </p>
               </div>
               <button
@@ -738,14 +712,14 @@ export default function WrongBookPage() {
                   border: '3px solid #e2e8f0', borderTopColor: '#7c3aed',
                   borderRadius: '50%', animation: 'spin 0.8s linear infinite',
                 }} />
-                <p style={{ marginTop: 16, color: '#64748b' }}>AI 正在生成專屬筆記...</p>
+                <p style={{ marginTop: 16, color: '#64748b' }}><LocalizedText value="AI 正在生成專屬筆記..." /></p>
                 <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
               </div>
             ) : (
               <div style={{ lineHeight: 1.9, fontSize: '0.95rem', color: '#1e293b' }}>
-                <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                   {noteModal.note}
-                </ReactMarkdown>
+                </LocalizedMarkdown>
               </div>
             )}
           </div>

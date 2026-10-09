@@ -1,6 +1,8 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { LocalizedText, useLocale, t } from './i18n.jsx';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { api as axios } from './i18n-api.js';
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
@@ -76,6 +78,7 @@ const btnSecondaryStyle = {
 };
 
 export default function AdminPage() {
+  useLocale();
       const [editUser, setEditUser] = useState(null);       // 編輯中的用戶
   const [editForm, setEditForm] = useState({});         // 編輯表單資料
   const [pwUser, setPwUser] = useState(null);           // 重設密碼的用戶
@@ -149,7 +152,7 @@ const handleSaveEdit = async () => {
         { headers: authHeaders }
       );
       setPwUser(null);
-      alert('✅ 密碼已重設成功');
+      alert(t('✅ 密碼已重設成功'));
     } catch (err) {
       setActionMsg(err.response?.data?.detail || '重設失敗');
     } finally {
@@ -167,7 +170,7 @@ const handleSaveEdit = async () => {
       );
       setUsers(users.filter(x => x.id !== u.id));
     } catch (err) {
-      alert(err.response?.data?.detail || '刪除失敗');
+      alert(t(err.response?.data?.detail || '刪除失敗'));
     }
   };
   const navigate = useNavigate();
@@ -200,72 +203,64 @@ const handleSaveEdit = async () => {
       .finally(() => setLoading(false));
   }, [navigate]);
 
-  if (loading) return <div style={{ padding: 40 }}>載入中...</div>;
-  if (error) return <div style={{ padding: 40, color: '#b91c1c' }}>⚠️ {error}</div>;
+  if (loading) return <div style={{ padding: 40 }}><LocalizedText value="載入中..." /></div>;
+  if (error) return <div style={{ padding: 40, color: '#b91c1c' }}>⚠️ <LocalizedText value={error} /></div>;
 
   return (
     
     <div style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <h1>👑 管理員後台</h1>
+        <h1><LocalizedText value="👑 管理員後台" /></h1>
         <button
           onClick={() => navigate('/browse')}
           style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
-        >
-          ← 返回題庫
-        </button>
+        ><LocalizedText value="← 返回題庫" /></button>
       </div>
 
       {stats && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12, marginBottom: 24 }}>
           {Object.entries(stats).map(([k, v]) => (
             <div key={k} style={{ background: '#f8fafc', padding: 16, borderRadius: 10, border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: 12, color: '#64748b' }}>{k}</div>
-              <div style={{ fontSize: 24, fontWeight: 700 }}>{v}</div>
+              <div style={{ fontSize: 12, color: '#64748b' }}><LocalizedText value={k} /></div>
+              <div style={{ fontSize: 24, fontWeight: 700 }}><LocalizedText value={v} /></div>
             </div>
           ))}
         </div>
       )}
 
-            <h3>👥 用戶列表（{users.length}）</h3>
+            <h3><LocalizedText value="👥 用戶列表（" /><LocalizedText value={users.length} />）</h3>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
 <thead>
   <tr style={{ background: '#f1f5f9' }}>
     <th style={{ padding: 10, textAlign: 'left' }}>ID</th>
-    <th style={{ padding: 10, textAlign: 'left' }}>用戶名</th>
-    <th style={{ padding: 10, textAlign: 'left' }}>姓名</th>       {/* ← 加這行 */}
-    <th style={{ padding: 10, textAlign: 'left' }}>郵箱</th>
-    <th style={{ padding: 10, textAlign: 'left' }}>身份</th>
-    <th style={{ padding: 10, textAlign: 'left' }}>操作</th>
+    <th style={{ padding: 10, textAlign: 'left' }}><LocalizedText value="用戶名" /></th>
+    <th style={{ padding: 10, textAlign: 'left' }}><LocalizedText value="姓名" /></th>
+    <th style={{ padding: 10, textAlign: 'left' }}><LocalizedText value="郵箱" /></th>
+    <th style={{ padding: 10, textAlign: 'left' }}><LocalizedText value="身份" /></th>
+    <th style={{ padding: 10, textAlign: 'left' }}><LocalizedText value="操作" /></th>
   </tr>
 </thead>
 <tbody>
   {users.map((u) => (
     <tr key={u.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
-      <td style={{ padding: 10 }}>{u.id}</td>
-      <td style={{ padding: 10 }}>{u.username}</td>
-      <td style={{ padding: 10 }}>{u.full_name || '-'}</td>       {/* ← 加這行 */}
-      <td style={{ padding: 10 }}>{u.email}</td>
-      <td style={{ padding: 10 }}>{u.is_admin ? '👑 管理員' : '🎓 考生'}</td>
+      <td style={{ padding: 10 }}><LocalizedText value={u.id} /></td>
+      <td style={{ padding: 10 }}><LocalizedText value={u.username} /></td>
+      <td style={{ padding: 10 }}><LocalizedText value={u.full_name || '-'} /></td>
+      <td style={{ padding: 10 }}><LocalizedText value={u.email} /></td>
+      <td style={{ padding: 10 }}><LocalizedText value={u.is_admin ? '👑 管理員' : '🎓 考生'} /></td>
       <td style={{ padding: 10 }}>
                 <button
                   onClick={() => openEditModal(u)}
                   style={smallBtnStyle}
-                >
-                  ✏️ 編輯
-                </button>
+                ><LocalizedText value="✏️ 編輯" /></button>
                 <button
                   onClick={() => openPasswordModal(u)}
                   style={{ ...smallBtnStyle, marginLeft: 6 }}
-                >
-                  🔑 重設密碼
-                </button>
+                ><LocalizedText value="🔑 重設密碼" /></button>
                 <button
                   onClick={() => handleDelete(u)}
                   style={{ ...smallBtnStyle, marginLeft: 6, color: '#b91c1c', borderColor: '#fca5a5' }}
-                >
-                  🗑️ 刪除
-                </button>
+                ><LocalizedText value="🗑️ 刪除" /></button>
               </td>
             </tr>
           ))}
@@ -275,7 +270,7 @@ const handleSaveEdit = async () => {
       {editUser && (
         <div style={modalOverlayStyle} onClick={() => setEditUser(null)}>
           <div style={modalCardStyle} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ marginTop: 0 }}>✏️ 編輯用戶：{editUser.username}</h3>
+            <h3 style={{ marginTop: 0 }}><LocalizedText value="✏️ 編輯用戶：" /><LocalizedText value={editUser.username} /></h3>
 
             <label style={labelStyle}>Email</label>
             <input
@@ -285,7 +280,7 @@ const handleSaveEdit = async () => {
               style={inputStyle}
             />
 
-            <label style={labelStyle}>姓名 / 稱呼</label>
+            <label style={labelStyle}><LocalizedText value="姓名 / 稱呼" /></label>
             <input
               type="text"
               value={editForm.full_name || ''}
@@ -300,18 +295,14 @@ const handleSaveEdit = async () => {
                 onChange={(e) => setEditForm({ ...editForm, is_admin: e.target.checked })}
                 style={{ marginRight: 8 }}
                 disabled={editUser.id === /* 當前管理員 ID */ undefined}
-              />
-              設為管理員
-            </label>
+              /><LocalizedText value="設為管理員" /></label>
 
-            {actionMsg && <div style={{ color: '#b91c1c', marginTop: 8 }}>⚠️ {actionMsg}</div>}
+            {actionMsg && <div style={{ color: '#b91c1c', marginTop: 8 }}>⚠️ <LocalizedText value={actionMsg} /></div>}
 
             <div style={{ display: 'flex', gap: 10, marginTop: 20, justifyContent: 'flex-end' }}>
-              <button onClick={() => setEditUser(null)} style={btnSecondaryStyle}>
-                取消
-              </button>
+              <button onClick={() => setEditUser(null)} style={btnSecondaryStyle}><LocalizedText value="取消" /></button>
               <button onClick={handleSaveEdit} disabled={actionLoading} style={btnPrimaryStyle}>
-                {actionLoading ? '儲存中...' : '儲存'}
+                <LocalizedText value={actionLoading ? '儲存中...' : '儲存'} />
               </button>
             </div>
           </div>
@@ -322,20 +313,18 @@ const handleSaveEdit = async () => {
       {pwUser && (
         <div style={modalOverlayStyle} onClick={() => setPwUser(null)}>
           <div style={modalCardStyle} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ marginTop: 0 }}>🔑 重設密碼：{pwUser.username}</h3>
-            <p style={{ color: '#64748b', fontSize: 13 }}>
-              請輸入新密碼（至少 6 位），儲存後該用戶即可用新密碼登入。
-            </p>
+            <h3 style={{ marginTop: 0 }}><LocalizedText value="🔑 重設密碼：" /><LocalizedText value={pwUser.username} /></h3>
+            <p style={{ color: '#64748b', fontSize: 13 }}><LocalizedText value="請輸入新密碼（至少 6 位），儲存後該用戶即可用新密碼登入。" /></p>
 
-            <label style={labelStyle}>新密碼</label>
+            <label style={labelStyle}><LocalizedText value="新密碼" /></label>
             <div style={{ position: 'relative' }}>
-              <input
+              <LocalizedAttributes><input
                 type={showPw ? 'text' : 'password'}
                 value={newPw}
                 onChange={(e) => setNewPw(e.target.value)}
                 style={{ ...inputStyle, paddingRight: 44 }}
-                placeholder="輸入新密碼"
-              />
+                placeholder={"輸入新密碼"}
+              /></LocalizedAttributes>
               <button
                 type="button"
                 onClick={() => setShowPw(!showPw)}
@@ -350,18 +339,16 @@ const handleSaveEdit = async () => {
                   fontSize: '1rem',
                 }}
               >
-                {showPw ? '🙈' : '👁️'}
+                <LocalizedText value={showPw ? '🙈' : '👁️'} />
               </button>
             </div>
 
-            {actionMsg && <div style={{ color: '#b91c1c', marginTop: 8 }}>⚠️ {actionMsg}</div>}
+            {actionMsg && <div style={{ color: '#b91c1c', marginTop: 8 }}>⚠️ <LocalizedText value={actionMsg} /></div>}
 
             <div style={{ display: 'flex', gap: 10, marginTop: 20, justifyContent: 'flex-end' }}>
-              <button onClick={() => setPwUser(null)} style={btnSecondaryStyle}>
-                取消
-              </button>
+              <button onClick={() => setPwUser(null)} style={btnSecondaryStyle}><LocalizedText value="取消" /></button>
               <button onClick={handleResetPassword} disabled={actionLoading} style={btnPrimaryStyle}>
-                {actionLoading ? '重設中...' : '確認重設'}
+                <LocalizedText value={actionLoading ? '重設中...' : '確認重設'} />
               </button>
             </div>
           </div>

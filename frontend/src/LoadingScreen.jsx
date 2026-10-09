@@ -1,15 +1,18 @@
+import { LocalizedText, useLocale } from './i18n.jsx';
 import React from 'react';
 
 export function LoadingScreen({ message = '正在載入題庫...' }) {
+  useLocale();
   return (
     <div className="loading-overlay">
       <div className="loading-spinner" />
-      <p className="loading-message">{message}</p>
+      <p className="loading-message"><LocalizedText value={message} /></p>
     </div>
   );
 }
 
 export function SkeletonCard() {
+  useLocale();
   return (
     <div className="skeleton-card">
       <div className="skeleton-tags">
@@ -31,6 +34,7 @@ export function SkeletonCard() {
 }
 
 export function SkeletonList({ count = 3 }) {
+  useLocale();
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (

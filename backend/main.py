@@ -12,7 +12,8 @@ from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, Query
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from localization import (LanguageMiddleware, EnglishTranslator, ENGLISH_INSTRUCTION, get_language, localized_messages)
 from sqlalchemy.orm import Session
 from openai import AsyncOpenAI
 import pymupdf as fitz
@@ -59,7 +60,21 @@ MAX_RETRIES = 2
 
 async_client = AsyncOpenAI(api_key=API_KEY or "dummy_offline_key", base_url=BASE_URL, timeout=180.0)
 
+translator = EnglishTranslator(async_client, MODEL, bool(API_KEY))
+
 app = FastAPI(title="Macau JAE Exam Analyzer API")
+app.add_middleware(LanguageMiddleware)
+
+
+class TranslationRequest(BaseModel):
+    texts: list[str] = Field(min_length=1, max_length=12)
+
+
+@app.post("/translate")
+async def translate_texts(req: TranslationRequest):
+    if any(len(text) > 12000 for text in req.texts) or sum(map(len, req.texts)) > 48000:
+        raise HTTPException(413, "Translation text is too long.")
+    return {"translations": await translator.translate(req.texts)}
 
 app.add_middleware(
     CORSMiddleware,
@@ -550,7 +565,11 @@ PROMPT_NO_ANSWER = (
 
 
 async def call_model_async(images: list[str], n_key_pages: int, self_solve: bool = False) -> list[dict]:
+    if not API_KEY:
+        raise HTTPException(503, "AI analysis requires JAE_API_KEY to be configured.")
     active_prompt = PROMPT_NO_ANSWER if self_solve else PROMPT
+    if get_language() == "en":
+        active_prompt = ENGLISH_INSTRUCTION + "\n\n" + active_prompt.replace("Traditional Chinese", "English").replace("繁體中文", "English")
     if self_solve:
         user_text = (
             f"There are {len(images)} exam page image(s). No answer key is included. "
@@ -597,7 +616,7 @@ async def call_model_async(images: list[str], n_key_pages: int, self_solve: bool
                 raise RuntimeError("Proxy returned HTML (likely 504 Gateway Timeout).")
 
             parsed = safe_json_parse(raw)
-            return parsed.get("questions", []) if isinstance(parsed, dict) else []
+            return await translator.ensure_english(parsed.get("questions", []) if isinstance(parsed, dict) else [])
 
         except Exception as e:
             last_err = e
@@ -658,7 +677,7 @@ SUB_TOPIC_TRANSLATIONS = {
 
 
 def clean_and_align_question(q: dict) -> dict:
-    if q.get('sub_topics'):
+    if q.get('sub_topics') and get_language() != 'en':
         q['sub_topics'] = [SUB_TOPIC_TRANSLATIONS.get(t, t) for t in q['sub_topics']]
 
     sol = q.get('solution', '') or ''
@@ -854,7 +873,7 @@ async def analyze_exam_stream(
         try:
             yield json.dumps({
                 "type": "progress", "percent": 5,
-                "message": f"正在讀取文件 {file.filename}..."
+                "message": "Reading the uploaded file..." if get_language() == "en" else f"正在讀取文件 {file.filename}..."
             }) + "\n"
 
             pdf_doc = fitz.open(stream=contents, filetype="pdf")
@@ -862,7 +881,7 @@ async def analyze_exam_stream(
 
             yield json.dumps({
                 "type": "progress", "percent": 15,
-                "message": f"正在識別試題與解答頁面 (共 {total_doc_pages} 頁)..."
+                "message": f"Identifying questions and answers ({total_doc_pages} pages)..." if get_language() == "en" else f"正在識別試題與解答頁面 (共 {total_doc_pages} 頁)..."
             }) + "\n"
 
             page_types, page_langs = classify_pdf_pages(pdf_doc)
@@ -871,7 +890,7 @@ async def analyze_exam_stream(
 
             yield json.dumps({
                 "type": "progress", "percent": 25,
-                "message": f"頁面識別完成：試題 {len(exam_page_indices)} 頁，解答 {len(answer_page_indices)} 頁"
+                "message": f"Identified {len(exam_page_indices)} question pages and {len(answer_page_indices)} answer pages" if get_language() == "en" else f"頁面識別完成：試題 {len(exam_page_indices)} 頁，解答 {len(answer_page_indices)} 頁"
             }) + "\n"
 
             batch_configs, exam_page_diagrams = prepare_parallel_batches(
@@ -880,7 +899,7 @@ async def analyze_exam_stream(
 
             yield json.dumps({
                 "type": "progress", "percent": 30,
-                "message": "正在提取題目與解答內容..."
+                "message": "Extracting questions and solutions..." if get_language() == "en" else "正在提取題目與解答內容..."
             }) + "\n"
 
             async def process_batch(cfg):
@@ -918,14 +937,14 @@ async def analyze_exam_stream(
 
             yield json.dumps({
                 "type": "progress", "percent": 90,
-                "message": "正在整理試題數據與排版格式..."
+                "message": "Formatting questions..." if get_language() == "en" else "正在整理試題數據與排版格式..."
             }) + "\n"
 
-            unique_questions = merge_questions(all_questions)
+            unique_questions = await translator.ensure_english(merge_questions(all_questions))
 
             yield json.dumps({
                 "type": "progress", "percent": 100,
-                "message": f"完成，共提取 {len(unique_questions)} 道題目"
+                "message": f"Complete: {len(unique_questions)} questions extracted" if get_language() == "en" else f"完成，共提取 {len(unique_questions)} 道題目"
             }) + "\n"
 
             yield json.dumps({
@@ -942,7 +961,7 @@ async def analyze_exam_stream(
         except Exception as e:
             yield json.dumps({
                 "type": "error",
-                "message": f"分析過程出錯: {str(e)}"
+                "message": "Analysis failed. Please try again." if get_language() == "en" else f"分析過程出錯: {str(e)}"
             }) + "\n"
 
     return StreamingResponse(event_generator(), media_type="application/x-ndjson")
@@ -994,7 +1013,7 @@ async def analyze_exam(file: UploadFile = File(...)):
 
             all_questions.append(q)
 
-    unique_questions = merge_questions(all_questions)
+    unique_questions = await translator.ensure_english(merge_questions(all_questions))
     return {"questions": unique_questions}
 
 
@@ -1513,6 +1532,8 @@ def get_quiz_review(
 
 @app.post("/ai/pedagogical-feedback")
 async def generate_pedagogical_feedback(req: FeedbackRequest):
+    if not API_KEY and get_language() == "en":
+        return {"feedback": "AI analysis requires JAE_API_KEY to be configured.", "available": False}
     weak_detail_lines = []
     for cat, stats in req.category_breakdown.items():
         pct = stats.get('percent', 0)
@@ -1555,11 +1576,13 @@ async def generate_pedagogical_feedback(req: FeedbackRequest):
     try:
         res = await async_client.chat.completions.create(
             model=MODEL,
-            messages=[{"role": "user", "content": prompt}],
+            messages=localized_messages(prompt),
             temperature=0.7
         )
-        feedback_text = res.choices[0].message.content.strip()
+        feedback_text = await translator.ensure_english(res.choices[0].message.content.strip())
     except Exception as e:
+        if get_language() == "en":
+            return {"feedback": "AI analysis is unavailable. Please try again later.", "available": False}
         feedback_text = (
             f"**【AI 學習診斷與提分建議】**\n\n"
             f"本次測驗總得分率為 **{req.score_percent}%**。\n"
@@ -1788,6 +1811,8 @@ def load_question_bank() -> List[dict]:
 
 
 async def generate_similar_questions(samples: List[dict], count: int) -> List[dict]:
+    if not API_KEY:
+        raise HTTPException(503, "AI generation requires JAE_API_KEY to be configured.")
     samples_text = "\n\n".join([
         f"【範例 {i+1}】\n"
         f"題型：{s.get('questionType', 'multiple_choice')}\n"
@@ -1840,16 +1865,16 @@ async def generate_similar_questions(samples: List[dict], count: int) -> List[di
         try:
             response = await async_client.chat.completions.create(
                 model=MODEL,
-                messages=[{"role": "user", "content": prompt}],
+                messages=localized_messages(prompt),
                 temperature=0.8,
                 response_format={"type": "json_object"},
             )
             raw = response.choices[0].message.content
             parsed = safe_json_parse(raw)
             if isinstance(parsed, dict) and "questions" in parsed:
-                return parsed["questions"]
+                return await translator.ensure_english(parsed["questions"])
             if isinstance(parsed, list):
-                return parsed
+                return await translator.ensure_english(parsed)
             return []
         except Exception as e:
             last_err = e
@@ -2727,6 +2752,8 @@ async def generate_review_note(
     req: ReviewNoteRequest,
     user: User = Depends(get_current_user),
 ):
+    if not API_KEY and get_language() == "en":
+        return {"topic": req.topic, "diagnosis_type": req.diagnosis_type, "note": "AI revision notes require JAE_API_KEY to be configured.", "available": False}
     attempts = req.recent_attempts or []
     attempts_text = "\n".join([
         f"- 題目：{(a.get('question_text') or '')[:60]}... | 你的答案：{a.get('user_answer')} | 正確：{a.get('correct_answer')} | 用時：{a.get('time_spent', '?')} 秒"
@@ -2772,11 +2799,13 @@ async def generate_review_note(
     try:
         res = await async_client.chat.completions.create(
             model=MODEL,
-            messages=[{"role": "user", "content": prompt}],
+            messages=localized_messages(prompt),
             temperature=0.6,
         )
-        note = res.choices[0].message.content.strip()
+        note = await translator.ensure_english(res.choices[0].message.content.strip())
     except Exception as e:
+        if get_language() == "en":
+            return {"topic": req.topic, "diagnosis_type": req.diagnosis_type, "note": "AI revision notes are unavailable. Please try again later.", "available": False}
         note = f"## 📌 {req.topic} 核心公式\n\n（AI 生成失敗：{e}）\n\n請稍後再試。"
 
     return {

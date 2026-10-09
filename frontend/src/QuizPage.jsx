@@ -1,11 +1,13 @@
+import { LocalizedAttributes } from './i18n.jsx';
+import { localizedFetch } from './i18n-api.js';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions, t } from './i18n.jsx';
 import React, { useState, useEffect, useMemo, Component, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import 'katex/dist/katex.min.css';
-import axios from 'axios';
+import { api as axios } from './i18n-api.js';
 import FavoriteButton from './FavoriteButton.jsx';
 import SpeakButton from './SpeakButton.jsx';
 import { useSearchParams } from 'react-router-dom';
@@ -80,15 +82,11 @@ class QuizErrorBoundary extends Component {
       return (
         <div style={{ maxWidth: 700, margin: '50px auto', padding: 30, background: '#fff', borderRadius: 16, border: '1px solid #fee2e2', textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.05)' }}>
           <div style={{ fontSize: 48, marginBottom: 16 }}>⚠️</div>
-          <h2 style={{ color: '#b91c1c', marginBottom: 12 }}>測驗介面載入出現異常</h2>
-          <p style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}>系統已自動防護並攔截錯誤，避免白屏。</p>
+          <h2 style={{ color: '#b91c1c', marginBottom: 12 }}><LocalizedText value="測驗介面載入出現異常" /></h2>
+          <p style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}><LocalizedText value="系統已自動防護並攔截錯誤，避免白屏。" /></p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
-            <button onClick={() => window.location.href = '/browse'} style={{ padding: '10px 20px', background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>
-              ← 返回題庫
-            </button>
-            <button onClick={() => this.setState({ hasError: false })} style={{ padding: '10px 20px', background: '#f1f5f9', color: '#334155', border: '1px solid #cbd5e1', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>
-              🔄 嘗試恢復
-            </button>
+            <button onClick={() => window.location.href = '/browse'} style={{ padding: '10px 20px', background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}><LocalizedText value="← 返回題庫" /></button>
+            <button onClick={() => this.setState({ hasError: false })} style={{ padding: '10px 20px', background: '#f1f5f9', color: '#334155', border: '1px solid #cbd5e1', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}><LocalizedText value="🔄 嘗試恢復" /></button>
           </div>
         </div>
       );
@@ -99,7 +97,7 @@ class QuizErrorBoundary extends Component {
 
 function extractOptions(q) {
   if (!q) return {};
-  const candidates = [q.options_zh, q.options_en, q.options, q.choices, q.choices_zh];
+  const candidates = [questionOptions(q)];
   let raw = null;
   for (const c of candidates) {
     if (c && typeof c === 'object' && Object.keys(c).length > 0) { raw = c; break; }
@@ -125,6 +123,7 @@ function extractOptions(q) {
 }
 
 function QuizContent() {
+  useLocale();
   const navigate = useNavigate();
   const [questionSource, setQuestionSource] = useState('past');
   const [phase, setPhase] = useState('setup');
@@ -137,7 +136,7 @@ function QuizContent() {
   useEffect(() => {
     if (activeQuestions.length === 0) {
       setLoading(true);
-      fetch(`${API_BASE_URL}/prestored/questions`)
+      localizedFetch(`${API_BASE_URL}/prestored/questions`)
         .then(async (r) => {
           const data = await r.json();
           if (!r.ok) throw new Error(`HTTP ${r.status}: ${data.detail || 'Unknown'}`);
@@ -236,7 +235,7 @@ function QuizContent() {
 
   const handleStartQuiz = async () => {
     if (questionSource === 'past' && activeQuestions.length === 0) {
-      alert("正在載入題庫數據，請稍候再點擊...");
+      alert(t("正在載入題庫數據，請稍候再點擊..."));
       return;
     }
 
@@ -258,7 +257,7 @@ function QuizContent() {
       pool = pool.filter(q => selectedTypes.includes(q.question_type));
     }
     if (questionSource === 'past' && pool.length === 0) {
-      alert('沒有符合篩選條件的題目，請更換科目或難度');
+      alert(t('沒有符合篩選條件的題目，請更換科目或難度'));
       setLoading(false);
       return;
     }
@@ -297,12 +296,12 @@ function QuizContent() {
         return;
       }
 
-      alert('後端回傳的試卷資料不完整，請稍後再試');
+      alert(t('後端回傳的試卷資料不完整，請稍後再試'));
       setLoading(false);
     } catch (err) {
       console.error('generate-quiz failed:', err);
       const detail = err.response?.data?.detail || err.message || '未知錯誤';
-      alert(questionSource === 'ai' ? `AI 生成失敗：${detail}` : `無法生成試卷：${detail}`);
+      alert(t(questionSource === 'ai' ? `AI 生成失敗：${detail}` : `無法生成試卷：${detail}`));
       setLoading(false);
     }
   };
@@ -350,7 +349,7 @@ function QuizContent() {
       }
     } catch (err) {
       console.error('Backend submit-quiz failed:', err);
-      alert(`提交失敗：${err.response?.data?.detail || err.message}`);
+      alert(t(`提交失敗：${err.response?.data?.detail || err.message}`));
       setLoading(false);
     }
   };
@@ -410,47 +409,41 @@ function QuizContent() {
     return (
       <div className="quiz-container">
         <div className="quiz-header-bar">
-          <button className="back-btn" onClick={() => navigate('/browse')}>← 返回題庫</button>
-          <h2>📝 四校勝券 · 互動組卷測驗</h2>
+          <button className="back-btn" onClick={() => navigate('/browse')}><LocalizedText value="← 返回題庫" /></button>
+          <h2><LocalizedText value="📝 四校勝券 · 互動組卷測驗" /></h2>
         </div>
 
         <div className="setup-card card">
           <div className="setup-info">
-            <span className="pool-badge">
-              題庫可用題數：<strong>{activeQuestions.length}</strong> 道真題
-            </span>
+            <span className="pool-badge"><LocalizedText value="題庫可用題數：" /><strong><LocalizedText value={activeQuestions.length} /></strong><LocalizedText value="道真題" /></span>
             {activeQuestions.length === 0 && (
-              <span className="loading-badge">⏳ 正在自動連接並載入本地真題庫...</span>
+              <span className="loading-badge"><LocalizedText value="⏳ 正在自動連接並載入本地真題庫..." /></span>
             )}
           </div>
 
           <div className="form-item">
-            <label>題目來源：</label>
+            <label><LocalizedText value="題目來源：" /></label>
             <div className="source-toggle">
               <button
                 type="button"
                 className={`source-btn ${questionSource === 'past' ? 'active' : ''}`}
                 onClick={() => setQuestionSource('past')}
-              >
-                📚 歷屆真題
-                <span className="source-sub">直接使用原題</span>
+              ><LocalizedText value="📚 歷屆真題" /><span className="source-sub"><LocalizedText value="直接使用原題" /></span>
               </button>
               <button
                 type="button"
                 className={`source-btn ${questionSource === 'ai' ? 'active' : ''}`}
                 onClick={() => setQuestionSource('ai')}
-              >
-                🤖 AI 相似題
-                <span className="source-sub">同類型新題</span>
+              ><LocalizedText value="🤖 AI 相似題" /><span className="source-sub"><LocalizedText value="同類型新題" /></span>
               </button>
             </div>
             {questionSource === 'ai' && !isLoggedIn && (
-              <div style={{ marginTop: 8, color: '#b45309', fontSize: '0.85rem' }}>⚠️ AI 生成需要先登入帳號</div>
+              <div style={{ marginTop: 8, color: '#b45309', fontSize: '0.85rem' }}><LocalizedText value="⚠️ AI 生成需要先登入帳號" /></div>
             )}
           </div>
 
           <div className="form-item">
-            <label>測驗題數：<strong>{numQuestions}</strong> 題</label>
+            <label><LocalizedText value="測驗題數：" /><strong><LocalizedText value={numQuestions} /></strong><LocalizedText value="題" /></label>
             <input
               type="range"
               min="1"
@@ -463,10 +456,8 @@ function QuizContent() {
 
           {availableCategories.length > 0 && (
             <div className="form-item">
-              <label>
-                科目模組篩選：
-                {selectedCategories.length === 0 && (
-                  <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 400, marginLeft: 6 }}>（未選 = 全部科目）</span>
+              <label><LocalizedText value="科目模組篩選：" />{selectedCategories.length === 0 && (
+                  <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 400, marginLeft: 6 }}><LocalizedText value="（未選 = 全部科目）" /></span>
                 )}
               </label>
               <div className="chips-group">
@@ -477,7 +468,7 @@ function QuizContent() {
                     className={`filter-chip ${selectedCategories.includes(cat) ? 'active' : ''}`}
                     onClick={() => toggleCategory(cat)}
                   >
-                    {cat}
+                    <LocalizedText value={cat} />
                   </button>
                 ))}
               </div>
@@ -485,7 +476,7 @@ function QuizContent() {
           )}
 
           <div className="form-item">
-            <label>難度篩選：</label>
+            <label><LocalizedText value="難度篩選：" /></label>
             <div className="chips-group">
               {['Easy', 'Medium', 'Hard'].map(diff => (
                 <button
@@ -494,14 +485,14 @@ function QuizContent() {
                   className={`filter-chip ${selectedDifficulties.includes(diff) ? 'active' : ''}`}
                   onClick={() => toggleDifficulty(diff)}
                 >
-                  {DIFFICULTY_MAP[diff]}
+                  <LocalizedText value={DIFFICULTY_MAP[diff]} />
                 </button>
               ))}
             </div>
           </div>
 
           <div className="form-item">
-            <label>題型篩選：</label>
+            <label><LocalizedText value="題型篩選：" /></label>
             <div className="chips-group">
               {['MCQ', 'Long'].map(t => (
                 <button
@@ -510,7 +501,7 @@ function QuizContent() {
                   className={`filter-chip ${selectedTypes.includes(t) ? 'active' : ''}`}
                   onClick={() => toggleType(t)}
                 >
-                  {TYPE_MAP[t]}
+                  <LocalizedText value={TYPE_MAP[t]} />
                 </button>
               ))}
             </div>
@@ -521,7 +512,7 @@ function QuizContent() {
             onClick={handleStartQuiz}
             disabled={loading || (questionSource === 'past' && activeQuestions.length === 0)}
           >
-            {loading ? (questionSource === 'ai' ? '🤖 AI 生成中，請稍候...' : '正在生成試卷...') : '🚀 開始作答測驗'}
+            <LocalizedText value={loading ? (questionSource === 'ai' ? '🤖 AI 生成中，請稍候...' : '正在生成試卷...') : '🚀 開始作答測驗'} />
           </button>
         </div>
       </div>
@@ -534,8 +525,8 @@ function QuizContent() {
       return (
         <div className="quiz-container">
           <div className="card text-center p-8">
-            <h3>⚠️ 測驗試題載入中或未抽取到題目</h3>
-            <button className="btn btn-primary mt-4" onClick={() => setPhase('setup')}>返回重試</button>
+            <h3><LocalizedText value="⚠️ 測驗試題載入中或未抽取到題目" /></h3>
+            <button className="btn btn-primary mt-4" onClick={() => setPhase('setup')}><LocalizedText value="返回重試" /></button>
           </div>
         </div>
       );
@@ -544,7 +535,7 @@ function QuizContent() {
     const safeIdx = Math.max(0, Math.min(currentIdx, quizQuestions.length - 1));
     const q = quizQuestions[safeIdx] || quizQuestions[0];
     const isMCQ = q.question_type === 'MCQ' || !q.question_type;
-    const questionText = q.raw_text_zh || q.raw_text_en || '';
+    const questionText = getQuestionText(q);
     const optionsMap = extractOptions(q);
     const optionLetters = ['A', 'B', 'C', 'D', 'E'].filter(l => Boolean(optionsMap[l]));
     const hasOptions = optionLetters.length > 0;
@@ -554,53 +545,49 @@ function QuizContent() {
         {confirmModalOpen && (
           <div className="modal-overlay" onClick={() => setConfirmModalOpen(false)}>
             <div className="modal-box" onClick={e => e.stopPropagation()}>
-              <h3 className="modal-title">⚠️ 還有題目尚未完成作答</h3>
-              <p className="modal-text">
-                還有 <strong>{quizQuestions.length - Object.keys(answers).length}</strong> 題尚未填寫答案，確定現在交卷嗎？
-              </p>
+              <h3 className="modal-title"><LocalizedText value="⚠️ 還有題目尚未完成作答" /></h3>
+              <p className="modal-text"><LocalizedText value="還有" /><strong><LocalizedText value={quizQuestions.length - Object.keys(answers).length} /></strong><LocalizedText value="題尚未填寫答案，確定現在交卷嗎？" /></p>
               <div className="modal-actions">
-                <button className="btn btn-secondary" onClick={() => setConfirmModalOpen(false)}>繼續作答</button>
-                <button className="btn btn-success" onClick={handleConfirmSubmit}>確認提交</button>
+                <button className="btn btn-secondary" onClick={() => setConfirmModalOpen(false)}><LocalizedText value="繼續作答" /></button>
+                <button className="btn btn-success" onClick={handleConfirmSubmit}><LocalizedText value="確認提交" /></button>
               </div>
             </div>
           </div>
         )}
 
         <div className="quiz-top-bar card">
-          <div className="progress-info">
-            第 <strong>{safeIdx + 1}</strong> / {quizQuestions.length} 題
-            <span className="answered-sub">（已作答 {Object.keys(answers).length} / {quizQuestions.length} 題）</span>
+          <div className="progress-info"><LocalizedText value="第" /><strong><LocalizedText value={safeIdx + 1} /></strong> / <LocalizedText value={quizQuestions.length} /><LocalizedText value="題" /><span className="answered-sub"><LocalizedText value="（已作答" /><LocalizedText value={Object.keys(answers).length} /> / <LocalizedText value={quizQuestions.length} /><LocalizedText value="題）" /></span>
           </div>
-          <div className="timer-badge">⏱️ {formatTime(elapsedSeconds)}</div>
+          <div className="timer-badge">⏱️ <LocalizedText value={formatTime(elapsedSeconds)} /></div>
         </div>
 
         <div className="card navdot-card">
           <div className="navdots-strip">
             {quizQuestions.map((_, i) => (
-              <button
+              <LocalizedAttributes key={i}><button
                 key={i}
                 type="button"
                 className={`navdot ${answers[i] ? 'done' : ''} ${i === safeIdx ? 'current' : ''}`}
                 onClick={() => goToQuestion(i)}
                 title={`第 ${i + 1} 題`}
               >
-                {i + 1}
-              </button>
+                <LocalizedText value={i + 1} />
+              </button></LocalizedAttributes>
             ))}
           </div>
         </div>
 
         <div className="question-taking-card card">
 <div className="question-meta-row">
-  <span className="meta-tag tag-category">{CATEGORY_MAP[q.main_category] || q.main_category || '數學'}</span>
-  <span className="meta-tag tag-type">{TYPE_MAP[q.question_type] || '選擇題'}</span>
-  <span className="meta-tag tag-difficulty">{DIFFICULTY_MAP[q.difficulty] || q.difficulty || '中等'}</span>
+  <span className="meta-tag tag-category"><LocalizedText value={CATEGORY_MAP[q.main_category] || q.main_category || '數學'} /></span>
+  <span className="meta-tag tag-type"><LocalizedText value={TYPE_MAP[q.question_type] || '選擇題'} /></span>
+  <span className="meta-tag tag-difficulty"><LocalizedText value={DIFFICULTY_MAP[q.difficulty] || q.difficulty || '中等'} /></span>
   {q.source === 'ai' && (
-    <span className="meta-tag" style={{ background: '#8b5cf6', color: '#fff' }}>🤖 AI 生成</span>
+    <span className="meta-tag" style={{ background: '#8b5cf6', color: '#fff' }}><LocalizedText value="🤖 AI 生成" /></span>
   )}
   <div style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center' }}>
     <SpeakButton
-      text={q.raw_text_zh || q.raw_text_en || ''}
+      text={getQuestionText(q)}
       options={extractOptions(q)}
       size="small"
     />
@@ -612,19 +599,19 @@ function QuizContent() {
 </div>
 
           <div className="question-body">
-            <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+            <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
               {normalizeLatex(questionText)}
-            </ReactMarkdown>
+            </LocalizedMarkdown>
           </div>
 
           {q.diagram_image && (
             <div className="diagram-box">
-              <img
+              <LocalizedAttributes><img
                 src={cleanDiagramUrl(q.diagram_image)}
-                alt="配圖"
+                alt={"配圖"}
                 className="diagram-img"
                 onError={(e) => { e.target.style.display = 'none'; }}
-              />
+              /></LocalizedAttributes>
             </div>
           )}
 
@@ -642,11 +629,11 @@ function QuizContent() {
                         className={`option-btn ${isSelected ? 'selected' : ''}`}
                         onClick={() => handleAnswerChange(opt)}
                       >
-                        <span className="option-letter">{opt}</span>
+                        <span className="option-letter"><LocalizedText value={opt} /></span>
                         <span className="option-content">
-                          <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                          <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                             {normalizeLatex(content)}
-                          </ReactMarkdown>
+                          </LocalizedMarkdown>
                         </span>
                       </button>
                     );
@@ -661,20 +648,20 @@ function QuizContent() {
                       className={`option-btn-letter ${answers[safeIdx] === opt ? 'selected' : ''}`}
                       onClick={() => handleAnswerChange(opt)}
                     >
-                      <span className="option-letter">{opt}</span>
+                      <span className="option-letter"><LocalizedText value={opt} /></span>
                     </button>
                   ))}
                 </div>
               )
             ) : (
               <div className="long-answer-box">
-                <textarea
-                  placeholder="請在此輸入你的最終答案或解題數值..."
+                <LocalizedAttributes><textarea
+                  placeholder={"請在此輸入你的最終答案或解題數值..."}
                   value={answers[safeIdx] || ''}
                   onChange={(e) => handleAnswerChange(e.target.value)}
                   rows={4}
                   className="long-textarea"
-                />
+                /></LocalizedAttributes>
               </div>
             )}
           </div>
@@ -685,20 +672,16 @@ function QuizContent() {
             className="btn btn-secondary"
             onClick={() => goToQuestion(Math.max(0, safeIdx - 1))}
             disabled={safeIdx === 0}
-          >
-            ← 上一題
-          </button>
+          ><LocalizedText value="← 上一題" /></button>
 
           {safeIdx < quizQuestions.length - 1 ? (
             <button
               className="btn btn-primary"
               onClick={() => goToQuestion(Math.min(quizQuestions.length - 1, safeIdx + 1))}
-            >
-              下一題 →
-            </button>
+            ><LocalizedText value="下一題 →" /></button>
           ) : (
             <button className="btn btn-success" onClick={handleSubmit} disabled={loading}>
-              {loading ? '正在批改中...' : '🎯 提交測驗並查看報告'}
+              <LocalizedText value={loading ? '正在批改中...' : '🎯 提交測驗並查看報告'} />
             </button>
           )}
         </div>
@@ -712,8 +695,8 @@ function QuizContent() {
       return (
         <div className="quiz-container">
           <div className="card text-center p-8">
-            <h3>⏳ 正在計算測驗成績...</h3>
-            <button className="btn btn-primary mt-4" onClick={() => setPhase('setup')}>返回重試</button>
+            <h3><LocalizedText value="⏳ 正在計算測驗成績..." /></h3>
+            <button className="btn btn-primary mt-4" onClick={() => setPhase('setup')}><LocalizedText value="返回重試" /></button>
           </div>
         </div>
       );
@@ -731,8 +714,8 @@ function QuizContent() {
     return (
       <div className="quiz-container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-          <button className="btn btn-secondary" onClick={() => navigate('/browse')}>← 返回題庫</button>
-          <h2 style={{ margin: 0 }}>📊 四校勝券 · 模擬測驗診斷報告</h2>
+          <button className="btn btn-secondary" onClick={() => navigate('/browse')}><LocalizedText value="← 返回題庫" /></button>
+          <h2 style={{ margin: 0 }}><LocalizedText value="📊 四校勝券 · 模擬測驗診斷報告" /></h2>
           <div style={{ width: 100 }} />
         </div>
 
@@ -741,25 +724,23 @@ function QuizContent() {
             <div className="score-circle" style={{
               borderColor: scorePct >= 80 ? '#10b981' : scorePct >= 60 ? '#f59e0b' : '#ef4444'
             }}>
-              <div className="score-number">{correctQ} <span className="score-total">/ {totalQ}</span></div>
-              <div className="score-pct">{scorePct}%</div>
+              <div className="score-number"><LocalizedText value={correctQ} /> <span className="score-total">/ <LocalizedText value={totalQ} /></span></div>
+              <div className="score-pct"><LocalizedText value={scorePct} />%</div>
             </div>
           </div>
-          <p className="time-taken">總作答用時：<strong>{formatTime(elapsedSeconds)}</strong></p>
+          <p className="time-taken"><LocalizedText value="總作答用時：" /><strong><LocalizedText value={formatTime(elapsedSeconds)} /></strong></p>
           {longCount > 0 && (
-            <p className="time-taken" style={{ marginTop: 6, fontSize: '0.85rem', color: '#0369a1' }}>
-              ℹ️ 本次測驗含 {longCount} 道解答大題，不計入自動評分，請自行核對解析。
-            </p>
+            <p className="time-taken" style={{ marginTop: 6, fontSize: '0.85rem', color: '#0369a1' }}><LocalizedText value="ℹ️ 本次測驗含" /><LocalizedText value={longCount} /><LocalizedText value="道解答大題，不計入自動評分，請自行核對解析。" /></p>
           )}
         </div>
 
         {Object.keys(breakdown).length > 0 && (
           <div className="card">
-            <h3>📈 各學科模組得分率與掌握評定（僅選擇題）</h3>
+            <h3><LocalizedText value="📈 各學科模組得分率與掌握評定（僅選擇題）" /></h3>
             <table className="stats-table">
               <thead>
                 <tr>
-                  <th>模組</th><th>正確 / 總題數</th><th>得分率</th><th>狀態評定</th>
+                  <th><LocalizedText value="模組" /></th><th><LocalizedText value="正確 / 總題數" /></th><th><LocalizedText value="得分率" /></th><th><LocalizedText value="狀態評定" /></th>
                 </tr>
               </thead>
               <tbody>
@@ -767,8 +748,8 @@ function QuizContent() {
                   const pct = stat.percent !== undefined ? stat.percent : 0;
                   return (
                     <tr key={cat}>
-                      <td><strong>{CATEGORY_MAP[cat] || cat}</strong></td>
-                      <td>{stat.correct} / {stat.total}</td>
+                      <td><strong><LocalizedText value={CATEGORY_MAP[cat] || cat} /></strong></td>
+                      <td><LocalizedText value={stat.correct} /> / <LocalizedText value={stat.total} /></td>
                       <td>
                         <div className="progress-cell">
                           <div className="progress-bg">
@@ -777,12 +758,12 @@ function QuizContent() {
                               background: pct >= 80 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#ef4444'
                             }} />
                           </div>
-                          <span>{pct}%</span>
+                          <span><LocalizedText value={pct} />%</span>
                         </div>
                       </td>
                       <td>
                         <span className={`eval-pill ${pct >= 80 ? 'green' : pct >= 50 ? 'yellow' : 'red'}`}>
-                          {pct >= 80 ? '熟練掌握' : pct >= 50 ? '尚待鞏固' : '重點薄弱'}
+                          <LocalizedText value={pct >= 80 ? '熟練掌握' : pct >= 50 ? '尚待鞏固' : '重點薄弱'} />
                         </span>
                       </td>
                     </tr>
@@ -796,26 +777,26 @@ function QuizContent() {
         <div className="card pedagogical-card">
           <div className="pedagogical-header">
             <div>
-              <h3>🎓 AI 個人化提分建議</h3>
-              <p className="pedagogical-sub">根據你的錯題與弱項模組，給出具體可執行的學習處方</p>
+              <h3><LocalizedText value="🎓 AI 個人化提分建議" /></h3>
+              <p className="pedagogical-sub"><LocalizedText value="根據你的錯題與弱項模組，給出具體可執行的學習處方" /></p>
             </div>
             {!aiFeedback && (
               <button className="feedback-btn" onClick={fetchPedagogicalFeedback} disabled={loadingFeedback}>
-                {loadingFeedback ? 'AI 分析中...' : '生成專屬提分建議'}
+                <LocalizedText value={loadingFeedback ? 'AI 分析中...' : '生成專屬提分建議'} />
               </button>
             )}
           </div>
           {aiFeedback && (
             <div className="pedagogical-content">
-              <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+              <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                 {normalizeLatex(aiFeedback)}
-              </ReactMarkdown>
+              </LocalizedMarkdown>
             </div>
           )}
         </div>
 
         <div className="reviews-list">
-          <h3>🔍 逐題對錯覆盤與公式詳解</h3>
+          <h3><LocalizedText value="🔍 逐題對錯覆盤與公式詳解" /></h3>
           {reviewList.map((r, i) => {
             const isLong = r.question_type === 'Long';
             const isCorrect = r.is_correct;
@@ -825,15 +806,15 @@ function QuizContent() {
               <div key={i} className={`card review-card ${cardClass}`}>
                 <div className="review-header">
                   <div className="review-title">
-                    <h4>{r.question_number || `第 ${i + 1} 題`}</h4>
-                    <span className="review-cat">{CATEGORY_MAP[r.main_category] || r.main_category || ''}</span>
+                    <h4><LocalizedText value={r.question_number || `第 ${i + 1} 題`} /></h4>
+                    <span className="review-cat"><LocalizedText value={CATEGORY_MAP[r.main_category] || r.main_category || ''} /></span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                     {isLong ? (
-                      <span className="status-badge" style={{ background: '#e0f2fe', color: '#0369a1' }}>📖 自我核對</span>
+                      <span className="status-badge" style={{ background: '#e0f2fe', color: '#0369a1' }}><LocalizedText value="📖 自我核對" /></span>
                     ) : (
                       <span className={`status-badge ${isCorrect ? 'success' : 'error'}`}>
-                        {isCorrect ? '✅ 答對' : '❌ 答錯'}
+                        <LocalizedText value={isCorrect ? '✅ 答對' : '❌ 答錯'} />
                       </span>
                     )}
                     <FavoriteButton question={r} questionId={r.id || `${r.question_number}-${r.raw_text_zh?.slice(0, 20)}`} />
@@ -841,14 +822,14 @@ function QuizContent() {
                 </div>
 
                 <div className="question-markdown">
-                  <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                  <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                     {normalizeLatex(r.raw_text_zh || r.raw_text_en || '')}
-                  </ReactMarkdown>
+                  </LocalizedMarkdown>
                 </div>
 
                 {r.diagram_image && (
                   <div className="diagram-box">
-                    <img src={cleanDiagramUrl(r.diagram_image)} alt="配圖" className="diagram-img" onError={(e) => { e.target.style.display = 'none'; }} />
+                    <LocalizedAttributes><img src={cleanDiagramUrl(r.diagram_image)} alt={"配圖"} className="diagram-img" onError={(e) => { e.target.style.display = 'none'; }} /></LocalizedAttributes>
                   </div>
                 )}
 
@@ -875,15 +856,15 @@ function QuizContent() {
                               color: '#fff', fontWeight: 700, fontSize: '0.8rem',
                               borderRadius: '50%', flexShrink: 0, marginTop: 2,
                             }}>
-                              {letter}
+                              <LocalizedText value={letter} />
                             </span>
                             <div style={{ flex: 1, color: isRight ? '#15803d' : '#1e293b', wordBreak: 'break-word' }}>
-                              <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                              <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                                 {normalizeLatex(optionsMap[letter])}
-                              </ReactMarkdown>
+                              </LocalizedMarkdown>
                             </div>
                             {isRight && (
-                              <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>✅ 正確</span>
+                              <span style={{ color: '#15803d', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}><LocalizedText value="✅ 正確" /></span>
                             )}
                           </div>
                         );
@@ -894,28 +875,28 @@ function QuizContent() {
 
                 {isLong ? (
                   <div className="long-self-check">
-                    <div className="long-self-check-hint">📝 此為解答大題，請對照下方「你的作答」與「參考詳解」自行核對。</div>
+                    <div className="long-self-check-hint"><LocalizedText value="📝 此為解答大題，請對照下方「你的作答」與「參考詳解」自行核對。" /></div>
                     <div className="long-compare-grid">
                       <div className="long-answer-panel user-panel">
-                        <div className="panel-title">✍️ 你的作答</div>
-                        <pre className="user-answer-pre">{r.user_answer || '(未作答)'}</pre>
+                        <div className="panel-title"><LocalizedText value="✍️ 你的作答" /></div>
+                        <pre className="user-answer-pre"><LocalizedText value={r.user_answer || '(未作答)'} /></pre>
                       </div>
                       <div className="long-answer-panel standard-panel">
-                        <div className="panel-title">📘 參考答案</div>
+                        <div className="panel-title"><LocalizedText value="📘 參考答案" /></div>
                         <div className="standard-answer-content">
-                          <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                          <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                             {normalizeLatex(r.correct_answer || r.answer || '（無標準答案）')}
-                          </ReactMarkdown>
+                          </LocalizedMarkdown>
                         </div>
                       </div>
                     </div>
                     {r.solution && (
                       <details className="solution-details" open>
-                        <summary>💡 查看權威步驟推導與解析</summary>
+                        <summary><LocalizedText value="💡 查看權威步驟推導與解析" /></summary>
                         <div className="solution-text">
-                          <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                          <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                             {normalizeLatex(r.solution)}
-                          </ReactMarkdown>
+                          </LocalizedMarkdown>
                         </div>
                       </details>
                     )}
@@ -924,20 +905,20 @@ function QuizContent() {
                   <>
                     <div className="answers-compare">
                       <div className={`ans-box ${isCorrect ? 'user-correct' : 'user-wrong'}`}>
-                        <strong>你的作答：</strong> {r.user_answer || '(未作答)'}
+                        <strong><LocalizedText value="你的作答：" /></strong> <LocalizedText value={r.user_answer || '(未作答)'} />
                       </div>
                       <div className="ans-box standard-correct">
-                        <strong>標準答案：</strong> {r.correct_answer || r.answer || '(無答案)'}
+                        <strong><LocalizedText value="標準答案：" /></strong> <LocalizedText value={r.correct_answer || r.answer || '(無答案)'} />
                       </div>
                     </div>
                     {r.solution && (
                       <details className="solution-details">
-                        <summary>💡 查看權威步驟推導與解析</summary>
+                        <summary><LocalizedText value="💡 查看權威步驟推導與解析" /></summary>
                         <div className="solution-body">
                           <div className="solution-text">
-                            <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
+                            <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
                               {normalizeLatex(r.solution)}
-                            </ReactMarkdown>
+                            </LocalizedMarkdown>
                           </div>
                         </div>
                       </details>
@@ -950,7 +931,7 @@ function QuizContent() {
         </div>
 
         <div className="results-actions" style={{ justifyContent: 'center' }}>
-          <button className="btn btn-primary" onClick={() => setPhase('setup')}>🔄 重新生成測驗</button>
+          <button className="btn btn-primary" onClick={() => setPhase('setup')}><LocalizedText value="🔄 重新生成測驗" /></button>
         </div>
       </div>
     );
@@ -960,6 +941,7 @@ function QuizContent() {
 }
 
 export default function QuizPage() {
+  useLocale();
   return (
     <QuizErrorBoundary>
       <style>{styles}</style>
