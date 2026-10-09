@@ -85,9 +85,9 @@ test('live submitted quiz shows saved English geometry answers and worked soluti
   expect(standard.status()).toBe(200);
   const source = (await standard.json()).questions;
   expect(source).toHaveLength(20);
-  const supplementary = await request.get(`${process.env.LIVE_API_URL}/prestored/questions?paper_id=p02s`, { headers: { 'Accept-Language': 'en' } });
+  const supplementary = await request.get(`${process.env.LIVE_API_URL}/prestored/questions?paper_id=p09s`, { headers: { 'Accept-Language': 'en' } });
   expect(supplementary.status()).toBe(200);
-  const geometry = (await supplementary.json()).questions.find(q => q.question_type === 'Long' && q.diagram_image);
+  const geometry = (await supplementary.json()).questions.find(q => q.id === 'p09-w6');
   expect(geometry).toBeTruthy();
   const selected = [...source, geometry];
   for (const question of selected) {
