@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -51,7 +51,7 @@ jobs:
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
           VITE_ROUTER_MODE: hash
-          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://jae-quiz-api.onrender.com' }}
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://jae-quiz-2-1.onrender.com' }}
         run: npm run build
       - name: Test Pages production routing
         working-directory: frontend
@@ -91,7 +91,7 @@ jobs:
       - name: Deploy and verify the exact backend revision
         env:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          BACKEND_URL: ${{ vars.VITE_API_BASE_URL || 'https://jae-quiz-api.onrender.com' }}
+          BACKEND_URL: ${{ vars.VITE_API_BASE_URL || 'https://jae-quiz-2-1.onrender.com' }}
           EXPECTED_COMMIT: ${{ github.sha }}
         run: python scripts/deploy_backend.py
 
@@ -113,6 +113,7 @@ jobs:
       - name: Verify published website and real question API
         working-directory: frontend
         env:
+          LIVE_API_URL: https://jae-quiz-2-1.onrender.com
           LIVE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
         run: npx playwright test --config playwright.live.config.js
       - uses: actions/upload-artifact@v4

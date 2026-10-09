@@ -47,7 +47,7 @@ and browser refreshes work on static hosting. Local development and Vercel keep
 browser routing.
 
 GitHub Pages hosts only the frontend. The configured API is
-`https://jae-quiz-api.onrender.com`; override it with the repository Actions
+`https://jae-quiz-2-1.onrender.com`; override it with the repository Actions
 variable `VITE_API_BASE_URL` if necessary. Deploy the backend from the same
 `main` revision on Render, with `JAE_API_KEY` and `JAE_JWT_SECRET` configured
 in Render's environment settings. API keys must never be put in frontend

@@ -12,6 +12,7 @@ test('published site loads the updated bilingual bank from the real API', async 
   await expect(page).toHaveTitle('JAE Exam Success');
   const paperList = await papersResponse;
   expect(paperList.status()).toBe(200);
+  if (process.env.LIVE_API_URL) expect(new URL(paperList.url()).origin).toBe(new URL(process.env.LIVE_API_URL).origin);
   const catalog = await paperList.json();
   expect(catalog.papers).toHaveLength(19);
   console.log(`Live bank verified: ${catalog.papers.length} papers from ${new URL(paperList.url()).origin}`);
