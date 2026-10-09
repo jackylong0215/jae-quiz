@@ -104,7 +104,7 @@ Browser tests use system Chromium when available. Otherwise run `npx playwright 
 The 18 supplied PDFs contain 225 distinct questions and 675 multiple-choice
 options. Their Chinese stems and curated English stems/options are persisted
 in `papers/source/questions.json`, with the same LaTeX expressions in both
-languages. The existing 20 questions from the 2026 standard paper are retained,
+languages. The existing 20 questions from the 2026 standard paper are retained and now include English text,
 giving 245 questions across 19 papers. The import performs no external AI calls.
 
 `papers/source/pdf_import_manifest.json` records the original filenames, hashes
@@ -118,10 +118,14 @@ supplementary paper is listed separately. Duplicate mock supplementary questions
 are removed, with their old IDs retained in `question_id_aliases.json` and the
 SQLite `question_aliases` table. Existing IDs and quiz sessions are preserved.
 
-English **question stems and options** are complete for the uploaded corpus.
-Existing detailed explanations are retained, with specific corrections recorded
-in `papers/source/import_report.json`; they have not all been revalidated or
-translated. The original PDFs include official English worked solutions.
+All 245 question stems, reference answers, worked explanations and their options
+now include stored English versions. The Chinese versions are preserved.
+Explanations and the missing 2026 stems were translated with the user-authorized
+provider; formulas were protected and restored locally. Reference answers and
+remaining options were localized locally. The result/review screens use these
+stored fields, including matching older saved quiz snapshots, without requiring
+live translation. Original explanation corrections remain recorded in
+`papers/source/import_report.json`.
 
 To regenerate the local text audit, validate the bank, or synchronise SQLite:
 
@@ -136,3 +140,10 @@ node scripts/validate-question-math.mjs
 Synchronisation validates source hashes, bilingual formula/option parity,
 all 135 official MCQ answers and all 90 written questions' subpart marks before
 updating SQLite. It checks database integrity and preserves quiz session rows.
+
+
+The one-time translation import is separate from the running backend:
+`python scripts/translate_bank.py --allow-provider-upload --apply` sends only
+missing stems and explanations and requires explicit authorization.
+`python scripts/localize_bank_answers.py` uses no provider and validates that
+English formulas match the source (allowing translated text labels).

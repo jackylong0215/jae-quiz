@@ -97,8 +97,9 @@ class QuestionBankTests(unittest.IsolatedAsyncioTestCase):
             with sqlite3.connect(destination) as db:
                 self.assertEqual(before, db.execute('SELECT * FROM quiz_sessions ORDER BY id').fetchall())
                 self.assertEqual(db.execute('SELECT COUNT(*) FROM questions').fetchone()[0],245)
-                self.assertEqual(db.execute('SELECT COUNT(*) FROM questions WHERE english IS NOT NULL').fetchone()[0],225)
-                self.assertEqual(db.execute('SELECT COUNT(*) FROM options WHERE text_en IS NOT NULL').fetchone()[0],675)
+                self.assertEqual(db.execute('SELECT COUNT(*) FROM questions WHERE english IS NOT NULL').fetchone()[0],245)
+                self.assertEqual(db.execute('SELECT COUNT(*) FROM options WHERE text_en IS NOT NULL').fetchone()[0],750)
+                self.assertEqual(db.execute('SELECT COUNT(*) FROM questions WHERE explanation_en IS NOT NULL AND answer_en IS NOT NULL').fetchone()[0],245)
                 self.assertEqual(db.execute('SELECT COUNT(*) FROM question_aliases').fetchone()[0],5)
                 self.assertEqual(db.execute('PRAGMA foreign_key_check').fetchall(),[])
 

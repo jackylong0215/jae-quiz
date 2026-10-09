@@ -1,6 +1,6 @@
 import { LocalizedAttributes } from './i18n.jsx';
 import { localizedFetch } from './i18n-api.js';
-import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions, t } from './i18n.jsx';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, getQuestionSolution, getQuestionAnswer, questionOptions, t } from './i18n.jsx';
 import React, { useState, useEffect, useMemo, Component, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import remarkMath from 'remark-math';
@@ -823,7 +823,7 @@ function QuizContent() {
 
                 <div className="question-markdown">
                   <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                    {normalizeLatex(r.raw_text_zh || r.raw_text_en || '')}
+                    {normalizeLatex(getQuestionText(r))}
                   </LocalizedMarkdown>
                 </div>
 
@@ -885,17 +885,17 @@ function QuizContent() {
                         <div className="panel-title"><LocalizedText value="📘 參考答案" /></div>
                         <div className="standard-answer-content">
                           <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                            {normalizeLatex(r.correct_answer || r.answer || '（無標準答案）')}
+                            {normalizeLatex(getQuestionAnswer(r) || '（無標準答案）')}
                           </LocalizedMarkdown>
                         </div>
                       </div>
                     </div>
-                    {r.solution && (
+                    {getQuestionSolution(r) && (
                       <details className="solution-details" open>
                         <summary><LocalizedText value="💡 查看權威步驟推導與解析" /></summary>
                         <div className="solution-text">
                           <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                            {normalizeLatex(r.solution)}
+                            {normalizeLatex(getQuestionSolution(r))}
                           </LocalizedMarkdown>
                         </div>
                       </details>
@@ -911,13 +911,13 @@ function QuizContent() {
                         <strong><LocalizedText value="標準答案：" /></strong> <LocalizedText value={r.correct_answer || r.answer || '(無答案)'} />
                       </div>
                     </div>
-                    {r.solution && (
+                    {getQuestionSolution(r) && (
                       <details className="solution-details">
                         <summary><LocalizedText value="💡 查看權威步驟推導與解析" /></summary>
                         <div className="solution-body">
                           <div className="solution-text">
                             <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                              {normalizeLatex(r.solution)}
+                              {normalizeLatex(getQuestionSolution(r))}
                             </LocalizedMarkdown>
                           </div>
                         </div>

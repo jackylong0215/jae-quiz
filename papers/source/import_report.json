@@ -10,7 +10,7 @@
   "papers": 19,
   "sourceIssues": [],
   "method": "local-only; no external service calls",
-  "explanationScope": "Existing explanations retained except explicit corrections; not comprehensively rechecked or translated.",
+  "explanationScope": "Original Chinese explanations preserved; all 245 English explanations added and mathematics checked for parity.",
   "date": "2026-10-09",
   "corrections": [
     {
@@ -122,5 +122,16 @@
     "frontendBuild": "passed",
     "frontendLint": "passed with existing warnings"
   },
-  "deployment": "Local workspace updated. Uploaded PDF content has not been sent to an AI service or published by this import."
+  "deployment": "Local workspace updated. Uploaded PDF content has not been sent to an AI service or published by this import.",
+  "englishReviewUpdate": {
+    "questions": 245,
+    "englishStems": 245,
+    "englishAnswers": 245,
+    "englishExplanations": 245,
+    "englishOptions": 750,
+    "method": "User-authorized provider translation for missing stems and explanations; reference answers and remaining options localized locally. Math expressions protected/restored locally.",
+    "originalChineseUnchanged": true,
+    "formulaRenderErrors": 0,
+    "formulaSpansRendered": 21580
+  }
 }

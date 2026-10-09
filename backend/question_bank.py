@@ -29,3 +29,35 @@ def bilingual_fields(question):
         'solution_zh': question.get('explanation') or question.get('solution') or '',
         'solution_en': question.get('explanation_en') or question.get('solution_en') or '',
     }
+
+
+def translation_lookup(questions):
+    """Match saved snapshots by their original stem, never by quiz position."""
+    stems, ambiguous = {}, set()
+    for q in questions:
+        stem = q.get('question')
+        if not stem:
+            continue
+        if stem in stems:
+            ambiguous.add(stem)
+        stems[stem] = q
+    return {'ids': {q['id']: q for q in questions if q.get('id')},
+            'stems': {stem: q for stem, q in stems.items() if stem not in ambiguous}}
+
+
+def with_bank_translations(question, lookup):
+    stem = question.get('raw_text_zh') or question.get('question')
+    source = lookup['ids'].get(question.get('id')) or lookup['stems'].get(stem)
+    if not source or stem != source.get('question') or question.get('ai_generated') or question.get('generated'):
+        return question.copy()
+    result = question.copy()
+    fields = bilingual_fields(source)
+    for field in ('raw_text_en', 'options_en', 'answer_en'):
+        if fields[field]:
+            result[field] = fields[field]
+    # Avoid attaching the new explanation to a different saved/custom solution.
+    saved_solution = question.get('solution_zh') or question.get('explanation') or question.get('solution')
+    if not saved_solution or saved_solution in (fields['solution_zh'], fields['solution_en']):
+        result['solution_zh'] = fields['solution_zh']
+        result['solution_en'] = fields['solution_en']
+    return result

@@ -1,5 +1,5 @@
 import { LocalizedAttributes } from './i18n.jsx';
-import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions, t } from './i18n.jsx';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, getQuestionSolution, questionOptions, t } from './i18n.jsx';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import remarkMath from 'remark-math';
@@ -505,17 +505,17 @@ export default function WrongBookPage() {
                       </div>
                     </div>
 
-                    {q.solution && (
+                    {getQuestionSolution(q) && (
                       <details style={{ background: '#f8fafc', padding: 12, borderRadius: 8 }}>
                         <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0369a1', fontSize: '0.9rem' }}><LocalizedText value="💡 查看解題步驟" /></summary>
                         <div style={{ marginTop: 12, lineHeight: 1.8 }}>
                           <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                            {normalizeLatex(q.solution)}
+                            {normalizeLatex(getQuestionSolution(q))}
                           </LocalizedMarkdown>
                         </div>
                             <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px dashed #cbd5e1', display: 'flex', justifyContent: 'flex-end' }}>
       <SpeakButton
-        text={q.solution}
+        text={getQuestionSolution(q)}
         size="small"
         label={t("🔊 朗讀詳解")}
       />

@@ -73,3 +73,55 @@ test('live AI feedback returns usable English content', async ({ request }) => {
   expect(result.feedback).toMatch(/algebra|equation|solve|practice/i);
   console.log('Live AI generation verified: nonempty English study feedback.');
 });
+
+// Reproduce the reported post-submission screen with the actual stored bank.
+test('live submitted quiz shows saved English geometry answers and worked solutions', async ({ page, request }) => {
+  const translations = [];
+  await page.route('**/translate', route => {
+    translations.push(...route.request().postDataJSON().texts);
+    return route.fulfill({ status: 503, json: { detail: 'Stored exam content must not need live translation.' } });
+  });
+  const standard = await request.get(`${process.env.LIVE_API_URL}/prestored/questions?paper_id=p17`, { headers: { 'Accept-Language': 'en' } });
+  expect(standard.status()).toBe(200);
+  const source = (await standard.json()).questions;
+  expect(source).toHaveLength(20);
+  const supplementary = await request.get(`${process.env.LIVE_API_URL}/prestored/questions?paper_id=p02s`, { headers: { 'Accept-Language': 'en' } });
+  expect(supplementary.status()).toBe(200);
+  const geometry = (await supplementary.json()).questions.find(q => q.question_type === 'Long' && q.diagram_image);
+  expect(geometry).toBeTruthy();
+  const selected = [...source, geometry];
+  for (const question of selected) {
+    expect(question.raw_text_en).toBeTruthy();
+    expect(question.solution_en).toBeTruthy();
+    expect(question.answer_en).toBeTruthy();
+    expect([question.raw_text_en, question.solution_en, question.answer_en].join('\n')).not.toMatch(/[\u3400-\u9fff]/u);
+  }
+  const generated = await request.post(`${process.env.LIVE_API_URL}/generate-quiz`, {
+    headers: { 'Accept-Language': 'en' }, data: { questions: selected, count: selected.length },
+  });
+  expect(generated.status()).toBe(200);
+  const quiz = await generated.json();
+  await page.addInitScript(quiz => {
+    localStorage.setItem('jae_language', 'en');
+    sessionStorage.setItem('jae_practice_quiz', JSON.stringify(quiz));
+  }, quiz);
+  await page.goto('./#/quiz?source=practice');
+  await page.getByRole('button', { name: '21', exact: true }).click();
+  await page.getByRole('button', { name: '🎯 Submit and view results', exact: true }).click();
+  await page.getByRole('button', { name: 'Confirm submission', exact: true }).click();
+  await expect(page.locator('.review-card')).toHaveCount(21);
+  await expect(page.locator('.review-card').last().locator('.diagram-img')).toBeVisible();
+  await page.locator('.solution-details').evaluateAll(elements => elements.forEach(element => { element.open = true; }));
+  await expect(page.locator('.solution-text')).toHaveCount(21);
+  const review = page.locator('.reviews-list');
+  await expect(review).not.toContainText('Translating into English');
+  await expect(review).not.toContainText('English translation unavailable');
+  await expect(review).not.toContainText(/[\u3400-\u9fff]/u);
+  await expect(page.locator('.katex-error')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Chinese', exact: true }).click();
+  await expect(review).toContainText(/[\u3400-\u9fff]/u);
+  await page.getByRole('button', { name: 'English', exact: true }).click();
+  await expect(review).not.toContainText(/[\u3400-\u9fff]/u);
+  expect(translations).toEqual([]);
+  console.log('Live post-submission review verified: 21 English stems, answers and solutions, including a geometry diagram, without provider translation.');
+});

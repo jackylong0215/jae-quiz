@@ -14,7 +14,7 @@ from sqlalchemy.pool import StaticPool
 from test_question_bank import LocalClient
 
 
-class UserFlowTests(unittest.IsolatedAsyncioTestCase):
+class UserFlowFixture(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
         self.engine=create_engine('sqlite://',connect_args={'check_same_thread':False},poolclass=StaticPool)
         Base.metadata.create_all(self.engine)
@@ -35,6 +35,8 @@ class UserFlowTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(login.status_code,200)
         return {'Authorization':'Bearer '+login.json()['access_token']}
 
+
+class UserFlowTests(UserFlowFixture):
     async def test_registration_login_and_protected_profile(self):
         async with LocalClient() as client:
             self.assertEqual((await client.get('/auth/me')).status_code,401)

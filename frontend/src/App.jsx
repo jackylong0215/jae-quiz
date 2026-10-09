@@ -1,6 +1,6 @@
 import { LocalizedAttributes } from './i18n.jsx';
 import { localizedFetch } from './i18n-api.js';
-import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions, englishContent, t } from './i18n.jsx';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, getQuestionSolution, getQuestionAnswer, questionOptions, englishContent, t } from './i18n.jsx';
 import React, { useState, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import remarkMath from 'remark-math';
@@ -453,7 +453,7 @@ export default function App() {
     let fullText = parts.join('\n\n');
     try {
       if (language === 'en') {
-        fullText = await englishContent([t(qNum), getQuestionText(q), q.answer ? `Answer: ${q.answer}` : '', q.solution ? `Solution:\n${q.solution}` : ''].filter(Boolean).join('\n\n'));
+        fullText = await englishContent([t(qNum), getQuestionText(q), getQuestionAnswer(q) ? `Answer: ${getQuestionAnswer(q)}` : '', getQuestionSolution(q) ? `Solution:\n${getQuestionSolution(q)}` : ''].filter(Boolean).join('\n\n'));
       }
       await navigator.clipboard.writeText(fullText);
       showToast('已複製含解答解析！');
@@ -928,16 +928,16 @@ export default function App() {
                           <div className="answer-title-label"><LocalizedText value="🎯 參考答案：" /></div>
                           <div className="answer-markdown">
                             <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                              {normalizeLatex(q.answer)}
+                              {normalizeLatex(getQuestionAnswer(q))}
                             </LocalizedMarkdown>
                           </div>
                         </div>
                       )}
 
-                      {q.solution ? (
+                      {getQuestionSolution(q) ? (
                         <div className="question-markdown solution-content">
                           <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                            {normalizeLatex(q.solution)}
+                            {normalizeLatex(getQuestionSolution(q))}
                           </LocalizedMarkdown>
                         </div>
                       ) : (

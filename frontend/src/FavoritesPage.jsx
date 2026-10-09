@@ -1,4 +1,4 @@
-import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions } from './i18n.jsx';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, getQuestionSolution, questionOptions } from './i18n.jsx';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import remarkMath from 'remark-math';
@@ -172,9 +172,9 @@ export default function FavoritesPage() {
                     <div style={{ color: '#15803d', marginBottom: 8 }}>
                       <strong><LocalizedText value="正確答案：" /></strong> <LocalizedText value={q.answer} />
                     </div>
-                    {q.solution && (
+                    {getQuestionSolution(q) && (
                       <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                        {normalizeLatex(q.solution)}
+                        {normalizeLatex(getQuestionSolution(q))}
                       </LocalizedMarkdown>
                     )}
                   </div>

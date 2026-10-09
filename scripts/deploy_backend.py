@@ -21,7 +21,9 @@ def expected_bank():
     questions = json.loads(raw)
     papers = json.loads((ROOT / 'papers/source/papers.json').read_text(encoding='utf-8'))
     return {'bank_sha256': hashlib.sha256(raw).hexdigest(), 'questions': len(questions),
-            'papers': len(papers), 'english_questions': sum(bool(q.get('english')) for q in questions)}
+            'papers': len(papers), 'english_questions': sum(bool(q.get('english')) for q in questions),
+            'english_solutions': sum(bool(q.get('explanation_en')) for q in questions),
+            'english_answers': sum(bool(q.get('answer_en')) for q in questions)}
 
 
 def matches_health(payload, expected, commit):

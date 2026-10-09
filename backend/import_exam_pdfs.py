@@ -114,7 +114,8 @@ def validate():
             'questionAndOptionMathSpans': formulas, 'totalQuestions': len(questions),
             'papers': len(papers), 'sourceIssues': source_issues,
             'method': 'local-only; no external service calls',
-            'explanationScope': 'Existing explanations retained except explicit corrections; not comprehensively rechecked or translated.'}
+            'englishExplanations': sum(bool(q.get('explanation_en')) for q in questions),
+            'explanationScope': 'Original Chinese explanations retained; English versions stored separately.'}
 
 
 def sync_database(destination=None):

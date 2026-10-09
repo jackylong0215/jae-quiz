@@ -28,10 +28,14 @@ export function t(value) {
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `http://${window.location.hostname}:8000`;
 const cache = new Map();
 const pending = new Map();
+const inFlight = new Map();
 let flushTimer;
+let flushing = false;
 
 async function flushTranslations() {
   flushTimer = undefined;
+  if (flushing || !pending.size) return;
+  flushing = true;
   const entries = [];
   let characters = 0;
   for (const entry of pending.entries()) {
@@ -43,6 +47,7 @@ async function flushTranslations() {
   try {
     const response = await localizedFetch(`${API_BASE_URL}/translate`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(45000),
       body: JSON.stringify({ texts: entries.map(([text]) => text) }),
     });
     if (!response.ok) throw new Error(`Translation failed: HTTP ${response.status}`);
@@ -55,6 +60,7 @@ async function flushTranslations() {
   } catch (error) {
     entries.forEach(([, handlers]) => handlers.reject(error));
   }
+  flushing = false;
   if (pending.size) flushTimer = setTimeout(flushTranslations, 30);
 }
 
@@ -62,11 +68,14 @@ export function requestTranslation(text) {
   if (typeof text !== 'string' || text.length > 12000) {
     return Promise.reject(new Error('Translation text is too long or invalid.'));
   }
+  if (inFlight.has(text)) return inFlight.get(text);
   if (cache.has(text)) return cache.get(text);
   const promise = new Promise((resolve, reject) => pending.set(text, { resolve, reject }));
   cache.set(text, promise);
+  inFlight.set(text, promise);
+  promise.then(() => inFlight.delete(text), () => inFlight.delete(text));
   if (cache.size > 512) cache.delete(cache.keys().next().value);
-  if (!flushTimer) flushTimer = setTimeout(flushTranslations, 30);
+  if (!flushTimer && !flushing) flushTimer = setTimeout(flushTranslations, 30);
   return promise;
 }
 
@@ -126,6 +135,18 @@ export function getQuestionText(question) {
   return getLanguage() === 'en'
     ? question.raw_text_en || question.raw_text_zh || ''
     : question.raw_text_zh || question.raw_text_en || '';
+}
+
+export function getQuestionSolution(question) {
+  return getLanguage() === 'en'
+    ? question.solution_en || question.explanation_en || question.solution || question.solution_zh || question.explanation || ''
+    : question.solution_zh || question.explanation || question.solution || question.solution_en || '';
+}
+
+export function getQuestionAnswer(question) {
+  return getLanguage() === 'en'
+    ? question.correct_answer_en || question.answer_en || question.correct_answer || question.answer || ''
+    : question.correct_answer || question.answer || question.answer_en || '';
 }
 
 export function questionOptions(question) {

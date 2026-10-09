@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from localization import (LanguageMiddleware, EnglishTranslator, ENGLISH_INSTRUCTION, get_language, localized_messages)
-from question_bank import bilingual_fields
+from question_bank import bilingual_fields, translation_lookup, with_bank_translations
 from admin_bootstrap import bootstrap_admin
 from sqlalchemy.orm import Session
 from openai import AsyncOpenAI
@@ -205,6 +205,8 @@ def deployment_health():
             'papers': len(papers),
             'questions': len(questions),
             'english_questions': sum(bool(q.get('english')) for q in questions),
+            'english_solutions': sum(bool(q.get('explanation_en')) for q in questions),
+            'english_answers': sum(bool(q.get('answer_en')) for q in questions),
         }, headers={'Cache-Control': 'no-store'})
     except (OSError, ValueError, TypeError):
         return JSONResponse({'status': 'unavailable'}, status_code=503, headers={'Cache-Control': 'no-store'})
@@ -1069,7 +1071,8 @@ async def generate_quiz(
         except Exception:
             raw_qs = []
 
-    filtered = [q for q in raw_qs if isinstance(q, dict)]
+    lookup = translation_lookup(load_question_bank())
+    filtered = [with_bank_translations(q, lookup) for q in raw_qs if isinstance(q, dict)]
     print(f"[DEBUG] /generate-quiz received {len(filtered)} questions from client")
 
     cats = req.categories or []
@@ -1128,7 +1131,7 @@ async def generate_quiz(
         stripped = q.copy()
         stripped["index"] = i
         stripped["id"] = f"{quiz_id}-{i}"
-        for field in ('answer', 'answer_en', 'correct_answer', 'solution', 'solution_zh',
+        for field in ('answer', 'answer_en', 'correct_answer', 'correct_answer_en', 'solution', 'solution_zh',
                       'solution_en', 'explanation', 'explanation_en'):
             stripped.pop(field, None)
         stripped_questions.append(stripped)
@@ -1161,6 +1164,8 @@ async def submit_quiz(sub: QuizSubmission, current_user: Optional[User] = Depend
     if not original_questions:
         raise HTTPException(status_code=404, detail="Quiz not found or expired")
 
+    lookup = translation_lookup(load_question_bank())
+    original_questions = [with_bank_translations(q, lookup) for q in original_questions]
     user_answers = sub.answers or {}
     results = []
     correct_count = 0
@@ -1512,6 +1517,8 @@ def get_quiz_review(
         except Exception:
             pass
 
+    lookup = translation_lookup(load_question_bank())
+    original_questions = [with_bank_translations(q, lookup) for q in original_questions]
     merged = []
     for i, q in enumerate(original_questions):
         user_ans = str(user_answers.get(str(i), "") or "").strip()
@@ -2050,8 +2057,9 @@ async def generate_ai_quiz(
     stripped = []
     for i, q in enumerate(ai_questions):
         s = q.copy()
-        s.pop("answer", None)
-        s.pop("solution", None)
+        for field in ('answer','answer_en','correct_answer','correct_answer_en','solution',
+                      'solution_zh','solution_en','explanation','explanation_en'):
+            s.pop(field, None)
         s["index"] = i
         s["id"] = f"{quiz_id}-{i}"
         stripped.append(s)
@@ -2127,6 +2135,7 @@ def list_favorites(
         FavoriteQuestion.user_id == user.id
     ).order_by(FavoriteQuestion.created_at.desc()).all()
 
+    lookup = translation_lookup(load_question_bank())
     result = []
     for f in favs:
         try:
@@ -2136,7 +2145,7 @@ def list_favorites(
         result.append({
             "id": f.id,
             "question_id": f.question_id,
-            "question": qjson,
+            "question": with_bank_translations(qjson, lookup),
             "note": f.note,
             "created_at": f.created_at.strftime("%Y-%m-%d %H:%M") if f.created_at else "",
         })
@@ -2533,6 +2542,7 @@ def get_wrong_questions(
         WrongQuestion.mastered == False,
     ).order_by(WrongQuestion.wrong_count.desc()).all()
 
+    lookup = translation_lookup(load_question_bank())
     grouped = {}
     for w in wrongs:
         cat = w.category or "其他"
@@ -2548,7 +2558,7 @@ def get_wrong_questions(
             subtopics = []
         grouped[cat].append({
             "question_id": w.question_id,
-            "question": qjson,
+            "question": with_bank_translations(qjson, lookup),
             "user_answer": w.user_answer,
             "correct_answer": w.correct_answer,
             "wrong_count": w.wrong_count or 1,
@@ -2727,8 +2737,9 @@ async def practice_by_topic(
         s = q.copy()
         s["index"] = i
         s["id"] = q.get("id") or f"{quiz_id}-{i}"
-        s.pop("answer", None)
-        s.pop("solution", None)
+        for field in ('answer','answer_en','correct_answer','correct_answer_en','solution',
+                      'solution_zh','solution_en','explanation','explanation_en'):
+            s.pop(field, None)
         stripped.append(s)
 
     return {

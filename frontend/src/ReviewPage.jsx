@@ -1,4 +1,4 @@
-import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, questionOptions } from './i18n.jsx';
+import { LocalizedText, LocalizedMarkdown, useLocale, getQuestionText, getQuestionSolution, getQuestionAnswer, questionOptions } from './i18n.jsx';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import remarkMath from 'remark-math';
@@ -245,19 +245,19 @@ export default function ReviewPage() {
                 <strong><LocalizedText value="正確答案：" /></strong>
                 <div style={{ marginTop: 6 }}>
                   <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                    {normalizeLatex(q.correct_answer || '(無答案)')}
+                    {normalizeLatex(getQuestionAnswer(q) || '(無答案)')}
                   </LocalizedMarkdown>
                 </div>
               </div>
             </div>
 
             {/* 解析 */}
-            {q.solution && (
+            {getQuestionSolution(q) && (
               <details style={{ background: '#f8fafc', padding: 12, borderRadius: 8 }} open={!isCorrect}>
                 <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0369a1' }}><LocalizedText value="💡 查看解題步驟" /></summary>
                 <div style={{ marginTop: 12, lineHeight: 1.8 }}>
                   <LocalizedMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatexOptions, rehypeRaw]}>
-                    {normalizeLatex(q.solution)}
+                    {normalizeLatex(getQuestionSolution(q))}
                   </LocalizedMarkdown>
                 </div>
               </details>

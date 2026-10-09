@@ -22,7 +22,7 @@ test('persisted English stems/options and restored equation systems render local
         raw_text_zh: q.question, raw_text_en: q.english,
         options_zh: Object.fromEntries(q.options.map(o => [o.id,o.text])),
         options_en: Object.fromEntries(q.options.map(o => [o.id,o.text_en])),
-        answer: q.answer, solution: q.explanation, main_category: 'Algebra', sub_topics: [], difficulty: 'Medium', score: q.points,
+        answer: q.answer, answer_en: q.answer_en, solution: q.explanation, solution_zh: q.explanation, solution_en: q.explanation_en, main_category: 'Algebra', sub_topics: [], difficulty: 'Medium', score: q.points,
       })) } });
     }
     return route.fulfill({ json: {} });

@@ -117,3 +117,21 @@ test('malformed translations show a retry message instead of hiding content', as
   await expect(page.locator('body')).toContainText('English translation unavailable.');
   await expectEnglish(page);
 });
+
+test('a stalled provider request exits loading and can be retried', async ({ page }) => {
+  await fixture(page);
+  await page.addInitScript(() => {
+    const timeout = AbortSignal.timeout.bind(AbortSignal);
+    AbortSignal.timeout = milliseconds => timeout(Math.min(milliseconds, 100));
+  });
+  await page.route('**/translate', () => {});
+  await page.goto('/browse');
+  await page.getByRole('button', { name: '📚 Load past questions', exact: true }).click();
+  await expect(page.locator('body')).toContainText('English translation unavailable.');
+  await expect(page.locator('.question-card')).not.toContainText('Translating into English');
+  await page.route('**/translate', route => route.fulfill({ json: {
+    translations: route.request().postDataJSON().texts.map(text => english[text] || 'Translated content'),
+  } }));
+  await page.getByRole('button', { name: 'Retry translation', exact: true }).click();
+  await expect(page.locator('.question-card')).toContainText('Find the value of');
+});
