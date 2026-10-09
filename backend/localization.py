@@ -81,7 +81,12 @@ class EnglishTranslator:
                             response_format={'type': 'json_object'},
                             temperature=0,
                         )
-                        translated = json.loads(response.choices[0].message.content)['translations']
+                        content = response.choices[0].message.content.strip()
+                        # Some compatible providers wrap JSON mode replies in Markdown.
+                        fenced = re.fullmatch(r'```(?:json)?\s*\n([\s\S]*?)\n```', content, re.IGNORECASE)
+                        if fenced:
+                            content = fenced.group(1)
+                        translated = json.loads(content)['translations']
                         if (not isinstance(translated, list) or len(translated) != len(batch)
                                 or any(not isinstance(text, str) or not text.strip() or CJK.search(text) for text in translated)):
                             raise ValueError('Invalid English translation')

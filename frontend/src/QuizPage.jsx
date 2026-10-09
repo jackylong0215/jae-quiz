@@ -85,7 +85,7 @@ class QuizErrorBoundary extends Component {
           <h2 style={{ color: '#b91c1c', marginBottom: 12 }}><LocalizedText value="測驗介面載入出現異常" /></h2>
           <p style={{ color: '#475569', fontSize: 14, marginBottom: 24 }}><LocalizedText value="系統已自動防護並攔截錯誤，避免白屏。" /></p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
-            <button onClick={() => window.location.href = '/browse'} style={{ padding: '10px 20px', background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}><LocalizedText value="← 返回題庫" /></button>
+            <button onClick={() => window.location.assign(import.meta.env.VITE_ROUTER_MODE === 'hash' ? `${import.meta.env.BASE_URL}#/browse` : '/browse')} style={{ padding: '10px 20px', background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}><LocalizedText value="← 返回題庫" /></button>
             <button onClick={() => this.setState({ hasError: false })} style={{ padding: '10px 20px', background: '#f1f5f9', color: '#334155', border: '1px solid #cbd5e1', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}><LocalizedText value="🔄 嘗試恢復" /></button>
           </div>
         </div>

@@ -64,6 +64,11 @@ class LocalizationTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(raised.exception.status_code, 502)
         self.assertEqual(translator.cache, {})
 
+    async def test_provider_markdown_json_wrapper_is_supported(self):
+        create = AsyncMock(return_value=response('```json\n{"translations": ["Find $x^2=4$."]}\n```'))
+        translator = EnglishTranslator(client_with(create), 'test-model', True)
+        self.assertEqual(await translator.translate(['求 $x^2=4$。']), ['Find $x^2=4$.'])
+
     async def test_missing_credentials_and_size_validation(self):
         translator = EnglishTranslator(client_with(AsyncMock()), 'test-model', False)
         with patch.object(main, 'translator', translator):

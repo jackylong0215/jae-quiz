@@ -277,7 +277,7 @@ export default function LoginPanel({ isOpen, onClose, onAuthChange }) {
     }}
     onClick={() => {
       onClose();
-      window.location.href = '/admin';
+      navigate('/admin');
     }}
   ><LocalizedText value="👑 管理後台" /></button>
 )}
