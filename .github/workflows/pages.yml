@@ -97,7 +97,7 @@ jobs:
         run: python scripts/deploy_backend.py
 
   verify-live:
-    if: github.event_name != 'pull_request'
+    if: ${{ always() && !cancelled() && github.event_name != 'pull_request' && needs.deploy.result == 'success' }}
     needs: [deploy, deploy-backend]
     runs-on: ubuntu-latest
     steps:

@@ -57,7 +57,10 @@ def main():
         with urlopen(Request(hook, data=b'', method='POST'), timeout=30) as response:
             if not 200 <= response.status < 300:
                 raise RuntimeError('deploy hook was rejected')
-    except (HTTPError, URLError, TimeoutError, OSError, RuntimeError):
+    except HTTPError as error:
+        print(f'Render rejected the deploy request (HTTP {error.code}). Check the service repository, commit availability, and hook validity.', file=sys.stderr)
+        return 1
+    except (URLError, TimeoutError, OSError, RuntimeError):
         # urllib errors can embed URLs containing the hook credential.
         print('Render rejected the deploy request or could not be reached. Check the configured hook in Render.', file=sys.stderr)
         return 1

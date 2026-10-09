@@ -95,6 +95,7 @@ class DeployScriptTests(unittest.TestCase):
         with patch.dict(os.environ,{'RENDER_DEPLOY_HOOK':hook,'BACKEND_URL':'https://backend.example.test','EXPECTED_COMMIT':'expected'}),patch.object(deploy_backend,'urlopen',side_effect=error),contextlib.redirect_stderr(StringIO()) as stderr:
             self.assertEqual(deploy_backend.main(),1)
         self.assertNotIn(secret,stderr.getvalue())
+        self.assertIn('HTTP 401',stderr.getvalue())
 
     def test_wrong_service_hook_is_rejected_before_deployment(self):
         with patch.dict(os.environ,{'RENDER_DEPLOY_HOOK':'https://api.render.com/deploy/srv-other?key=test','BACKEND_URL':'https://backend.example.test','EXPECTED_COMMIT':'expected','EXPECTED_RENDER_SERVICE_ID':'srv-current'}),patch.object(deploy_backend,'urlopen') as request,contextlib.redirect_stderr(StringIO()):
